@@ -1,0 +1,22 @@
+﻿<?xml version="1.0"?>
+<preLoad>
+	<!-- 预加载资源  isFirst:1-首次加载 0-后台隐藏式加载-->
+	<res id="UIComponent" folder="module" isFirst="1" priority="50"/>
+	
+	<!-- 预加载数值配置表-->
+	<res id="heroSheetData" folder="configfile" isFirst="1"/>
+	<res id="langSheetData" folder="configfile" isFirst="1"/>
+	<res id="monsterSheetData" folder="configfile" isFirst="1"/>
+	<res id="towerSheetData" folder="configfile" isFirst="1"/>
+	<res id="soldierSheetData" folder="configfile" isFirst="1"/>
+	<res id="weaponSheetData" folder="configfile" isFirst="1"/>
+	<res id="magicSheetData" folder="configfile" isFirst="1"/>
+	<res id="heroSkillSheetData" folder="configfile" isFirst="1"/>
+	<res id="towerSkillSheetData" folder="configfile" isFirst="1"/>
+	<res id="monsterSkillSheetData" folder="configfile" isFirst="1"/>
+	<res id="buffSheetData" folder="configfile" isFirst="1"/>
+	<res id="itemSheetData" folder="configfile" isFirst="1"/>
+	<res id="tollgateSheetData" folder="configfile" isFirst="1"/>
+	<res id="waveSheetData" folder="configfile" isFirst="1"/>
+	<res id="subwaveSheetData" folder="configfile" isFirst="1"/>
+</preLoad>	

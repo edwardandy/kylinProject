@@ -1,0 +1,12 @@
+<alldata>
+	<metadata>
+		<configId/>
+		<minAtk/>
+		<maxAtk/>
+	</metadata>
+	<metadata>
+		<configId/>
+		<minAtk/>
+		<maxAtk/>
+	</metadata>
+</alldata>

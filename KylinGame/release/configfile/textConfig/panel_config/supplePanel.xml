@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--货栈面板文本配置-->
+<data>	
+	<title>supple</title>
+	<costdiamonds>Need,Diamonds</costdiamonds>
+	<costdold>Need,Gold</costdold>
+	<costhonor>Need,Honor</costhonor>
+	<houselevel>Level</houselevel>
+	<housenextlevel>Next level</housenextlevel>
+	<hour>per delivery</hour>
+	<proget>Low chance of receiving 1 extra item on supply delivery,Medium chance of receiving 1 extra item on supply delivery,High chance of receiving 1 extra item on supply delivery</proget>
+	<chest></chest>
+	<insupple>New materials will arrive in</insupple>
+	<stopsupple>Supply order canceled. Reorder to get new supply shipments</stopsupple>
+	<stopsupplebtn>Cancel Order</stopsupplebtn>
+	<startsupplebtn>Reorder</startsupplebtn>
+	<stopsuppletip>Canceling an order will stop this supplier from sending supplies@Reordering supplies will start a new shipment with this supplier</stopsuppletip>
+	<stopin>Reorder supplies in</stopin>
+	<pausedsupper>Paused</pausedsupper>
+</data>

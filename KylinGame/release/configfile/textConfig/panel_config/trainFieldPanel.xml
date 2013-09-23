@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--训练场面板文本配置-->
+<data>	
+	<title>training field</title>
+	<training>training</training>
+	<experience>experience</experience>
+	<unlock>unlock</unlock>
+	<trainingBtn>select hero</trainingBtn>
+	<trainingComplete>complete</trainingComplete>
+	<trainMode>
+		<mode>Apprentice Training</mode>
+		<mode>Recruit Training</mode>
+		<mode>Adept Training</mode>
+		<mode>Skilled Training</mode>
+		<mode>Elite Training</mode>
+		<mode>NightmareTraining</mode>
+	</trainMode>
+	
+	<trainHour>H</trainHour>
+	
+	<buttonText>
+		<txt>trainning click to cancel</txt>
+		<txt>Complete</txt>
+		<txt>train</txt>
+	</buttonText>
+	
+	<text>
+		<txt>Free</txt>
+		<txt>Complete</txt>		
+	</text>
+	
+	<free>Free</free>
+</data>

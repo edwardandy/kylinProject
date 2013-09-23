@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>	
+	<gold>
+		<name>GOLD</name>
+		<desc>Nothing really matters!</desc>	
+	</gold>
+	
+	<title_tips>
+		<tip>I am '%'!</tip>
+		<tip>'%' is me!</tip>
+		<tip>They call me '%'!</tip>
+	</title_tips>
+	<clickadd>Click to place in bag</clickadd>
+	<droppro>Drop Chance</droppro>
+	<dropprodes>Very Low,Low,Medium,High,Very High</dropprodes>
+	<supper>Stack Max</supper>
+	<clickmagicunlock>Click to learn</clickmagicunlock>
+	<clickmagicunupgrade>Click to upgrade</clickmagicunupgrade>
+	<clickmagicunresearch>Click to research</clickmagicunresearch>
+	<occ>Attack Type,Range,Melee/Range</occ>
+	<business>Click for options</business>
+	<heroes>Heroes</heroes>
+	<inventory>Inventory</inventory>
+	<leaderboard>Leaderboard</leaderboard>
+	<achievements>Achievements</achievements>
+	<settings>Settings</settings>
+	<music>Music</music>
+	<sounds>Sounds</sounds>
+	<quality>Quality</quality>
+	<towername>Arrow Towers@Barracks@Cannoner Towers@Mage Towers</towername>
+	<heroatt>Health@Attack Damage@Range@Armor@Attack Speed@Movespeed</heroatt>
+	<heroatttitle>Attribute</heroatttitle>
+	<diamondsSpr>Diamonds</diamondsSpr>
+	<coinSpr>Golds</coinSpr>
+	<honorSpr>Honor</honorSpr>
+	<unlock>Click to unlock</unlock>
+	<marchMonster>Call the next wave!</marchMonster>
+	<syspub>Today's Tavern picks@Pick cards at Tavern</syspub>
+	<sysresearch>upgrade available&research available</sysresearch>
+	<sysmagic>upgrade available</sysmagic>
+	<systrain>Hero training slots@Heroes ready for training&training complete</systrain>
+	<syshero>ready for augmentaion</syshero>
+	<syshouse>Supplies ready for collection</syshouse>
+	<sysopeate>Upgrade ready!&Research ready!&Fortification ready!&New progress!</sysopeate>
+	<augment>Click to augment hero</augment>
+	<coolddown>Reset cooldown</coolddown>
+	<collectitem>Collect item from level taxes</collectitem>
+	<dreamhunter>Hire a Treasure Hunter to double rewards. Buff takes effect immediately</dreamhunter>
+	<dreamstart>Challenge Blitz Acres once per day.</dreamstart>
+	<dreamfloor>Tier</dreamfloor>
+	<dreamrewardtip>Defeated</dreamrewardtip>
+	<dreamdroptip>Victory Rewards@Possible Item Drops</dreamdroptip>
+</data>

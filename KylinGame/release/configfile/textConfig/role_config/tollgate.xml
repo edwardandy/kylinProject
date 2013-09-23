@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--关卡文本配置-->
+<data>	
+	<wave>wave:</wave>
+	<introduction>introduction</introduction>
+	<pattern>pattern</pattern>
+	<easy>easy</easy>
+	<hard>hard</hard>
+	<hero>hero</hero>
+	<challengerules>challenge rules</challengerules>
+	<firstthree>first three</firstthree>
+	<afterthree>after three</afterthree>
+	<ready>ready</ready>
+	<fight>fight !!</fight>
+	<autofight>auto fight</autofight>
+	<battletactics>current  heros</battletactics>
+	<currentheros>current  heros</currentheros>
+	<currentskills>current  skills</currentskills>
+	<currentprops>current  props</currentprops>
+	<reward>reward</reward>
+	<superwave>super wave</superwave>
+	<lifetotal>life total</lifetotal>
+	<maxlv>max lv</maxlv>
+	<no>no</no>
+	<all>all towers</all>
+	<myheros>my heros</myheros>
+	<mymagics>my magics</mymagics>
+	<myitems>my items</myitems>
+</data>

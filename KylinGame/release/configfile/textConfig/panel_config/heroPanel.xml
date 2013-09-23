@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--英雄训练面板文本配置-->
+<data>	
+	<title>heroes</title>
+	<activeSkills>Innate skills</activeSkills>
+	<passiveSkills>Special skills</passiveSkills>
+	<strengthenTime>Can augment in:</strengthenTime>
+	<strengthenTime2>Augmention increases your hero's base stats</strengthenTime2>
+	<strengthenTime3>Reach the next level to further augment</strengthenTime3>
+	<strengthen>stimulate potential</strengthen>
+	<skillpoints>The remaining skill points</skillpoints>
+	<distribution>distribution</distribution>
+	<strengthenOk>Strengthen success</strengthenOk>
+	<strengthenNo>Strengthen Failure</strengthenNo>
+	<StrengthAcceleratCostPopNo>no</StrengthAcceleratCostPopNo>
+	<StrengthAcceleratCostPopYes>yes</StrengthAcceleratCostPopYes>
+	<StrengthAugmentSuccessful>Augment Successful</StrengthAugmentSuccessful>
+	<StrengthAugmentFailed>Augment Failed</StrengthAugmentFailed>
+	<StrengthNeed>Need</StrengthNeed>
+	<StrengthHave>Have</StrengthHave>
+	<StrengthABtn>Augment</StrengthABtn>
+	<StrengthAdvBtn>Adv.Augment</StrengthAdvBtn>
+	<required>Hero Level @ Required</required>
+	<tome>Skill Tome Level</tome>
+	<into>*Hero can be recruited in the Tavern</into>
+	<intobuy>*Recruit this hero by one of the following</intobuy>
+	<honortitle>Automatically recruit hero at</honortitle>
+	<honor>Honor</honor>
+</data>

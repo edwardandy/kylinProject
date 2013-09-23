@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--玩家文本配置-->
+<data>	
+	<name>name</name>
+	<score>score</score>
+	<energy>Energy</energy>
+	<energyNotFull>Energy in</energyNotFull>
+</data>

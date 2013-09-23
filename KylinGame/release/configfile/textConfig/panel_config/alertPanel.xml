@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--弹出框面板文本配置-->
+<data>	
+	<housewaremu>Unlock Supplies@Must unlock preceding slots first!</housewaremu>
+	<housewareuh>Unlock Slot@Do you want to unlock@slot(s)?</housewareuh>
+	<forgetskill>Forget@Forgotten skills are not recoverable. Forget skill?</forgetskill>
+	<nogold>Gold@Sorry ! you don't have enough gold.</nogold>
+	<nodiamond>Diamond@Sorry ! you don't have enough diamond.</nodiamond>
+	<noenergy>Amount@Sorry ! you don't have enough energy.</noenergy>
+	<nospace>Inventory@Inventory is full, please make some space!</nospace>
+	<stackoverflow>Item@Item max reached! Sell or use items to free space.</stackoverflow>
+	<buydiamond>Purchase@Would you like to buy more diamonds?</buydiamond>
+	<buycoins>Purchase@Would you like to buy more coins?</buycoins>
+	<unlockbag>Unlock Bag Slot@Unlock@inventory slot for</unlockbag>
+	<strengthspeed>Speed up@This accelerated cost</strengthspeed>
+	<collectspeed>Speed Tax@Speed up collection to collect now.</collectspeed>
+	<trainingspeed>Speed Training@Speed hero training up and complete instantly.</trainingspeed>
+	<heroupgrade>Training Upgrade@Every upgrade provides an extra 10% experience</heroupgrade>
+	<canceltraning>Cancel Training@Do you really want to cancel training?</canceltraning>
+	<unlockheroslots>Unlock Training Slot@Unlock more slots for addational training?</unlockheroslots>
+	<heroRevive>Instant Revive@no need?</heroRevive>
+	<dreamland>warning!@Starting anew battle will clear all battle history data. Are you sure you want start a new battle?</dreamland>
+	<dreamspeed>Speed up!@Speed up this battle's pace!</dreamspeed>
+</data>

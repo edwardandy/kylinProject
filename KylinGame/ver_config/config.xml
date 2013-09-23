@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<root>
+	<configfile folder="release/configfile/">
+		<item id="game_config" size="8109">game_config.xml</item>
+		<item id="preload_config" size="290">preload_config.xml</item>
+		<item id="heroData" size="1499">dataConfig/heroData.xml</item>
+		<item id="heroSheetData" size="757">dataConfig/heroSheetData.xml</item>
+		<item id="alertPanel" size="1669">textConfig/panel_config/alertPanel.xml</item>
+		<item id="commonLang" size="1420">textConfig/panel_config/commonLang.xml</item>
+		<item id="heroPanel" size="1366">textConfig/panel_config/heroPanel.xml</item>
+		<item id="levelPanel" size="864">textConfig/panel_config/levelPanel.xml</item>
+		<item id="loadPanel" size="1365">textConfig/panel_config/loadPanel.xml</item>
+		<item id="magiccadePanel" size="301">textConfig/panel_config/magiccadePanel.xml</item>
+		<item id="pubPanel" size="266">textConfig/panel_config/pubPanel.xml</item>
+		<item id="researchPanel" size="319">textConfig/panel_config/researchPanel.xml</item>
+		<item id="supplePanel" size="1010">textConfig/panel_config/supplePanel.xml</item>
+		<item id="systemError" size="4326">textConfig/panel_config/systemError.xml</item>
+		<item id="tip" size="2206">textConfig/panel_config/tip.xml</item>
+		<item id="trainFieldPanel" size="772">textConfig/panel_config/trainFieldPanel.xml</item>
+		<item id="hero" size="281">textConfig/role_config/hero.xml</item>
+		<item id="player" size="195">textConfig/role_config/player.xml</item>
+		<item id="tollgate" size="893">textConfig/role_config/tollgate.xml</item>
+		<item id="tower" size="184">textConfig/role_config/tower.xml</item>
+	</configfile>
+	<font folder="release/font/">
+		<item id="FontLibrary_cn" size="51636">FontLibrary_cn.swf</item>
+		<item id="FontLibrary_us" size="72246">FontLibrary_us.swf</item>
+		<item id="FontLibrary_us_old" size="71819">FontLibrary_us_old.swf</item>
+	</font>
+	<module folder="release/module/">
+		<item id="KylinFightModule" size="779">kylinFightModule/KylinFightModule.swf</item>
+		<item id="LoadPanel" size="160808">LoadPanel/LoadPanel.swf</item>
+		<item id="TestModule" size="1092">TestModule/TestModule.swf</item>
+		<item id="UIComponent" size="866">UIComponent/UIComponent.swf</item>
+	</module>
+</root>

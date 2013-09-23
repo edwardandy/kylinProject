@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--加载面板文本配置-->
+<data>	
+	<title>load</title>
+	<msg>High level heroes are the key to defeating levels</msg>
+	<msg>The higher level the training, the more experience gained</msg>
+	<msg>Canceling hero training, will not give refunds</msg>
+	<msg>Every battle will cost some energy</msg>
+	<msg>Using items wisely can turn the tide of battle</msg>
+	<msg>Chance to receive Diamonds increases with each Supply Station level</msg>
+	<msg>Skill strength increases with each level</msg>
+	<msg>Increase skill level by gathering required items</msg>
+	<msg>Rewards won from cards are sent to you bag</msg>
+	<msg>Towers can be upgraded at the Smith</msg>
+	<msg>Highest level towers have 2 additional battle skills</msg>
+	<msg>The more honor accumulated, the higher your leaderboard rank</msg>
+	<msg>If an upgrade fails, there will be a 5 minute cooldown before being able to upgrade again</msg>
+	<msg>Every level a hero receives additional skill points</msg>
+	<msg>Every hero has two innate, passive skills</msg>
+	<msg>Achievements are awarded as proof of your skills</msg>
+	<msg>Each achievement title has its own special properties</msg>
+	<msg>Each item slot has a storage amount limit</msg>
+	<msg>You can store items in your Pockets temporarily; remember to grab them before they expire</msg>
+</data>

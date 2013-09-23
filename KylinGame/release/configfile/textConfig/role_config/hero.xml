@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--英雄文本配置-->
+<data>	
+	<lvLabel>LV.</lvLabel>
+	<lvLabels>Lv.</lvLabels>
+	<strengthenLv>Strengthen level</strengthenLv>
+	<nextlevel>Next Level</nextlevel>
+	<maxlevel>MAX</maxlevel>
+	<maxlevel2>Level Max</maxlevel2>
+</data>

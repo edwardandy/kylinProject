@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--关卡选择面板文本配置-->
+<data>	
+	<dropInfoTitle>All Reward</dropInfoTitle>
+	<dropInfoDetail>You will win these reward after battle.</dropInfoDetail>
+	
+	<selectHeroPanel>
+		<title>My Heroes</title>
+		<subtitle1>yipaiqian hero</subtitle1>
+		<subtitle2>choose hero</subtitle2>
+		<detail>You can send % heros</detail>
+	</selectHeroPanel>
+	
+	<selectSkillPanel>
+		<title>My Skills</title>
+		<subtitle1>equiped skills</subtitle1>
+		<subtitle2>choose skill</subtitle2>
+		<detail>You can equip % skills</detail>
+	</selectSkillPanel>
+		
+	<selectItemPanel>
+		<title>My Items</title>
+		<subtitle1>Carried Items</subtitle1>
+		<subtitle2>choose item</subtitle2>
+		<detail>You can carry % items</detail>
+	</selectItemPanel>
+	
+	<levelPanel>
+		<rewardTxt>checkout</rewardTxt>
+	</levelPanel>
+</data>

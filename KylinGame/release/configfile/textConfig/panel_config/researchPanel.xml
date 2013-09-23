@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--升级塔面板文本配置-->
+<data>	
+	<title>research</title>
+	<damage>Barracks soldiers base attack increased by</damage>
+	<damage2>Tower base attack increased by</damage2>
+	<speed>and base range increased by</speed>
+	<life>and base life increased by</life>
+</data>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--酒馆面板文本配置-->
+<data>	
+	<title>pub</title>
+	<b1Titel>free  picks  used</b1Titel>
+	<b1BtnLabel>picks one</b1BtnLabel>
+	<b2Titel>diamonds  picks  used</b2Titel>
+	<b2BtnLabel>picks one</b2BtnLabel>
+</data>
