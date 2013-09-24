@@ -29,7 +29,7 @@
         </excludedEntries>
       </libraryPathEntry>
       <libraryPathEntry kind="3" linkType="1" path="/KylinGameRsls/bin/KylinGameRsls.swc" useDefaultLinkType="false"/>
-      <libraryPathEntry kind="3" linkType="1" path="E:/Workspaces/Flash Builder/MonsterDebugger.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="1" linkType="1" path="libs"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>
