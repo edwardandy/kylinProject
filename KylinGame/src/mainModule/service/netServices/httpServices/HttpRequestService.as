@@ -3,7 +3,7 @@ package mainModule.service.netServices.httpServices
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	
-	import kylin.echo.edward.framwork.service.KylinService;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.controller.netCmds.httpCmds.HttpEvent;
 	import mainModule.model.gameConstAndVar.FlashVarsModel;
@@ -14,7 +14,7 @@ package mainModule.service.netServices.httpServices
 	 * @author Edward
 	 * 
 	 */	
-	public class HttpRequestService extends KylinService implements IHttpRequestService
+	public class HttpRequestService extends KylinActor implements IHttpRequestService
 	{
 		[Inject]
 		public var flashVars:FlashVarsModel;

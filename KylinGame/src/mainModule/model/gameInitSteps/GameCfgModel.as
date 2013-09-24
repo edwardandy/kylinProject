@@ -1,6 +1,6 @@
 package mainModule.model.gameInitSteps
 {
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.model.gameInitSteps.interfaces.IGameCfgModel;
 
@@ -9,7 +9,7 @@ package mainModule.model.gameInitSteps
 	 * @author Edward
 	 * 
 	 */	
-	public class GameCfgModel extends KylinModel implements IGameCfgModel
+	public class GameCfgModel extends KylinActor implements IGameCfgModel
 	{
 		private var _gameCfg:XML;
 		

@@ -5,7 +5,8 @@ package release.module.kylinFightModule
 	
 	import kylin.echo.edward.framwork.view.KylinBasePanel;
 	
-	import org.robotlegs.core.IInjector;
+	import robotlegs.bender.framework.api.IInjector;
+	
 	
 	[SWF(width="760",height="650",frameRate="30",backgroundColor="0xff0000")] 
 	public class KylinFightModule extends KylinBasePanel

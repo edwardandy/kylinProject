@@ -1,14 +1,15 @@
 package mainModule.model.preLoadData
 {
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.model.preLoadData.interfaces.IPreLoadCfgModel;
+
 	/**
 	 * 游戏预加载资源配置 
 	 * @author Edward
 	 * 
 	 */	
-	public class PreLoadCfgModel extends KylinModel implements IPreLoadCfgModel
+	public class PreLoadCfgModel extends KylinActor implements IPreLoadCfgModel
 	{
 		private var _cfg:XML;
 		

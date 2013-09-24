@@ -39,7 +39,7 @@ package mainModule.controller.gameInitSteps
 			setUpContextMenu();
 			loadTextConfig();
 			
-			commandMap.detain(this);
+			directCommandMap.detain(this);
 		}
 		
 		private function setUpContextMenu():void
@@ -50,7 +50,7 @@ package mainModule.controller.gameInitSteps
 			var _contextMenuVersionItem:ContextMenuItem = new ContextMenuItem("Version : "+ gameCfgModel.gameCfg.version +"." + flashVars.RES_VER +"_" + flashVars.LAN);
 			_conMenu.customItems.push(_contextMenuNameItem);
 			_conMenu.customItems.push(_contextMenuVersionItem);
-			contextView.contextMenu = _conMenu;
+			contextView.view.contextMenu = _conMenu;
 		}
 		
 		private function loadTextConfig():void
@@ -73,7 +73,7 @@ package mainModule.controller.gameInitSteps
 			
 			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitLoadPreloadCfg));
 			
-			commandMap.release(this);
+			directCommandMap.release(this);
 		}
 	}
 }

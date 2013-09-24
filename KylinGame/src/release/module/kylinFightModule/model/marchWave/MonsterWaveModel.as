@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.model.marchWave
 {
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
 	
@@ -11,7 +11,7 @@ package release.module.kylinFightModule.model.marchWave
 	 * @author Edward
 	 * 
 	 */
-	public class MonsterWaveModel extends KylinModel implements IMonsterWaveModel
+	public class MonsterWaveModel extends KylinActor implements IMonsterWaveModel
 	{
 		private var _vecMonsterWaves:Vector.<MonsterWaveVO>;
 		private var _curWaveCount:int;

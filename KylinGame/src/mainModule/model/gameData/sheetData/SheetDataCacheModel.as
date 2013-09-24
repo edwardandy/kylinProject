@@ -2,7 +2,7 @@ package mainModule.model.gameData.sheetData
 {
 	import flash.utils.Dictionary;
 	
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.model.gameData.sheetData.interfaces.ISheetDataCacheModel;
 
@@ -11,7 +11,7 @@ package mainModule.model.gameData.sheetData
 	 * @author Edward
 	 * 
 	 */	
-	public class SheetDataCacheModel extends KylinModel implements ISheetDataCacheModel
+	public class SheetDataCacheModel extends KylinActor implements ISheetDataCacheModel
 	{
 		private var _dicSheetCache:Dictionary;
 		

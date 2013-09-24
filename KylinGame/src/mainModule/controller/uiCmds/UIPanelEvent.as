@@ -11,7 +11,7 @@ package mainModule.controller.uiCmds
 	 * @author Administrator
 	 * 
 	 */	
-	public class UIPanelEvent extends KylinEvent
+	public class UIPanelEvent extends Event
 	{
 		/**
 		 * 打开面板

@@ -2,13 +2,13 @@ package mainModule.model.gameData.dynamicData
 {
 	import flash.utils.Dictionary;
 	
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.model.gameData.dynamicData.hero.HeroDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.interfaces.IDynamicDataDictionaryModel;
 	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
 	
-	public class DynamicDataDictionaryModel extends KylinModel implements IDynamicDataDictionaryModel
+	public class DynamicDataDictionaryModel extends KylinActor implements IDynamicDataDictionaryModel
 	{
 		[Inject]
 		public var heroData:HeroDynamicDataModel;

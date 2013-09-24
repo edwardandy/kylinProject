@@ -3,7 +3,7 @@ package mainModule.service.uiServices
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	
-	import kylin.echo.edward.framwork.service.KylinService;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.framwork.view.interfaces.IKylinBasePanel;
 	
 	import mainModule.model.panelData.PanelCfgVo;
@@ -12,13 +12,13 @@ package mainModule.service.uiServices
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	import mainModule.service.uiServices.interfaces.IUIPanelBehaviorService;
 	
-	import org.robotlegs.core.IInjector;
+	import robotlegs.bender.framework.api.IInjector;
 	
 	import utili.behavior.declare.DeclareBehavior;
 	import utili.behavior.interfaces.IAppearBehavior;
 	import utili.behavior.interfaces.IDisappearBehavior;
 	
-	public class UIPanelBehaviorService extends KylinService implements IUIPanelBehaviorService
+	public class UIPanelBehaviorService extends KylinActor implements IUIPanelBehaviorService
 	{
 		[Inject]
 		public var _panelCfg:IPanelCfgModel;
@@ -51,7 +51,7 @@ package mainModule.service.uiServices
 			var cfg:PanelCfgVo = _panelCfg.getPanelCfg(panelId);
 			_layers.getPanelSubLayerByIdx(cfg.layerIndex).addChild(DisplayObject(_panels.getPanel(panelId)));
 			
-			var iAppear:IAppearBehavior = _injector.instantiate(appearClass);
+			var iAppear:IAppearBehavior = _injector.instantiateUnmapped(appearClass);
 			iAppear.init(Sprite(panel),appearCB);
 			iAppear.appear();
 			++_appearPanelCount;
@@ -81,7 +81,7 @@ package mainModule.service.uiServices
 			disappearClass ||= _declare.getBehaviorClass("DisappearDirectly");
 			if(!disappearClass)
 				return;
-			var iDisappear:IDisappearBehavior = _injector.instantiate(disappearClass);
+			var iDisappear:IDisappearBehavior = _injector.instantiateUnmapped(disappearClass);
 			iDisappear.init(Sprite(panel),disappearCB);
 			iDisappear.disappear();
 		}

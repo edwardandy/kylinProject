@@ -1,6 +1,6 @@
 package mainModule.model.gameData.dynamicData
 {
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.controller.gameData.GameDataUpdateEvent;
 	
@@ -11,7 +11,7 @@ package mainModule.model.gameData.dynamicData
 	 * @author Edward
 	 * 
 	 */	
-	public class BaseDynamicDataModel extends KylinModel
+	public class BaseDynamicDataModel extends KylinActor
 	{
 		/**
 		 * 数据对应的id 

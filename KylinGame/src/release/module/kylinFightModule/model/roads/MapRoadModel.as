@@ -1,6 +1,7 @@
 package release.module.kylinFightModule.model.roads
 {			
-	import kylin.echo.edward.framwork.model.KylinModel;
+	
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
 	import release.module.kylinFightModule.utili.RoadLineVOHelperUtil;
@@ -11,7 +12,7 @@ package release.module.kylinFightModule.model.roads
 	 * @author Edward
 	 * 
 	 */	
-	public class MapRoadModel extends KylinModel implements IMapRoadModel
+	public class MapRoadModel extends KylinActor implements IMapRoadModel
 	{
 		private var _vecRoads:Vector.<MapRoadVO>;	
 		private var _ptRoadEnd:PointVO;

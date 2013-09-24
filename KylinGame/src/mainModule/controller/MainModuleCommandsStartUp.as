@@ -14,12 +14,14 @@ package mainModule.controller
 	import mainModule.controller.uiCmds.UIOpenPanelCmd;
 	import mainModule.controller.uiCmds.UIPanelEvent;
 	
-	import org.robotlegs.core.ICommandMap;
+	import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
+		
 
 	public class MainModuleCommandsStartUp
 	{
-		public function MainModuleCommandsStartUp(cmdMap:ICommandMap)
+		public function MainModuleCommandsStartUp(cmdMap:IEventCommandMap)
 		{
+			cmdMap.ccc();
 			cmdMap.mapEvent(GameInitStepEvent.GameInitLoadResCfg,GameInitLoadResCfgCmd,GameInitStepEvent,true);
 			cmdMap.mapEvent(GameInitStepEvent.GameInitLoadGameCfg,GameInitLoadGameCfgCmd,GameInitStepEvent,true);
 			cmdMap.mapEvent(GameInitStepEvent.GameInitSetupGameCfg,GameInitSetupGameCfgCmd,GameInitStepEvent,true);
@@ -34,7 +36,7 @@ package mainModule.controller
 			mapHttpCmds(cmdMap);
 		}
 		
-		private function mapHttpCmds(cmdMap:ICommandMap):void
+		private function mapHttpCmds(cmdMap:IEventCommandMap):void
 		{
 			cmdMap.mapEvent(HttpEvent.Http_GameInit,HttpGameInitCmd,HttpEvent);
 		}

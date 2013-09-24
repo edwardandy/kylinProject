@@ -52,48 +52,49 @@ package mainModule.model
 	import mainModule.model.textData.TextCfgModel;
 	import mainModule.model.textData.interfaces.ITextCfgModel;
 	
-	import org.robotlegs.core.IInjector;
+	import robotlegs.bender.framework.api.IInjector;
+	
 
 	public final class MainModuleModelsStartUp
 	{
 		public function MainModuleModelsStartUp(inject:IInjector)
 		{
-			inject.mapSingletonOf(IGameCfgModel,GameCfgModel);
+			inject.map(IGameCfgModel).toSingleton(GameCfgModel);
 			//inject.mapSingleton(FlashVarsModel);
-			inject.mapSingletonOf(IConfigDataModel,ConfigDataModel);
-			inject.mapSingletonOf(IPanelCfgModel,PanelCfgModel);
-			inject.mapSingletonOf(ITextCfgModel,TextCfgModel);
-			inject.mapSingletonOf(IPanelDeclareModel,PanelDeclareModel);
-			inject.mapSingleton(ViewLayersModel);
-			inject.mapSingleton(PanelInstancesModel);
-			inject.mapSingletonOf(IPreLoadCfgModel,PreLoadCfgModel);
+			inject.map(IConfigDataModel).toSingleton(ConfigDataModel);
+			inject.map(IPanelCfgModel).toSingleton(PanelCfgModel);
+			inject.map(ITextCfgModel).toSingleton(TextCfgModel);
+			inject.map(IPanelDeclareModel).toSingleton(PanelDeclareModel);
+			inject.map(ViewLayersModel).asSingleton();
+			inject.map(PanelInstancesModel).asSingleton();
+			inject.map(IPreLoadCfgModel).toSingleton(PreLoadCfgModel);
 			
 			injectGameData(inject);
 		}
 		
 		private function injectGameData(inject:IInjector):void
 		{
-			inject.mapSingletonOf(ISheetDataCacheModel,SheetDataCacheModel);
+			inject.map(ISheetDataCacheModel).toSingleton(SheetDataCacheModel);
 			//配置表数据映射
-			inject.mapSingletonOf(IHeroSheetDataModel,HeroSheetDataModel);
-			inject.mapSingletonOf(ILangSheetDataModel,LangSheetDataModel);
-			inject.mapSingletonOf(IMonsterSheetDataModel,MonsterSheetDataModel);
-			inject.mapSingletonOf(ITowerSheetDataModel,TowerSheetDataModel);
-			inject.mapSingletonOf(ISoldierSheetDataModel,SoldierSheetDataModel);
-			inject.mapSingletonOf(IMagicSkillSheetDataModel,MagicSkillSheetDataModel);
-			inject.mapSingletonOf(IHeroSkillSheetDataModel,HeroSkillSheetDataModel);
-			inject.mapSingletonOf(IMonsterSkillSheetDataModel,MonsterSkillSheetDataModel);
-			inject.mapSingletonOf(IWeaponSheetDataModel,WeaponSheetDataModel);
-			inject.mapSingletonOf(ITowerSkillSheetDataModel,TowerSkillSheetDataModel);
-			inject.mapSingletonOf(IBuffSheetDataModel,BuffSheetDataModel);
-			inject.mapSingletonOf(IItemSheetDataModel,ItemSheetDataModel);
-			inject.mapSingletonOf(ITollgateSheetDataModel,TollgateSheetDataModel);
-			inject.mapSingletonOf(IWaveSheetDataModel,WaveSheetDataModel);
-			inject.mapSingletonOf(ISubwaveSheetDataModel,SubwaveSheetDataModel);
+			inject.map(IHeroSheetDataModel).toSingleton(HeroSheetDataModel);
+			inject.map(ILangSheetDataModel).toSingleton(LangSheetDataModel);
+			inject.map(IMonsterSheetDataModel).toSingleton(MonsterSheetDataModel);
+			inject.map(ITowerSheetDataModel).toSingleton(TowerSheetDataModel);
+			inject.map(ISoldierSheetDataModel).toSingleton(SoldierSheetDataModel);
+			inject.map(IMagicSkillSheetDataModel).toSingleton(MagicSkillSheetDataModel);
+			inject.map(IHeroSkillSheetDataModel).toSingleton(HeroSkillSheetDataModel);
+			inject.map(IMonsterSkillSheetDataModel).toSingleton(MonsterSkillSheetDataModel);
+			inject.map(IWeaponSheetDataModel).toSingleton(WeaponSheetDataModel);
+			inject.map(ITowerSkillSheetDataModel).toSingleton(TowerSkillSheetDataModel);
+			inject.map(IBuffSheetDataModel).toSingleton(BuffSheetDataModel);
+			inject.map(IItemSheetDataModel).toSingleton(ItemSheetDataModel);
+			inject.map(ITollgateSheetDataModel).toSingleton(TollgateSheetDataModel);
+			inject.map(IWaveSheetDataModel).toSingleton(WaveSheetDataModel);
+			inject.map(ISubwaveSheetDataModel).toSingleton(SubwaveSheetDataModel);
 			//动态数据映射
-			inject.mapSingletonOf(IDynamicDataDictionaryModel,DynamicDataDictionaryModel);
-			inject.mapSingleton(HeroDynamicDataModel);
-			inject.mapSingletonOf(IFightDynamicDataModel,FightDynamicDataModel);
+			inject.map(IDynamicDataDictionaryModel).toSingleton(DynamicDataDictionaryModel);
+			inject.map(HeroDynamicDataModel).asSingleton();
+			inject.map(IFightDynamicDataModel).toSingleton(FightDynamicDataModel);
 		}	
 	}
 }

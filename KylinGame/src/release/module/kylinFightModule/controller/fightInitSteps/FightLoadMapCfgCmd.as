@@ -1,9 +1,7 @@
 package release.module.kylinFightModule.controller.fightInitSteps
 {
-	import flash.display.DisplayObject;
 	import flash.events.Event;
 	
-	import br.com.stimuli.loading.loadingtypes.ImageItem;
 	import br.com.stimuli.loading.loadingtypes.XMLItem;
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;

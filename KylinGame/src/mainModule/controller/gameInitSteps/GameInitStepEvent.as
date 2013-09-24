@@ -4,7 +4,7 @@ package mainModule.controller.gameInitSteps
 	
 	import kylin.echo.edward.framwork.KylinEvent;
 	
-	public class GameInitStepEvent extends KylinEvent
+	public class GameInitStepEvent extends Event
 	{
 		/**
 		 * 开始加载资源配置文件，游戏开始最优先加载 

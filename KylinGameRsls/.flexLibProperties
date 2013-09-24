@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
+    <classEntry path="kylin.echo.edward.framwork.view.KylinBasePanel"/>
     <classEntry path="kylin.echo.edward.utilities.loader.interfaces.IDomainResMgr"/>
     <classEntry path="kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress"/>
     <classEntry path="kylin.echo.edward.utilities.loader.resPath.ResPathParam"/>
-    <classEntry path="kylin.echo.edward.framwork.controller.KylinCommand"/>
-    <classEntry path="kylin.echo.edward.framwork.model.KylinModel"/>
-    <classEntry path="kylin.echo.edward.framwork.service.KylinService"/>
-    <classEntry path="kylin.echo.edward.framwork.view.KylinBasePanel"/>
-    <classEntry path="kylin.echo.edward.framwork.view.KylinMediater"/>
-    <classEntry path="kylin.echo.edward.framwork.KylinEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

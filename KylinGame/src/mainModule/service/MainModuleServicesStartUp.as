@@ -10,7 +10,7 @@ package mainModule.service
 	import mainModule.service.uiServices.interfaces.IUIPanelBehaviorService;
 	import mainModule.service.uiServices.interfaces.IUIPanelService;
 	
-	import org.robotlegs.core.IInjector;
+	import robotlegs.bender.framework.api.IInjector;
 	
 	import utili.behavior.declare.DeclareBehavior;
 
@@ -18,13 +18,13 @@ package mainModule.service
 	{
 		public function MainModuleServicesStartUp(inject:IInjector)
 		{
-			inject.mapSingleton(DeclareBehavior);
-			inject.mapSingletonOf(IUIPanelService,UIPanelService);
-			inject.mapSingletonOf(IUIPanelBehaviorService,UIPanelBehaviorService);
-			inject.mapSingletonOf(IHttpRequestService,HttpRequestService);
-			inject.mapSingletonOf(ISheetDataService,CSVSheetDataService);
+			inject.map(DeclareBehavior).asSingleton();
+			inject.map(IUIPanelService).toSingleton(UIPanelService);
+			inject.map(IUIPanelBehaviorService).toSingleton(UIPanelBehaviorService);
+			inject.map(IHttpRequestService).toSingleton(HttpRequestService);
+			inject.map(ISheetDataService).toSingleton(CSVSheetDataService);
 			
-			inject.mapClass(HttpRequestParam,HttpRequestParam);
+			inject.map(HttpRequestParam).toType(HttpRequestParam);
 		}
 	}
 }

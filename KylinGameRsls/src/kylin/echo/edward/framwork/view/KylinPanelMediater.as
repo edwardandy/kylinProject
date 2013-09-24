@@ -1,21 +1,23 @@
 package kylin.echo.edward.framwork.view
 {
-	public class KylinPanelMediater extends KylinMediater
+	import robotlegs.bender.bundles.mvcs.Mediator;
+
+	public class KylinPanelMediater extends Mediator
 	{		
 		public function KylinPanelMediater()
 		{
 			super();
 		}
 
-		override public function onRegister():void
+		override public function initialize():void
 		{
-			super.onRegister();
+			super.initialize();
 			basePanel.firstInit();
 		}
 		
-		override public function onRemove():void
+		override public function destroy():void
 		{
-			super.onRemove();
+			super.destroy();
 			basePanel.dispose();
 		}
 		/**

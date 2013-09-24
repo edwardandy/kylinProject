@@ -9,7 +9,7 @@ package mainModule.controller.gameData
 	 * @author Edward
 	 * 
 	 */	
-	public class GameDataUpdateEvent extends KylinEvent
+	public class GameDataUpdateEvent extends Event
 	{
 		/**
 		 * 英雄数据更新 

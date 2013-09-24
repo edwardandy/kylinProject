@@ -1,11 +1,11 @@
 package mainModule.model.gameConstAndVar
 {	
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.model.gameConstAndVar.interfaces.IConfigDataModel;
 	import mainModule.model.gameInitSteps.interfaces.IGameCfgModel;
 	
-	public class ConfigDataModel extends KylinModel implements IConfigDataModel
+	public class ConfigDataModel extends KylinActor implements IConfigDataModel
 	{
 		[Inject]
 		public var gameCfgModel:IGameCfgModel;

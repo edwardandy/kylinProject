@@ -1,23 +1,23 @@
 package mainModule.service.gameDataServices.sheetData
 {
 	import br.com.stimuli.loading.loadingtypes.URLItem;
-	import br.com.stimuli.loading.loadingtypes.XMLItem;
 	
-	import kylin.echo.edward.framwork.service.KylinService;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	import kylin.echo.edward.utilities.string.KylinStringUtil;
 	
 	import mainModule.model.gameData.sheetData.interfaces.ISheetDataCacheModel;
 	import mainModule.service.gameDataServices.interfaces.ISheetDataService;
 	
-	import org.robotlegs.core.IInjector;
+	import robotlegs.bender.framework.api.IInjector;
+	
 
 	/**
 	 * CSV格式的配置文件解析器  
 	 * @author Edward
 	 * 
 	 */	
-	public class CSVSheetDataService extends KylinService implements ISheetDataService
+	public class CSVSheetDataService extends KylinActor implements ISheetDataService
 	{
 		[Inject]
 		public var loadMgr:ILoadMgr;
@@ -75,7 +75,7 @@ package mainModule.service.gameDataServices.sheetData
 			if(!arrSub)
 				return null;
 			
-			var result:Object = _injector.instantiate(sheetClass);
+			var result:Object = _injector.instantiateUnmapped(sheetClass);
 			var prop:String;
 			i = 0;
 			for(i in arrData[fieldRow])

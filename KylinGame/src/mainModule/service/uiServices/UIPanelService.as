@@ -10,7 +10,7 @@ package mainModule.service.uiServices
 	
 	import br.com.stimuli.loading.loadingtypes.ImageItem;
 	
-	import kylin.echo.edward.framwork.service.KylinService;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.framwork.view.interfaces.IKylinBasePanel;
 	import kylin.echo.edward.utilities.display.DisplayObjectUtils;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
@@ -24,10 +24,11 @@ package mainModule.service.uiServices
 	import mainModule.service.uiServices.interfaces.IUIPanelBehaviorService;
 	import mainModule.service.uiServices.interfaces.IUIPanelService;
 	
-	import org.robotlegs.core.IInjector;
+	import robotlegs.bender.framework.api.IInjector;
 	
 	
-	public class UIPanelService extends KylinService implements IUIPanelService
+	
+	public class UIPanelService extends KylinActor implements IUIPanelService
 	{
 		[Inject]
 		public var _panelCfg:IPanelCfgModel;
@@ -119,7 +120,7 @@ package mainModule.service.uiServices
 				_injector.injectInto(instance);
 			}
 			else
-				instance = IKylinBasePanel(_injector.instantiate(_panelDeclare.getPanelClass(id)));
+				instance = IKylinBasePanel(_injector.instantiateUnmapped(_panelDeclare.getPanelClass(id)));
 			if(!instance)
 				return;
 			_panels.cachePanel(id,instance);

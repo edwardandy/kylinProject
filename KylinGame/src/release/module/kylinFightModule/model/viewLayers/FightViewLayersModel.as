@@ -3,7 +3,7 @@ package release.module.kylinFightModule.model.viewLayers
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 
@@ -12,7 +12,7 @@ package release.module.kylinFightModule.model.viewLayers
 	 * @author Edward
 	 * 
 	 */	
-	public class FightViewLayersModel extends KylinModel implements IFightViewLayersModel
+	public class FightViewLayersModel extends KylinActor implements IFightViewLayersModel
 	{
 		private var _parent:DisplayObjectContainer;
 		private var _groundLayer:Sprite;

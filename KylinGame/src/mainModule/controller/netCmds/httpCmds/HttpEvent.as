@@ -5,7 +5,7 @@ package mainModule.controller.netCmds.httpCmds
 	import kylin.echo.edward.framwork.KylinEvent;
 	
 	
-	public class HttpEvent extends KylinEvent
+	public class HttpEvent extends Event
 	{
 		/**
 		 *  发送请求(请求可能被存入队列中等待)

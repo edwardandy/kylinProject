@@ -32,7 +32,7 @@ package mainModule.controller.gameInitSteps
 			super.execute();
 			loadGameCfg("game_config");
 			
-			commandMap.detain(this);
+			directCommandMap.detain(this);
 		}
 		
 		private function loadGameCfg(id:String):void
@@ -50,7 +50,7 @@ package mainModule.controller.gameInitSteps
 						
 			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitSetupGameCfg));
 			
-			commandMap.release(this);
+			directCommandMap.release(this);
 		}
 	}
 }

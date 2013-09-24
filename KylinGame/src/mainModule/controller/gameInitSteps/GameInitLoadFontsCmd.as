@@ -28,7 +28,7 @@ package mainModule.controller.gameInitSteps
 			
 			loadFonts();
 			
-			commandMap.detain(this);
+			directCommandMap.detain(this);
 		}
 		
 		private function loadFonts():void
@@ -37,7 +37,7 @@ package mainModule.controller.gameInitSteps
 			if(null == item)
 			{
 				dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitSetViewLayers));
-				commandMap.release(this);
+				directCommandMap.release(this);
 				return;
 			}
 			
@@ -66,7 +66,7 @@ package mainModule.controller.gameInitSteps
 				Font.registerFont(item.getDefinitionByName(fontName) as Class);
 			}*/
 			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitSetViewLayers));
-			commandMap.release(this);
+			directCommandMap.release(this);
 		}
 		
 		/*[Embed(source="Museo700-Regular.otf", fontName="NormalFont",embedAsCFF="false", mimeType="application/x-font")]

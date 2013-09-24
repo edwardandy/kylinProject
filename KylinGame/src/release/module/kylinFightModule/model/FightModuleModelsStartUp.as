@@ -1,6 +1,5 @@
 package release.module.kylinFightModule.model
 {
-	import org.robotlegs.core.IInjector;
 	
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
@@ -10,6 +9,8 @@ package release.module.kylinFightModule.model
 	import release.module.kylinFightModule.model.roads.MapRoadModel;
 	import release.module.kylinFightModule.model.scene.SceneDataModel;
 	import release.module.kylinFightModule.model.viewLayers.FightViewLayersModel;
+	
+	import robotlegs.bender.framework.api.IInjector;
 
 	public final class FightModuleModelsStartUp
 	{

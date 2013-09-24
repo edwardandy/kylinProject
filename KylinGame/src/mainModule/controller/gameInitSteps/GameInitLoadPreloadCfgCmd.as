@@ -32,7 +32,7 @@ package mainModule.controller.gameInitSteps
 			
 			loadCfg("preload_config");
 			
-			commandMap.detain(this);
+			directCommandMap.detain(this);
 		}
 		
 		private function loadCfg(id:String):void
@@ -50,7 +50,7 @@ package mainModule.controller.gameInitSteps
 			
 			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitLoadFonts));
 			
-			commandMap.release(this);
+			directCommandMap.release(this);
 		}
 	}
 }

@@ -5,8 +5,6 @@ package mainModule
 	import flash.system.ApplicationDomain;
 	import flash.system.Security;
 	
-	import kylin.echo.edward.framwork.KylinContext;
-	
 	import mainModule.controller.MainModuleCommandsStartUp;
 	import mainModule.controller.gameInitSteps.GameInitStepEvent;
 	import mainModule.controller.uiCmds.UIPanelEvent;
@@ -17,7 +15,9 @@ package mainModule
 	import mainModule.startUp.MainModuleParseFlashVar;
 	import mainModule.view.MainModuleViewMediaterStartUp;
 	
-	import org.robotlegs.core.IInjector;
+	import robotlegs.bender.framework.api.IInjector;
+	import robotlegs.bender.framework.impl.Context;
+	
 	
 
 	/**
@@ -25,26 +25,26 @@ package mainModule
 	 * @author Edward
 	 * 
 	 */	
-	public class MainModuleContext extends KylinContext
+	public class MainModuleContext extends Context
 	{		
 		private var _loaderReadyCallback:Function;
 		
 		public function MainModuleContext(contextView:DisplayObjectContainer=null, autoStartup:Boolean=true, parentInjector:IInjector = null, applicationDomain:ApplicationDomain = null)
 		{
-			super(contextView, autoStartup,parentInjector,applicationDomain);
+			//super(contextView, autoStartup,parentInjector,applicationDomain);
 		}
 		/**
 		 * 启动框架 
 		 */		
-		override public function startup():void
+		/*override */public function startup():void
 		{
-			injector.mapValue(Stage,contextView.stage);
+			//injector.mapValue(Stage,contextView.view.stage);
 
 			new MainModuleModelsStartUp(this.injector);
 			new MainModuleServicesStartUp(this.injector);
 			new MainModuleInjectStartUp(this.injector);
-			new MainModuleCommandsStartUp(this.commandMap);
-			new MainModuleViewMediaterStartUp(this.mediatorMap);
+			//new MainModuleCommandsStartUp(this.commandMap);
+			//new MainModuleViewMediaterStartUp(this.mediatorMap);
 
 			super.startup();
 			
@@ -55,7 +55,7 @@ package mainModule
 		/**
 		 * 关闭框架 
 		 */		
-		override public function shutdown():void
+		/*override */public function shutdown():void
 		{
 			loaderReadyCallback = null;
 			super.shutdown();

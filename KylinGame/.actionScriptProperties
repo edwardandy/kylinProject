@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <actionScriptProperties analytics="false" mainApplicationPath="KylinGameShell.as" projectUUID="fe5691d9-43be-40e0-8408-843c588fc7c6" version="11">
   <compiler additionalCompilerArguments="-locale en_US --keep-as3-metadata+=Inject,PostConstruct,SmashInject" advancedTelemetry="false" autoRSLOrdering="true" copyDependentFiles="true" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="false" htmlHistoryManagement="true" htmlPlayerVersionCheck="true" includeNetmonSwc="false" outputFolderPath="" removeUnusedRSL="true" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" useFlashSDK="true" verifyDigests="true" warn="true">
-    <compilerSourcePath/>
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/BulkLoader/src"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/robotlegs-framework-v2.1.0/src"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/KylinProjectGit/KylinGameRsls/src"/>
+      <compilerSourcePathEntry kind="1" linkType="1" path="${DOCUMENTS}/SwiftSuspenders/src"/>
+    </compilerSourcePath>
     <libraryPath defaultLinkType="0">
       <libraryPathEntry kind="4" path="">
         <excludedEntries>
@@ -28,7 +33,6 @@
           <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="3" linkType="1" path="/KylinGameRsls/bin/KylinGameRsls.swc" useDefaultLinkType="false"/>
       <libraryPathEntry kind="1" linkType="1" path="libs"/>
     </libraryPath>
     <sourceAttachmentPath/>

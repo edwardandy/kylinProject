@@ -1,6 +1,7 @@
 package release.module.kylinFightModule.model.scene
 {
-	import kylin.echo.edward.framwork.model.KylinModel;
+	
+	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
 	import mainModule.model.gameData.sheetData.interfaces.ITollgateSheetDataModel;
@@ -13,7 +14,7 @@ package release.module.kylinFightModule.model.scene
 	 * @author Edward
 	 * 
 	 */	
-	public class SceneDataModel extends KylinModel implements ISceneDataModel
+	public class SceneDataModel extends KylinActor implements ISceneDataModel
 	{
 		[Inject]
 		public var fightData:IFightDynamicDataModel;

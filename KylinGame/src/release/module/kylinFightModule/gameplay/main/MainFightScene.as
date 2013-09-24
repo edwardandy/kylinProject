@@ -2,7 +2,8 @@ package release.module.kylinFightModule.gameplay.main
 {
 	import kylin.echo.edward.gameplay.KylinGameGroup;
 	
-	import org.robotlegs.core.IInjector;
+	import robotlegs.bender.framework.api.IInjector;
+	
 
 	/**
 	 * 战斗主场景 

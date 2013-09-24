@@ -34,21 +34,21 @@ package mainModule.controller.gameInitSteps
 		{
 			viewLayers.panelLayer = new Sprite;
 			viewLayers.panelLayer.mouseEnabled = false;
-			contextView.addChild(viewLayers.panelLayer);
+			contextView.view.addChild(viewLayers.panelLayer);
 			
 			viewLayers.popUpLayer = new Sprite;
 			viewLayers.popUpLayer.visible = false;
-			contextView.addChild(viewLayers.popUpLayer);
+			contextView.view.addChild(viewLayers.popUpLayer);
 			
 			viewLayers.tipsLayer = new Sprite;
 			viewLayers.tipsLayer.mouseEnabled = false;
 			viewLayers.tipsLayer.mouseChildren = false;
-			contextView.addChild(viewLayers.tipsLayer);
+			contextView.view.addChild(viewLayers.tipsLayer);
 			
 			viewLayers.waitPanelAppearLayer = new Sprite;
 			viewLayers.waitPanelAppearLayer.mouseChildren = false;
 			viewLayers.waitPanelAppearLayer.visible = false;
-			contextView.addChild(viewLayers.waitPanelAppearLayer);
+			contextView.view.addChild(viewLayers.waitPanelAppearLayer);
 			DisplayObjectUtils.instance.fillRectSprite(viewLayers.waitPanelAppearLayer,stage.stageWidth,stage.stageHeight,0,0);
 		}
 			

@@ -55,7 +55,7 @@ package mainModule.controller.gameInitSteps
 				allLoadCmp();
 			}
 			
-			commandMap.detain(this);
+			directCommandMap.detain(this);
 		}
 		
 		private function startPreLoad():void
@@ -113,7 +113,7 @@ package mainModule.controller.gameInitSteps
 			dispatch(new UIPanelEvent(UIPanelEvent.UI_ClosePanel,PanelNameConst.LoadPanel));
 			dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.KylinFightModule));
 			
-			commandMap.release(this);
+			directCommandMap.release(this);
 		}
 	}
 }

@@ -2,9 +2,8 @@ package mainModule.model.gameData.sheetData
 {
 	import flash.utils.Dictionary;
 	
-	import br.com.stimuli.loading.loadingtypes.XMLItem;
 	
-	import kylin.echo.edward.framwork.model.KylinModel;
+	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.service.gameDataServices.interfaces.ISheetDataService;
@@ -14,7 +13,7 @@ package mainModule.model.gameData.sheetData
 	 * @author Edward
 	 * 
 	 */	
-	public class BaseSheetDataModel extends KylinModel
+	public class BaseSheetDataModel extends KylinActor
 	{
 		[Inject]
 		public var loadMgr:ILoadMgr;

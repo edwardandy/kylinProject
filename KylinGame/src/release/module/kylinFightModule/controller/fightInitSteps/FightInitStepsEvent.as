@@ -2,9 +2,8 @@ package release.module.kylinFightModule.controller.fightInitSteps
 {
 	import flash.events.Event;
 	
-	import kylin.echo.edward.framwork.KylinEvent;
 	
-	public class FightInitStepsEvent extends KylinEvent
+	public class FightInitStepsEvent extends Event
 	{
 		/**
 		 * 单机时根据配置表填充虚拟的战斗数据 

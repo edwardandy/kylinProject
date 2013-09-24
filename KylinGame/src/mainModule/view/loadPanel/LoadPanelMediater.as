@@ -17,7 +17,7 @@ package mainModule.view.loadPanel
 			super();
 		}
 		
-		override public function onRegister():void
+		override public function initialize():void
 		{
 			super.onRegister();
 			
