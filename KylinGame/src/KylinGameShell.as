@@ -19,14 +19,24 @@ package
 	 * @author Edward
 	 * 
 	 */
-	[SWF(width="760",height="650",frameRate="30",backgroundColor="0xcccccc")] 
+	[SWF(width="760",height="650",frameRate="30",backgroundColor="0xffffff")] 
 	public class KylinGameShell extends Sprite
 	{
+		/**
+		 * 主程序文件名 
+		 */		
 		private const wrapperUrl:String = "wrapper";
-		
+		/**
+		 * 资源版本号 
+		 */		
 		private var _ver:String;
+		/**
+		 * 资源路径 
+		 */		
 		private var _cdnPath:String;
-
+		/**
+		 * 主程序加载进度显示 
+		 */		
 		private var _txtProgress:TextField;
 		
 		public function KylinGameShell()
@@ -45,16 +55,21 @@ package
 			initChild();
 			init();
 		}
-		
+		/**
+		 * 初始化进度显示文本框 
+		 * 
+		 */		
 		private function initChild():void
 		{
-			var spt:Sprite = new Sprite;
+			/*var spt:Sprite = new Sprite;
 			this.addChild(spt);
 			spt.graphics.beginFill(0xffffff);
 			spt.graphics.drawRect(0,0,this.stage.stageWidth,this.stage.stageHeight);
-			spt.graphics.endFill();
+			spt.graphics.endFill();*/
 			
 			_txtProgress = new TextField;
+			_txtProgress.mouseEnabled = false;
+			_txtProgress.mouseWheelEnabled = false;
 			_txtProgress.x = this.stage.stageWidth*0.5 - 70;
 			_txtProgress.y = this.stage.stageHeight*0.5 - 11;
 			_txtProgress.autoSize = TextFieldAutoSize.LEFT;
@@ -84,7 +99,10 @@ package
 			subPath += suffix;
 			return subPath;
 		}
-		
+		/**
+		 * 加载主程序 
+		 * 
+		 */		
 		private function loadWrapper():void
 		{
 			var request:URLRequest = new URLRequest(genUrl(wrapperUrl,".swf"));
