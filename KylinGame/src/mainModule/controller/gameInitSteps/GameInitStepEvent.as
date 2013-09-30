@@ -1,9 +1,7 @@
 package mainModule.controller.gameInitSteps
 {
 	import flash.events.Event;
-	
-	import kylin.echo.edward.framwork.KylinEvent;
-	
+		
 	public class GameInitStepEvent extends Event
 	{
 		/**

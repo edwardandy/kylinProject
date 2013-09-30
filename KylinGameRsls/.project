@@ -15,21 +15,4 @@
 		<nature>com.adobe.flexbuilder.project.aslibnature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>[source path] BulkLoader-src</name>
-			<type>2</type>
-			<locationURI>DOCUMENTS/BulkLoader/src</locationURI>
-		</link>
-		<link>
-			<name>[source path] SwiftSuspenders-src</name>
-			<type>2</type>
-			<locationURI>DOCUMENTS/SwiftSuspenders/src</locationURI>
-		</link>
-		<link>
-			<name>[source path] robotlegs-framework-v2.1.0-src</name>
-			<type>2</type>
-			<locationURI>DOCUMENTS/robotlegs-framework-v2.1.0/src</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>

@@ -1,9 +1,7 @@
 package mainModule.controller.netCmds.httpCmds
 {
 	import flash.events.Event;
-	
-	import kylin.echo.edward.framwork.KylinEvent;
-	
+		
 	
 	public class HttpEvent extends Event
 	{

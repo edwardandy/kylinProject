@@ -1,9 +1,7 @@
 package mainModule.controller.gameData
 {
 	import flash.events.Event;
-	
-	import kylin.echo.edward.framwork.KylinEvent;
-	
+		
 	/**
 	 * 游戏动态数据更新事件
 	 * @author Edward

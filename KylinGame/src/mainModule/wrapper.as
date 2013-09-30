@@ -14,13 +14,6 @@ package mainModule
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getTimer;
 	
-	import kylin.echo.edward.framwork.KylinContext;
-	
-	import mainModule.startUp.MainModuleParseFlashVar;
-	
-	import org.robotlegs.core.IContext;
-	import org.robotlegs.mvcs.Context;
-	
 	/**
 	 * 游戏主模块 
 	 * @author Edward

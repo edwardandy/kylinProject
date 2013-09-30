@@ -1,7 +1,5 @@
 package io.smash.core
 {
-    import flash.desktop.NativeApplication;
-    import flash.desktop.SystemIdleMode;
     import flash.display.Sprite;
     import flash.display.Stage;
     import flash.display.StageAlign;

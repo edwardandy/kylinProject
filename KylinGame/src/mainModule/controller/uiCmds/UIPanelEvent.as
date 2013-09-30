@@ -2,10 +2,6 @@ package mainModule.controller.uiCmds
 {
 	import flash.events.Event;
 	
-	import kylin.echo.edward.framwork.KylinEvent;
-	
-	import mainModule.controller.gameInitSteps.GameInitStepEvent;
-
 	/**
 	 * 面板打开、关闭等操作事件 
 	 * @author Administrator
