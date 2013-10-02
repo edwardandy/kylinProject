@@ -34,6 +34,8 @@ package mainModule
 			addEventListener(Event.ADDED_TO_STAGE,onAddToStage);
 			
 			MonsterDebugger.initialize(this);
+			var param:Object = this.loaderInfo.parameters;
+			trace(param);
 		}
 		/**
 		 * @inheritDoc

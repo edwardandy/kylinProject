@@ -8,6 +8,7 @@ package
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequest;
+	import flash.net.URLVariables;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	import flash.text.TextField;
@@ -112,6 +113,8 @@ package
 			load.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR,onIOError);
 			load.contentLoaderInfo.addEventListener(SecurityErrorEvent.SECURITY_ERROR,onSecurityError);
 			var context:LoaderContext = new LoaderContext(false,new ApplicationDomain(this.loaderInfo.applicationDomain));
+			//var context:LoaderContext = new LoaderContext(false,new ApplicationDomain());//是否和上面等价
+			context.parameters = this.loaderInfo.parameters;
 			load.load(request,context);
 		}
 		
@@ -120,7 +123,7 @@ package
 			var loadInfo:LoaderInfo = e.currentTarget as LoaderInfo;
 			removeLoaderListener(loadInfo);
 			
-			(loadInfo.content as ITdModule).SetModuleParam([this.loaderInfo.parameters,onModuleLoaderReady]);
+			(loadInfo.content as ITdModule).SetModuleParam([onModuleLoaderReady]);
 			
 			this.stage.addChildAt(loadInfo.content,0);	
 		}
