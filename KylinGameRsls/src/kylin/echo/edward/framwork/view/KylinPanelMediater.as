@@ -4,6 +4,9 @@ package kylin.echo.edward.framwork.view
 
 	public class KylinPanelMediater extends Mediator
 	{		
+		[Inject]
+		public var basePanel:KylinBasePanel;
+		
 		public function KylinPanelMediater()
 		{
 			super();
@@ -19,15 +22,6 @@ package kylin.echo.edward.framwork.view
 		{
 			super.destroy();
 			basePanel.dispose();
-		}
-		/**
-		 * 获得面板 
-		 * @return 
-		 * 
-		 */		
-		protected function get basePanel():KylinBasePanel
-		{
-			return viewComponent as KylinBasePanel;
 		}
 	}
 }

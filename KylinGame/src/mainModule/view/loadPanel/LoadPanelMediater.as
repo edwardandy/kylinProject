@@ -19,7 +19,7 @@ package mainModule.view.loadPanel
 		
 		override public function initialize():void
 		{
-			super.onRegister();
+			super.initialize();
 			
 			addViewListener(UIPanelEvent.UI_PanelOpened,onLoadPanelOpened,UIPanelEvent);
 			addContextListener(ProgressEvent.PROGRESS,onLoadProgress,ProgressEvent);

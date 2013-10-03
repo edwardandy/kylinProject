@@ -1,8 +1,11 @@
 package mainModule.view
 {
+	import kylin.echo.edward.framwork.view.KylinBasePanel;
+	
 	import mainModule.view.loadPanel.LoadPanel;
 	import mainModule.view.loadPanel.LoadPanelMediater;
 	
+	import robotlegs.bender.extensions.matching.TypeMatcher;
 	import robotlegs.bender.extensions.mediatorMap.api.IMediatorMap;
 	
 
@@ -10,7 +13,7 @@ package mainModule.view
 	{
 		public function MainModuleViewMediaterStartUp(mediaterMap:IMediatorMap)
 		{
-			mediaterMap.mapView(LoadPanel,LoadPanelMediater);
+			mediaterMap.mapMatcher(new TypeMatcher().allOf(LoadPanel,KylinBasePanel)).toMediator(LoadPanelMediater);
 		}
 	}
 }

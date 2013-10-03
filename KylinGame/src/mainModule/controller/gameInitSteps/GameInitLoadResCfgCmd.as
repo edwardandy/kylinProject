@@ -25,7 +25,7 @@ package mainModule.controller.gameInitSteps
 		override public function execute():void
 		{
 			super.execute();
-			commandMap.detain(this);
+			directCommandMap.detain(this);
 			loadResCfg("ver_config/config");
 		}
 		
@@ -52,11 +52,11 @@ package mainModule.controller.gameInitSteps
 			var loader:URLLoader = e.currentTarget as URLLoader;
 			loader.removeEventListener(Event.COMPLETE,onLoadCfgCmp);
 			
-			injector.mapValue(ResPathParam,new ResPathParam(new XML(loader.data),_flashVars.FLASH_PATH,_flashVars.LAN));	
+			injector.map(ResPathParam).toValue(new ResPathParam(new XML(loader.data),_flashVars.FLASH_PATH,_flashVars.LAN))
 			
 			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitLoadGameCfg));
 			
-			commandMap.release(this);
+			directCommandMap.release(this);
 		}
 		
 		

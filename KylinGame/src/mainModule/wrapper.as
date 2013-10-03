@@ -1,7 +1,5 @@
 package mainModule
-{
-	import com.demonsters.debugger.MonsterDebugger;
-	
+{	
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
 	import flash.display.Sprite;
@@ -14,45 +12,42 @@ package mainModule
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getTimer;
 	
+	import mainModule.configuration.MainModuleConfig;
+	
+	import robotlegs.bender.bundles.mvcs.MVCSBundle;
+	import robotlegs.bender.extensions.contextView.ContextView;
+	import robotlegs.bender.framework.api.IContext;
+	import robotlegs.bender.framework.impl.Context;
+	
+	
 	/**
 	 * 游戏主模块 
 	 * @author Edward
 	 * 
 	 */	
 	[SWF(width="760",height="650",frameRate="30",backgroundColor="0xcccccc")] 
-	public class wrapper extends Sprite implements ITdModule
+	public class wrapper extends Sprite
 	{
 		/**
 		 * 	主模块框架入口
 		 */		
-		private var _context:MainModuleContext;
+		private var _context:IContext;
 		
 		public function wrapper()
 		{		
-			super();
-			_context = new MainModuleContext(this);
 			addEventListener(Event.ADDED_TO_STAGE,onAddToStage);
-			
-			MonsterDebugger.initialize(this);
-			var param:Object = this.loaderInfo.parameters;
-			trace(param);
-		}
-		/**
-		 * @inheritDoc
-		 */		
-		public function SetModuleParam(param:Object):void
-		{
-			//获取flashVar
-			_context.parseFlashVars((param as Array)[0]);
-			_context.loaderReadyCallback = (param as Array)[1];
-			//_loaderReadyCallback = (param as Array)[2];
-			//_cb = (param as Array)[1];
 		}
 		
 		//private var _cb:Function;
 		private function onAddToStage(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,onAddToStage);
+			
+			_context = new Context()
+				.install( MVCSBundle)
+				.configure(MainModuleConfig)
+				.configure( new ContextView(this) );
+			
 			//_cb();
 			//loadModule();
 			//loadTestRes();

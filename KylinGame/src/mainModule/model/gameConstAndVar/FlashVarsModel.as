@@ -2,7 +2,7 @@ package mainModule.model.gameConstAndVar
 {
 	/**
 	 * js传给flash的变量 
-	 * @author Administrator
+	 * @author Edward
 	 * 
 	 */	
 	public final class FlashVarsModel

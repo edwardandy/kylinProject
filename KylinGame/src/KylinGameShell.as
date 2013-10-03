@@ -8,7 +8,6 @@ package
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.URLRequest;
-	import flash.net.URLVariables;
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	import flash.text.TextField;
@@ -42,12 +41,10 @@ package
 		
 		public function KylinGameShell()
 		{
-			this.mouseEnabled = true;
 			_ver = this.loaderInfo.parameters.ver;
 			_cdnPath = this.loaderInfo.parameters.url;
 			
 			this.addEventListener(Event.ADDED_TO_STAGE,onAddToStage);
-			
 		}
 		
 		private function onAddToStage(e:Event):void
@@ -62,12 +59,6 @@ package
 		 */		
 		private function initChild():void
 		{
-			/*var spt:Sprite = new Sprite;
-			this.addChild(spt);
-			spt.graphics.beginFill(0xffffff);
-			spt.graphics.drawRect(0,0,this.stage.stageWidth,this.stage.stageHeight);
-			spt.graphics.endFill();*/
-			
 			_txtProgress = new TextField;
 			_txtProgress.mouseEnabled = false;
 			_txtProgress.mouseWheelEnabled = false;
@@ -122,9 +113,7 @@ package
 		{
 			var loadInfo:LoaderInfo = e.currentTarget as LoaderInfo;
 			removeLoaderListener(loadInfo);
-			
-			(loadInfo.content as ITdModule).SetModuleParam([onModuleLoaderReady]);
-			
+						
 			this.stage.addChildAt(loadInfo.content,0);	
 		}
 		
