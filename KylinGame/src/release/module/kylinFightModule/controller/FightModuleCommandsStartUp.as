@@ -13,10 +13,10 @@ package release.module.kylinFightModule.controller
 	{
 		public function FightModuleCommandsStartUp(cmdMap:IEventCommandMap)
 		{
-			cmdMap.mapEvent(FightInitStepsEvent.FightFillVirtualData,FightFillVirtualDataCmd,FightInitStepsEvent,true);
-			cmdMap.mapEvent(FightInitStepsEvent.FightStartup,FightStartupCmd,FightInitStepsEvent,true);
-			cmdMap.mapEvent(FightInitStepsEvent.FightLoadMapImg,FightLoadMapImgCmd,FightInitStepsEvent,true);
-			cmdMap.mapEvent(FightInitStepsEvent.FightLoadMapCfg,FightLoadMapCfgCmd,FightInitStepsEvent,true);
+			cmdMap.map(FightInitStepsEvent.FightFillVirtualData,FightInitStepsEvent).toCommand(FightFillVirtualDataCmd).once();
+			cmdMap.map(FightInitStepsEvent.FightStartup,FightInitStepsEvent).toCommand(FightStartupCmd).once();
+			cmdMap.map(FightInitStepsEvent.FightLoadMapImg,FightInitStepsEvent).toCommand(FightLoadMapImgCmd).once();
+			cmdMap.map(FightInitStepsEvent.FightLoadMapCfg,FightInitStepsEvent).toCommand(FightLoadMapCfgCmd).once();
 		}
 	}
 }

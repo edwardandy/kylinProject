@@ -38,7 +38,6 @@ package mainModule
 			addEventListener(Event.ADDED_TO_STAGE,onAddToStage);
 		}
 		
-		//private var _cb:Function;
 		private function onAddToStage(e:Event):void
 		{
 			removeEventListener(Event.ADDED_TO_STAGE,onAddToStage);

@@ -16,10 +16,10 @@ package release.module.kylinFightModule.model
 	{
 		public function FightModuleModelsStartUp(injector:IInjector)
 		{
-			injector.mapSingletonOf(IMonsterWaveModel,MonsterWaveModel);
-			injector.mapSingletonOf(IFightViewLayersModel,FightViewLayersModel);
-			injector.mapSingletonOf(IMapRoadModel,MapRoadModel);
-			injector.mapSingletonOf(ISceneDataModel,SceneDataModel);
+			injector.map(IMonsterWaveModel).toSingleton(MonsterWaveModel);
+			injector.map(IFightViewLayersModel).toSingleton(FightViewLayersModel);
+			injector.map(IMapRoadModel).toSingleton(MapRoadModel);
+			injector.map(ISceneDataModel).toSingleton(SceneDataModel);
 		}
 	}
 }
