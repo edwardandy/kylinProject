@@ -3,7 +3,7 @@ package mainModule.model.panelData
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.utils.Dictionary;
-	
+		
 	import utili.structure.DictionaryUtil;
 
 	/**
@@ -13,6 +13,7 @@ package mainModule.model.panelData
 	 */	
 	public final class ViewLayersModel
 	{
+		private var _contextRoot:DisplayObjectContainer;
 		/**
 		 * 面板层 
 		 */		
@@ -34,6 +35,38 @@ package mainModule.model.panelData
 		public function ViewLayersModel()
 		{
 			panelIdxToLayer = new Dictionary();
+			init();
+		}
+		
+		/**
+		 * 框架根显示容器 
+		 */
+		public function get contextRoot():DisplayObjectContainer
+		{
+			return _contextRoot;
+		}
+
+		private function init():void
+		{
+			_contextRoot = new Sprite;
+			
+			panelLayer = new Sprite;
+			panelLayer.mouseEnabled = false;
+			_contextRoot.addChild(panelLayer);
+			
+			popUpLayer = new Sprite;
+			popUpLayer.visible = false;
+			_contextRoot.addChild(popUpLayer);
+			
+			tipsLayer = new Sprite;
+			tipsLayer.mouseEnabled = false;
+			tipsLayer.mouseChildren = false;
+			_contextRoot.addChild(tipsLayer);
+			
+			waitPanelAppearLayer = new Sprite;
+			waitPanelAppearLayer.mouseChildren = false;
+			waitPanelAppearLayer.visible = false;
+			_contextRoot.addChild(waitPanelAppearLayer);
 		}
 		
 		

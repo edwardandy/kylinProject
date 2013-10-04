@@ -6,7 +6,6 @@ package mainModule.controller
 	import mainModule.controller.gameInitSteps.GameInitLoadResCfgCmd;
 	import mainModule.controller.gameInitSteps.GameInitLoaderReadyCallBackShell.GameInitLoaderReadyCallBackShellCmd;
 	import mainModule.controller.gameInitSteps.GameInitPreLoadResCmd;
-	import mainModule.controller.gameInitSteps.GameInitSetViewLayersCmd;
 	import mainModule.controller.gameInitSteps.GameInitSetupGameCfgCmd;
 	import mainModule.controller.gameInitSteps.GameInitStepEvent;
 	import mainModule.controller.netCmds.httpCmds.HttpEvent;
@@ -27,7 +26,6 @@ package mainModule.controller
 			cmdMap.map(GameInitStepEvent.GameInitSetupGameCfg,GameInitStepEvent).toCommand(GameInitSetupGameCfgCmd).once();
 			cmdMap.map(GameInitStepEvent.GameInitLoadPreloadCfg,GameInitStepEvent).toCommand(GameInitLoadPreloadCfgCmd).once();
 			cmdMap.map(GameInitStepEvent.GameInitLoadFonts,GameInitStepEvent).toCommand(GameInitLoadFontsCmd).once();
-			cmdMap.map(GameInitStepEvent.GameInitSetViewLayers,GameInitStepEvent).toCommand(GameInitSetViewLayersCmd).once();
 			cmdMap.map(GameInitStepEvent.GameInitPreLoadRes,GameInitStepEvent).toCommand(GameInitPreLoadResCmd).once();
 			
 			cmdMap.map(UIPanelEvent.UI_OpenPanel,UIPanelEvent).toCommand(UIOpenPanelCmd);

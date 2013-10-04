@@ -25,10 +25,6 @@ package mainModule.controller.gameInitSteps
 		 */		
 		public static const GameInitLoadFonts:String = "LoadFonts";
 		/**
-		 * 设置游戏显示层级
-		 */		
-		public static const GameInitSetViewLayers:String = "SetViewLayers";
-		/**
 		 * 预加载资源 
 		 */		
 		public static const GameInitPreLoadRes:String = "PreLoadRes";

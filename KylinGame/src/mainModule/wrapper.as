@@ -13,9 +13,9 @@ package mainModule
 	import flash.utils.getTimer;
 	
 	import mainModule.configuration.MainModuleConfig;
+	import mainModule.extensions.ViewLayerExtension;
 	
 	import robotlegs.bender.bundles.mvcs.MVCSBundle;
-	import robotlegs.bender.extensions.contextView.ContextView;
 	import robotlegs.bender.framework.api.IContext;
 	import robotlegs.bender.framework.impl.Context;
 	
@@ -45,7 +45,8 @@ package mainModule
 			_context = new Context()
 				.install( MVCSBundle)
 				.configure(MainModuleConfig)
-				.configure( new ContextView(this) );
+				//.configure(new ViewLayerConfig(this));
+				.install( new ViewLayerExtension(this))
 			
 			//_cb();
 			//loadModule();

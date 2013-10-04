@@ -65,7 +65,7 @@ package mainModule.model
 			inject.map(IPanelCfgModel).toSingleton(PanelCfgModel);
 			inject.map(ITextCfgModel).toSingleton(TextCfgModel);
 			inject.map(IPanelDeclareModel).toSingleton(PanelDeclareModel);
-			inject.map(ViewLayersModel).asSingleton();
+			//inject.map(ViewLayersModel).asSingleton();
 			inject.map(PanelInstancesModel).asSingleton();
 			inject.map(IPreLoadCfgModel).toSingleton(PreLoadCfgModel);
 			

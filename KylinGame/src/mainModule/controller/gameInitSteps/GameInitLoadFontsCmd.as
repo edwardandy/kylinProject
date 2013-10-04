@@ -7,6 +7,9 @@ package mainModule.controller.gameInitSteps
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
+	import mainModule.controller.uiCmds.UIPanelEvent;
+	import mainModule.model.panelData.PanelNameConst;
+	
 	/**
 	 * 加载游戏字体库 
 	 * @author Edward
@@ -36,7 +39,7 @@ package mainModule.controller.gameInitSteps
 			var item:ImageItem = loadMgr.addFontItem("FontLibrary");
 			if(null == item)
 			{
-				dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitSetViewLayers));
+				dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.LoadPanel));
 				directCommandMap.release(this);
 				return;
 			}
@@ -65,7 +68,7 @@ package mainModule.controller.gameInitSteps
 				var ft1:Font = new(item.getDefinitionByName(fontName) as Class);
 				Font.registerFont(item.getDefinitionByName(fontName) as Class);
 			}*/
-			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitSetViewLayers));
+			dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.LoadPanel));
 			directCommandMap.release(this);
 		}
 		

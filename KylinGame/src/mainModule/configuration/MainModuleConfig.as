@@ -8,7 +8,6 @@ package mainModule.configuration
 	
 	import mainModule.controller.MainModuleCommandsStartUp;
 	import mainModule.controller.gameInitSteps.GameInitStepEvent;
-	import mainModule.controller.uiCmds.UIPanelEvent;
 	import mainModule.model.MainModuleModelsStartUp;
 	import mainModule.service.MainModuleServicesStartUp;
 	import mainModule.startUp.MainModuleInjectStartUp;
