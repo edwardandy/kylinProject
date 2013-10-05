@@ -13,6 +13,7 @@ package mainModule
 	import flash.utils.getTimer;
 	
 	import mainModule.configuration.MainModuleConfig;
+	import mainModule.extensions.FlashVarsExtension;
 	import mainModule.extensions.ViewLayerExtension;
 	
 	import robotlegs.bender.bundles.mvcs.MVCSBundle;
@@ -44,8 +45,8 @@ package mainModule
 			
 			_context = new Context()
 				.install( MVCSBundle)
+				.install(new FlashVarsExtension(this.loaderInfo.parameters))
 				.configure(MainModuleConfig)
-				//.configure(new ViewLayerConfig(this));
 				.install( new ViewLayerExtension(this))
 			
 			//_cb();

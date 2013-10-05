@@ -11,7 +11,6 @@ package mainModule.controller.gameInitSteps
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
 	import kylin.echo.edward.utilities.loader.resPath.ResPathFolderType;
 	
-	import mainModule.controller.netCmds.httpCmds.HttpEvent;
 	import mainModule.controller.uiCmds.UIPanelEvent;
 	import mainModule.model.panelData.PanelNameConst;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;

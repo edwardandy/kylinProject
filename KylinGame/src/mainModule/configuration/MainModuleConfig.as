@@ -7,6 +7,7 @@ package mainModule.configuration
 	import flash.system.Security;
 	
 	import mainModule.controller.MainModuleCommandsStartUp;
+	import mainModule.controller.gameInitSteps.GameInitLoadResCfgCmd;
 	import mainModule.controller.gameInitSteps.GameInitStepEvent;
 	import mainModule.model.MainModuleModelsStartUp;
 	import mainModule.service.MainModuleServicesStartUp;
@@ -66,10 +67,7 @@ package mainModule.configuration
 			//service
 			//httpManager.initialize(GameConst.PATH_TO_PHP);
 			//serviceFactory.registerService(GameStartService.NAME, GameStartService);
-			
-			//mdeiator
-			new MainModuleParseFlashVar(contextView.view.loaderInfo.parameters,this.injector);
-			
+						
 			new MainModuleModelsStartUp(this.injector);
 			new MainModuleServicesStartUp(this.injector);
 			new MainModuleInjectStartUp(this.injector);

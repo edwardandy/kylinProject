@@ -3,7 +3,6 @@ package kylin.echo.edward.framwork.model
 	import flash.events.Event;
 	import flash.events.IEventDispatcher;
 	
-	import robotlegs.bender.extensions.localEventMap.api.IEventMap;
 	
 	public class KylinActor 
 	{

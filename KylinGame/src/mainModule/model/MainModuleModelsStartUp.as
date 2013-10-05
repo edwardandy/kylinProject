@@ -60,12 +60,10 @@ package mainModule.model
 		public function MainModuleModelsStartUp(inject:IInjector)
 		{
 			inject.map(IGameCfgModel).toSingleton(GameCfgModel);
-			//inject.mapSingleton(FlashVarsModel);
 			inject.map(IConfigDataModel).toSingleton(ConfigDataModel);
 			inject.map(IPanelCfgModel).toSingleton(PanelCfgModel);
 			inject.map(ITextCfgModel).toSingleton(TextCfgModel);
 			inject.map(IPanelDeclareModel).toSingleton(PanelDeclareModel);
-			//inject.map(ViewLayersModel).asSingleton();
 			inject.map(PanelInstancesModel).asSingleton();
 			inject.map(IPreLoadCfgModel).toSingleton(PreLoadCfgModel);
 			
