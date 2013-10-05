@@ -1,26 +1,41 @@
 <?xml version="1.0" ?>
 <root>
 	<configfile folder="release/configfile/">
-		<item id="game_config" size="8109">game_config.xml</item>
-		<item id="preload_config" size="290">preload_config.xml</item>
-		<item id="heroData" size="1499">dataConfig/heroData.xml</item>
-		<item id="heroSheetData" size="757">dataConfig/heroSheetData.xml</item>
-		<item id="alertPanel" size="1669">textConfig/panel_config/alertPanel.xml</item>
-		<item id="commonLang" size="1420">textConfig/panel_config/commonLang.xml</item>
-		<item id="heroPanel" size="1366">textConfig/panel_config/heroPanel.xml</item>
-		<item id="levelPanel" size="864">textConfig/panel_config/levelPanel.xml</item>
-		<item id="loadPanel" size="1365">textConfig/panel_config/loadPanel.xml</item>
-		<item id="magiccadePanel" size="301">textConfig/panel_config/magiccadePanel.xml</item>
-		<item id="pubPanel" size="266">textConfig/panel_config/pubPanel.xml</item>
-		<item id="researchPanel" size="319">textConfig/panel_config/researchPanel.xml</item>
-		<item id="supplePanel" size="1010">textConfig/panel_config/supplePanel.xml</item>
-		<item id="systemError" size="4326">textConfig/panel_config/systemError.xml</item>
-		<item id="tip" size="2206">textConfig/panel_config/tip.xml</item>
-		<item id="trainFieldPanel" size="772">textConfig/panel_config/trainFieldPanel.xml</item>
-		<item id="hero" size="281">textConfig/role_config/hero.xml</item>
-		<item id="player" size="195">textConfig/role_config/player.xml</item>
-		<item id="tollgate" size="893">textConfig/role_config/tollgate.xml</item>
-		<item id="tower" size="184">textConfig/role_config/tower.xml</item>
+		<item id="game_config" size="8135">game_config.xml</item>
+		<item id="preload_config" size="1144">preload_config.xml</item>
+		<item id="heroSheetData" size="146">dataConfig/heroSheetData.txt</item>
+		<item id="heroSheetData" size="725">dataConfig/heroSheetData.xml</item>
+		<item id="buffSheetData" size="4911">dataConfig/buff/buffSheetData.txt</item>
+		<item id="heroSheetData" size="1957">dataConfig/hero/heroSheetData.txt</item>
+		<item id="heroSkillSheetData" size="7003">dataConfig/heroSkill/heroSkillSheetData.txt</item>
+		<item id="itemSheetData" size="18005">dataConfig/item/itemSheetData.txt</item>
+		<item id="langSheetData" size="525898">dataConfig/lang/langSheetData.txt</item>
+		<item id="magicSheetData" size="77771">dataConfig/magicSkill/magicSheetData.txt</item>
+		<item id="monsterSheetData" size="9891">dataConfig/monster/monsterSheetData.txt</item>
+		<item id="monsterSkillSheetData" size="9369">dataConfig/monsterSkill/monsterSkillSheetData.txt</item>
+		<item id="soldierSheetData" size="16046">dataConfig/soldier/soldierSheetData.txt</item>
+		<item id="subwaveSheetData" size="195412">dataConfig/subwave/subwaveSheetData.txt</item>
+		<item id="tollgateSheetData" size="30268">dataConfig/tollgate/tollgateSheetData.txt</item>
+		<item id="towerSheetData" size="3691">dataConfig/tower/towerSheetData.txt</item>
+		<item id="towerSkillSheetData" size="10825">dataConfig/towerSkill/towerSkillSheetData.txt</item>
+		<item id="waveSheetData" size="55306">dataConfig/wave/waveSheetData.txt</item>
+		<item id="weaponSheetData" size="2566">dataConfig/weapon/weaponSheetData.txt</item>
+		<item id="alertPanel" size="1646">textConfig/panel_config/alertPanel.xml</item>
+		<item id="commonLang" size="1405">textConfig/panel_config/commonLang.xml</item>
+		<item id="heroPanel" size="1338">textConfig/panel_config/heroPanel.xml</item>
+		<item id="levelPanel" size="834">textConfig/panel_config/levelPanel.xml</item>
+		<item id="loadPanel" size="1342">textConfig/panel_config/loadPanel.xml</item>
+		<item id="magiccadePanel" size="294">textConfig/panel_config/magiccadePanel.xml</item>
+		<item id="pubPanel" size="258">textConfig/panel_config/pubPanel.xml</item>
+		<item id="researchPanel" size="311">textConfig/panel_config/researchPanel.xml</item>
+		<item id="supplePanel" size="991">textConfig/panel_config/supplePanel.xml</item>
+		<item id="systemError" size="4278">textConfig/panel_config/systemError.xml</item>
+		<item id="tip" size="2154">textConfig/panel_config/tip.xml</item>
+		<item id="trainFieldPanel" size="740">textConfig/panel_config/trainFieldPanel.xml</item>
+		<item id="hero" size="272">textConfig/role_config/hero.xml</item>
+		<item id="player" size="188">textConfig/role_config/player.xml</item>
+		<item id="tollgate" size="865">textConfig/role_config/tollgate.xml</item>
+		<item id="tower" size="177">textConfig/role_config/tower.xml</item>
 	</configfile>
 	<font folder="release/font/">
 		<item id="FontLibrary_cn" size="51636">FontLibrary_cn.swf</item>
@@ -28,9 +43,8 @@
 		<item id="FontLibrary_us_old" size="71819">FontLibrary_us_old.swf</item>
 	</font>
 	<module folder="release/module/">
-		<item id="KylinFightModule" size="779">kylinFightModule/KylinFightModule.swf</item>
+		<item id="KylinFightModule" size="28141">kylinFightModule/KylinFightModule.swf</item>
 		<item id="LoadPanel" size="160808">LoadPanel/LoadPanel.swf</item>
-		<item id="TestModule" size="1092">TestModule/TestModule.swf</item>
 		<item id="UIComponent" size="866">UIComponent/UIComponent.swf</item>
 	</module>
 </root>
