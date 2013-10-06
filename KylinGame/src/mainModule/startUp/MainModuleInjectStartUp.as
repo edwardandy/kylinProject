@@ -5,6 +5,9 @@ package mainModule.startUp
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
 	
+	import mainModule.service.loadServices.LoadAssetsServices;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
+	
 	import robotlegs.bender.framework.api.IInjector;
 	
 	/**
@@ -18,7 +21,7 @@ package mainModule.startUp
 		{
 			//在游戏初始化获得所有参数时执行
 			//inject.mapValue(ResPathParam,new ResPathParam());
-			inject.map(ILoadMgr).toSingleton(LoadMgr);	
+			inject.map(ILoadAssetsServices).toSingleton(LoadAssetsServices);	
 			inject.map(ILoaderProgress).toType(LoaderProgress);
 		}
 	}

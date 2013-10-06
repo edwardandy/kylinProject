@@ -5,9 +5,11 @@ package mainModule.controller.gameInitSteps
 	import br.com.stimuli.loading.loadingtypes.XMLItem;
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
+	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.model.gameInitSteps.interfaces.IGameCfgModel;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 
 	/**
 	 * 加载游戏主配置文件 
@@ -20,7 +22,7 @@ package mainModule.controller.gameInitSteps
 		public var gameCfgModel:IGameCfgModel;
 		
 		[Inject]
-		public var loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		
 		public function GameInitLoadGameCfgCmd()
 		{
@@ -37,16 +39,12 @@ package mainModule.controller.gameInitSteps
 		
 		private function loadGameCfg(id:String):void
 		{
-			var _loadConfig:XMLItem = loadMgr.addCfgFileItem(id) as XMLItem;
-			_loadConfig.addEventListener(Event.COMPLETE,onGameCfgLoaded);
+			loadService.addCfgFileItem(id).addComplete(onGameCfgLoaded);
 		}
 		
-		private function onGameCfgLoaded(e:Event):void
+		private function onGameCfgLoaded(info:AssetInfo):void
 		{
-			var _loadConfig:XMLItem = e.currentTarget as XMLItem;
-			_loadConfig.removeEventListener(Event.COMPLETE,onGameCfgLoaded);
-			
-			gameCfgModel.gameCfg = _loadConfig.content;
+			gameCfgModel.gameCfg = info.content;
 						
 			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitSetupGameCfg));
 			

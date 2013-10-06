@@ -3,11 +3,13 @@ package mainModule.service.gameDataServices.sheetData
 	import br.com.stimuli.loading.loadingtypes.URLItem;
 	
 	import kylin.echo.edward.framwork.model.KylinActor;
+	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	import kylin.echo.edward.utilities.string.KylinStringUtil;
 	
 	import mainModule.model.gameData.sheetData.interfaces.ISheetDataCacheModel;
 	import mainModule.service.gameDataServices.interfaces.ISheetDataService;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	import robotlegs.bender.framework.api.IInjector;
 	
@@ -20,7 +22,7 @@ package mainModule.service.gameDataServices.sheetData
 	public class CSVSheetDataService extends KylinActor implements ISheetDataService
 	{
 		[Inject]
-		public var loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var sheetCache:ISheetDataCacheModel;
 		[Inject]
@@ -35,11 +37,11 @@ package mainModule.service.gameDataServices.sheetData
 		{
 			if(!sheetCache.getSheetCache(sheetName))
 			{
-				var item:URLItem = loadMgr.getCfgFileItem(sheetName) as URLItem;
-				if(!item || !item.content)
+				const asset:AssetInfo = loadService.getCfgFileItem(sheetName);
+				if(!asset || !asset.content)
 					return null;
 				
-				sheetCache.cacheSheetData(sheetName,KylinStringUtil.parseCsv(item.content));
+				sheetCache.cacheSheetData(sheetName,KylinStringUtil.parseCsv(asset.content));
 			}
 			var arrData:Array = sheetCache.getSheetCache(sheetName);
 			if(!arrData)

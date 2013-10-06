@@ -6,9 +6,11 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import br.com.stimuli.loading.loadingtypes.ImageItem;
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
+	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 
@@ -18,7 +20,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	public class FightLoadMapImgCmd extends KylinCommand
 	{
 		[Inject]
-		public var loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var fightData:IFightDynamicDataModel;
 		[Inject]
@@ -32,24 +34,12 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		override public function execute():void
 		{
 			super.execute();
-			var item:ImageItem = loadMgr.addMapImgItem(fightData.tollgateMainId.toString());
-			if(item.isLoaded)
-			{
-				initMapBg(item.content);
-				return;	
-			}
-			item.addEventListener(Event.COMPLETE,onLoadCmp);
+			loadService.addMapImgItem(fightData.tollgateMainId.toString()).addComplete(initMapBg);
 		}
 		
-		private function onLoadCmp(e:Event):void
+		private function initMapBg(asset:AssetInfo):void
 		{
-			var item:ImageItem = e.currentTarget as ImageItem;
-			initMapBg(item.content);
-		}
-		
-		private function initMapBg(img:DisplayObject):void
-		{
-			viewLayers.groundLayer.addChild(img);
+			viewLayers.groundLayer.addChild(asset.content as DisplayObject);
 			
 			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightLoadMapCfg));
 		}

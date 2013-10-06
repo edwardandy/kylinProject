@@ -13,7 +13,6 @@ package mainModule.service.uiServices
 	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.framwork.view.interfaces.IKylinBasePanel;
 	import kylin.echo.edward.utilities.display.DisplayObjectUtils;
-	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.model.panelData.PanelCfgVo;
 	import mainModule.model.panelData.PanelInstancesModel;
@@ -21,6 +20,7 @@ package mainModule.service.uiServices
 	import mainModule.model.panelData.ViewLayersModel;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	import mainModule.model.panelData.interfaces.IPanelDeclareModel;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	import mainModule.service.uiServices.interfaces.IUIPanelBehaviorService;
 	import mainModule.service.uiServices.interfaces.IUIPanelService;
 	
@@ -39,7 +39,7 @@ package mainModule.service.uiServices
 		[Inject]
 		public var _panels:PanelInstancesModel;
 		[Inject]
-		public var _loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var _injector:IInjector;
 		[Inject]
@@ -71,12 +71,13 @@ package mainModule.service.uiServices
 			if(!cfg)
 				return;
 			var resId:String = cfg.resId || id;
-			var item:ImageItem = _loadMgr.addModuleItem(resId,resId+"_childDomain");
+			
+			var item:ImageItem = loadService.addModuleItem(resId,resId+"_childDomain").item as ImageItem;
 			if(!item)
 				return;
 			if(item.isLoaded)
 			{
-				genPanelInstance(id,item,param);
+				genPanelInstance(id,item.content,param);
 				return;
 			}
 			
@@ -109,14 +110,14 @@ package mainModule.service.uiServices
 			_panelBehavior.appear(id);
 		}
 		
-		private function genPanelInstance(id:String,item:ImageItem,param:Object):void
+		private function genPanelInstance(id:String,content:*,param:Object):void
 		{
 			if(_panels.getPanel(id))
 				return;
 			var instance:IKylinBasePanel;
-			if(item.content is IKylinBasePanel)
+			if(content is IKylinBasePanel)
 			{
-				instance = IKylinBasePanel(item.content);
+				instance = IKylinBasePanel(content);
 				_injector.injectInto(instance);
 			}
 			else
@@ -126,7 +127,7 @@ package mainModule.service.uiServices
 			_panels.cachePanel(id,instance);
 			_panels.getPanel(id).panelId = id;
 			
-			_panels.getPanel(id).resDomain = (item.content as DisplayObject).loaderInfo.applicationDomain;
+			_panels.getPanel(id).resDomain = (content as DisplayObject).loaderInfo.applicationDomain;
 			DisplayObjectUtils.instance.fillRectSprite(Sprite(_panels.getPanel(id)),stage.stageWidth,stage.stageHeight,0,0);
 			//var cfg:PanelCfgVo = _panelCfg.getPanelCfg(id);
 			//_layers.getPanelSubLayerByIdx(cfg.layerIndex).addChild(DisplayObject(_panels.getPanel(id)));
@@ -142,7 +143,7 @@ package mainModule.service.uiServices
 			
 			for each(var panelId:String in _dicResIDToPanelID[item.id] as Array)
 			{
-				genPanelInstance(panelId,item,_dicPanelIDToParam[panelId]);
+				genPanelInstance(panelId,item.content,_dicPanelIDToParam[panelId]);
 				_dicPanelIDToParam[panelId] = null;
 				delete _dicPanelIDToParam[panelId];
 			}

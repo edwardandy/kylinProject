@@ -30,6 +30,7 @@ package mainModule.extensions
 			
 			var viewLayers:ViewLayersModel = context.injector.getOrCreateNewInstance(ViewLayersModel);
 			
+			_root.addChild(viewLayers.fightScene);
 			_root.addChild(viewLayers.contextRoot);
 			DisplayObjectUtils.instance.fillRectSprite(viewLayers.waitPanelAppearLayer,_root.stage.stageWidth,_root.stage.stageHeight,0,0);
 			

@@ -7,12 +7,10 @@ package mainModule.configuration
 	import flash.system.Security;
 	
 	import mainModule.controller.MainModuleCommandsStartUp;
-	import mainModule.controller.gameInitSteps.GameInitLoadResCfgCmd;
 	import mainModule.controller.gameInitSteps.GameInitStepEvent;
 	import mainModule.model.MainModuleModelsStartUp;
 	import mainModule.service.MainModuleServicesStartUp;
 	import mainModule.startUp.MainModuleInjectStartUp;
-	import mainModule.startUp.MainModuleParseFlashVar;
 	import mainModule.view.MainModuleViewMediaterStartUp;
 	
 	import robotlegs.bender.extensions.contextView.ContextView;

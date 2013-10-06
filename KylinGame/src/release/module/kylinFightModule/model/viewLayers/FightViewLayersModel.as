@@ -5,6 +5,8 @@ package release.module.kylinFightModule.model.viewLayers
 	
 	import kylin.echo.edward.framwork.model.KylinActor;
 	
+	import mainModule.model.panelData.ViewLayersModel;
+	
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 
 	/**
@@ -14,7 +16,9 @@ package release.module.kylinFightModule.model.viewLayers
 	 */	
 	public class FightViewLayersModel extends KylinActor implements IFightViewLayersModel
 	{
-		private var _parent:DisplayObjectContainer;
+		//private var _parent:DisplayObjectContainer;
+		[Inject]
+		public var mainViewLayers:ViewLayersModel;
 		private var _groundLayer:Sprite;
 		private var _bottomLayer:Sprite;
 		private var _middleLayer:Sprite;
@@ -23,12 +27,6 @@ package release.module.kylinFightModule.model.viewLayers
 		public function FightViewLayersModel()
 		{
 			super();
-		}
-		
-		[Inject]
-		public function set parent(value:DisplayObjectContainer):void
-		{
-			_parent = value;
 		}
 		
 		public function get topLayer():Sprite
@@ -66,10 +64,10 @@ package release.module.kylinFightModule.model.viewLayers
 		 */		
 		public function initialize():void
 		{
-			_parent.addChild(_groundLayer);
-			_parent.addChild(_bottomLayer);
-			_parent.addChild(_middleLayer);
-			_parent.addChild(_topLayer);
+			mainViewLayers.fightScene.addChild(_groundLayer);
+			mainViewLayers.fightScene.addChild(_bottomLayer);
+			mainViewLayers.fightScene.addChild(_middleLayer);
+			mainViewLayers.fightScene.addChild(_topLayer);
 		}
 		/**
 		 * 销毁

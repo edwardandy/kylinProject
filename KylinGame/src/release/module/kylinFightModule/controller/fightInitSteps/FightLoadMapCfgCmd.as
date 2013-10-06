@@ -5,9 +5,11 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import br.com.stimuli.loading.loadingtypes.XMLItem;
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
+	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
 
@@ -17,7 +19,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	public class FightLoadMapCfgCmd extends KylinCommand
 	{
 		[Inject]
-		public var loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var fightData:IFightDynamicDataModel;
 		[Inject]
@@ -31,24 +33,12 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		override public function execute():void
 		{
 			super.execute();
-			var item:XMLItem = loadMgr.addMapXmlItem(fightData.tollgateId.toString());
-			if(item.isLoaded)
-			{
-				parseCfg(item.content);
-				return;	
-			}
-			item.addEventListener(Event.COMPLETE,onLoadCmp);
+			loadService.addMapXmlItem(fightData.tollgateId.toString()).addComplete(parseCfg);
 		}
 		
-		private function onLoadCmp(e:Event):void
+		private function parseCfg(asset:AssetInfo):void
 		{
-			var item:XMLItem = e.currentTarget as XMLItem;
-			parseCfg(item.content);
-		}
-		
-		private function parseCfg(data:XML):void
-		{
-			roadData.updateData(data);
+			roadData.updateData(asset.content as XML);
 			
 			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightStartup));
 		}

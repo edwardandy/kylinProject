@@ -1,18 +1,9 @@
 package release.module.kylinFightModule.configuration
 {
-	import com.demonsters.debugger.MonsterDebugger;
 	
-	import flash.display.Stage;
 	import flash.events.IEventDispatcher;
 	import flash.system.Security;
-	
-	import mainModule.controller.MainModuleCommandsStartUp;
-	import mainModule.controller.gameInitSteps.GameInitStepEvent;
-	import mainModule.model.MainModuleModelsStartUp;
-	import mainModule.service.MainModuleServicesStartUp;
-	import mainModule.startUp.MainModuleInjectStartUp;
-	import mainModule.startUp.MainModuleParseFlashVar;
-	import mainModule.view.MainModuleViewMediaterStartUp;
+
 	
 	import release.module.kylinFightModule.controller.FightModuleCommandsStartUp;
 	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;

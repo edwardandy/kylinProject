@@ -6,16 +6,12 @@ package kylin.echo.edward.utilities.loader
 	import flash.system.ApplicationDomain;
 	import flash.system.LoaderContext;
 	import flash.utils.Dictionary;
-	
-	import br.com.stimuli.loading.loadingtypes.LoadingItem;
-	
+		
 	import kylin.echo.edward.utilities.loader.interfaces.IDomainResMgr;
 	
 	public final class DomainResMgr implements IDomainResMgr
 	{
-		//id:domainName
 		private var _dicDomainName:Dictionary;
-		//domainName:ApplicationDomain
 		private var _dicDomain:Dictionary;
 		private var _loadMgr:LoadMgr;
 		
@@ -26,49 +22,23 @@ package kylin.echo.edward.utilities.loader
 			_loadMgr = loadMgr;
 		}
 		
-		/*public function checkDomainLoaded(loadItem:LoadingItem):void
-		{
-			if(!loadItem.isSWF())
-				return;
-			for(var url:String in _dicDomainName)
-			{
-				if(url != loadItem.url.url)
-					continue;
-				var content:MovieClip = loadItem.content as MovieClip;
-				var domain:String = _dicDomainName[url];
-				
-				if(domain)
-				{
-					addDomain(domain, content.loaderInfo.applicationDomain);		
-				}
-				else
-				{
-					addDomain("currentDomain", content.loaderInfo.applicationDomain);		
-				}
-				
-			}
-		}
-		
-		private function addDomain(name:String, domain:ApplicationDomain):void	
-		{
-			if(_dicDomain[name] == null)
-			{
-				_dicDomain[name] = domain;
-			}
-		}*/
-		
 		/**
-		 * @inheritDoc
-		 */		
-		public function addSwfDomainItem(folderKey:String,idKey:String,domainName:String = null,props:Object = null,loaderName:String = "root"):LoadingItem
+		 * 添加SWF域加载项 
+		 * @param folderKey 资源配置目录键名
+		 * @param idKey 资源配置id
+		 * @param domainName 资源加载到的域名称
+		 * @param props 加载时传递给bulkloader的加载参数
+		 * @return props参数
+		 * 
+		 */			
+		internal function addDomainItem(folderKey:String,idKey:String,domainName:String,props:Object = null):Object
 		{
-			if(!folderKey || !idKey)
-				return null;
+			if(!folderKey || !idKey || !domainName)
+				return props;
 			
 			var loadKey:String = _loadMgr.genLoadKey(folderKey,idKey);
 			if(!_dicDomainName[loadKey])
 			{
-				domainName ||= "currentDomain";
 				_dicDomainName[loadKey] = domainName;
 				var applicationDomain:ApplicationDomain = ("currentDomain" == domainName) ? ApplicationDomain.currentDomain : 
 					(_dicDomain[domainName] || (-1 != domainName.indexOf("childDomain") ? new ApplicationDomain(ApplicationDomain.currentDomain) : new ApplicationDomain));
@@ -80,7 +50,7 @@ package kylin.echo.edward.utilities.loader
 				else
 					props["context"] = context;
 			}
-			return _loadMgr.addLoadItem(folderKey,idKey,props,loaderName);
+			return props;
 		}
 		
 		private function getClassFromDomain(clsName:String, domainName:String = null):Class{

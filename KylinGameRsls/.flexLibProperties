@@ -5,6 +5,9 @@
     <classEntry path="kylin.echo.edward.utilities.loader.interfaces.IDomainResMgr"/>
     <classEntry path="kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress"/>
     <classEntry path="kylin.echo.edward.utilities.loader.resPath.ResPathParam"/>
+    <classEntry path="kylin.echo.edward.utilities.loader.AssetInfoCache"/>
+    <classEntry path="kylin.echo.edward.utilities.loader.interfaces.IAssetsLoaderListener"/>
+    <classEntry path="kylin.echo.edward.utilities.loader.ExternalImageItem"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

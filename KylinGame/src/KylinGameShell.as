@@ -13,6 +13,8 @@ package
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+	
+	import br.com.stimuli.loading.utils.SmartURL;
 		
 	/**
 	 * 游戏外壳，用于加载主程序以及传递flash参数 

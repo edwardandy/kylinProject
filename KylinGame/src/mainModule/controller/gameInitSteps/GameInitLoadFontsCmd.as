@@ -5,10 +5,12 @@ package mainModule.controller.gameInitSteps
 	import br.com.stimuli.loading.loadingtypes.ImageItem;
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
+	import kylin.echo.edward.utilities.loader.interfaces.IAssetsLoaderListener;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.controller.uiCmds.UIPanelEvent;
 	import mainModule.model.panelData.PanelNameConst;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	/**
 	 * 加载游戏字体库 
@@ -18,7 +20,7 @@ package mainModule.controller.gameInitSteps
 	public class GameInitLoadFontsCmd extends KylinCommand
 	{
 		[Inject]
-		public var loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		
 		public function GameInitLoadFontsCmd()
 		{
@@ -27,7 +29,7 @@ package mainModule.controller.gameInitSteps
 		
 		override public function execute():void
 		{
-			super.execute();
+			super.execute(); 
 			
 			loadFonts();
 			
@@ -36,31 +38,10 @@ package mainModule.controller.gameInitSteps
 		
 		private function loadFonts():void
 		{
-			var item:ImageItem = loadMgr.addFontItem("FontLibrary");
-			if(null == item)
-			{
-				dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.LoadPanel));
-				directCommandMap.release(this);
-				return;
-			}
-			
-			if(item.isLoaded)
-			{
-				processFontUtil(item);
-				return;
-			}
-			
-			item.addEventListener(Event.COMPLETE,onLoadFontCmp);
+			loadService.addFontItem("FontLibrary").addComplete(processFontUtil).addError(processFontUtil);
 		}
 		
-		private function onLoadFontCmp(e:Event):void
-		{
-			var item:ImageItem = e.currentTarget as ImageItem;
-			item.removeEventListener(Event.COMPLETE,onLoadFontCmp);
-			processFontUtil(item);
-		}
-		
-		private function processFontUtil(item:ImageItem):void
+		private function processFontUtil():void
 		{	
 			/*var arrNames:Vector.<String> = (item.content as MovieClip).loaderInfo.applicationDomain.getQualifiedDefinitionNames();
 			for each(var fontName:String in arrNames)

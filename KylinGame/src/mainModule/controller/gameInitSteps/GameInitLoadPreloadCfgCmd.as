@@ -5,9 +5,11 @@ package mainModule.controller.gameInitSteps
 	import br.com.stimuli.loading.loadingtypes.XMLItem;
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
+	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.model.preLoadData.interfaces.IPreLoadCfgModel;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 
 	/**
 	 * 加载游戏预加载资源配置文件
@@ -17,7 +19,7 @@ package mainModule.controller.gameInitSteps
 	public class GameInitLoadPreloadCfgCmd extends KylinCommand
 	{
 		[Inject]
-		public var loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var _preLoadCfg:IPreLoadCfgModel;
 		
@@ -37,16 +39,12 @@ package mainModule.controller.gameInitSteps
 		
 		private function loadCfg(id:String):void
 		{
-			var _loadConfig:XMLItem = loadMgr.addCfgFileItem(id) as XMLItem;
-			_loadConfig.addEventListener(Event.COMPLETE,onGameCfgLoaded);
+			loadService.addCfgFileItem(id).addComplete(onGameCfgLoaded);
 		}
 		
-		private function onGameCfgLoaded(e:Event):void
+		private function onGameCfgLoaded(asset:AssetInfo):void
 		{
-			var _loadConfig:XMLItem = e.currentTarget as XMLItem;
-			_loadConfig.removeEventListener(Event.COMPLETE,onGameCfgLoaded);
-			
-			_preLoadCfg.initData(_loadConfig.content);
+			_preLoadCfg.initData(asset.content);
 			
 			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitLoadFonts));
 			

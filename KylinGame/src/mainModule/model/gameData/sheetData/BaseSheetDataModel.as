@@ -2,11 +2,11 @@ package mainModule.model.gameData.sheetData
 {
 	import flash.utils.Dictionary;
 	
-	
 	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.service.gameDataServices.interfaces.ISheetDataService;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	/**
 	 * 游戏数值表 
@@ -16,7 +16,7 @@ package mainModule.model.gameData.sheetData
 	public class BaseSheetDataModel extends KylinActor
 	{
 		[Inject]
-		public var loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var sheetDataService:ISheetDataService;
 		/**

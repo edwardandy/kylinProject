@@ -38,7 +38,6 @@ package kylin.echo.edward.utilities.loader.resPath
 			
 			if(allLanVerItem)
 				return getResult(folder,allLanVerItem);
-			//log("cannot genResUrl! folderKey:"+folderKey+" id:"+id);
 			return null;
 		}
 		

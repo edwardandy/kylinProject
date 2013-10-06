@@ -11,20 +11,37 @@ package kylin.echo.edward.utilities.loader
 	[Event(name="progress",type="flash.events.ProgressEvent")]
 	[Event(name="complete",type="flash.events.Event")]
 	/**
-	 * 加载进度显示项
+	 * 多个加载进度显示项
 	 * @author Edward
 	 * 
 	 */	
-	public class LoaderProgress extends EventDispatcher implements ILoaderProgress
+	public class LoaderProgress implements ILoaderProgress
 	{
-		//加载项队列
-		private var _vecLoadingItems:Vector.<LoadingItem>;
-		//进度事件
-		private var _evtProgress:ProgressEvent;
+		/**
+		 * 加载项队列
+		 */		
+		private var _vecLoadingItems:Vector.<LoadingItem>;		
+
+		private var _progressCB:Function;
+		private var _completeCB:Function;
 		
 		public function LoaderProgress()
 		{
 			_vecLoadingItems = new Vector.<LoadingItem>;
+		}
+		/**
+		 * @inheritDoc
+		 */
+		public function set completeCB(value:Function):void
+		{
+			_completeCB = value;
+		}
+		/**
+		 * @inheritDoc
+		 */
+		public function set progressCB(value:Function):void
+		{
+			_progressCB = value;
 		}
 		/**
 		 * @inheritDoc
@@ -40,32 +57,23 @@ package kylin.echo.edward.utilities.loader
 			return _vecLoadingItems.length;
 		}
 		/**
-		 * @inheritDoc
+		 * 获得当前的加载进度 
+		 * @return 加载进度
+		 * 
 		 */
-		public function get loadProgress():Number
+		private function get loadProgress():Number
 		{
 			if(0 == _vecLoadingItems.length)
 				return 0;
-			//var fProgress:Number = 0;
+			
 			var iByteLoaded:int = 0;
 			var iByteTotle:int = 0;
-			//var iLoaded:int = 0;
 			for each(var item:LoadingItem in _vecLoadingItems)
 			{
 				iByteLoaded += item.bytesLoaded;
 				iByteTotle += item.weight;
-				/*if(item.isLoaded)
-				{
-					++iLoaded;
-					fProgress += 1/_vecLoadingItems.length;
-				}
-				else if(item._isLoading)
-				{
-					fProgress += item.bytesLoaded/item.bytesTotal/_vecLoadingItems.length;
-				}*/
 			}
 			
-			//if(iLoaded == _vecLoadingItems.length)
 			if(iByteLoaded == iByteTotle)
 				return 1;
 	
@@ -79,20 +87,20 @@ package kylin.echo.edward.utilities.loader
 			return _vecLoadingItems.length>0;
 		}
 		/**
-		 * @inheritDoc
-		 */
-		public function dispose():void
+		 * 清空队列中的加载项 
+		 * 
+		 */	
+		private function dispose():void
 		{
 			_vecLoadingItems.length = 0;
+			_completeCB = null;
+			_progressCB = null;
 		}
 		
 		private function onItemProgress(e:ProgressEvent):void
-		{
-			_evtProgress ||= new ProgressEvent(ProgressEvent.PROGRESS);
-			_evtProgress.bytesLoaded = loadProgress;
-			_evtProgress.bytesTotal = 1;
-			
-			dispatchEvent(_evtProgress);
+		{		
+			if(null != _progressCB)
+				_progressCB.apply(null,[loadProgress]);
 		}
 		
 		private function onItemComplete(e:Event):void
@@ -102,15 +110,15 @@ package kylin.echo.edward.utilities.loader
 			
 			var iLoaded:int;
 			for each(var item:LoadingItem in _vecLoadingItems)
-			{
 				if(item.isLoaded)
-				{
 					++iLoaded;
-				}
-			}
 			
 			if(iLoaded == _vecLoadingItems.length)
-				dispatchEvent(e.clone());
+			{
+				if(null != _completeCB)
+					_completeCB.apply();
+				dispose();
+			}
 		}
 	}
 }

@@ -3,7 +3,7 @@ package mainModule.model.panelData
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
 	import flash.utils.Dictionary;
-		
+	
 	import utili.structure.DictionaryUtil;
 
 	/**
@@ -14,6 +14,7 @@ package mainModule.model.panelData
 	public final class ViewLayersModel
 	{
 		private var _contextRoot:DisplayObjectContainer;
+		private var _fightScene:DisplayObjectContainer;
 		/**
 		 * 面板层 
 		 */		
@@ -45,10 +46,19 @@ package mainModule.model.panelData
 		{
 			return _contextRoot;
 		}
+		/**
+		 * 战斗场景层，不进行框架监听 
+		 * 
+		 */		
+		public function get fightScene():DisplayObjectContainer
+		{
+			return _fightScene;
+		}
 
 		private function init():void
 		{
 			_contextRoot = new Sprite;
+			_fightScene = new Sprite;
 			
 			panelLayer = new Sprite;
 			panelLayer.mouseEnabled = false;

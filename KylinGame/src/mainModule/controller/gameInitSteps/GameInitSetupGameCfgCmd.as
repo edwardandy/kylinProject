@@ -7,12 +7,14 @@ package mainModule.controller.gameInitSteps
 	import flash.ui.ContextMenuItem;
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
+	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
 	
 	import mainModule.model.gameConstAndVar.FlashVarsModel;
 	import mainModule.model.gameInitSteps.interfaces.IGameCfgModel;
 	import mainModule.model.textData.interfaces.ITextCfgModel;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	public class GameInitSetupGameCfgCmd extends KylinCommand
 	{
@@ -23,7 +25,7 @@ package mainModule.controller.gameInitSteps
 		[Inject]
 		public var flashVars:FlashVarsModel;
 		[Inject]
-		public var loadMgr:ILoadMgr;
+		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var loadProgress:ILoaderProgress;
 		
@@ -57,18 +59,18 @@ package mainModule.controller.gameInitSteps
 		{
 			for each(var textKey:XML in gameCfgModel.gameCfg.textConfig as XMLList)
 			{
-				loadProgress.addItem(loadMgr.addCfgFileItem(textKey));
+				loadService.addCfgFileItem(textKey).addToLoaderProgress(loadProgress);
 			}
-			loadProgress.addEventListener(Event.COMPLETE,onTextConfigLoaded);
+			loadProgress.completeCB = onTextConfigLoaded;
 		}
 		
-		private function onTextConfigLoaded(e:Event):void
+		private function onTextConfigLoaded():void
 		{
-			loadProgress.removeEventListener(Event.COMPLETE,onTextConfigLoaded);
-			
 			for each(var textKey:XML in gameCfgModel.gameCfg.textConfig as XMLList)
 			{
-				textCfg.addTextCfg(textKey,loadMgr.addCfgFileItem(textKey).content as XML);
+				var asset:AssetInfo = loadService.getCfgFileItem(textKey);
+				if(asset && asset.content is XML)
+					textCfg.addTextCfg(textKey,asset.content as XML);
 			}
 			
 			dispatch(new GameInitStepEvent(GameInitStepEvent.GameInitLoadPreloadCfg));
