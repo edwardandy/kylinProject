@@ -1,0 +1,71 @@
+<data endPointMarkPosition="739|272">
+  <info id="111" name="111" dec="111"/>
+  <waves>
+    <wave duration="123213">
+      <subWave startTime="0" duration="3000">
+        <monster typeId="1232" count="3" roadIndex="0"/>
+      </subWave>
+    </wave>
+  </waves>
+  <roads>
+    <road>
+      <p x="-14" y="397"/>
+      <p x="64" y="398"/>
+      <p x="129" y="401"/>
+      <p x="189" y="403"/>
+      <p x="202" y="405"/>
+      <p x="231" y="412"/>
+      <p x="241" y="416"/>
+      <p x="303" y="440"/>
+      <p x="351" y="454"/>
+      <p x="361" y="455"/>
+      <p x="392" y="457"/>
+      <p x="403" y="455"/>
+      <p x="414" y="452"/>
+      <p x="424" y="448"/>
+      <p x="433" y="442"/>
+      <p x="441" y="436"/>
+      <p x="448" y="428"/>
+      <p x="454" y="420"/>
+      <p x="458" y="410"/>
+      <p x="461" y="401"/>
+      <p x="463" y="390"/>
+      <p x="465" y="380"/>
+      <p x="464" y="369"/>
+      <p x="462" y="359"/>
+      <p x="457" y="349"/>
+      <p x="452" y="340"/>
+      <p x="415" y="287"/>
+      <p x="411" y="278"/>
+      <p x="405" y="255"/>
+      <p x="406" y="242"/>
+      <p x="410" y="229"/>
+      <p x="414" y="219"/>
+      <p x="421" y="211"/>
+      <p x="429" y="204"/>
+      <p x="439" y="200"/>
+      <p x="449" y="196"/>
+      <p x="460" y="193"/>
+      <p x="470" y="191"/>
+      <p x="481" y="191"/>
+      <p x="492" y="192"/>
+      <p x="504" y="194"/>
+      <p x="526" y="201"/>
+      <p x="583" y="219"/>
+      <p x="652" y="241"/>
+      <p x="717" y="263"/>
+      <p x="757" y="280"/>
+      <p x="786" y="295"/>
+    </road>
+  </roads>
+  <elements>
+    <Element category="Toft" x="373" y="385" meetPoint="46|49" locked="0"/>
+    <Element category="Toft" x="491" y="264" meetPoint="-87|-30" locked="0"/>
+    <Element category="Toft" x="331" y="204" meetPoint="73|30" locked="0"/>
+    <Element category="Toft" x="273" y="509" meetPoint="30|-61" locked="0"/>
+    <Element category="Toft" x="129" y="467" meetPoint="53|-66" locked="0"/>
+    <Element category="Toft" x="224" y="334" meetPoint="-39|65" locked="0"/>
+    <Element category="Toft" x="502" y="125" meetPoint="-7|61" locked="0"/>
+    <Element category="Toft" x="492" y="491" meetPoint="-70|-56" locked="0"/>
+  </elements>
+</data>

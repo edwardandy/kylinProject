@@ -1,0 +1,102 @@
+<data endPointMarkPosition="409|538">
+  <info id="4" name="4" dec="4"/>
+  <waves>
+    <wave duration="123213">
+      <subWave startTime="0" duration="3000">
+        <monster typeId="1232" count="3" roadIndex="0"/>
+      </subWave>
+    </wave>
+  </waves>
+  <roads>
+    <road>
+      <p x="381" y="39"/>
+      <p x="381" y="109"/>
+      <p x="380" y="169"/>
+      <p x="380" y="257"/>
+      <p x="379" y="324"/>
+      <p x="380" y="387"/>
+      <p x="387" y="456"/>
+      <p x="390" y="467"/>
+      <p x="407" y="526"/>
+      <p x="412" y="535"/>
+      <p x="432" y="571"/>
+      <p x="464" y="632"/>
+      <p x="487" y="678"/>
+    </road>
+    <road>
+      <p x="381" y="36"/>
+      <p x="378" y="63"/>
+      <p x="374" y="73"/>
+      <p x="369" y="83"/>
+      <p x="360" y="94"/>
+      <p x="342" y="114"/>
+      <p x="331" y="123"/>
+      <p x="283" y="161"/>
+      <p x="231" y="210"/>
+      <p x="224" y="221"/>
+      <p x="191" y="275"/>
+      <p x="186" y="286"/>
+      <p x="163" y="345"/>
+      <p x="143" y="407"/>
+      <p x="114" y="467"/>
+      <p x="106" y="473"/>
+      <p x="97" y="479"/>
+      <p x="88" y="484"/>
+      <p x="28" y="508"/>
+      <p x="17" y="509"/>
+      <p x="-37" y="513"/>
+      <p x="-48" y="513"/>
+      <p x="-48" y="513"/>
+    </road>
+    <road>
+      <p x="381" y="31"/>
+      <p x="383" y="53"/>
+      <p x="388" y="64"/>
+      <p x="395" y="75"/>
+      <p x="404" y="84"/>
+      <p x="424" y="100"/>
+      <p x="475" y="133"/>
+      <p x="487" y="139"/>
+      <p x="498" y="142"/>
+      <p x="561" y="170"/>
+      <p x="571" y="178"/>
+      <p x="623" y="223"/>
+      <p x="629" y="234"/>
+      <p x="635" y="246"/>
+      <p x="640" y="258"/>
+      <p x="664" y="318"/>
+      <p x="668" y="331"/>
+      <p x="671" y="351"/>
+      <p x="672" y="371"/>
+      <p x="671" y="394"/>
+      <p x="670" y="406"/>
+      <p x="666" y="416"/>
+      <p x="662" y="425"/>
+      <p x="657" y="435"/>
+      <p x="620" y="482"/>
+      <p x="612" y="490"/>
+      <p x="594" y="508"/>
+      <p x="587" y="518"/>
+      <p x="574" y="541"/>
+      <p x="571" y="554"/>
+      <p x="566" y="577"/>
+      <p x="564" y="609"/>
+      <p x="567" y="619"/>
+      <p x="587" y="685"/>
+      <p x="587" y="685"/>
+    </road>
+  </roads>
+  <elements>
+    <Element category="Toft" x="304" y="248" meetPoint="58|-23"/>
+    <Element category="Toft" x="462" y="207" meetPoint="-51|-32"/>
+    <Element category="Toft" x="500" y="537" meetPoint="-51|46"/>
+    <Element category="Toft" x="299" y="332" meetPoint="67|-15"/>
+    <Element category="Toft" x="593" y="386" meetPoint="68|20"/>
+    <Element category="Toft" x="465" y="430" meetPoint="-74|2"/>
+    <Element category="Toft" x="570" y="295" meetPoint="51|-28"/>
+    <Element category="Toft" x="460" y="332" meetPoint="-67|-7"/>
+    <Element category="Toft" x="60" y="411" meetPoint="56|26"/>
+    <Element category="Toft" x="215" y="449" meetPoint="-49|-43"/>
+    <Element category="Toft" x="115" y="255" meetPoint="62|29"/>
+  </elements>
+</data>

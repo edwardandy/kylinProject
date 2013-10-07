@@ -1,0 +1,129 @@
+<data endPointMarkPosition="230|532">
+  <info id="100210711" name="100210711" dec="100210711"/>
+  <waves>
+    <wave duration="123213">
+      <subWave startTime="0" duration="3000">
+        <monster typeId="1232" count="3" roadIndex="0"/>
+      </subWave>
+    </wave>
+  </waves>
+  <roads>
+    <road>
+      <p x="746" y="147"/>
+      <p x="664" y="153"/>
+      <p x="599" y="165"/>
+      <p x="586" y="171"/>
+      <p x="521" y="198"/>
+      <p x="512" y="205"/>
+      <p x="504" y="213"/>
+      <p x="496" y="222"/>
+      <p x="482" y="242"/>
+      <p x="464" y="274"/>
+      <p x="445" y="301"/>
+      <p x="436" y="308"/>
+      <p x="427" y="315"/>
+      <p x="417" y="320"/>
+      <p x="396" y="328"/>
+      <p x="386" y="330"/>
+      <p x="323" y="344"/>
+      <p x="302" y="351"/>
+      <p x="293" y="357"/>
+      <p x="284" y="363"/>
+      <p x="277" y="372"/>
+      <p x="270" y="381"/>
+      <p x="258" y="402"/>
+      <p x="255" y="413"/>
+      <p x="248" y="438"/>
+      <p x="236" y="502"/>
+      <p x="225" y="567"/>
+      <p x="208" y="654"/>
+    </road>
+    <road>
+      <p x="750" y="150"/>
+      <p x="675" y="151"/>
+      <p x="664" y="153"/>
+      <p x="654" y="156"/>
+      <p x="644" y="162"/>
+      <p x="636" y="168"/>
+      <p x="630" y="176"/>
+      <p x="626" y="186"/>
+      <p x="621" y="199"/>
+      <p x="621" y="213"/>
+      <p x="622" y="227"/>
+      <p x="622" y="298"/>
+      <p x="618" y="311"/>
+      <p x="606" y="344"/>
+      <p x="601" y="353"/>
+      <p x="587" y="372"/>
+      <p x="580" y="381"/>
+      <p x="534" y="427"/>
+      <p x="523" y="435"/>
+      <p x="504" y="445"/>
+      <p x="494" y="449"/>
+      <p x="449" y="463"/>
+      <p x="390" y="477"/>
+      <p x="370" y="479"/>
+      <p x="340" y="480"/>
+      <p x="328" y="479"/>
+      <p x="317" y="479"/>
+      <p x="283" y="483"/>
+      <p x="271" y="487"/>
+      <p x="261" y="493"/>
+      <p x="252" y="502"/>
+      <p x="245" y="512"/>
+      <p x="239" y="523"/>
+      <p x="229" y="547"/>
+      <p x="225" y="559"/>
+      <p x="221" y="580"/>
+      <p x="221" y="590"/>
+      <p x="214" y="630"/>
+      <p x="211" y="657"/>
+    </road>
+    <road>
+      <p x="374" y="-7"/>
+      <p x="358" y="61"/>
+      <p x="345" y="75"/>
+      <p x="336" y="82"/>
+      <p x="326" y="88"/>
+      <p x="264" y="120"/>
+      <p x="203" y="154"/>
+      <p x="193" y="164"/>
+      <p x="177" y="183"/>
+      <p x="172" y="192"/>
+      <p x="164" y="212"/>
+      <p x="161" y="223"/>
+      <p x="160" y="235"/>
+      <p x="160" y="245"/>
+      <p x="162" y="256"/>
+      <p x="164" y="267"/>
+      <p x="168" y="277"/>
+      <p x="173" y="288"/>
+      <p x="184" y="307"/>
+      <p x="197" y="325"/>
+      <p x="207" y="335"/>
+      <p x="247" y="388"/>
+      <p x="249" y="399"/>
+      <p x="249" y="411"/>
+      <p x="246" y="457"/>
+      <p x="244" y="467"/>
+      <p x="232" y="529"/>
+      <p x="220" y="593"/>
+      <p x="209" y="663"/>
+    </road>
+  </roads>
+  <elements>
+    <Element category="Toft" x="548" y="272" meetPoint="-20|-70" locked="0"/>
+    <Element category="Toft" x="486" y="366" meetPoint="16|54" locked="0"/>
+    <Element category="Toft" x="351" y="413" meetPoint="0|56" locked="0"/>
+    <Element category="Toft" x="282" y="291" meetPoint="-25|67" locked="0"/>
+    <Element category="Toft" x="377" y="261" meetPoint="44|54" locked="0"/>
+    <Element category="Toft" x="254" y="214" meetPoint="-80|9" locked="0"/>
+    <Element category="Toft" x="339" y="164" meetPoint="-102|-24" locked="0"/>
+    <Element category="Toft" x="418" y="120" meetPoint="-89|-28" locked="0"/>
+    <Element category="Toft" x="162" y="394" meetPoint="73|-14" locked="0"/>
+    <Element category="Toft" x="169" y="469" meetPoint="60|4" locked="0"/>
+    <Element category="Toft" x="319" y="552" meetPoint="-87|-28" locked="0"/>
+    <Element category="Toft" x="567" y="490" meetPoint="-48|-40" locked="0"/>
+    <Element category="Toft" x="657" y="409" meetPoint="-73|-22" locked="0"/>
+  </elements>
+</data>
