@@ -1,10 +1,9 @@
 package utili.behavior.disappear
 {
+	import kylin.echo.edward.utilities.display.DisplayUtility;
+	
 	import utili.behavior.Behavior;
-	import utili.behavior.displayUtility.DisplayUtility;
-	import utili.behavior.interfaces.IDisappear;
 	import utili.behavior.interfaces.IDisappearBehavior;
-	import utili.behavior.interfaces.IDispose;
 
 	/**
 	 * 面板消失特效

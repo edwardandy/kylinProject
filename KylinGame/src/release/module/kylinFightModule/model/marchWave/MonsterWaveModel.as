@@ -1,10 +1,10 @@
 package release.module.kylinFightModule.model.marchWave
 {
 	import kylin.echo.edward.framwork.model.KylinActor;
+	import kylin.echo.edward.utilities.datastructures.FillObjectUtil;
 	
 	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
 	
-	import utili.structure.FillObjectUtil;
 
 	/**
 	 * 出怪波次数据 

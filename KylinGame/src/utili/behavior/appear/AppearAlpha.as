@@ -3,13 +3,10 @@ package utili.behavior.appear
 	import flash.events.Event;
 	import flash.utils.getTimer;
 	
-	import mainModule.model.gameConstAndVar.ConfigDataModel;
 	import mainModule.model.gameConstAndVar.interfaces.IConfigDataModel;
 	
 	import utili.behavior.Behavior;
-	import utili.behavior.interfaces.IAppear;
 	import utili.behavior.interfaces.IAppearBehavior;
-	import utili.behavior.interfaces.IDispose;
 	
 	/**
 	 * ...透明度出现

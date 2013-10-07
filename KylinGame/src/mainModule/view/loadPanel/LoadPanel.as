@@ -4,7 +4,7 @@ package mainModule.view.loadPanel
 	import flash.text.TextField;
 	
 	import kylin.echo.edward.framwork.view.KylinBasePanel;
-	import kylin.echo.edward.utilities.FontMgr;
+	import kylin.echo.edward.utilities.font.FontMgr;
 	
 	import mainModule.controller.uiCmds.UIPanelEvent;
 	import mainModule.model.panelData.PanelNameConst;

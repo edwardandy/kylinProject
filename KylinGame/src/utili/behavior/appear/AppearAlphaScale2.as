@@ -1,10 +1,9 @@
  package utili.behavior.appear
 {
+	import kylin.echo.edward.utilities.display.DisplayUtility;
+	
 	import utili.behavior.Behavior;
-	import utili.behavior.displayUtility.DisplayUtility;
-	import utili.behavior.interfaces.IAppear;
 	import utili.behavior.interfaces.IAppearBehavior;
-	import utili.behavior.interfaces.IDispose;
 
 	/**
 	 * 面板出现特效

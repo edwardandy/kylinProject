@@ -1,6 +1,5 @@
 package utili.behavior
 {
-	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	
 	import utili.behavior.interfaces.IBehavior;

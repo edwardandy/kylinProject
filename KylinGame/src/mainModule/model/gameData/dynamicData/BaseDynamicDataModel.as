@@ -1,11 +1,10 @@
 package mainModule.model.gameData.dynamicData
 {
 	import kylin.echo.edward.framwork.model.KylinActor;
+	import kylin.echo.edward.utilities.datastructures.FillObjectUtil;
 	
 	import mainModule.controller.gameData.GameDataUpdateEvent;
 	
-	import utili.structure.FillObjectUtil;
-
 	/**
 	 * 后台保存的游戏动态数据 
 	 * @author Edward

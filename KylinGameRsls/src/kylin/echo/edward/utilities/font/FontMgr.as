@@ -1,10 +1,9 @@
-package kylin.echo.edward.utilities
+package kylin.echo.edward.utilities.font
 {
 	import flash.text.Font;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.utils.Dictionary;
-	import flash.utils.getQualifiedClassName;
 
 	public final class FontMgr
 	{

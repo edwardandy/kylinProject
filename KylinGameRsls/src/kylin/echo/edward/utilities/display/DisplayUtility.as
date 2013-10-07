@@ -1,4 +1,4 @@
-package utili.behavior.displayUtility
+package kylin.echo.edward.utilities.display
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

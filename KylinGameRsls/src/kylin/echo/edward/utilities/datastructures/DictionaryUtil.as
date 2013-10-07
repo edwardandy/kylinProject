@@ -33,7 +33,7 @@
 	ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-package utili.structure
+package kylin.echo.edward.utilities.datastructures
 {
 	import flash.utils.Dictionary;
 	

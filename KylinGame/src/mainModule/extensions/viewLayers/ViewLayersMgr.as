@@ -4,8 +4,8 @@ package mainModule.extensions.viewLayers
 	import flash.display.Sprite;
 	import flash.utils.Dictionary;
 	
-	import utili.structure.DictionaryUtil;
-
+	import kylin.echo.edward.utilities.datastructures.DictionaryUtil;
+	
 	/**
 	 * 显示层次集合
 	 * @author Edward

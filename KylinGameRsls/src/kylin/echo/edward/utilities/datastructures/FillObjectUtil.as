@@ -1,4 +1,4 @@
-package utili.structure
+package kylin.echo.edward.utilities.datastructures
 {
 	/**
 	 * 填充对象内容功能类

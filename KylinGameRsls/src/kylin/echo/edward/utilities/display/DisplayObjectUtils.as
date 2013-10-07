@@ -2,12 +2,9 @@ package kylin.echo.edward.utilities.display
 {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	import flash.display.MovieClip;
 	import flash.display.Sprite;
-	import flash.events.TimerEvent;
 	import flash.text.TextField;
 	import flash.utils.Dictionary;
-	import flash.utils.Timer;
 	import flash.utils.describeType;
 	import flash.utils.getDefinitionByName;
 	
