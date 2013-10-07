@@ -8,7 +8,7 @@ package mainModule.service.uiServices
 	
 	import mainModule.model.panelData.PanelCfgVo;
 	import mainModule.model.panelData.PanelInstancesModel;
-	import mainModule.model.panelData.ViewLayersModel;
+	import mainModule.extensions.viewLayers.ViewLayersMgr;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	import mainModule.service.uiServices.interfaces.IUIPanelBehaviorService;
 	
@@ -18,7 +18,7 @@ package mainModule.service.uiServices
 	import utili.behavior.interfaces.IAppearBehavior;
 	import utili.behavior.interfaces.IDisappearBehavior;
 	
-	public class UIPanelBehaviorService extends KylinActor implements IUIPanelBehaviorService
+	public class UIPanelBehaviorService /*extends KylinActor*/ implements IUIPanelBehaviorService
 	{
 		[Inject]
 		public var _panelCfg:IPanelCfgModel;
@@ -29,7 +29,7 @@ package mainModule.service.uiServices
 		[Inject]
 		public var _declare:DeclareBehavior;
 		[Inject]
-		public var _layers:ViewLayersModel;
+		public var _layers:ViewLayersMgr;
 		
 		private var _appearPanelCount:int;
 		public function UIPanelBehaviorService()

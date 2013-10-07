@@ -17,7 +17,7 @@ package mainModule.service.uiServices
 	import mainModule.model.panelData.PanelCfgVo;
 	import mainModule.model.panelData.PanelInstancesModel;
 	import mainModule.model.panelData.PanelNameConst;
-	import mainModule.model.panelData.ViewLayersModel;
+	import mainModule.extensions.viewLayers.ViewLayersMgr;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	import mainModule.model.panelData.interfaces.IPanelDeclareModel;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
@@ -35,7 +35,7 @@ package mainModule.service.uiServices
 		[Inject]
 		public var _panelDeclare:IPanelDeclareModel;
 		[Inject]
-		public var _layers:ViewLayersModel;
+		public var _layers:ViewLayersMgr;
 		[Inject]
 		public var _panels:PanelInstancesModel;
 		[Inject]

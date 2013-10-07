@@ -13,8 +13,8 @@ package mainModule
 	import flash.utils.getTimer;
 	
 	import mainModule.configuration.MainModuleConfig;
-	import mainModule.extensions.FlashVarsExtension;
-	import mainModule.extensions.ViewLayerExtension;
+	import mainModule.extensions.flashVars.FlashVarsExtension;
+	import mainModule.extensions.viewLayers.ViewLayerExtension;
 	
 	import robotlegs.bender.bundles.mvcs.MVCSBundle;
 	import robotlegs.bender.framework.api.IContext;
@@ -44,10 +44,10 @@ package mainModule
 			removeEventListener(Event.ADDED_TO_STAGE,onAddToStage);
 			
 			_context = new Context()
-				.install( MVCSBundle)
+				.install(MVCSBundle)
 				.install(new FlashVarsExtension(this.loaderInfo.parameters))
 				.configure(MainModuleConfig)
-				.install( new ViewLayerExtension(this))
+				.install( new ViewLayerExtension(this));
 			
 			//_cb();
 			//loadModule();

@@ -14,8 +14,8 @@ package utili.behavior.declare
 	import utili.behavior.disappear.DisappearScale;
 
 	/**
-	 * ...声明行为
-	 * @author MAY
+	 * 映射面板出现方式
+	 * @author Edward
 	 */
 	public class DeclareBehavior 
 	{	

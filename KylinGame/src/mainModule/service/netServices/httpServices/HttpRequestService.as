@@ -6,7 +6,7 @@ package mainModule.service.netServices.httpServices
 	import kylin.echo.edward.framwork.model.KylinActor;
 	
 	import mainModule.controller.netCmds.httpCmds.HttpEvent;
-	import mainModule.model.gameConstAndVar.FlashVarsModel;
+	import mainModule.extensions.flashVars.FlashVars;
 	import mainModule.service.netServices.httpServices.interfaces.IHttpRequestService;
 
 	/**
@@ -17,7 +17,7 @@ package mainModule.service.netServices.httpServices
 	public class HttpRequestService extends KylinActor implements IHttpRequestService
 	{
 		[Inject]
-		public var flashVars:FlashVarsModel;
+		public var flashVars:FlashVars;
 		
 		private var _url:String;
 		private var _requestId:Number;

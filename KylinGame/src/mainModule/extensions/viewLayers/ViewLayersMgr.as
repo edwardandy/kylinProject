@@ -1,4 +1,4 @@
-package mainModule.model.panelData
+package mainModule.extensions.viewLayers
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
@@ -11,7 +11,7 @@ package mainModule.model.panelData
 	 * @author Edward
 	 * 
 	 */	
-	public final class ViewLayersModel
+	public final class ViewLayersMgr
 	{
 		private var _contextRoot:DisplayObjectContainer;
 		private var _fightScene:DisplayObjectContainer;
@@ -33,7 +33,7 @@ package mainModule.model.panelData
 		 */		
 		public var waitPanelAppearLayer:Sprite;
 		
-		public function ViewLayersModel()
+		public function ViewLayersMgr()
 		{
 			panelIdxToLayer = new Dictionary();
 			init();

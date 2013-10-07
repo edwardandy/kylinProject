@@ -12,9 +12,6 @@ package release.module.kylinFightModule.gameplay.main
 	 */	
 	public final class PreRegisterManager
 	{
-		[Inject]
-		public var contextView:DisplayObjectContainer;
-		//[Inject]
 		public var mainFightScene:MainFightScene;
 		[Inject]
 		public var monsterWave:IMonsterWaveModel;

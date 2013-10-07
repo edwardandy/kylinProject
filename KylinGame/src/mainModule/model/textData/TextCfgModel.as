@@ -1,12 +1,10 @@
 package mainModule.model.textData
 {
 	import flash.utils.Dictionary;
-	
-	import kylin.echo.edward.framwork.model.KylinActor;
-	
+		
 	import mainModule.model.textData.interfaces.ITextCfgModel;
 	
-	public class TextCfgModel extends KylinActor implements ITextCfgModel
+	public class TextCfgModel implements ITextCfgModel
 	{
 		private var _dicTextCfg:Dictionary;
 		

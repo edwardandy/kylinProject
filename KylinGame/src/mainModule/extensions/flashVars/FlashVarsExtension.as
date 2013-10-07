@@ -1,6 +1,5 @@
-package mainModule.extensions
+package mainModule.extensions.flashVars
 {
-	import mainModule.model.gameConstAndVar.FlashVarsModel;
 	
 	import robotlegs.bender.framework.api.IContext;
 	import robotlegs.bender.framework.api.IExtension;
@@ -21,11 +20,11 @@ package mainModule.extensions
 		
 		public function extend(context:IContext):void
 		{
-			var flashVar:FlashVarsModel = new FlashVarsModel;
+			var flashVar:FlashVars = new FlashVars;
 			
 			flashVar.RES_VER = _param.ver;
 			
-			context.injector.map(FlashVarsModel).toValue(flashVar);
+			context.injector.map(FlashVars).toValue(flashVar);
 			_param = null;
 		}
 	}

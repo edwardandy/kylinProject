@@ -44,7 +44,7 @@ package mainModule.model
 	import mainModule.model.panelData.PanelCfgModel;
 	import mainModule.model.panelData.PanelDeclareModel;
 	import mainModule.model.panelData.PanelInstancesModel;
-	import mainModule.model.panelData.ViewLayersModel;
+	import mainModule.extensions.viewLayers.ViewLayersMgr;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	import mainModule.model.panelData.interfaces.IPanelDeclareModel;
 	import mainModule.model.preLoadData.PreLoadCfgModel;

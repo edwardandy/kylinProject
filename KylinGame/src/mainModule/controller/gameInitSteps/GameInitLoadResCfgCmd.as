@@ -7,7 +7,7 @@ package mainModule.controller.gameInitSteps
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	import kylin.echo.edward.utilities.loader.resPath.ResPathParam;
 	
-	import mainModule.model.gameConstAndVar.FlashVarsModel;
+	import mainModule.extensions.flashVars.FlashVars;
 
 	/**
 	 * 开始加载资源配置文件，游戏开始最优先加载 
@@ -15,7 +15,7 @@ package mainModule.controller.gameInitSteps
 	public class GameInitLoadResCfgCmd extends KylinCommand
 	{
 		[Inject]
-		public var _flashVars:FlashVarsModel;
+		public var _flashVars:FlashVars;
 		
 		public function GameInitLoadResCfgCmd()
 		{

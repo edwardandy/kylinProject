@@ -1,7 +1,12 @@
 package mainModule.service
 {	
+	import kylin.echo.edward.utilities.loader.LoaderProgress;
+	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
+	
 	import mainModule.service.gameDataServices.interfaces.ISheetDataService;
 	import mainModule.service.gameDataServices.sheetData.CSVSheetDataService;
+	import mainModule.service.loadServices.LoadAssetsServices;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	import mainModule.service.netServices.httpServices.HttpRequestParam;
 	import mainModule.service.netServices.httpServices.HttpRequestService;
 	import mainModule.service.netServices.httpServices.interfaces.IHttpRequestService;
@@ -23,6 +28,9 @@ package mainModule.service
 			inject.map(IUIPanelBehaviorService).toSingleton(UIPanelBehaviorService);
 			inject.map(IHttpRequestService).toSingleton(HttpRequestService);
 			inject.map(ISheetDataService).toSingleton(CSVSheetDataService);
+			
+			inject.map(ILoadAssetsServices).toSingleton(LoadAssetsServices);	
+			inject.map(ILoaderProgress).toType(LoaderProgress);
 			
 			inject.map(HttpRequestParam).toType(HttpRequestParam);
 		}

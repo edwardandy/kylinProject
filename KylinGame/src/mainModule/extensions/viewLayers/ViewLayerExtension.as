@@ -1,10 +1,9 @@
-package mainModule.extensions
+package mainModule.extensions.viewLayers
 {
 	import flash.display.DisplayObjectContainer;
 	
 	import kylin.echo.edward.utilities.display.DisplayObjectUtils;
 	
-	import mainModule.model.panelData.ViewLayersModel;
 	
 	import robotlegs.bender.extensions.contextView.ContextView;
 	import robotlegs.bender.framework.api.IContext;
@@ -26,9 +25,9 @@ package mainModule.extensions
 		
 		public function extend(context:IContext):void
 		{
-			context.injector.map(ViewLayersModel).asSingleton();
+			context.injector.map(ViewLayersMgr).asSingleton();
 			
-			var viewLayers:ViewLayersModel = context.injector.getOrCreateNewInstance(ViewLayersModel);
+			var viewLayers:ViewLayersMgr = context.injector.getOrCreateNewInstance(ViewLayersMgr);
 			
 			_root.addChild(viewLayers.fightScene);
 			_root.addChild(viewLayers.contextRoot);

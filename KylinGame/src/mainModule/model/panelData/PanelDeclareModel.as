@@ -1,9 +1,7 @@
 package mainModule.model.panelData
 {
 	import flash.utils.Dictionary;
-	
-	import kylin.echo.edward.framwork.model.KylinActor;
-	
+		
 	import mainModule.model.panelData.interfaces.IPanelDeclareModel;
 	import mainModule.view.loadPanel.LoadPanel;
 
@@ -12,7 +10,7 @@ package mainModule.model.panelData
 	 * @author Edward
 	 * 
 	 */	
-	public class PanelDeclareModel extends KylinActor implements IPanelDeclareModel
+	public class PanelDeclareModel implements IPanelDeclareModel
 	{
 		private var _dicPanelDeclare:Dictionary = new Dictionary;
 		

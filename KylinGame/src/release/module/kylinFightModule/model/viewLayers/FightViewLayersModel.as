@@ -5,7 +5,7 @@ package release.module.kylinFightModule.model.viewLayers
 	
 	import kylin.echo.edward.framwork.model.KylinActor;
 	
-	import mainModule.model.panelData.ViewLayersModel;
+	import mainModule.extensions.viewLayers.ViewLayersMgr;
 	
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 
@@ -18,7 +18,7 @@ package release.module.kylinFightModule.model.viewLayers
 	{
 		//private var _parent:DisplayObjectContainer;
 		[Inject]
-		public var mainViewLayers:ViewLayersModel;
+		public var mainViewLayers:ViewLayersMgr;
 		private var _groundLayer:Sprite;
 		private var _bottomLayer:Sprite;
 		private var _middleLayer:Sprite;

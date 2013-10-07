@@ -11,7 +11,7 @@ package mainModule.controller.gameInitSteps
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
 	
-	import mainModule.model.gameConstAndVar.FlashVarsModel;
+	import mainModule.extensions.flashVars.FlashVars;
 	import mainModule.model.gameInitSteps.interfaces.IGameCfgModel;
 	import mainModule.model.textData.interfaces.ITextCfgModel;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
@@ -23,7 +23,7 @@ package mainModule.controller.gameInitSteps
 		[Inject]
 		public var textCfg:ITextCfgModel;
 		[Inject]
-		public var flashVars:FlashVarsModel;
+		public var flashVars:FlashVars;
 		[Inject]
 		public var loadService:ILoadAssetsServices;
 		[Inject]

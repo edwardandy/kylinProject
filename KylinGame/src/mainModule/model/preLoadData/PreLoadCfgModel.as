@@ -1,7 +1,5 @@
 package mainModule.model.preLoadData
-{
-	import kylin.echo.edward.framwork.model.KylinActor;
-	
+{	
 	import mainModule.model.preLoadData.interfaces.IPreLoadCfgModel;
 
 	/**
@@ -9,7 +7,7 @@ package mainModule.model.preLoadData
 	 * @author Edward
 	 * 
 	 */	
-	public class PreLoadCfgModel extends KylinActor implements IPreLoadCfgModel
+	public class PreLoadCfgModel implements IPreLoadCfgModel
 	{
 		private var _cfg:XML;
 		

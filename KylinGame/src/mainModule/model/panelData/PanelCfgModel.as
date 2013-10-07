@@ -1,13 +1,11 @@
 package mainModule.model.panelData
 {
 	import flash.utils.Dictionary;
-	
-	import kylin.echo.edward.framwork.model.KylinActor;
-	
+		
 	import mainModule.model.gameInitSteps.interfaces.IGameCfgModel;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	
-	public class PanelCfgModel extends KylinActor implements IPanelCfgModel
+	public class PanelCfgModel implements IPanelCfgModel
 	{
 		[Inject]
 		public var gameCfgModel:IGameCfgModel;
