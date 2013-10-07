@@ -4,6 +4,7 @@ package mainModule.service.loadServices.interfaces
 	
 	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.IAssetsLoaderListener;
+	import kylin.echo.edward.utilities.loader.interfaces.IDomainResMgr;
 
 	/**
 	 * 素材加载和管理 
@@ -12,6 +13,12 @@ package mainModule.service.loadServices.interfaces
 	 */	
 	public interface ILoadAssetsServices
 	{
+		/**
+		 *  获得SWF域加载管理器
+		 * @return 
+		 * 
+		 */		
+		function get domainMgr():IDomainResMgr;
 		/**
 		 * 获得缓存的素材信息 
 		 * @param folderKey

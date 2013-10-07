@@ -22,9 +22,9 @@ package kylin.echo.edward.utilities.loader.resPath
 		 */		
 		public function genResUrl(folderKey:String,id:String):ResPathVO
 		{
-			var folderXml:XML = _param.resCfg.child(folderKey)[0];
-			var folder:String = folderXml.@folder;
-			var items:XMLList = folderXml.item;
+			const folderXml:XML = _param.resCfg.child(folderKey)[0];
+			const folder:String = folderXml.@folder;
+			const items:XMLList = folderXml.item;
 			var allLanVerItem:XML;
 			for each(var item:XML in items)
 			{

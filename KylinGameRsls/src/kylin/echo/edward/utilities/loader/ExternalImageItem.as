@@ -30,7 +30,8 @@ package kylin.echo.edward.utilities.loader
 		
 		private function onExternalCompleteHandler(evt : Event) : void 
 		{
-			var cacheLoader:Loader = new Loader();
+			//跨域图片加载完成后，再使用字节方式加载一次即可访问新的Loader的content
+			const cacheLoader:Loader = new Loader();
 			cacheLoader.loadBytes(loader.contentLoaderInfo.bytes);
 			cacheLoader.contentLoaderInfo.addEventListener(Event.COMPLETE,function(e:*):void{
 				cacheLoader.contentLoaderInfo.removeEventListener(Event.COMPLETE,arguments.callee);

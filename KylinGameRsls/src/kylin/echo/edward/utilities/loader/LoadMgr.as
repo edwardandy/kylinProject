@@ -54,8 +54,7 @@ package kylin.echo.edward.utilities.loader
 			if(!load)
 				load = new BulkLoader(name,3);
 			return load;
-		}
-		
+		}	
 		/**
 		 * 通过资源配置目录键名和id键名生成加载项的id 
 		 * @param folderKey 资源配置目录键名
@@ -105,7 +104,7 @@ package kylin.echo.edward.utilities.loader
 					_logger.error("LoadMgr ResPathVO cannot find! folderKey:{0} ,idKey:{1}",[folderKey,idKey]);
 					return _loadListener;
 				}
-				props[BulkLoader.WEIGHT] = resVo?resVo.size:1;
+				props[BulkLoader.WEIGHT] = resVo?(resVo.size?resVo.size:1):1;
 				item = getLoaderByName(loaderName).add(resVo?resVo.url:idKey,props); 
 				getLoaderByName(loaderName).start();
 				addOrRemoveItemListeners(item);

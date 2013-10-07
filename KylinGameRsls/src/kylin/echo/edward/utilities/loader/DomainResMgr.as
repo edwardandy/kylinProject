@@ -8,10 +8,20 @@ package kylin.echo.edward.utilities.loader
 	import flash.utils.Dictionary;
 		
 	import kylin.echo.edward.utilities.loader.interfaces.IDomainResMgr;
-	
+	/**
+	 *  SWF域加载管理器
+	 * @author Edward
+	 * 
+	 */	
 	public final class DomainResMgr implements IDomainResMgr
 	{
+		/**
+		 *  loadKey => domainName
+		 */		
 		private var _dicDomainName:Dictionary;
+		/**
+		 *  domainName => ApplicationDomain
+		 */		
 		private var _dicDomain:Dictionary;
 		private var _loadMgr:LoadMgr;
 		
@@ -36,14 +46,14 @@ package kylin.echo.edward.utilities.loader
 			if(!folderKey || !idKey || !domainName)
 				return props;
 			
-			var loadKey:String = _loadMgr.genLoadKey(folderKey,idKey);
+			const loadKey:String = _loadMgr.genLoadKey(folderKey,idKey);
 			if(!_dicDomainName[loadKey])
 			{
 				_dicDomainName[loadKey] = domainName;
-				var applicationDomain:ApplicationDomain = ("currentDomain" == domainName) ? ApplicationDomain.currentDomain : 
+				const applicationDomain:ApplicationDomain = ("currentDomain" == domainName) ? ApplicationDomain.currentDomain : 
 					(_dicDomain[domainName] || (-1 != domainName.indexOf("childDomain") ? new ApplicationDomain(ApplicationDomain.currentDomain) : new ApplicationDomain));
 				_dicDomain[domainName] ||= applicationDomain;
-				var context:LoaderContext = (props && props["context"] is LoaderContext)? props["context"] as LoaderContext : new LoaderContext();
+				const context:LoaderContext = (props && props["context"] is LoaderContext)? props["context"] as LoaderContext : new LoaderContext();
 				context.applicationDomain =  applicationDomain;
 				if(!props)
 					props = {"context":context};
@@ -53,24 +63,26 @@ package kylin.echo.edward.utilities.loader
 			return props;
 		}
 		
-		private function getClassFromDomain(clsName:String, domainName:String = null):Class{
-			if (domainName)	{
-				var domain:ApplicationDomain = _dicDomain[domainName];
-				if (domain)	{
-					if (domain.hasDefinition(clsName))	{
+		private function getClassFromDomain(clsName:String, domainName:String = null):Class
+		{
+			if (domainName)	
+			{
+				const domain:ApplicationDomain = _dicDomain[domainName];
+				if (domain)	
+				{
+					if (domain.hasDefinition(clsName))	
 						return domain.getDefinition(clsName) as Class;
-					}
 					return null;
 				}
 			}
-			for each(var eachDomain:ApplicationDomain in _dicDomain)	{
-				if (eachDomain.hasDefinition(clsName))	{
+			
+			for each(var eachDomain:ApplicationDomain in _dicDomain)	
+			{
+				if (eachDomain.hasDefinition(clsName))	
 					return eachDomain.getDefinition(clsName) as Class;
-				}
 			}
 			return null;
-		}
-		
+		}	
 		/**
 		 * @inheritDoc
 		 */	
@@ -83,7 +95,7 @@ package kylin.echo.edward.utilities.loader
 		 */	
 		public function getMovieClipByDomain(key:String,domainName:String = null):MovieClip
 		{
-			var cls:Class = getClassByDomain(key,domainName);
+			const cls:Class = getClassByDomain(key,domainName);
 			return (null != cls ? new cls() as MovieClip : null);
 		}
 		/**
@@ -91,7 +103,7 @@ package kylin.echo.edward.utilities.loader
 		 */	
 		public function getSimpleButtonByDomain(key:String,domainName:String = null):SimpleButton
 		{
-			var cls:Class = getClassByDomain(key,domainName);
+			const cls:Class = getClassByDomain(key,domainName);
 			return (null != cls ? new cls() as SimpleButton : null);
 		}
 		/**
@@ -99,7 +111,7 @@ package kylin.echo.edward.utilities.loader
 		 */	
 		public function getSpriteByDomain(key:String,domainName:String = null):Sprite
 		{
-			var cls:Class = getClassByDomain(key,domainName);
+			const cls:Class = getClassByDomain(key,domainName);
 			return (null != cls ? new cls() as Sprite : null);
 		}
 	}

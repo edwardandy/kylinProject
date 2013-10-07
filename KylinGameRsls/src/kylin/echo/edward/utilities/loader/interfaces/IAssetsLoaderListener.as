@@ -1,7 +1,11 @@
 package kylin.echo.edward.utilities.loader.interfaces
 {
 	import br.com.stimuli.loading.loadingtypes.LoadingItem;
-
+	/**
+	 * 向生成的加载项添加回调函数 
+	 * @author Edward
+	 * 
+	 */	
 	public interface IAssetsLoaderListener
 	{
 		/**

@@ -18,19 +18,27 @@ package kylin.echo.edward.utilities.loader
 		private var _loadMgr:LoadMgr;
 		private var _infoCache:AssetInfoCache;
 		/**
-		 * Constructor
+		 * 向生成的加载项添加回调函数 
 		 **/
 		public function AssetsLoaderListener(loader:LoadMgr,cache:AssetInfoCache)
 		{
 			_loadMgr = loader;
 			_infoCache = cache;
 		}
-		
+		/**
+		 * 当前要添加监听函数的加载项 
+		 * @param value
+		 * 
+		 */		
 		internal function set loadItem(value:LoadingItem):void
 		{
 			_loadItem = value;
 		}
-		
+		/**
+		 * 当前加载项的id 
+		 * @param value
+		 * 
+		 */		
 		internal function set key(value:String):void
 		{
 			_key = value;
@@ -96,7 +104,7 @@ package kylin.echo.edward.utilities.loader
 		{
 			if(!loadProgress || !_loadItem || _loadItem.isLoaded)
 				return this;
-			loadProgress.addItem(_loadItem);
+			(loadProgress as LoaderProgress).addItem(_loadItem,this);
 			return this;
 		}
 		/**

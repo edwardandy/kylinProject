@@ -24,7 +24,7 @@ package kylin.echo.edward.utilities.loader.interfaces
 		 * @param item 资源加载项
 		 * 
 		 */		
-		function addItem(item:LoadingItem):int;
+		//function addItem(item:LoadingItem):int;
 		/**
 		 * 获得当前的加载进度 
 		 * @return 加载进度

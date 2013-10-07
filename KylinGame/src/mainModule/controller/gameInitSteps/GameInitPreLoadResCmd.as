@@ -3,18 +3,15 @@ package mainModule.controller.gameInitSteps
 	import flash.events.Event;
 	import flash.events.ProgressEvent;
 	
-	import br.com.stimuli.loading.loadingtypes.ImageItem;
-	import br.com.stimuli.loading.loadingtypes.LoadingItem;
-	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
-	import kylin.echo.edward.utilities.loader.resPath.ResPathFolderType;
 	
 	import mainModule.controller.uiCmds.UIPanelEvent;
 	import mainModule.model.panelData.PanelNameConst;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	import mainModule.model.preLoadData.PreLoadCfgVo;
 	import mainModule.model.preLoadData.interfaces.IPreLoadCfgModel;
+	import mainModule.service.loadServices.ResPathFolderType;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 
 	/**

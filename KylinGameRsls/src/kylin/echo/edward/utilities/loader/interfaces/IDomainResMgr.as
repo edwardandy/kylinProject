@@ -4,7 +4,6 @@ package kylin.echo.edward.utilities.loader.interfaces
 	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	
-	import br.com.stimuli.loading.loadingtypes.LoadingItem;
 	/**
 	 *  SWF域加载管理器
 	 * @author Edward

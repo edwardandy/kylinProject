@@ -1,4 +1,4 @@
-package kylin.echo.edward.utilities.loader.resPath
+package mainModule.service.loadServices
 {
 	public final class ResPathFolderType
 	{

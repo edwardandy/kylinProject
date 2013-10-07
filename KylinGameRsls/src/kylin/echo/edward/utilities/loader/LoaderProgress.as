@@ -1,15 +1,9 @@
 package kylin.echo.edward.utilities.loader
 {
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.events.ProgressEvent;
-	
 	import br.com.stimuli.loading.loadingtypes.LoadingItem;
 	
+	import kylin.echo.edward.utilities.loader.interfaces.IAssetsLoaderListener;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
-	
-	[Event(name="progress",type="flash.events.ProgressEvent")]
-	[Event(name="complete",type="flash.events.Event")]
 	/**
 	 * 多个加载进度显示项
 	 * @author Edward
@@ -46,13 +40,14 @@ package kylin.echo.edward.utilities.loader
 		/**
 		 * @inheritDoc
 		 */		
-		public function addItem(item:LoadingItem):int
+		internal function addItem(item:LoadingItem,listener:IAssetsLoaderListener):int
 		{
-			if(-1 == _vecLoadingItems.indexOf(item))
+			if(item && -1 == _vecLoadingItems.indexOf(item))
 			{
 				_vecLoadingItems.push(item);
-				item.addEventListener(ProgressEvent.PROGRESS,onItemProgress);
-				item.addEventListener(Event.COMPLETE,onItemComplete);
+				listener.addComplete(onItemComplete).addProgress(onItemProgress);
+				//item.addEventListener(ProgressEvent.PROGRESS,onItemProgress);
+				//item.addEventListener(Event.COMPLETE,onItemComplete);
 			}
 			return _vecLoadingItems.length;
 		}
@@ -70,7 +65,8 @@ package kylin.echo.edward.utilities.loader
 			var iByteTotle:int = 0;
 			for each(var item:LoadingItem in _vecLoadingItems)
 			{
-				iByteLoaded += item.bytesLoaded;
+				//iByteLoaded += item.bytesLoaded;
+				iByteLoaded += item.weightPercentLoaded;
 				iByteTotle += item.weight;
 			}
 			
@@ -97,17 +93,14 @@ package kylin.echo.edward.utilities.loader
 			_progressCB = null;
 		}
 		
-		private function onItemProgress(e:ProgressEvent):void
+		private function onItemProgress():void
 		{		
 			if(null != _progressCB)
 				_progressCB.apply(null,[loadProgress]);
 		}
 		
-		private function onItemComplete(e:Event):void
-		{
-			(e.currentTarget as EventDispatcher).removeEventListener(Event.COMPLETE,onItemComplete);
-			(e.currentTarget as EventDispatcher).removeEventListener(ProgressEvent.PROGRESS,onItemProgress);
-			
+		private function onItemComplete():void
+		{	
 			var iLoaded:int;
 			for each(var item:LoadingItem in _vecLoadingItems)
 				if(item.isLoaded)

@@ -12,8 +12,8 @@ package mainModule.service.loadServices
 	import kylin.echo.edward.utilities.loader.LoadMgr;
 	import kylin.echo.edward.utilities.loader.StreamImageItem;
 	import kylin.echo.edward.utilities.loader.interfaces.IAssetsLoaderListener;
+	import kylin.echo.edward.utilities.loader.interfaces.IDomainResMgr;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
-	import kylin.echo.edward.utilities.loader.resPath.ResPathFolderType;
 	import kylin.echo.edward.utilities.loader.resPath.ResPathParam;
 	
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
@@ -55,7 +55,16 @@ package mainModule.service.loadServices
 			
 			_loadMgr = new LoadMgr(_logger,pathParam);
 		}
-		
+		/**
+		 * @inheritDoc
+		 */	
+		public function get domainMgr():IDomainResMgr
+		{
+			return _loadMgr.domainMgr;
+		}
+		/**
+		 * @inheritDoc
+		 */	
 		public function getAssetInfo(folderKey:String,idKey:String):AssetInfo
 		{
 			return _loadMgr.getLoadRes(folderKey,idKey);
