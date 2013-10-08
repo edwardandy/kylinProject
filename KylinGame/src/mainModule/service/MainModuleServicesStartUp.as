@@ -10,6 +10,8 @@ package mainModule.service
 	import mainModule.service.netServices.httpServices.HttpRequestParam;
 	import mainModule.service.netServices.httpServices.HttpRequestService;
 	import mainModule.service.netServices.httpServices.interfaces.IHttpRequestService;
+	import mainModule.service.soundServices.ISoundService;
+	import mainModule.service.soundServices.SoundService;
 	import mainModule.service.uiServices.UIPanelBehaviorService;
 	import mainModule.service.uiServices.UIPanelService;
 	import mainModule.service.uiServices.interfaces.IUIPanelBehaviorService;
@@ -31,6 +33,8 @@ package mainModule.service
 			
 			inject.map(ILoadAssetsServices).toSingleton(LoadAssetsServices);	
 			inject.map(ILoaderProgress).toType(LoaderProgress);
+			
+			inject.map(ISoundService).toSingleton(SoundService);	
 			
 			inject.map(HttpRequestParam).toType(HttpRequestParam);
 		}
