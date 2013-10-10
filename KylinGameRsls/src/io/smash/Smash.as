@@ -2,8 +2,6 @@ package io.smash
 {
     import io.smash.core.SmashGroup;
     
-    import flash.display.Stage;
-
     /**
      * Helper class to track a few important bits of global state.
      */

@@ -9,24 +9,19 @@
 package io.smash.time
 {
     
-    import io.smash.Smash;
-    import io.smash.SmashUtil;
-    import io.smash.core.ISmashManager;
-    import io.smash.core.SmashComponent;
-    import io.smash.core.SmashGroup;
-    import io.smash.debug.Logger;
-    import io.smash.debug.Profiler;
-    import io.smash.util.IPrioritizable;
-    import io.smash.util.SimplePriorityQueue;
-    import io.smash.util.TypeUtility;
-    import io.smash.util.sprintf;
-    
     import flash.display.Stage;
-    import flash.events.Event;
     import flash.events.TimerEvent;
     import flash.utils.Timer;
     import flash.utils.getQualifiedClassName;
     import flash.utils.getTimer;
+    
+    import io.smash.SmashUtil;
+    import io.smash.core.ISmashManager;
+    import io.smash.util.IPrioritizable;
+    import io.smash.util.SimplePriorityQueue;
+    import io.smash.util.TypeUtility;
+    
+    import robotlegs.bender.framework.api.ILogger;
     
     /**
      * The process manager manages all time related functionality in the engine.
@@ -44,8 +39,10 @@ package io.smash.time
      */
     public class TimeManager implements ISmashManager
     {
-        [SmashInject]
+        [Inject]
         public var stage:Stage;
+		[Inject]
+		public var logger:ILogger;
         
         /**
          * If true, disables warnings about losing ticks.
@@ -55,7 +52,7 @@ package io.smash.time
         /**
          * The number of ticks that will happen every second.
          */
-        public const TICKS_PER_SECOND:int = 60;
+        public const TICKS_PER_SECOND:int = 30;
         
         /**
          * The rate at which ticks are fired, in seconds.
@@ -163,11 +160,6 @@ package io.smash.time
                 start();
         }
         
-        public function destroy():void
-        {
-            if(started)
-                stop();
-        }
         
         /**
          * Starts the process manager. This is automatically called when the first object
@@ -178,7 +170,8 @@ package io.smash.time
         {
             if (started)
             {
-                Logger.warn(this, "start", "The ProcessManager is already started.");
+				//log("The TimeManager is already started.");
+                //Logger.warn(this, "start", "The ProcessManager is already started.");
                 return;
             }
             
@@ -187,9 +180,11 @@ package io.smash.time
             
             if(!timer)
                 timer = new Timer(32);
-            timer.delay = 1000 / stage.frameRate;
+			if(_timeScale > 0)
+            	timer.delay = Math.max(1,int(TICK_RATE_MS/_timeScale));/*1000 / stage.frameRate;*/
             timer.start();
-            timer.addEventListener(TimerEvent.TIMER, onFrame);
+			if(!timer.hasEventListener(TimerEvent.TIMER))
+            	timer.addEventListener(TimerEvent.TIMER, onFrame);
             started = true;
         }
         
@@ -202,12 +197,14 @@ package io.smash.time
         {
             if (!started)
             {
-                Logger.warn(this, "stop", "The TimeManager isn't started.");
+				logger.error("The TimeManager isn't started.");
+                //Logger.warn(this, "stop", "The TimeManager isn't started.");
                 return;
             }
             
             started = false;
             timer.stop();
+			timer.removeEventListener(TimerEvent.TIMER, onFrame);
         }
         
         /**
@@ -229,8 +226,8 @@ package io.smash.time
          */
         public function schedule(delay:Number, thisObject:Object, callback:Function, ...arguments):void
         {
-            if (!started)
-                start();
+            /*if (!started)
+                start();*/
             
             var schedule:ScheduleEntry = new ScheduleEntry();
             schedule.dueTime = _virtualTime + delay;
@@ -284,7 +281,8 @@ package io.smash.time
                 thinkHeap.remove(object);
             
             if(!thinkHeap.enqueue(object))
-                Logger.print(this, "Thinking queue length maxed out!");
+				logger.error("Thinking queue length maxed out!");
+                //Logger.print(this, "Thinking queue length maxed out!");
         }
         
         /**
@@ -302,9 +300,9 @@ package io.smash.time
          * 
          * @param object The object to remove.
          */
-        public function removeAnimatedObject(object:IAnimated):void
+        public function removeAnimatedObject(object:IAnimated):Boolean
         {
-            removeObject(object, animatedObjects);
+            return removeObject(object, animatedObjects);
         }
         
         /**
@@ -328,20 +326,20 @@ package io.smash.time
          * 
          * @param amount The amount of time to simulate.
          */
-        public function testAdvance(amount:Number):void
+        /*public function testAdvance(amount:Number):void
         {
             advance(amount * _timeScale, true);
-        }
+        }*/
         
         /**
          * Forces the process manager to seek its virtualTime by the specified amount.
          * This moves virtualTime without calling advance and without processing ticks or frames.
          * WARNING: USE WITH CAUTION AND ONLY IF YOU REALLY KNOW THE CONSEQUENCES!
          */
-        public function seek(amount:Number):void
+        /*public function seek(amount:Number):void
         {
             _virtualTime += amount;
-        }
+        }*/
         
         /**
          * Deferred function callback - called back at start of processing for next frame. Useful
@@ -382,8 +380,8 @@ package io.smash.time
                 return;
             }
             
-            if (!started)
-                start();
+            /*if (!started)
+                start();*/
             
             var position:int = -1;
             for (var i:int = 0; i < list.length; i++)
@@ -393,7 +391,8 @@ package io.smash.time
                 
                 if (list[i].listener == object)
                 {
-                    Logger.warn(object, "AddProcessObject", "This object has already been added to the process manager.");
+					logger.warn("This object has already been added to the time manager.");
+                    //Logger.warn(object, "AddProcessObject", "This object has already been added to the process manager.");
                     return;
                 }
                 
@@ -420,7 +419,7 @@ package io.smash.time
          * @param object Object to remove.
          * @param list List from which to remove.
          */
-        private function removeObject(object:*, list:Array):void
+        private function removeObject(object:*, list:Array):Boolean
         {
             if (listenerCount == 1 && thinkHeap.size == 0)
                 stop();
@@ -442,11 +441,12 @@ package io.smash.time
                         list.splice(i, 1);                        
                     }
                     
-                    return;
+                    return true;
                 }
             }
-            
-            Logger.warn(object, "RemoveProcessObject", "This object has not been added to the process manager.");
+			logger.warn("This object has not been added to the time manager.");
+			return false;
+            //Logger.warn(object, "RemoveProcessObject", "This object has not been added to the process manager.");
         }
         
         /**
@@ -456,10 +456,14 @@ package io.smash.time
         {
             // This is called from a system event, so it had better be at the 
             // root of the profiler stack!
-            Profiler.ensureAtRoot();
+            //Profiler.ensureAtRoot();
             
             // Track current time.
             var currentTime:Number = getTimer();
+			
+			if(currentTime < 0)
+				logger.error("onFrame getTimer()<0 ");
+			
             if (lastTime < 0)
             {
                 lastTime = currentTime;
@@ -486,13 +490,13 @@ package io.smash.time
         
         public function advance(deltaTime:Number, suppressSafety:Boolean = false):void
         {
-            Profiler.enter("advance");
+            //Profiler.enter("advance");
             
             // Update platform time, to avoid lots of costly calls to getTimer.
             _platformTime = getTimer();
             
             // Note virtual time we started advancing from.
-            var startTime:Number = _virtualTime;
+            //var startTime:Number = _virtualTime;
             
             // Add time to the accumulator.
             elapsed += deltaTime;
@@ -509,7 +513,8 @@ package io.smash.time
             if (tickCount >= MAX_TICKS_PER_FRAME && !suppressSafety && !disableSlowWarning)
             {
                 // By default, only show when profiling.
-                Logger.warn(this, "advance", "Exceeded maximum number of ticks for frame (" + elapsed.toFixed() + "ms dropped) .");
+				logger.warn("Exceeded maximum number of ticks for frame (" + elapsed.toFixed() + "ms dropped) .");
+                //Logger.warn(this, "advance", "Exceeded maximum number of ticks for frame (" + elapsed.toFixed() + "ms dropped) .");
             }
             
             // Make sure that we don't fall behind too far. This helps correct
@@ -526,7 +531,7 @@ package io.smash.time
             // processScheduledObjects();
             
             // Update objects wanting OnFrame callbacks.
-            Profiler.enter("frame");
+            //Profiler.enter("frame");
             duringAdvance = true;
             _interpolationFactor = elapsed / TICK_RATE_MS;
             for(var i:int=0; i<animatedObjects.length; i++)
@@ -535,19 +540,19 @@ package io.smash.time
                 if(!animatedObject)
                     continue;
                 
-                Profiler.enter(animatedObject.profilerKey);
+                //Profiler.enter(animatedObject.profilerKey);
                 (animatedObject.listener as IAnimated).onFrame();
-                Profiler.exit(animatedObject.profilerKey);
+                //Profiler.exit(animatedObject.profilerKey);
             }
             duringAdvance = false;
-            Profiler.exit("frame");
+            //Profiler.exit("frame");
             
             // Purge the lists if needed.
             if(needPurgeEmpty)
             {
                 needPurgeEmpty = false;
                 
-                Profiler.enter("purgeEmpty");
+                //Profiler.enter("purgeEmpty");
                 
                 for(var j:int=0; j<animatedObjects.length; j++)
                 {
@@ -567,12 +572,12 @@ package io.smash.time
                     k--;
                 }
                 
-                Profiler.exit("purgeEmpty");
+                //Profiler.exit("purgeEmpty");
             }
             
-            Profiler.exit("advance");
+            //Profiler.exit("advance");
             
-            Profiler.ensureAtRoot();
+            //Profiler.ensureAtRoot();
         }
         
         public function fireTick():void
@@ -585,7 +590,7 @@ package io.smash.time
             processScheduledObjects();
             
             // Do the onTick callbacks, noting time in profiler appropriately.
-            Profiler.enter("tick");
+            //Profiler.enter("tick");
             
             duringAdvance = true;
             for(var j:int=0; j<tickedObjects.length; j++)
@@ -594,13 +599,13 @@ package io.smash.time
                 if(!object)
                     continue;
                 
-                Profiler.enter(object.profilerKey);
-                (object.listener as ITicked).onTick();
-                Profiler.exit(object.profilerKey);
+                //Profiler.enter(object.profilerKey);
+                (object.listener as IAnimated).onFrame();
+                //Profiler.exit(object.profilerKey);
             }
             duringAdvance = false;
             
-            Profiler.exit("tick");
+            //Profiler.exit("tick");
             
             // Update virtual time by subtracting from accumulator.
             _virtualTime += TICK_RATE_MS;
@@ -613,7 +618,7 @@ package io.smash.time
             var oldDeferredMethodQueue:Array = deferredMethodQueue;
             if(oldDeferredMethodQueue.length)
             {
-                Profiler.enter("callLater");
+                //Profiler.enter("callLater");
                 
                 // Put a new array in the queue to avoid getting into corrupted
                 // state due to more calls being added.
@@ -628,13 +633,13 @@ package io.smash.time
                 // Wipe the old array now we're done with it.
                 oldDeferredMethodQueue.length = 0;
                 
-                Profiler.exit("callLater");
+                //Profiler.exit("callLater");
             }
             
             // Process any queued items.
             if(thinkHeap.size)
             {
-                Profiler.enter("Queue");
+                //Profiler.enter("Queue");
                 
                 while(thinkHeap.size && thinkHeap.front.priority >= -_virtualTime)
                 {
@@ -644,7 +649,7 @@ package io.smash.time
                     
                     var type:String = TypeUtility.getObjectClassName(itemRaw);
                     
-                    Profiler.enter(type);
+                    //Profiler.enter(type);
                     if(qItem)
                     {
                         // Check here to avoid else block that throws an error - empty callback
@@ -660,24 +665,24 @@ package io.smash.time
                     {
                         throw new Error("Unknown type found in thinkHeap.");
                     }
-                    Profiler.exit(type);                    
+                    //Profiler.exit(type);                    
                     
                 }
                 
-                Profiler.exit("Queue");                
+                //Profiler.exit("Queue");                
             }
         }
         /**
          * Dumps the contents of the thinking queue to the console.
          */ 
-        public function printThinkingQueue():void
-        {
-            Logger.print(this, sprintf("%-11s%-80s%-3s", "Priority", "Class Name", "Has Owner"));         
+        //public function printThinkingQueue():void
+        //{
+           //Logger.print(this, sprintf("%-11s%-80s%-3s", "Priority", "Class Name", "Has Owner"));         
             // Get the contents of the think heap as an array
-            var queue:Array = thinkHeap.toArray();
+           // var queue:Array = thinkHeap.toArray();
             
             // traverse the think heap and print it to the console. 
-            for(var i:int=0; i< queue.length; ++i)
+            /*for(var i:int=0; i< queue.length; ++i)
             {
                 var item:IPrioritizable = queue[i];
                 var component:SmashComponent = item as SmashComponent;
@@ -686,10 +691,30 @@ package io.smash.time
                     hasOwner = "yes";
                 var queueEntry:String = sprintf( "%-11s%-80s%-3s", item.priority, TypeUtility.getObjectClassName(item), hasOwner);
                 Logger.print(TimeManager, queueEntry);
-            }
+            }*/
             
-            Logger.print(this, "There are " + queue.length + " items in the queue.");
-        }
+            //Logger.print(this, "There are " + queue.length + " items in the queue.");
+        //}
+		
+		public function destroy():void
+		{
+			if(started)
+				stop();
+			
+			deferredMethodQueue.length = 0;
+			_virtualTime = 0;
+			_interpolationFactor = 0;
+			_timeScale = 1.0;
+			lastTime = -1.0;
+			elapsed = 0.0;
+			animatedObjects.length = 0;
+			tickedObjects.length = 0;
+			needPurgeEmpty = false;
+			_platformTime = 0;
+			_frameCounter = 0;
+			duringAdvance = false;
+			thinkHeap.clear();
+		}
         
         protected var deferredMethodQueue:Array = [];
         protected var started:Boolean = false;
@@ -698,6 +723,7 @@ package io.smash.time
         protected var _timeScale:Number = 1.0;
         protected var lastTime:int = -1.0;
         protected var elapsed:Number = 0.0;
+		//protected var lastDateTime:int = -1.0;
         protected var animatedObjects:Array = new Array();
         protected var tickedObjects:Array = new Array();
         protected var needPurgeEmpty:Boolean = false;
