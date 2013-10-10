@@ -424,7 +424,7 @@ tl.add(nested);
 			var i:int = _paramProps.length,
 				j:int, a:Array;
 			while (--i > -1) {
-				if ((a = this.vars[_paramProps[i]])) {
+				if (Boolean(a = this.vars[_paramProps[i]])) {
 					j = a.length;
 					while (--j > -1) {
 						if (a[j] === "{self}") {

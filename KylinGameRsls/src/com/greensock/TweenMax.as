@@ -10,7 +10,26 @@ package com.greensock {
 	import com.greensock.core.PropTween;
 	import com.greensock.core.SimpleTimeline;
 	import com.greensock.events.TweenEvent;
-	import com.greensock.plugins.*;
+	import com.greensock.plugins.AutoAlphaPlugin;
+	import com.greensock.plugins.BevelFilterPlugin;
+	import com.greensock.plugins.BezierPlugin;
+	import com.greensock.plugins.BezierThroughPlugin;
+	import com.greensock.plugins.BlurFilterPlugin;
+	import com.greensock.plugins.ColorMatrixFilterPlugin;
+	import com.greensock.plugins.ColorTransformPlugin;
+	import com.greensock.plugins.DropShadowFilterPlugin;
+	import com.greensock.plugins.EndArrayPlugin;
+	import com.greensock.plugins.FrameLabelPlugin;
+	import com.greensock.plugins.FramePlugin;
+	import com.greensock.plugins.GlowFilterPlugin;
+	import com.greensock.plugins.HexColorsPlugin;
+	import com.greensock.plugins.RemoveTintPlugin;
+	import com.greensock.plugins.RoundPropsPlugin;
+	import com.greensock.plugins.ShortRotationPlugin;
+	import com.greensock.plugins.TintPlugin;
+	import com.greensock.plugins.TweenPlugin;
+	import com.greensock.plugins.VisiblePlugin;
+	import com.greensock.plugins.VolumePlugin;
 	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
@@ -1628,7 +1647,7 @@ TweenMax.killAll(false, false, true, false);
 				tween:Animation, i:int;
 			for (i = 0; i < l; i++) {
 				tween = a[i];
-				if (allTrue || (tween is SimpleTimeline) || ((isDC = (TweenLite(tween).target == TweenLite(tween).vars.onComplete)) && delayedCalls) || (tweens && !isDC)) {
+				if (allTrue || (tween is SimpleTimeline) || (Boolean(isDC = (TweenLite(tween).target == TweenLite(tween).vars.onComplete)) && delayedCalls) || (tweens && !isDC)) {
 					if (complete) {
 						tween.totalTime(tween.totalDuration());
 					} else {

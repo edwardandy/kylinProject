@@ -111,7 +111,7 @@ package org.osflash.signals
 			var currentTarget:Object = target;
 
 			while (currentTarget && currentTarget.hasOwnProperty("parent") 
-				   && (currentTarget = currentTarget["parent"]))
+				   && (Boolean(currentTarget = currentTarget["parent"])))
 			{
 				if (currentTarget is IBubbleEventHandler)
 				{

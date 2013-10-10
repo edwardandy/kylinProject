@@ -154,7 +154,7 @@ package com.greensock.plugins {
 		 */
 		protected function _addTween(target:Object, propName:String, start:Number, end:*, overwriteProp:String=null, round:Boolean=false):void {
 			var c:Number;
-			if (end != null && (c = (typeof(end) === "number" || end.charAt(1) !== "=") ? Number(end) - start : int(end.charAt(0)+"1") * Number(end.substr(2)))) {
+			if (end != null && Boolean((c = (typeof(end) === "number" || end.charAt(1) !== "=") ? Number(end) - start : int(end.charAt(0)+"1") * Number(end.substr(2))))) {
 				_firstPT = new PropTween(target, propName, start, c, overwriteProp || propName, false, _firstPT);
 				_firstPT.r = round;
 			}
@@ -279,12 +279,12 @@ package com.greensock.plugins {
 					while (pt2 && pt2.pr > pt.pr) {
 						pt2 = pt2._next;
 					}
-					if ((pt._prev = pt2 ? pt2._prev : last)) {
+					if ((Boolean(pt._prev = pt2) ? pt2._prev : last)) {
 						pt._prev._next = pt;
 					} else {
 						first = pt;
 					}
-					if ((pt._next = pt2)) {
+					if (Boolean(pt._next = pt2)) {
 						pt2._prev = pt;
 					} else {
 						last = pt;
