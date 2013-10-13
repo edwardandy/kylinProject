@@ -15,11 +15,28 @@ package mainModule.service.netServices.httpServices
 		private var _bNeedRespon:Boolean;
 		private var _bInQueue:Boolean;
 		private var _retryTimes:int;
+		private var _bVirtual:Boolean;
 		
 		public function HttpRequestParam()
 		{
 			_vecData = new Vector.<HttpRequestDataFormat>;
 			_bInQueue = true;
+		}
+
+		/**
+		 * 虚拟的请求，不会连接服务器，延时后自动返回，需要在cmd中自行填充数据
+		 */
+		public function get bVirtual():Boolean
+		{
+			return _bVirtual;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set bVirtual(value:Boolean):void
+		{
+			_bVirtual = value;
 		}
 
 		/**

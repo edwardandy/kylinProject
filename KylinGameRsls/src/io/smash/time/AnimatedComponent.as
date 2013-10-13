@@ -64,7 +64,7 @@ package io.smash.time
         /**
          * @inheritDoc
          */
-        public function onFrame():void
+        public function onFrame(iElapse:int):void
         {
             applyBindings();
         }

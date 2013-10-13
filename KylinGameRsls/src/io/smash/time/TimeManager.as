@@ -541,7 +541,7 @@ package io.smash.time
                     continue;
                 
                 //Profiler.enter(animatedObject.profilerKey);
-                (animatedObject.listener as IAnimated).onFrame();
+                (animatedObject.listener as IAnimated).onFrame(elapsed);
                 //Profiler.exit(animatedObject.profilerKey);
             }
             duringAdvance = false;
@@ -600,7 +600,7 @@ package io.smash.time
                     continue;
                 
                 //Profiler.enter(object.profilerKey);
-                (object.listener as IAnimated).onFrame();
+                (object.listener as IAnimated).onFrame(elapsed);
                 //Profiler.exit(object.profilerKey);
             }
             duringAdvance = false;

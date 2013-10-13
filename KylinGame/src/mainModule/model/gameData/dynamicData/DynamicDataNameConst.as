@@ -7,7 +7,21 @@ package mainModule.model.gameData.dynamicData
 	 */	
 	public final class DynamicDataNameConst
 	{
+		/**
+		 * 英雄动态数据 
+		 */		
 		public static const HeroData:String = "heroData";
+		/**
+		 * 进入战斗之前获得的战斗动态数据 
+		 */		
 		public static const FightData:String = "fightData";
+		/**
+		 * 英雄技能动态数据 
+		 */		
+		public static const HeroSkillData:String = "heroSkillData";
+		/**
+		 * 防御塔动态数据 
+		 */		
+		public static const TowerData:String = "towerData";
 	}
 }

@@ -4,10 +4,11 @@ package mainModule.controller
 	import mainModule.controller.gameInitSteps.GameInitLoadGameCfgCmd;
 	import mainModule.controller.gameInitSteps.GameInitLoadPreloadCfgCmd;
 	import mainModule.controller.gameInitSteps.GameInitLoadResCfgCmd;
-	import mainModule.controller.gameInitSteps.GameInitLoaderReadyCallBackShell.GameInitLoaderReadyCallBackShellCmd;
 	import mainModule.controller.gameInitSteps.GameInitPreLoadResCmd;
 	import mainModule.controller.gameInitSteps.GameInitSetupGameCfgCmd;
 	import mainModule.controller.gameInitSteps.GameInitStepEvent;
+	import mainModule.controller.gameInitSteps.GameInitLoaderReadyCallBackShell.GameInitLoaderReadyCallBackShellCmd;
+	import mainModule.controller.gameInitSteps.GameInitLoaderReadyCallBackShell.GameInitLoaderReadyGuard;
 	import mainModule.controller.netCmds.httpCmds.HttpEvent;
 	import mainModule.controller.netCmds.httpCmds.cmds.HttpGameInitCmd;
 	import mainModule.controller.uiCmds.UIClosePanelCmd;
@@ -30,7 +31,7 @@ package mainModule.controller
 			
 			cmdMap.map(UIPanelEvent.UI_OpenPanel,UIPanelEvent).toCommand(UIOpenPanelCmd);
 			cmdMap.map(UIPanelEvent.UI_OpenPanel,UIPanelEvent).toCommand(GameInitLoaderReadyCallBackShellCmd)
-				.withGuards().once();
+				.withGuards(GameInitLoaderReadyGuard).once();
 			cmdMap.map(UIPanelEvent.UI_ClosePanel,UIPanelEvent).toCommand(UIClosePanelCmd);
 	
 			mapHttpCmds(cmdMap);

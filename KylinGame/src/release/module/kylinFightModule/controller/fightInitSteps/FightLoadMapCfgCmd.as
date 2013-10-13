@@ -40,7 +40,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		{
 			roadData.updateData(asset.content as XML);
 			
-			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightStartup));
+			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightPreLoadRes));
 		}
 	}
 }

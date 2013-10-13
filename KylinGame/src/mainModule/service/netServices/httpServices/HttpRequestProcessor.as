@@ -4,6 +4,8 @@ package mainModule.service.netServices.httpServices
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.IEventDispatcher;
+	import flash.utils.clearTimeout;
+	import flash.utils.setTimeout;
 	
 	import mainModule.controller.netCmds.httpCmds.HttpEvent;
 	
@@ -22,6 +24,7 @@ package mainModule.service.netServices.httpServices
 		private var _connection:HttpConnection;
 		private var _param:HttpRequestParam;
 		private var _contextDispatcher:IEventDispatcher;
+		private var _iVirtualTick:uint;
 		
 		public function HttpRequestProcessor(_url:String,data:HttpRequestParam,dispatcher:IEventDispatcher)
 		{
@@ -51,12 +54,38 @@ package mainModule.service.netServices.httpServices
 		 */		
 		public function startRequest():void
 		{
+			if(_param.bVirtual)
+			{
+				if(_param.bNeedRespon)
+				{
+					_iVirtualTick = setTimeout(onVirtualRequest,2000);
+					if(_contextDispatcher.hasEventListener(_param.responseEventType))
+						_contextDispatcher.dispatchEvent(new HttpEvent(_param.responseEventType,[_param],HttpEvent.Type_RequestBeSend));
+				}
+				else
+					this.dispatchEvent(new Event(Event.COMPLETE));
+				return;
+			}
+			
 			_connection.addEventListener(Event.COMPLETE,onRequestComplete);
 			_connection.addEventListener(ErrorEvent.ERROR,onRequestError);
 			_connection.startConnect();	
 			
 			if(0 == _param.retryTimes && _contextDispatcher.hasEventListener(_param.responseEventType))
 				_contextDispatcher.dispatchEvent(new HttpEvent(_param.responseEventType,[_param],HttpEvent.Type_RequestBeSend));
+		}
+		
+		private function onVirtualRequest():void
+		{
+			if(_iVirtualTick)
+			{
+				clearTimeout(_iVirtualTick)
+				_iVirtualTick = 0;
+			}
+			
+			processRespon();
+			
+			this.dispatchEvent(new Event(Event.COMPLETE));
 		}
 		
 		private function removeListeners():void
@@ -77,6 +106,13 @@ package mainModule.service.netServices.httpServices
 		 */		
 		private function processRespon():void
 		{
+			if(_param.bVirtual)
+			{
+				if(_contextDispatcher.hasEventListener(_param.responseEventType))
+					_contextDispatcher.dispatchEvent(new HttpEvent(_param.responseEventType,[[],_param],HttpEvent.Type_Response));
+				return;
+			}
+			
 			if(!_connection.responseData)
 				return;
 			var result:Object = JSON.parse(_connection.responseData);
@@ -135,6 +171,12 @@ package mainModule.service.netServices.httpServices
 		
 		public function dispose():void
 		{
+			if(_iVirtualTick)
+			{
+				clearTimeout(_iVirtualTick)
+				_iVirtualTick = 0;
+			}
+			
 			_connection.dispose();
 			_connection = null;
 			

@@ -18,6 +18,10 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		 */		
 		public static const FightLoadMapCfg:String = "fightLoadMapCfg";
 		/**
+		 * 预加载战斗动画资源
+		 */		
+		public static const FightPreLoadRes:String = "fightPreLoadRes";
+		/**
 		 * 战斗前准备完毕，开始战斗
 		 */		
 		public static const FightStartup:String = "fightStartup";

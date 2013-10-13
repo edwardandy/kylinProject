@@ -14,6 +14,14 @@ package mainModule.controller.gameData
 		 */		
 		public static const GameDataUpdate_HeroData:String = "gameDataUpdate_HeroData";
 		/**
+		 * 英雄技能数据更新 
+		 */		
+		public static const GameDataUpdate_HeroSkillData:String = "gameDataUpdate_HeroSkillData";
+		/**
+		 * 防御塔数据更新 
+		 */		
+		public static const GameDataUpdate_TowerData:String = "gameDataUpdate_TowerData";
+		/**
 		* 游戏动态数据更新事件
 		* @author Edward
 		* 

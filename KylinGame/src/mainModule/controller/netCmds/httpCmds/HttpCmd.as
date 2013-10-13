@@ -84,7 +84,7 @@ package mainModule.controller.netCmds.httpCmds
 		}
 		/**
 		 * 初始化发送请求数据 
-		 * 
+		 * 如果发出虚拟请求，需要在此requestParam.bVirtual = true
 		 */		
 		protected function initRequestParam():void
 		{
@@ -116,12 +116,24 @@ package mainModule.controller.netCmds.httpCmds
 		 */		
 		protected function response():void
 		{
-			arrResponseData = (event.body as Array)[0];
+			requestParam = (event.body as Array)[1];
+			if(requestParam.bVirtual)
+				arrResponseData = virtualResponData;
+			else
+				arrResponseData = (event.body as Array)[0];
 			parseResponseData();
 			
-			requestParam = (event.body as Array)[1];
 			if(bNeedWaiting)
 				dispatch(new UIPanelEvent(UIPanelEvent.UI_ClosePanel,PanelNameConst.WaitingPanel));
+		}
+		/**
+		 * 当请求是虚拟时，需要在此返回虚拟的数据用于处理
+		 * @return 
+		 * 
+		 */		
+		protected function get virtualResponData():Array
+		{
+			return [];
 		}
 		/**
 		 * 更新动态数据 

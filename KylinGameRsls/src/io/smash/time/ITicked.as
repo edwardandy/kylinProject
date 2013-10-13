@@ -29,6 +29,6 @@ package io.smash.time
          * 
          * @see ProcessManager#AddTickedObject()
          */
-        function onTick():void;
+        function onTick(iElapse:int):void;
     }
 }

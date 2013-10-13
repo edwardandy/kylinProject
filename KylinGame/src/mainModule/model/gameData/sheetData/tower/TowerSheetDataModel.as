@@ -10,23 +10,6 @@ package mainModule.model.gameData.sheetData.tower
 	 */	
 	public class TowerSheetDataModel extends BaseSheetDataModel implements ITowerSheetDataModel
 	{
-		/**
-		 * 兵营 
-		 */		
-		public static const TowerType_Barrack:int = 1;
-		/**
-		 * 箭塔 
-		 */		
-		public static const TowerType_Arrow:int = 2;
-		/**
-		 * 魔法塔 
-		 */		
-		public static const TowerType_Magic:int = 3;
-		/**
-		 * 炮塔 
-		 */		
-		public static const TowerType_Cannon:int = 4;
-		
 		public function TowerSheetDataModel()
 		{
 			super();

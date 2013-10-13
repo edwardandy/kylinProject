@@ -32,6 +32,6 @@ package io.smash.time
          * 
          * @see ProcessManager#AddAnimatedObject()
          */
-        function onFrame():void;
+        function onFrame(iElapse:int):void;
     }
 }

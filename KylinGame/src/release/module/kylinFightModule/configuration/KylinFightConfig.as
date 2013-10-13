@@ -3,12 +3,14 @@ package release.module.kylinFightModule.configuration
 	
 	import flash.events.IEventDispatcher;
 	import flash.system.Security;
-
+	
+	import io.smash.time.TimeManager;
 	
 	import release.module.kylinFightModule.controller.FightModuleCommandsStartUp;
 	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;
 	import release.module.kylinFightModule.gameplay.main.MainFightScene;
 	import release.module.kylinFightModule.model.FightModuleModelsStartUp;
+	import release.module.kylinFightModule.service.FightModuleServicesStartUp;
 	
 	import robotlegs.bender.extensions.contextView.ContextView;
 	import robotlegs.bender.extensions.directCommandMap.api.IDirectCommandMap;
@@ -52,11 +54,13 @@ package release.module.kylinFightModule.configuration
 		{
 			Security.allowDomain("*");
 			
-			injector.map(MainFightScene).asSingleton();
+			//injector.map(MainFightScene).asSingleton();
+			injector.map(TimeManager).asSingleton();
 			
 			new FightModuleCommandsStartUp(eventCommandMap);
 			new FightModuleModelsStartUp(injector);
-
+			new FightModuleServicesStartUp(injector);
+			
 			//startup
 			context.afterInitializing(startup);
 		}

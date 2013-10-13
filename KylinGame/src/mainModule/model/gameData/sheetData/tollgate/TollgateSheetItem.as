@@ -1,5 +1,7 @@
 package mainModule.model.gameData.sheetData.tollgate
 {
+	import flash.utils.Dictionary;
+	
 	import mainModule.model.gameData.sheetData.BaseDescSheetItem;
 
 	/**
@@ -85,6 +87,58 @@ package mainModule.model.gameData.sheetData.tollgate
 		 * 关卡类型
 		 */
 		public var tollType:uint;
+		
+		private var _arrLockTowerTypes:Array = [];
+		public function set towerLocked(value:String):void
+		{
+			_arrLockTowerTypes.length = 0;
+			if(!value)
+				return;
+			_arrLockTowerTypes = value.split(",").map(function(type:String,...args):int{return int(type);});
+		}
+		/**
+		 * 该类型的塔是否不能在本关卡建造 
+		 * @param type 塔类型
+		 * @return 
+		 * 
+		 */		
+		public function isTowerTypeLocked(type:int):Boolean
+		{
+			return _arrLockTowerTypes && (-1 != _arrLockTowerTypes.indexOf(type));
+		}
+		/**
+		 * 可以建造的塔最高等级 
+		 */		
+		private var _dicMaxTowerLvls:Dictionary = new Dictionary;
+		/**
+		 * 设置本关卡可以建造的塔最高等级 
+		 * @param value towerType1:maxLvl1;towerType2:maxLvl2;...
+		 * 
+		 */		
+		public function set maxTowerLvl(value:String):void
+		{
+			_dicMaxTowerLvls = new Dictionary;
+			if(!value)
+				return;
+			var arrLimits:Array = value.split(";");
+			for each(var limit:String in arrLimits)
+			{
+				var arrSub:Array = limit.split(":");
+				_dicMaxTowerLvls[int(arrSub[0])] = int(arrSub[1]);
+			}
+		}
+		/**
+		 * 某类型的塔可升级到的最高等级 
+		 * @param iType 塔类型
+		 * @return 
+		 * 
+		 */		
+		public function getTowerMaxLvlByType(iType:int):int
+		{
+			if(!_dicMaxTowerLvls[iType])
+				return 0;
+			return _dicMaxTowerLvls[iType];
+		}
 		
 		private var _arrWaves:Array;
 		

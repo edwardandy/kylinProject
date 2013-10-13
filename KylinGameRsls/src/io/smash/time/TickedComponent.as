@@ -61,7 +61,7 @@ package io.smash.time
         /**
          * @inheritDoc
          */
-        public function onTick():void
+        public function onTick(iElapse:int):void
         {
             applyBindings();
         }
