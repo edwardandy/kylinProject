@@ -1,12 +1,13 @@
 package mainModule.model.gameData.dynamicData.tower
 {
 	import mainModule.model.gameData.dynamicData.BaseDynamicItem;
+
 	/**
 	 * 防御塔动态项 
 	 * @author Edward
 	 * 
 	 */	
-	public class TowerDynamicItem extends BaseDynamicItem
+	public class TowerDynamicItem extends BaseDynamicItem implements ITowerDynamicItem
 	{
 		private var _arrSkills:Array = [];
 		
@@ -18,9 +19,7 @@ package mainModule.model.gameData.dynamicData.tower
 			_arrSkills = str.split(",").map(function(id:String,...arg):uint{ return uint(id);});
 		}
 		/**
-		 * 防御塔解锁的技能id数组 
-		 * @return 
-		 * 
+		 * @inheritDoc
 		 */		
 		public function get arrSkills():Array
 		{

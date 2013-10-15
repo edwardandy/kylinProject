@@ -14,7 +14,7 @@ package io.smash.simpler
         
         public var targetProperty:String;
         
-        public override function onTick():void
+        public override function onTick(iElapse:int):void
         {
             owner.setProperty(targetProperty, new Point(stage.mouseX, stage.mouseY));
         }

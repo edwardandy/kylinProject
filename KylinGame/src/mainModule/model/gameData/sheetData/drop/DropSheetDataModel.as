@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.drop
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IDropSheetDataModel;
 
 	/**
 	 * 掉落包数值表 
@@ -19,9 +18,9 @@ package mainModule.model.gameData.sheetData.drop
 		/**
 		 * @inheritDoc
 		 */		
-		public function getDropSheetById(id:uint):DropSheetItem
+		public function getDropSheetById(id:uint):IDropSheetItem
 		{
-			return genSheetElement(id) as DropSheetItem;
+			return genSheetElement(id) as IDropSheetItem;
 		}
 	}
 }

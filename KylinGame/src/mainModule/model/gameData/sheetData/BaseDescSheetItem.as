@@ -1,6 +1,6 @@
 package mainModule.model.gameData.sheetData
 {
-	import mainModule.model.gameData.sheetData.interfaces.ILangSheetDataModel;
+	import mainModule.model.gameData.sheetData.lang.ILangSheetDataModel;
 	import mainModule.model.gameData.sheetData.lang.LangSheetItem;
 
 	/**

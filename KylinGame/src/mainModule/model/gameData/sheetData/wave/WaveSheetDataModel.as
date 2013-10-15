@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.wave
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IWaveSheetDataModel;
 	/**
 	 * 关卡出怪大波次数值表 
 	 * @author Edward

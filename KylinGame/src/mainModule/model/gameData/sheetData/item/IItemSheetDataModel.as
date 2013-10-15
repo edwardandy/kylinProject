@@ -1,0 +1,19 @@
+package mainModule.model.gameData.sheetData.item
+{
+
+	/**
+	 * 道具数值表 
+	 * @author Edward
+	 * 
+	 */	
+	public interface IItemSheetDataModel
+	{
+		/**
+		 * 通过道具id获得配置表项数值 
+		 * @param id
+		 * @return 
+		 * 
+		 */		
+		function getItemSheetById(id:uint):IItemSheetItem;
+	}
+}

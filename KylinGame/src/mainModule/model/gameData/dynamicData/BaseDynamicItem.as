@@ -2,12 +2,14 @@ package mainModule.model.gameData.dynamicData
 {
 	import kylin.echo.edward.utilities.datastructures.FillObjectUtil;
 	
+	import mainModule.model.gameData.dynamicData.interfaces.IBaseDynamicItem;
+	
 	/**
 	 * 动态数据基础项，比如每个英雄的动态数据，每个法术的动态数据 
 	 * @author Edward
 	 * 
 	 */	
-	public class BaseDynamicItem
+	public class BaseDynamicItem implements IBaseDynamicItem
 	{
 		private var _id:uint;
 		
@@ -16,7 +18,7 @@ package mainModule.model.gameData.dynamicData
 		}
 		
 		/**
-		 * 数据项的唯一id 
+		 * @inheritDoc
 		 */
 		public function get id():uint
 		{

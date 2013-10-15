@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.skill.heroSkill
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IHeroSkillSheetDataModel;
 
 	/**
 	 * 英雄技能数值表 
@@ -17,9 +16,9 @@ package mainModule.model.gameData.sheetData.skill.heroSkill
 			sheetClass = HeroSkillSheetItem;
 		}
 		
-		public function getHeroSkillSheetById(id:uint):HeroSkillSheetItem
+		public function getHeroSkillSheetById(id:uint):IHeroSkillSheetItem
 		{
-			return genSheetElement(id) as HeroSkillSheetItem;
+			return genSheetElement(id) as IHeroSkillSheetItem;
 		}
 	}
 }

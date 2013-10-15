@@ -3,8 +3,8 @@ package release.module.kylinFightModule.model.scene
 	
 	import kylin.echo.edward.framwork.model.KylinActor;
 	
-	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.ITollgateSheetDataModel;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
+	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
 	import mainModule.model.gameData.sheetData.tollgate.TollgateSheetItem;
 	
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;

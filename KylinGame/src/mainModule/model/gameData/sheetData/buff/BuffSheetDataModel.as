@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.buff
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IBuffSheetDataModel;
 
 	/**
 	 * buff数值表 
@@ -17,9 +16,9 @@ package mainModule.model.gameData.sheetData.buff
 			sheetClass = BuffSheetItem;
 		}
 		
-		public function getBuffSheetById(id:uint):BuffSheetItem
+		public function getBuffSheetById(id:uint):IBuffSheetItem
 		{
-			return genSheetElement(id) as BuffSheetItem;
+			return genSheetElement(id) as IBuffSheetItem;
 		}
 	}
 }

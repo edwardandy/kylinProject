@@ -3,7 +3,6 @@ package mainModule.model.gameData.dynamicData.hero
 	import mainModule.controller.gameData.GameDataUpdateEvent;
 	import mainModule.model.gameData.dynamicData.BaseDynamicItemsModel;
 	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
-	import mainModule.model.gameData.dynamicData.interfaces.IHeroDynamicDataModel;
 
 	/**
 	 * 英雄动态数据 
@@ -21,16 +20,17 @@ package mainModule.model.gameData.dynamicData.hero
 		/**
 		 * @inheritDoc
 		 */		
-		public function getHeroDataById(id:uint):HeroDynamicItem
+		public function getHeroDataById(id:uint):IHeroDynamicItem
 		{
-			return getItemById(id) as HeroDynamicItem;
+			return getItemById(id) as IHeroDynamicItem;
+			var i:IHeroDynamicItem;
 		}
 		/**
 		 * @inheritDoc
 		 */
-		public function getAllHeroData():Vector.<HeroDynamicItem>
+		public function getAllHeroData():Vector.<IHeroDynamicItem>
 		{
-			return Vector.<HeroDynamicItem>(getAllItems());
+			return Vector.<IHeroDynamicItem>(getAllItems());
 		}
 	}
 }

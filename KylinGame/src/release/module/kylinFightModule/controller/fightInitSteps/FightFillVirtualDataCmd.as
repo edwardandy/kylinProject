@@ -4,10 +4,10 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	
 	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
 	import mainModule.model.gameData.dynamicData.interfaces.IDynamicDataDictionaryModel;
-	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.ISubwaveSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.ITollgateSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IWaveSheetDataModel;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
+	import mainModule.model.gameData.sheetData.subwave.ISubwaveSheetDataModel;
+	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
+	import mainModule.model.gameData.sheetData.wave.IWaveSheetDataModel;
 	import mainModule.model.gameData.sheetData.subwave.SubwaveSheetItem;
 	import mainModule.model.gameData.sheetData.tollgate.TollgateSheetItem;
 	import mainModule.model.gameData.sheetData.wave.WaveSheetItem;

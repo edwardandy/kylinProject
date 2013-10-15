@@ -9,24 +9,50 @@ package mainModule.model.gameData.sheetData.skill.towerSkill
 	 * @author Edward
 	 * 
 	 */	
-	public class TowerSkillSheetItem extends BaseOwnerSkillSheetItem
+	public class TowerSkillSheetItem extends BaseOwnerSkillSheetItem implements ITowerSkillSheetItem
 	{
 		private var _objUpgradeCost:Object;
 		
-		/**
-		 * 战斗内的升级价格
-		 */
-		public var buyGold:uint;
-		/**
-		 * 升级冷却时间  单位 秒
-		 */		
-		public var coolTime:int;
+		private var _buyGold:uint;
+		private var _coolTime:int;
 		
 		public function TowerSkillSheetItem()
 		{
 			super();
 		}
 		
+		/**
+		 * 升级冷却时间  单位 秒
+		 */
+		public function get coolTime():int
+		{
+			return _coolTime;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set coolTime(value:int):void
+		{
+			_coolTime = value;
+		}
+
+		/**
+		 * 战斗内的升级价格
+		 */
+		public function get buyGold():uint
+		{
+			return _buyGold;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set buyGold(value:uint):void
+		{
+			_buyGold = value;
+		}
+
 		/**
 		 * 升级材料ID 格式 "888888:100;133046:1"
 		 */

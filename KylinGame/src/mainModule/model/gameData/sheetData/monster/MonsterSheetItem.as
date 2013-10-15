@@ -6,50 +6,179 @@ package mainModule.model.gameData.sheetData.monster
 	 * @author Edward
 	 * 
 	 */	
-	public class MonsterSheetItem extends BaseMoveFighterSheetItem
+	public class MonsterSheetItem extends BaseMoveFighterSheetItem implements IMonsterSheetItem
 	{
+		private var _isBoss:Boolean;
+		private var _killLife:uint;
+		private var _rewardExp:uint;
+		private var _rewardGoods:uint;
+		private var _heroRewardGoods:uint;
+		private var _heroKillScore:uint;
+		private var _deadScore:uint;
+		private var _canSummon:Boolean;
+		private var _resId:int;
+		
+		private var _arrFeatureLanIds:Array = [];
+		
 		/**
-		 * 是否boss
+		 * 使用的资源id 
 		 */
-		public var isBoss:Boolean;
+		public function get resId():int
+		{
+			return _resId;
+		}
+
 		/**
-		 * 伤害关卡生命
+		 * @private
 		 */
-		public var killLife:uint;
+		public function set resId(value:int):void
+		{
+			_resId = value;
+		}
+
 		/**
-		 * 击杀奖励经验
+		 * 是否可召唤
 		 */
-		public var rewardExp:uint;
+		public function get canSummon():Boolean
+		{
+			return _canSummon;
+		}
+
 		/**
-		 * 击杀奖励货物
+		 * @private
 		 */
-		public var rewardGoods:uint;
-		/**
-		 * 被英雄击杀奖励额外货物
-		 */
-		public var heroRewardGoods:uint;
-		/**
-		 * 英雄击杀额外积分
-		 */
-		public var heroKillScore:uint;
+		public function set canSummon(value:Boolean):void
+		{
+			_canSummon = value;
+		}
+
 		/**
 		 * 击杀后积分
 		 */
-		public var deadScore:uint;
+		public function get deadScore():uint
+		{
+			return _deadScore;
+		}
+
 		/**
-		 * 是否可召唤
-		 */		
-		public var canSummon:Boolean;
+		 * @private
+		 */
+		public function set deadScore(value:uint):void
+		{
+			_deadScore = value;
+		}
+
 		/**
-		 * 使用的资源id 
-		 */		
-		public var resId:int;
+		 * 英雄击杀额外积分
+		 */
+		public function get heroKillScore():uint
+		{
+			return _heroKillScore;
+		}
+
 		/**
-		 * 怪物的三个特点的描述的语言包ID 
-		 */		
-		public var feature1:int;
-		public var feature2:int;
-		public var feature3:int;
+		 * @private
+		 */
+		public function set heroKillScore(value:uint):void
+		{
+			_heroKillScore = value;
+		}
+
+		/**
+		 * 被英雄击杀奖励额外货物
+		 */
+		public function get heroRewardGoods():uint
+		{
+			return _heroRewardGoods;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set heroRewardGoods(value:uint):void
+		{
+			_heroRewardGoods = value;
+		}
+
+		/**
+		 * 击杀奖励货物
+		 */
+		public function get rewardGoods():uint
+		{
+			return _rewardGoods;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set rewardGoods(value:uint):void
+		{
+			_rewardGoods = value;
+		}
+
+		/**
+		 * 击杀奖励经验
+		 */
+		public function get rewardExp():uint
+		{
+			return _rewardExp;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set rewardExp(value:uint):void
+		{
+			_rewardExp = value;
+		}
+
+		/**
+		 * 伤害关卡生命
+		 */
+		public function get killLife():uint
+		{
+			return _killLife;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set killLife(value:uint):void
+		{
+			_killLife = value;
+		}
+
+		/**
+		 * 是否boss
+		 */
+		public function get isBoss():Boolean
+		{
+			return _isBoss;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set isBoss(value:Boolean):void
+		{
+			_isBoss = value;
+		}
+
+		/**
+		 * 怪物的第一个特点的描述的语言包ID 
+		 */
+		public function get arrFeatureLanIds():Array
+		{
+			return _arrFeatureLanIds;
+		}
+
+		public function set featureLanIds(value:String):void
+		{
+			_arrFeatureLanIds.length = 0;
+			if(!value)
+				return;
+			_arrFeatureLanIds = value.split(",").map(function(lan:String,...args):uint{return uint(lan);});
+		}
 		
 		public function MonsterSheetItem()
 		{

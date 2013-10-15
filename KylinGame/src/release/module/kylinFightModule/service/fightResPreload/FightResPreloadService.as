@@ -6,8 +6,8 @@ package release.module.kylinFightModule.service.fightResPreload
 	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
 	
-	import mainModule.model.gameData.sheetData.interfaces.IItemSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IMagicSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.item.IItemSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetDataModel;
 	import mainModule.model.gameData.sheetData.item.ItemSheetItem;
 	import mainModule.model.gameData.sheetData.skill.magic.MagicSkillSheetItem;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;

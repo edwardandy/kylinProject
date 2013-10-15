@@ -9,41 +9,22 @@ package mainModule.model.gameData.sheetData.buff
 	 * @author Edward
 	 * 
 	 */
-	public class BuffSheetItem extends BaseSheetItem
+	public class BuffSheetItem extends BaseSheetItem implements IBuffSheetItem
 	{
 		/**
 		 *属性格式
 		 * buffid,life,duration
 		 */
 		private var _arrMode:Array;
-		/**
-		 *覆盖类别
-		 *旧的buff会被新的与他同类的buff覆盖掉
-		 *不填或者填0表示buff不会被覆盖也不会覆盖别的buff
-		 *从数字1开始，相同数字的buff表示同类。
-		 **/
-		public var overType:int;
-		/**
-		 * 资源id，如果不为0，则使用该id对应的buff的资源
-		 * 否则使用自己id所对应的资源
-		 */
-		public var resId:int;
-		/**
-		 * 附加资源
-		 */
-		public var otherResIds:String;
+		private var _overType:int;
+		private var _resId:int;
+		private var _otherResIds:String;
 		/**
 		 *	该buf所能影响的boss列表
 		 * 	bossid1,bossid2,...
 		 */
 		private var _arrEffectBosses:Array;
-		/**
-		 *  显示位置的相对点
-		 * 	0表示在目标的头上显示
-		 *	1表示在目标的脚下显示
-		 *	2表示在身体中间
-		 */
-		public var positionType:int;
+		private var _positionType:int;
 		/**
 		 * 偏移位置
 		 */
@@ -53,6 +34,78 @@ package mainModule.model.gameData.sheetData.buff
 		{
 			super();
 		}
+
+		/**
+		 *  显示位置的相对点
+		 * 	0表示在目标的头上显示
+		 *	1表示在目标的脚下显示
+		 *	2表示在身体中间
+		 */
+		public function get positionType():int
+		{
+			return _positionType;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set positionType(value:int):void
+		{
+			_positionType = value;
+		}
+
+		/**
+		 * 附加资源
+		 */
+		public function get otherResIds():String
+		{
+			return _otherResIds;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set otherResIds(value:String):void
+		{
+			_otherResIds = value;
+		}
+
+		/**
+		 * 资源id，如果不为0，则使用该id对应的buff的资源
+		 * 否则使用自己id所对应的资源
+		 */
+		public function get resId():int
+		{
+			return _resId;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set resId(value:int):void
+		{
+			_resId = value;
+		}
+
+		/**
+		 *覆盖类别
+		 *旧的buff会被新的与他同类的buff覆盖掉
+		 *不填或者填0表示buff不会被覆盖也不会覆盖别的buff
+		 *从数字1开始，相同数字的buff表示同类。
+		 **/
+		public function get overType():int
+		{
+			return _overType;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set overType(value:int):void
+		{
+			_overType = value;
+		}
+
 		/**
 		 * 偏移位置
 		 */

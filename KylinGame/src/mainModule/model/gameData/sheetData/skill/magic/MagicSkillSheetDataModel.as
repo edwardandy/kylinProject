@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.skill.magic
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IMagicSkillSheetDataModel;
 
 	/**
 	 * 法术数值表 
@@ -17,9 +16,9 @@ package mainModule.model.gameData.sheetData.skill.magic
 			sheetClass = MagicSkillSheetItem;
 		}
 		
-		public function getMagicSkillSheetById(id:uint):MagicSkillSheetItem
+		public function getMagicSkillSheetById(id:uint):IMagicSkillSheetItem
 		{
-			return genSheetElement(id) as MagicSkillSheetItem;
+			return genSheetElement(id) as IMagicSkillSheetItem;
 		}
 	}
 }

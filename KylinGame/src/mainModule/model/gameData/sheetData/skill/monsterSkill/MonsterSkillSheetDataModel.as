@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.skill.monsterSkill
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IMonsterSkillSheetDataModel;
 
 	/**
 	 * 怪物技能数值表 
@@ -17,9 +16,9 @@ package mainModule.model.gameData.sheetData.skill.monsterSkill
 			sheetClass = MonsterSkillSheetItem;
 		}
 		
-		public function getMonsterSkillSheetById(id:uint):MonsterSkillSheetItem
+		public function getMonsterSkillSheetById(id:uint):IMonsterSkillSheetItem
 		{
-			return genSheetElement(id) as MonsterSkillSheetItem;
+			return genSheetElement(id) as IMonsterSkillSheetItem;
 		}
 	}
 }

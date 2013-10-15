@@ -2,7 +2,7 @@ package mainModule.controller.netCmds.httpCmds.cmds
 {
 	import mainModule.controller.netCmds.httpCmds.HttpCmd;
 	import mainModule.model.gameData.sheetData.hero.HeroSheetItem;
-	import mainModule.model.gameData.sheetData.interfaces.IHeroSheetDataModel;
+	import mainModule.model.gameData.sheetData.hero.IHeroSheetDataModel;
 
 	/**
 	 * 请求游戏初始化的后台数据 

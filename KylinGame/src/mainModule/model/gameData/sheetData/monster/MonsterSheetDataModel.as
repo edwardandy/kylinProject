@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.monster
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IMonsterSheetDataModel;
 
 	/**
 	 * 怪物数值表 
@@ -17,9 +16,9 @@ package mainModule.model.gameData.sheetData.monster
 			sheetClass = MonsterSheetItem;
 		}
 		
-		public function getMonsterSheetById(id:uint):MonsterSheetItem
+		public function getMonsterSheetById(id:uint):IMonsterSheetItem
 		{
-			return genSheetElement(id) as MonsterSheetItem;
+			return genSheetElement(id) as IMonsterSheetItem;
 		}
 	}
 }

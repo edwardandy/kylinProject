@@ -6,7 +6,7 @@ package mainModule.model.gameData.dynamicData
 	
 	import mainModule.model.gameData.dynamicData.hero.HeroDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.interfaces.IDynamicDataDictionaryModel;
-	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	
 	public class DynamicDataDictionaryModel extends KylinActor implements IDynamicDataDictionaryModel
 	{

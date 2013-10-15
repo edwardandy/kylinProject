@@ -6,7 +6,7 @@ package mainModule.model.gameData.sheetData.skill.monsterSkill
 	 * @author Edward
 	 * 
 	 */	
-	public class MonsterSkillSheetItem extends BaseOwnerSkillSheetItem
+	public class MonsterSkillSheetItem extends BaseOwnerSkillSheetItem implements IMonsterSkillSheetItem
 	{
 		public function MonsterSkillSheetItem()
 		{

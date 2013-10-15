@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.tollgate
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.ITollgateSheetDataModel;
 
 	/**
 	 * 关卡数值表 

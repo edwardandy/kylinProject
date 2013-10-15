@@ -1,7 +1,7 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
 	import mainModule.model.gameData.sheetData.buff.BuffSheetItem;
-	import mainModule.model.gameData.sheetData.interfaces.IBuffSheetDataModel;
+	import mainModule.model.gameData.sheetData.buff.IBuffSheetDataModel;
 	
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;

@@ -4,7 +4,6 @@ package mainModule.model.gameData.dynamicData.fight
 	
 	import mainModule.model.gameData.dynamicData.BaseDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
-	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
 
 	/**
 	 * 进战斗之前获得的战斗所需动态数据 

@@ -1,18 +1,25 @@
 package mainModule.model.gameData.dynamicData
 {
+	import mainModule.model.gameData.dynamicData.interfaces.IBaseDynamicItemsModel;
+	
+	import robotlegs.bender.framework.api.IInjector;
+
 	/**
 	 * 具有一组动态项的数据，比如一组英雄数据
 	 * {dynamicItems=>{180001=>{id=>180001,,,}...},,,} 
 	 * @author Edward
 	 * 
 	 */	
-	public class BaseDynamicItemsModel extends BaseDynamicDataModel
+	public class BaseDynamicItemsModel extends BaseDynamicDataModel implements IBaseDynamicItemsModel
 	{
 		protected var _vecItems:Vector.<BaseDynamicItem>;
 		/**
 		 * 动态数据项的类型 
 		 */		
 		protected var itemClazz:Class;
+		
+		[Inject]
+		public var _injector:IInjector;
 		
 		public function BaseDynamicItemsModel()
 		{
@@ -30,7 +37,7 @@ package mainModule.model.gameData.dynamicData
 				item = getItemById(id);
 				if(!item)
 				{
-					item = new itemClazz;
+					item = _injector.instantiateUnmapped(itemClazz);
 					_vecItems.push(item);
 					item.beFilled(items[id]);
 					onItemAdd(item);
@@ -71,6 +78,16 @@ package mainModule.model.gameData.dynamicData
 		protected function onItemAdd(item:BaseDynamicItem):void
 		{
 			
+		}
+		/**
+		 * @inheritDoc
+		 */		
+		public function removeItemById(id:uint):void
+		{
+			const item:BaseDynamicItem = getItemById(id);
+			if(!item)
+				return;
+			_vecItems.splice(_vecItems.indexOf(item),1);
 		}
 		/**
 		 * 数据项被移除

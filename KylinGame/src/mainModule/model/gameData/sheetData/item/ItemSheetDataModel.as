@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.item
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IItemSheetDataModel;
 	
 	public class ItemSheetDataModel extends BaseSheetDataModel implements IItemSheetDataModel
 	{
@@ -18,9 +17,9 @@ package mainModule.model.gameData.sheetData.item
 		 * @return 
 		 * 
 		 */		
-		public function getItemSheetById(id:uint):ItemSheetItem
+		public function getItemSheetById(id:uint):IItemSheetItem
 		{
-			return genSheetElement(id) as ItemSheetItem;
+			return genSheetElement(id) as IItemSheetItem;
 		}
 	}
 }

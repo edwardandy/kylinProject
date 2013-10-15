@@ -7,22 +7,51 @@ package mainModule.model.gameData.dynamicData.hero
 	 * @author Edward
 	 * 
 	 */	
-	public class HeroDynamicItem extends BaseDynamicItem
+	public class HeroDynamicItem extends BaseDynamicItem implements IHeroDynamicItem
 	{
-		/**
-		 * 当前经验
-		 */
-		public var exp:uint;
-		/**
-		 * 等级
-		 */
-		public var level:uint;		
+		private var _exp:uint;
+		private var _level:uint;		
 		/**
 		 * 已激活的天赋列表: id1,id2,id3 
 		 */		
 		private var _talents:String;
 		private var _arrTalents:Array;
-		
+
+		/**
+		 * 等级
+		 */
+		public function get level():uint
+		{
+			return _level;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set level(value:uint):void
+		{
+			_level = value;
+		}
+
+		/**
+		 * 当前经验
+		 */
+		public function get exp():uint
+		{
+			return _exp;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set exp(value:uint):void
+		{
+			_exp = value;
+		}
+
+		/**
+		 * @inheritDoc 
+		 */		
 		public function get arrTalents():Array
 		{
 			return _arrTalents;

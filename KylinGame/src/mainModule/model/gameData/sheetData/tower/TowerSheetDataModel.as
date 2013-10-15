@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.tower
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.ITowerSheetDataModel;
 
 	/**
 	 * 塔数值表 

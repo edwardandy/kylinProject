@@ -9,7 +9,7 @@ package mainModule.model.gameData.sheetData.drop
 	 * @author Edward
 	 * 
 	 */	
-	public class DropSheetItem extends BaseDescSheetItem
+	public class DropSheetItem extends BaseDescSheetItem implements IDropSheetItem
 	{
 		private var _dicDropItems:Dictionary = new Dictionary;
 		/**

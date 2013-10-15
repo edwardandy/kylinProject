@@ -23,5 +23,9 @@ package mainModule.model.gameData.dynamicData
 		 * 防御塔动态数据 
 		 */		
 		public static const TowerData:String = "towerData";
+		/**
+		 * 魔法动态数据 
+		 */		
+		public static const MagicSkillData:String = "magicSkillData";
 	}
 }

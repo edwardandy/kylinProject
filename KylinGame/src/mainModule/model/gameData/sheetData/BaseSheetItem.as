@@ -7,13 +7,27 @@ package mainModule.model.gameData.sheetData
 	 */	
 	public class BaseSheetItem
 	{
-		/**
-		 * 唯一标识id 
-		 */		
-		public var configId:uint;
+		private var _configId:uint;
 		
 		public function BaseSheetItem()
 		{
 		}
+
+		/**
+		 * 唯一标识id 
+		 */
+		public function get configId():uint
+		{
+			return _configId;
+		}
+
+		/**
+		 * @private
+		 */
+		public function set configId(value:uint):void
+		{
+			_configId = value;
+		}
+
 	}
 }

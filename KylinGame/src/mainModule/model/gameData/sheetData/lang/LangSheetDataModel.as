@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.lang
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.ILangSheetDataModel;
 
 	/**
 	 * 语言包数据 
@@ -17,9 +16,9 @@ package mainModule.model.gameData.sheetData.lang
 			sheetClass = LangSheetItem;
 		}
 		
-		public function getLangSheetById(id:uint):LangSheetItem
+		public function getLangSheetById(id:uint):ILangSheetItem
 		{
-			return genSheetElement(id) as LangSheetItem;
+			return genSheetElement(id) as ILangSheetItem;
 		}
 	}
 }

@@ -2,7 +2,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 {
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	
-	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	
 	import release.module.kylinFightModule.gameplay.main.MainFightScene;
 

@@ -6,7 +6,6 @@ package mainModule.model.gameData.dynamicData.heroSkill
 	import mainModule.model.gameData.dynamicData.BaseDynamicItem;
 	import mainModule.model.gameData.dynamicData.BaseDynamicItemsModel;
 	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
-	import mainModule.model.gameData.dynamicData.interfaces.IHeroSkillDynamicDataModel;
 
 	/**
 	 * 英雄技能动态数据 
@@ -29,12 +28,12 @@ package mainModule.model.gameData.dynamicData.heroSkill
 		/**
 		 * @inheritDoc
 		 */		
-		public function getHeroSkillDataById(heroId:uint,skillId:uint):HeroSkillDynamicItem
+		public function getHeroSkillDataById(heroId:uint,skillId:uint):IHeroSkillDynamicItem
 		{
 			var vecSkills:Vector.<HeroSkillDynamicItem> = _dicHeroToSkill[heroId];
 			if(!vecSkills)
 				return null;
-			for each(var item:HeroSkillDynamicItem in vecSkills)
+			for each(var item:IHeroSkillDynamicItem in vecSkills)
 			{
 				if(skillId == item.skillId)
 					return item;
@@ -44,9 +43,9 @@ package mainModule.model.gameData.dynamicData.heroSkill
 		/**
 		 * @inheritDoc
 		 */
-		public function getHeroAllSkillData(heroId:uint):Vector.<HeroSkillDynamicItem>
+		public function getHeroAllSkillData(heroId:uint):Vector.<IHeroSkillDynamicItem>
 		{
-			var vecSkills:Vector.<HeroSkillDynamicItem> = _dicHeroToSkill[heroId];
+			var vecSkills:Vector.<IHeroSkillDynamicItem> = _dicHeroToSkill[heroId];
 			if(!vecSkills)
 				return null;
 			return vecSkills;

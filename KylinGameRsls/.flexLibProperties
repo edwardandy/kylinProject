@@ -8,6 +8,7 @@
     <classEntry path="kylin.echo.edward.utilities.loader.AssetInfoCache"/>
     <classEntry path="kylin.echo.edward.utilities.loader.interfaces.IAssetsLoaderListener"/>
     <classEntry path="kylin.echo.edward.utilities.loader.ExternalImageItem"/>
+    <classEntry path="kylin.echo.edward.utilities.IDispose"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

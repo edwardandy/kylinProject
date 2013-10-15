@@ -44,7 +44,7 @@ package io.smash.input
             _keyState[ke.keyCode] = false;
         }
         
-        public function onTick():void
+        public function onTick(iElapse:int):void
         {
             for (var cnt:int = 0; cnt < _keyState.length; cnt++)
             {

@@ -3,7 +3,6 @@ package mainModule.model.gameData.dynamicData.tower
 	import mainModule.controller.gameData.GameDataUpdateEvent;
 	import mainModule.model.gameData.dynamicData.BaseDynamicItemsModel;
 	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
-	import mainModule.model.gameData.dynamicData.interfaces.ITowerDynamicDataModel;
 
 	/**
 	 * 塔的动态数据 
@@ -33,9 +32,9 @@ package mainModule.model.gameData.dynamicData.tower
 		/**
 		 * @inheritDoc
 		 */		
-		public function getTowerDataById(id:uint):TowerDynamicItem
+		public function getTowerDataById(id:uint):ITowerDynamicItem
 		{
-			return getItemById(id) as TowerDynamicItem;
+			return getItemById(id) as ITowerDynamicItem;
 		}
 		/**
 		 * @inheritDoc

@@ -708,7 +708,7 @@ package io.smash.debug
             return Math.floor(roundedHeight / glyphCache.getLineHeight());
         }
         
-        public function onTick():void
+        public function onTick(iElapse:int):void
         {
             // Check the keybindings.
             for(var i:int=0; i<keyBindings.length; i++)

@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.hero
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.IHeroSheetDataModel;
 
 	/**
 	 * 英雄数值表 
@@ -17,9 +16,9 @@ package mainModule.model.gameData.sheetData.hero
 			sheetClass = HeroSheetItem;
 		}
 		
-		public function getHeroSheetById(id:uint):HeroSheetItem
+		public function getHeroSheetById(id:uint):IHeroSheetItem
 		{
-			return genSheetElement(id) as HeroSheetItem;
+			return genSheetElement(id) as IHeroSheetItem;
 		}
 	}
 }

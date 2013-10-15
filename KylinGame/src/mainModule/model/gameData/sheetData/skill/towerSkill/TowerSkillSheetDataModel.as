@@ -1,7 +1,6 @@
 package mainModule.model.gameData.sheetData.skill.towerSkill
 {
 	import mainModule.model.gameData.sheetData.BaseSheetDataModel;
-	import mainModule.model.gameData.sheetData.interfaces.ITowerSkillSheetDataModel;
 
 	/**
 	 * 塔技能数值表 
@@ -17,9 +16,9 @@ package mainModule.model.gameData.sheetData.skill.towerSkill
 			sheetClass = TowerSkillSheetItem;
 		}
 		
-		public function getTowerSkillSheetById(id:uint):TowerSkillSheetItem
+		public function getTowerSkillSheetById(id:uint):ITowerSkillSheetItem
 		{
-			return genSheetElement(id) as TowerSkillSheetItem;
+			return genSheetElement(id) as ITowerSkillSheetItem;
 		}
 	}
 }

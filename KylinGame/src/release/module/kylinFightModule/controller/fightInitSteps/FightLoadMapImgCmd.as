@@ -9,7 +9,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
-	import mainModule.model.gameData.dynamicData.interfaces.IFightDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;

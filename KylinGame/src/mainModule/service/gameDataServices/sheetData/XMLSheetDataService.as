@@ -1,13 +1,12 @@
 package mainModule.service.gameDataServices.sheetData
-{
-	import br.com.stimuli.loading.loadingtypes.XMLItem;
-	
+{	
 	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.utilities.loader.AssetInfo;
-	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.service.gameDataServices.interfaces.ISheetDataService;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
+	
+	import robotlegs.bender.framework.api.IInjector;
 
 	/**
 	 * XML格式的配置文件解析器 
@@ -18,6 +17,8 @@ package mainModule.service.gameDataServices.sheetData
 	{
 		[Inject]
 		public var loadService:ILoadAssetsServices;
+		[Inject]
+		public var _injector:IInjector;
 		
 		public function XMLSheetDataService()
 		{
@@ -56,7 +57,7 @@ package mainModule.service.gameDataServices.sheetData
 				return null;
 			
 			subList = element.children();
-			var result:Object = new sheetClass;
+			var result:Object = _injector.instantiateUnmapped(sheetClass);
 			for each(sub in subList)
 			{
 				if(result.hasOwnProperty(sub.name()))

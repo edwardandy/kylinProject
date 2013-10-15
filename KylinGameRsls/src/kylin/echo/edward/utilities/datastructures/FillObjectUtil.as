@@ -1,5 +1,7 @@
 package kylin.echo.edward.utilities.datastructures
 {
+	import kylin.echo.edward.utilities.IDispose;
+
 	/**
 	 * 填充对象内容功能类
 	 * @author Edward
@@ -7,6 +9,8 @@ package kylin.echo.edward.utilities.datastructures
 	 */	
 	public final class FillObjectUtil
 	{
+		public static const BeDiscarded:String = "==beDiscarded==";
+		
 		public function FillObjectUtil()
 		{
 		}
@@ -26,6 +30,19 @@ package kylin.echo.edward.utilities.datastructures
 			{
 				if(!dest.hasOwnProperty(idx) || null == src[idx])
 					continue;
+				if(BeDiscarded === src[idx])
+				{
+					if(dest[idx] is String)
+						dest[idx] = "";
+					else if(dest[idx] is int || dest[idx] is uint || dest[idx] is Number)
+						dest[idx] = 0;
+					else 
+					{
+						if(dest[idx] is IDispose)
+							(dest[idx] as IDispose).dispose();
+						dest[idx] = null;
+					}
+				}
 				dest[idx] = src[idx];
 			}
 			return true;
