@@ -6,9 +6,9 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	public class FightInitStepsEvent extends Event
 	{
 		/**
-		 * 单机时根据配置表填充虚拟的战斗数据 
+		 * 进入战斗前请求战斗数据
 		 */		
-		public static const FightFillVirtualData:String = "fightFillVirtualData";
+		public static const FightRequestData:String = "fightRequestData";
 		/**
 		 * 加载战斗背景地图资源
 		 */		

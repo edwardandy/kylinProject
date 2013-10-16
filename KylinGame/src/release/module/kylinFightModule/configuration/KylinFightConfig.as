@@ -67,7 +67,7 @@ package release.module.kylinFightModule.configuration
 		
 		private function startup():void
 		{	
-			dispatcher.dispatchEvent(new FightInitStepsEvent(FightInitStepsEvent.FightFillVirtualData));
+			dispatcher.dispatchEvent(new FightInitStepsEvent(FightInitStepsEvent.FightRequestData));
 		}
 	}
 }
