@@ -14,6 +14,6 @@ package mainModule.model.gameData.sheetData.soldier
 		 * @return 
 		 * 
 		 */		
-		function getSoldierSheetById(id:uint):SoldierSheetItem;
+		function getSoldierSheetById(id:uint):ISoldierSheetItem;
 	}
 }

@@ -1,6 +1,6 @@
 package mainModule.model.gameData.sheetData.summonerGrowth
 {
-	import mainModule.model.gameData.sheetData.BaseDescSheetItem;
+	import mainModule.model.gameData.sheetData.BaseSheetItem;
 	
 	import robotlegs.bender.framework.api.ILogger;
 
@@ -9,7 +9,7 @@ package mainModule.model.gameData.sheetData.summonerGrowth
 	 * @author Edward
 	 * 
 	 */	
-	public class SummonerGrowthSheetItem extends BaseDescSheetItem implements ISummonerGrowthSheetItem
+	public class SummonerGrowthSheetItem extends BaseSheetItem implements ISummonerGrowthSheetItem
 	{
 		public var summon_12108:uint;
 		public var summon_12174:uint;

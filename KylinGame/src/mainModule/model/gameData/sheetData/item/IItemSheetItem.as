@@ -1,12 +1,13 @@
 package mainModule.model.gameData.sheetData.item
 {
-	import mainModule.model.gameData.sheetData.interfaces.IBaseSheetItem;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseDescSheetItem;
+
 	/**
 	 * 道具数值表项 
 	 * @author Edward
 	 * 
 	 */
-	public interface IItemSheetItem extends IBaseSheetItem
+	public interface IItemSheetItem extends IBaseDescSheetItem
 	{
 		/**
 		 * 商城里可以购买的数量，购买后会变化 ,默认-1为无限制
@@ -96,7 +97,7 @@ package mainModule.model.gameData.sheetData.item
 		/**
 		 * 是否可战斗中使用  0 不可以  1 可以
 		 */
-		function get fightUse():uint;
+		function get fightUse():Boolean;
 		/**
 		 * 道具类型 1:消耗 , 2:宝箱, 3:材料 , 4:技能升级书 , 5:皮肤 , 6技能书
 		 */

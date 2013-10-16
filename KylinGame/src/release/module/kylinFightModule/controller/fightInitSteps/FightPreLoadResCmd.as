@@ -2,7 +2,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 {
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	
-	import release.module.kylinFightModule.service.interfaces.IFightResPreloadService;
+	import release.module.kylinFightModule.service.fightResPreload.IFightResPreloadService;
 
 	/**
 	 * 预加载战斗动画资源

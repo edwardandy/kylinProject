@@ -16,9 +16,9 @@ package mainModule.model.gameData.sheetData.tollgate
 			sheetClass = TollgateSheetItem;
 		}
 		
-		public function getTollgateSheetById(id:uint):TollgateSheetItem
+		public function getTollgateSheetById(id:uint):ITollgateSheetItem
 		{
-			return genSheetElement(id) as TollgateSheetItem;
+			return genSheetElement(id) as ITollgateSheetItem;
 		}
 	}
 }

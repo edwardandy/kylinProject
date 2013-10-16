@@ -6,10 +6,14 @@ package release.module.kylinFightModule.service.fightResPreload
 	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
 	
+	import mainModule.model.gameConstAndVar.interfaces.IConfigDataModel;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.magicSkill.IMagicSkillDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.magicSkill.IMagicSkillDynamicItem;
 	import mainModule.model.gameData.sheetData.item.IItemSheetDataModel;
+	import mainModule.model.gameData.sheetData.item.IItemSheetItem;
 	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetDataModel;
-	import mainModule.model.gameData.sheetData.item.ItemSheetItem;
-	import mainModule.model.gameData.sheetData.skill.magic.MagicSkillSheetItem;
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetItem;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;
@@ -28,21 +32,25 @@ package release.module.kylinFightModule.service.fightResPreload
 	import release.module.kylinFightModule.service.fightResPreload.preLoad.SoilderPreLoad;
 	import release.module.kylinFightModule.service.fightResPreload.preLoad.TowerPreLoad;
 	import release.module.kylinFightModule.service.fightResPreload.preLoad.WeaponPreLoad;
+	
+	import robotlegs.bender.framework.api.IInjector;
 
 	/**
 	 * 战斗前预加载资源，包括怪物，英雄，技能，法术等的动画
 	 * @author Edward
 	 * 
 	 */	
-	public class FightResPreloadService extends KylinActor
+	public class FightResPreloadService extends KylinActor implements IFightResPreloadService
 	{		
 		private static var PreProcRes:String = "preProcRes";
 		
 		[Inject]
+		public var injector:IInjector;
+		[Inject]
 		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var loadProgress:ILoaderProgress;
-		
+		//数值配置表数据
 		[Inject]
 		public var magicSkillModel:IMagicSkillSheetDataModel;
 		[Inject]
@@ -51,6 +59,13 @@ package release.module.kylinFightModule.service.fightResPreload
 		public var monsterWaveModel:IMonsterWaveModel;
 		[Inject]
 		public var sceneModel:ISceneDataModel;
+		//动态数据
+		[Inject]
+		public var magicData:IMagicSkillDynamicDataModel;
+		[Inject]
+		public var heroData:IHeroDynamicDataModel;
+		[Inject]
+		public var configData:IConfigDataModel;
 		
 		private var _dicPreloadRes:Dictionary = new Dictionary(true);
 		
@@ -66,16 +81,30 @@ package release.module.kylinFightModule.service.fightResPreload
 				
 		public function FightResPreloadService()
 		{
+			super();
+		}
+		
+		[PostConstruct]
+		public function init():void
+		{
 			_magicLoad = new MagicPreLoad(this);
+			injector.injectInto(_magicLoad);
 			_itemLoad = new ItemPreLoad(this);
+			injector.injectInto(_itemLoad);
 			_heroLoad = new HeroPreLoad(this);
+			injector.injectInto(_heroLoad);
 			_monsterLoad = new MonsterPreLoad(this);
+			injector.injectInto(_monsterLoad);
 			_soilderLoad = new SoilderPreLoad(this);
+			injector.injectInto(_soilderLoad);
 			_weaponLoad = new WeaponPreLoad(this);
+			injector.injectInto(_weaponLoad);
 			_skillLoad = new SkillPreLoad(this);
+			injector.injectInto(_skillLoad);
 			_bufferLoad = new BufferPreLoad(this);
+			injector.injectInto(_bufferLoad);
 			_towerLoad = new TowerPreLoad(this);
-			
+			injector.injectInto(_towerLoad);
 		}
 		
 		public function checkPreloadRes(url:String):void
@@ -134,7 +163,7 @@ package release.module.kylinFightModule.service.fightResPreload
 		
 		public function checkMagicPreloadIcon(magicId:uint):void
 		{
-			var item:MagicSkillSheetItem = magicSkillModel.getMagicSkillSheetById(magicId);
+			var item:IMagicSkillSheetItem = magicSkillModel.getMagicSkillSheetById(magicId);
 			if(!item)
 				return;
 			loadService.addIconItem("magic_" + (item.iconId>0?item.iconId:magicId) + "_" /*+ IconConst.ICON_SIZE_CIRCLE*/)
@@ -150,11 +179,11 @@ package release.module.kylinFightModule.service.fightResPreload
 		
 		public function checkItemPreloadIcon(itemId:uint):void
 		{
-			var item:ItemSheetItem = itemModel.getItemSheetById(itemId);
+			var item:IItemSheetItem = itemModel.getItemSheetById(itemId);
 			if(!item)
 				return;
 			
-			var iconId:uint = item.resourceId || itemId;
+			var iconId:uint = item.resId || itemId;
 			loadService.addIconItem("Item_" + iconId + "_" /*+ IconConst.ICON_SIZE_CIRCLE*/)
 				.addToLoaderProgress(loadProgress);
 		}
@@ -171,7 +200,7 @@ package release.module.kylinFightModule.service.fightResPreload
 		 */
 		private function preloadItemRes():void
 		{
-			for each(var id:uint in PropIconView.ITEMIDS)
+			for each(var id:uint in configData.arrItemIdsInFight)
 			{
 				checkItemPreloadRes(id);
 				checkItemPreloadIcon(id);
@@ -182,11 +211,11 @@ package release.module.kylinFightModule.service.fightResPreload
 		 */
 		private function preloadMagicRes():void
 		{
-			var arr:Array = MagicSkillData.getInstance().getAllOwnMagicTemps();
-			for each(var temp:MagicSkillTemplateInfo in arr)
+			var arr:Vector.<IMagicSkillDynamicItem> = magicData.getAllMagicData();
+			for each(var temp:IMagicSkillDynamicItem in arr)
 			{
-				checkMagicPreloadRes(temp.configId);
-				checkMagicPreloadIcon(temp.configId);
+				checkMagicPreloadRes(temp.id);
+				checkMagicPreloadIcon(temp.id);
 			}
 		}
 		/**
@@ -194,7 +223,7 @@ package release.module.kylinFightModule.service.fightResPreload
 		 */
 		private function preloadHeroSkillRes():void
 		{
-			for each(var id:uint in UserData.getInstance().userExtendInfo.currentHeroIds)
+			for each(var id:uint in heroData.arrHeroIdsInFight)
 			{	
 				checkHeroPreloadRes(id);
 				checkHeroPreloadIcon(id);

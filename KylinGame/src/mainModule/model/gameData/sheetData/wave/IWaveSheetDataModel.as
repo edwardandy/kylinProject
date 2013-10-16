@@ -14,6 +14,6 @@ package mainModule.model.gameData.sheetData.wave
 		 * @return 
 		 * 
 		 */		
-		function getWaveSheetById(id:uint):WaveSheetItem;
+		function getWaveSheetById(id:uint):IWaveSheetItem;
 	}
 }

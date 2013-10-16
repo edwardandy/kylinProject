@@ -21,5 +21,9 @@ package mainModule.model.gameData.dynamicData.hero
 		 * 
 		 */		
 		function getAllHeroData():Vector.<IHeroDynamicItem>;
+		/**
+		 * 带入到战斗中的英雄id 
+		 */
+		function get arrHeroIdsInFight():Array;
 	}
 }

@@ -16,9 +16,9 @@ package mainModule.model.gameData.sheetData.subwave
 			sheetClass = SubwaveSheetItem;
 		}
 		
-		public function getSubwaveSheetById(id:uint):SubwaveSheetItem
+		public function getSubwaveSheetById(id:uint):ISubwaveSheetItem
 		{
-			return genSheetElement(id) as SubwaveSheetItem;
+			return genSheetElement(id) as ISubwaveSheetItem;
 		}
 	}
 }

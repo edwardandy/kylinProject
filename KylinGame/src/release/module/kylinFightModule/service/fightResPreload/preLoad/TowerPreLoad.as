@@ -1,91 +1,83 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.manager.applicationManagers.GamePreloadResMgr;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicItem;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetDataModel;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
+	import mainModule.service.gameDataServices.helpServices.ITollgateService;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.tollLimit.TollLimitTemplateInfo;
-	import framecore.structure.model.user.tollgate.TollgateData;
-	import framecore.structure.model.user.tollgate.TollgateInfo;
-	import framecore.structure.model.user.tower.TowerData;
-	import framecore.structure.model.user.tower.TowerInfo;
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
 	
 	public class TowerPreLoad extends BasicPreLoad
 	{
-		public function TowerPreLoad(mgr:GamePreloadResMgr)
+		[Inject]
+		public var towerData:ITowerDynamicDataModel;
+		[Inject]
+		public var towerModel:ITowerSheetDataModel;
+		[Inject]
+		public var fightData:IFightDynamicDataModel;
+		[Inject]
+		public var tollgateService:ITollgateService;
+		
+		public function TowerPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);
 		}
 		
 		override public function checkCurLoadRes(id:uint):void
 		{	
-			var towerInfo:TowerInfo = TowerData.getInstance().getTowerInfoByTowerId(id);	
-			if(!towerInfo)
+			
+			var info:ITowerDynamicItem = towerData.getTowerDataById(id);	
+			if(!info)
+				return;			
+			if(!tollgateService.canTowerBuildInTollgate(fightData.tollgateId,id))
 				return;
 			
-			var tempInfo:TowerTemplateInfo = towerInfo.towerTemplateInfo;
-			
-			if(checkIsValide(id))
-				return;
+			var item:ITowerSheetItem = towerModel.getTowerSheetById(id);
 			
 			preloadRes(GameObjectCategoryType.TOWER+"_"+id);
 			
-			parseSoilder(tempInfo);
+			parseSoilder(item);
 			
-			parseWeapon(tempInfo);
+			parseWeapon(item);
 			
-			parseSkills(towerInfo);
+			parseSkills(info);
 			
-			parseNextTower(tempInfo);
+			parseNextTower(item);
 			
-			parseOtherRes(tempInfo.otherResIds);
+			parseOtherRes(item.otherResIds);
 		}
 		
-		private function parseSoilder(info:TowerTemplateInfo):void
+		private function parseSoilder(info:ITowerSheetItem):void
 		{
 			if(info.soldierId>0)
 				preloadSoilderRes(info.soldierId);
 		}
 		
-		private function parseWeapon(info:TowerTemplateInfo):void
+		private function parseWeapon(info:ITowerSheetItem):void
 		{
 			if(info.weapon>0)
 				preloadWeaponRes(info.weapon);
 		}
 		
-		private function parseSkills(info:TowerInfo):void
+		private function parseSkills(info:ITowerDynamicItem):void
 		{
-			var arrIds:Array = info.skillIds;
+			var arrIds:Array = info.arrSkills;
 			for each(var skillId:uint in arrIds)
 			{
 				preloadSkillRes(skillId);
 			}
 		}
 		
-		private function parseNextTower(info:TowerTemplateInfo):void
+		private function parseNextTower(info:ITowerSheetItem):void
 		{
-			var arrIds:Array = info.nextTowerId.split(":");
+			var arrIds:Array = info.nextTowerIds;
 			for each(var id:uint in arrIds)
 			{
 				checkCurLoadRes(id);
 			}
-		}
-		
-		private function checkIsValide(id:uint):Boolean
-		{
-			var tollLimitTypeId:uint = 	TollgateInfo(TollgateData.getInstance()
-				.getOwnInfoById(TollgateData.currentLevelId))
-				.tollgateTemplateInfo.tollLimitId;
-			
-			var tollLimit:TollLimitTemplateInfo = TemplateDataFactory.getInstance().getTollLimitTemplateById(tollLimitTypeId);
-			var towerInfo:TowerTemplateInfo = TemplateDataFactory.getInstance().getTowerTemplateById(id);
-			
-			var result:Boolean = tollLimit.towerForbid.indexOf(towerInfo.type.toString()) == -1 ||
-				towerInfo.level > tollLimit.towerLevel - 1 ||
-				!TowerData.getInstance().getTowerisLockByTypeId(id);
-			
-			return result;
 		}
 	}
 }

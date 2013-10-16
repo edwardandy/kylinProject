@@ -1,44 +1,49 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import com.shinezone.towerDefense.fight.manager.applicationManagers.GamePreloadResMgr;
-	import framecore.tools.GameStringUtil;
+	import mainModule.model.gameData.sheetData.skill.IBaseOwnerSkillSheetItem;
+	import mainModule.model.gameData.sheetData.skill.heroSkill.IHeroSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.monsterSkill.IMonsterSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.towerSkill.ITowerSkillSheetDataModel;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseSkillInfo;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
+	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
 	
 	public class SkillPreLoad extends BasicPreLoad
 	{
-		public function SkillPreLoad(mgr:GamePreloadResMgr)
+		[Inject]
+		public var heroSkillModel:IHeroSkillSheetDataModel;
+		[Inject]
+		public var monsterSkillModel:IMonsterSkillSheetDataModel;
+		[Inject]
+		public var towerSkillModel:ITowerSkillSheetDataModel;
+		
+		public function SkillPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);
 		}
 		
 		override public function checkCurLoadRes(id:uint):void
-		{
-			var bHero:Boolean = false;
-			var info:BaseSkillInfo = TemplateDataFactory.getInstance().getSkillTemplateById(id);
-			if(!info)
-			{
-				info = TemplateDataFactory.getInstance().getHeroSkillTemplateById(id);
-				bHero = true;
-			}
-			if(!info/*|| SkillType.INITIATIVE != info.type*/)
+		{	
+			var item:IBaseOwnerSkillSheetItem = heroSkillModel.getHeroSkillSheetById(id);
+			item ||= monsterSkillModel.getMonsterSkillSheetById(id);
+			item ||= towerSkillModel.getTowerSkillSheetById(id);
+			
+			if(!item)
 				return;
 			
-			if(info.configId == SkillID.ColdStorm)
-				preloadRes(GameObjectCategoryType.SPECIAL+"_"+info.configId);
-			else if(info.resId>0)
-				preloadRes(GameObjectCategoryType.SPECIAL+"_"+info.resId);
+			if(SkillID.ColdStorm == item.configId)
+				preloadRes(GameObjectCategoryType.SPECIAL+"_"+item.configId);
+			else if(item.resId>0)
+				preloadRes(GameObjectCategoryType.SPECIAL+"_"+item.resId);
 			
-			parseMagicEffect(GameStringUtil.deserializeString(info.effect));
-			parseMagicBuffer(info);
-			parseWeapon(info);
-			parseOtherRes(info.otherResIds);
+			parseMagicEffect(item.objEffect);
+			parseMagicBuffer(item);
+			parseWeapon(item);
+			parseOtherRes(item.otherResIds);
 		}
 		
-		private function parseWeapon(info:BaseSkillInfo):void
+		private function parseWeapon(info:IBaseOwnerSkillSheetItem):void
 		{
 			if(info.weapon>0)
 				preloadWeaponRes(info.weapon);

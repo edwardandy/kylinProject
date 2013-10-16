@@ -5,7 +5,7 @@ package release.module.kylinFightModule.model.scene
 	
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
-	import mainModule.model.gameData.sheetData.tollgate.TollgateSheetItem;
+	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
 	
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 
@@ -63,7 +63,7 @@ package release.module.kylinFightModule.model.scene
 
 		public function initialize():void
 		{
-			var tollgateItem:TollgateSheetItem = tollgateSheet.getTollgateSheetById(fightData.tollgateId);
+			var tollgateItem:ITollgateSheetItem = tollgateSheet.getTollgateSheetById(fightData.tollgateId);
 			_sceneGoods = fightData.initGoods>0 ? fightData.initGoods : tollgateItem.goods;
 			_sceneLife = tollgateItem.life;
 			_sceneTotalLife = _sceneLife;

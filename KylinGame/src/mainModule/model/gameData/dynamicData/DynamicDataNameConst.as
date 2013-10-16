@@ -27,5 +27,9 @@ package mainModule.model.gameData.dynamicData
 		 * 魔法动态数据 
 		 */		
 		public static const MagicSkillData:String = "magicSkillData";
+		/**
+		 * 用户的动态数据 
+		 */		
+		public static const UserData:String = "userData";
 	}
 }

@@ -1,25 +1,24 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
-{
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.manager.applicationManagers.GamePreloadResMgr;
-	import framecore.tools.GameStringUtil;
+{	
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetItem;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.magicSkill.MagicSkillTemplateInfo;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
 
 	public class MagicPreLoad extends BasicPreLoad
 	{
-		public function MagicPreLoad(mgr:GamePreloadResMgr)
+		[Inject]
+		public var magicModel:IMagicSkillSheetDataModel;
+		
+		public function MagicPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);
 		}
 		
 		override public function checkCurLoadRes(id:uint):void
 		{
-			var info:MagicSkillTemplateInfo = TemplateDataFactory.getInstance().getMagicSkillTemplateById(id);
+			var info:IMagicSkillSheetItem = magicModel.getMagicSkillSheetById(id);
 			if(!info)
 				return;
 			
@@ -28,7 +27,7 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 				preloadRes(GameObjectCategoryType.MAGIC_SKILL+"_"+resId);	
 			
 			//解析effect内包含的资源
-			parseMagicEffect(GameStringUtil.deserializeString(info.effect));
+			parseMagicEffect(info.objEffect);
 			//解析buff内包含的资源
 			parseMagicBuffer(info);
 			
@@ -36,7 +35,7 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 			parseOtherRes(info.otherResIds);
 		}
 		
-		private function parseCursor(info:MagicSkillTemplateInfo):void
+		private function parseCursor(info:IMagicSkillSheetItem):void
 		{
 			if(info.cursorId>0)
 				preloadRes("cursor_"+info.cursorId);

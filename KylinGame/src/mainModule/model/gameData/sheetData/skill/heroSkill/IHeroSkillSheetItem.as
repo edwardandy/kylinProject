@@ -1,5 +1,7 @@
 package mainModule.model.gameData.sheetData.skill.heroSkill
 {
+	import mainModule.model.gameData.sheetData.skill.IBaseOwnerSkillSheetItem;
+
 	/**
 	 * 英雄技能数值表项 
 	 * @author Edward

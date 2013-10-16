@@ -1,26 +1,26 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.manager.applicationManagers.GamePreloadResMgr;
+	import mainModule.model.gameData.sheetData.monster.IMonsterSheetDataModel;
+	import mainModule.model.gameData.sheetData.monster.IMonsterSheetItem;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.monster.MonsterTemplateInfo;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
 	
 	public class MonsterPreLoad extends BasicPreLoad
 	{
-		public function MonsterPreLoad(mgr:GamePreloadResMgr)
+		[Inject]
+		public var monsterModel:IMonsterSheetDataModel;
+		
+		public function MonsterPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);
 		}
 		
 		override public function checkCurLoadRes(id:uint):void
 		{
-			var monsterInfo:MonsterTemplateInfo = TemplateDataFactory.getInstance().getMonsterTemplateById(id);
+			var monsterInfo:IMonsterSheetItem = monsterModel.getMonsterSheetById(id);
 			if(!monsterInfo)
-			{
-				//throw new Error("preloadError monsterId is not exist:"+monsterId);
 				return;
-			}
 			
 			preloadRes(GameObjectCategoryType.MONSTER+"_"+(monsterInfo.resId || id));
 			
@@ -31,15 +31,15 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 			parseOtherRes(monsterInfo.otherResIds);
 		}
 		
-		private function parseWeapon(info:MonsterTemplateInfo):void
+		private function parseWeapon(info:IMonsterSheetItem):void
 		{
 			if(info.weapon>0)
 				preloadWeaponRes(info.weapon);
 		}
 		
-		private function parseSkills(info:MonsterTemplateInfo):void
+		private function parseSkills(info:IMonsterSheetItem):void
 		{
-			for each(var skillId:uint in info.getskillIds())
+			for each(var skillId:uint in info.skillIds)
 			{
 				preloadSkillRes(skillId);
 			}	

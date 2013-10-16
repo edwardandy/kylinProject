@@ -14,6 +14,6 @@ package mainModule.model.gameData.sheetData.weapon
 		 * @return 
 		 * 
 		 */	
-		function getWeaponSheetById(id:uint):WeaponSheetItem
+		function getWeaponSheetById(id:uint):IWeaponSheetItem
 	}
 }

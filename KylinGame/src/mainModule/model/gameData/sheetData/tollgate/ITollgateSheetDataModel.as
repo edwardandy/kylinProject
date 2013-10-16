@@ -14,6 +14,6 @@ package mainModule.model.gameData.sheetData.tollgate
 		 * @return 
 		 * 
 		 */		
-		function getTollgateSheetById(id:uint):TollgateSheetItem;
+		function getTollgateSheetById(id:uint):ITollgateSheetItem;
 	}
 }

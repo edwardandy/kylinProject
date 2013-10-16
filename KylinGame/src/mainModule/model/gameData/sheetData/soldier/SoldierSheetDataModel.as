@@ -16,9 +16,9 @@ package mainModule.model.gameData.sheetData.soldier
 			sheetClass = SoldierSheetItem;
 		}
 		
-		public function getSoldierSheetById(id:uint):SoldierSheetItem
+		public function getSoldierSheetById(id:uint):ISoldierSheetItem
 		{
-			return genSheetElement(id) as SoldierSheetItem;
+			return genSheetElement(id) as ISoldierSheetItem;
 		}
 	}
 }

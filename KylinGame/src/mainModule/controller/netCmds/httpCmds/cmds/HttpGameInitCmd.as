@@ -1,8 +1,8 @@
 package mainModule.controller.netCmds.httpCmds.cmds
 {
 	import mainModule.controller.netCmds.httpCmds.HttpCmd;
-	import mainModule.model.gameData.sheetData.hero.HeroSheetItem;
 	import mainModule.model.gameData.sheetData.hero.IHeroSheetDataModel;
+	import mainModule.model.gameData.sheetData.hero.IHeroSheetItem;
 
 	/**
 	 * 请求游戏初始化的后台数据 
@@ -23,7 +23,7 @@ package mainModule.controller.netCmds.httpCmds.cmds
 		{
 			super.request();
 			
-			var item:HeroSheetItem = heroSheet.getHeroSheetById(180001);
+			var item:IHeroSheetItem = heroSheet.getHeroSheetById(180001);
 			trace(item);
 		}
 	}

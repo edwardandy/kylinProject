@@ -1,5 +1,7 @@
 package mainModule.model.gameData.dynamicData.tower
 {
+	import kylin.echo.edward.utilities.string.KylinStringUtil;
+	
 	import mainModule.model.gameData.dynamicData.BaseDynamicItem;
 
 	/**
@@ -16,7 +18,7 @@ package mainModule.model.gameData.dynamicData.tower
 			_arrSkills = [];
 			if(!str)
 				return;
-			_arrSkills = str.split(",").map(function(id:String,...arg):uint{ return uint(id);});
+			_arrSkills = KylinStringUtil.splitStringArrayToIntArray(str);
 		}
 		/**
 		 * @inheritDoc

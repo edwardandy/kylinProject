@@ -85,5 +85,18 @@ package kylin.echo.edward.utilities.string
 			}
 			return arrRes;
 		}
+		/**
+		 * 将类似"10001,10002,..."格式的字符串解析成数组，并且元素的类型替换为int 
+		 * @param s 原始字符串
+		 * @param split 分隔符
+		 * @return 
+		 * 
+		 */		
+		public static function splitStringArrayToIntArray(s:String,split:String = ","):Array
+		{
+			if(!s)
+				return null;
+			return s.split(split).map(function(value:String,...args):int{return int(value);});
+		}
 	}
 }

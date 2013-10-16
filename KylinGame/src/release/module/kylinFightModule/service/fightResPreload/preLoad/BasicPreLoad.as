@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import mainModule.model.gameData.sheetData.skill.BaseSkillSheetItem;
+	import mainModule.model.gameData.sheetData.skill.IBaseSkillSheetItem;
 	
 	import release.module.kylinFightModule.gameplay.constant.BufferFields;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
@@ -142,7 +142,7 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 		 * 解析buff内包含的资源
 		 * 
 		 */		
-		protected function parseMagicBuffer(info:BaseSkillSheetItem):void
+		protected function parseMagicBuffer(info:IBaseSkillSheetItem):void
 		{
 			var arrBuff:Array = info.getBuffs();
 			if(arrBuff)

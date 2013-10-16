@@ -2,14 +2,14 @@ package mainModule.model.gameData.sheetData.drop
 {
 	import flash.utils.Dictionary;
 	
-	import mainModule.model.gameData.sheetData.BaseDescSheetItem;
+	import mainModule.model.gameData.sheetData.BaseSheetItem;
 
 	/**
 	 * 掉落数值项 
 	 * @author Edward
 	 * 
 	 */	
-	public class DropSheetItem extends BaseDescSheetItem implements IDropSheetItem
+	public class DropSheetItem extends BaseSheetItem implements IDropSheetItem
 	{
 		private var _dicDropItems:Dictionary = new Dictionary;
 		/**

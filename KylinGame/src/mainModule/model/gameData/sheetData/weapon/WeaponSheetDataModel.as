@@ -16,9 +16,9 @@ package mainModule.model.gameData.sheetData.weapon
 			sheetClass = WeaponSheetItem;
 		}
 		
-		public function getWeaponSheetById(id:uint):WeaponSheetItem
+		public function getWeaponSheetById(id:uint):IWeaponSheetItem
 		{
-			return genSheetElement(id) as WeaponSheetItem;
+			return genSheetElement(id) as IWeaponSheetItem;
 		}
 	}
 }

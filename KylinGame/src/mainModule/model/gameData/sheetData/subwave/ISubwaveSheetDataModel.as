@@ -14,6 +14,6 @@ package mainModule.model.gameData.sheetData.subwave
 		 * @return 
 		 * 
 		 */		
-		function getSubwaveSheetById(id:uint):SubwaveSheetItem;
+		function getSubwaveSheetById(id:uint):ISubwaveSheetItem;
 	}
 }

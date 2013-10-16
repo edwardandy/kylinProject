@@ -1,21 +1,24 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.manager.applicationManagers.GamePreloadResMgr;
+	import mainModule.model.gameData.sheetData.weapon.IWeaponSheetDataModel;
+	import mainModule.model.gameData.sheetData.weapon.IWeaponSheetItem;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.weapon.WeaponTemplateInfo;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
 	
 	public class WeaponPreLoad extends BasicPreLoad
 	{
-		public function WeaponPreLoad(mgr:GamePreloadResMgr)
+		[Inject]
+		public var weaponModel:IWeaponSheetDataModel;
+		
+		public function WeaponPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);
 		}
 		
 		override public function checkCurLoadRes(id:uint):void
 		{
-			var info:WeaponTemplateInfo = TemplateDataFactory.getInstance().getWeaponTemplateById(id);
+			var info:IWeaponSheetItem = weaponModel.getWeaponSheetById(id);
 			if(!info)
 				return;
 			var resId:uint = info.resId || id;
@@ -25,7 +28,7 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 			parseOtherRes(info.otherResIds);
 		}
 		
-		private function parseSpecialEffect(info:WeaponTemplateInfo):void
+		private function parseSpecialEffect(info:IWeaponSheetItem):void
 		{
 			if(info.specialEffect>0)
 				preloadRes(GameObjectCategoryType.SPECIAL+"_"+info.specialEffect);

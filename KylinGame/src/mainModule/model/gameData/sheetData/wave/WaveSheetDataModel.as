@@ -15,9 +15,9 @@ package mainModule.model.gameData.sheetData.wave
 			sheetClass = WaveSheetItem;
 		}
 		
-		public function getWaveSheetById(id:uint):WaveSheetItem
+		public function getWaveSheetById(id:uint):IWaveSheetItem
 		{
-			return genSheetElement(id) as WaveSheetItem;
+			return genSheetElement(id) as IWaveSheetItem;
 		}
 	}
 }

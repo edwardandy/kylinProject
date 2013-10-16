@@ -6,7 +6,7 @@ package mainModule.model.gameData.sheetData.towerLevelup
 	 * @author Edward
 	 * 
 	 */	
-	public class TowerLevelupSheetItem extends BaseSheetItem
+	public class TowerLevelupSheetItem extends BaseSheetItem implements ITowerLevelupSheetItem
 	{
 		/**
 		 * 升级前的冷却时间 
@@ -39,30 +39,21 @@ package mainModule.model.gameData.sheetData.towerLevelup
 			super();
 		}
 		/**
-		 * 获得塔升级前所需的cd时间 
-		 * @param iType
-		 * @return 
-		 * 
-		 */		
+		 * @inheritDoc
+		 */	
 		public function getLevelupCdTime(iType:int):uint
 		{
 			return this["cdTime"+iType];
 		}
 		/**
-		 * 获得塔升级后的成长值，兵营为攻击力和生命值，其他塔是攻击力和射程 
-		 * @param iType
-		 * @return 
-		 * 
+		 * @inheritDoc
 		 */		
 		public function getLevelupGrowth(iType:int):Array
 		{
 			return [this["grow1_"+iType],this["grow2_"+iType]];
 		}
 		/**
-		 * 获得塔升级所需的消耗 
-		 * @param iType
-		 * @return itemId:num;itemId:num...
-		 * 
+		 * @inheritDoc
 		 */		
 		public function getLevelupCost(iType:int):String
 		{

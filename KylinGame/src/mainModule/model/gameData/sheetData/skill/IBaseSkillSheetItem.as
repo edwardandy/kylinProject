@@ -1,13 +1,13 @@
 package mainModule.model.gameData.sheetData.skill
 {	
-	import mainModule.model.gameData.sheetData.interfaces.IBaseSheetItem;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseDescSheetItem;
 
 	/**
 	 * 法术，技能数值表项基类 
 	 * @author Edward
 	 * 
 	 */	
-	public interface IBaseSkillSheetItem extends IBaseSheetItem
+	public interface IBaseSkillSheetItem extends IBaseDescSheetItem
 	{
 		/**
 		 * 附加资源
@@ -45,7 +45,7 @@ package mainModule.model.gameData.sheetData.skill
 		 * 		1 主动	 0 被动
 		 */
 		function get type():int;
-	/**
+		/**
 		 *技能直接效果对象  {dmg:"10-100",summon:"10000"}
 		 */
 		function get objEffect():Object;

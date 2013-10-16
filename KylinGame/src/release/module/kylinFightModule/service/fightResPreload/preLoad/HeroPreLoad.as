@@ -1,18 +1,24 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.manager.applicationManagers.GamePreloadResMgr;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicItem;
+	import mainModule.model.gameData.dynamicData.heroSkill.IHeroSkillDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.heroSkill.IHeroSkillDynamicItem;
+	import mainModule.model.gameData.sheetData.hero.IHeroSheetDataModel;
+	import mainModule.model.gameData.sheetData.hero.IHeroSheetItem;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.hero.HeroData;
-	import framecore.structure.model.user.hero.HeroInfo;
-	import framecore.structure.model.user.heroSkill.HeroSkillInfo;
-	import framecore.structure.model.user.heroTalents.HeroTalentTemplateInfo;
-	
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
 	
 	public class HeroPreLoad extends BasicPreLoad
 	{
+		[Inject]
+		public var heroData:IHeroDynamicDataModel;
+		[Inject]
+		public var heroModel:IHeroSheetDataModel;
+		[Inject]
+		public var heroSkillData:IHeroSkillDynamicDataModel;
+		
 		public function HeroPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);
@@ -20,42 +26,35 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 		
 		override public function checkCurLoadRes(id:uint):void
 		{
-			var heroInfo:HeroInfo = HeroData.getInstance().getOwnInfoById(id) as HeroInfo;
-			if(!heroInfo)
+			var heroInfo:IHeroDynamicItem = heroData.getHeroDataById(id);
+			var heroSheet:IHeroSheetItem = heroModel.getHeroSheetById(id);
+			if(!heroInfo || !heroSheet)
 				return;
 			
 			preloadRes(GameObjectCategoryType.HERO+"_"+id);	
 			
-			parseHeroWeapon(heroInfo);
+			parseHeroWeapon(heroSheet);
 			
-			parseHeroSkill(heroInfo);
+			parseHeroSkill(id);
 			
-			parseHeroTalents(heroInfo);
+			//parseHeroTalents(heroInfo);
 		}
 		
-		private function parseHeroWeapon(info:HeroInfo):void
+		private function parseHeroWeapon(info:IHeroSheetItem):void
 		{
-			if(info.heroTemplateInfo.weapon>0)
-				preloadWeaponRes(info.heroTemplateInfo.weapon);
+			if(info.weapon>0)
+				preloadWeaponRes(info.weapon);
 		}
 		
-		private function parseHeroSkill(info:HeroInfo):void
+		private function parseHeroSkill(id:uint):void
 		{
-			/*for each(var skillId:uint in info.heroTemplateInfo.getskillIds())
+			for each(var skill:IHeroSkillDynamicItem in heroSkillData.getHeroAllSkillData(id))
 			{
-				preloadSkillRes(skillId);
-			}	*/
-			
-			if(info.passiveSkillInfos && info.passiveSkillInfos.length>0)
-			{
-				for each(var skill:HeroSkillInfo in info.passiveSkillInfos)
-				{
-					preloadSkillRes(skill.configId);
-				}
+				preloadSkillRes(skill.skillId);
 			}
 		}
 		
-		private function parseHeroTalents(info:HeroInfo):void
+		/*private function parseHeroTalents(info:HeroInfo):void
 		{
 			if(info.arrTalents && info.arrTalents.length>0)
 			{
@@ -66,6 +65,6 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 						preloadSkillRes(temp.skillId);
 				}
 			}
-		}
+		}*/
 	}
 }

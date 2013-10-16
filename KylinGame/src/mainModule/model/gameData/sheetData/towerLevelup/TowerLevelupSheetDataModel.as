@@ -7,7 +7,7 @@ package mainModule.model.gameData.sheetData.towerLevelup
 	 * @author Edward
 	 * 
 	 */	
-	public class TowerLevelupSheetDataModel extends BaseSheetDataModel
+	public class TowerLevelupSheetDataModel extends BaseSheetDataModel implements ITowerLevelupSheetDataModel
 	{
 		public function TowerLevelupSheetDataModel()
 		{
@@ -16,14 +16,11 @@ package mainModule.model.gameData.sheetData.towerLevelup
 			sheetClass = TowerLevelupSheetItem;
 		}
 		/**
-		 * 通过等级获得塔升级数据 
-		 * @param lvl
-		 * @return 
-		 * 
+		 * @inheritDoc 
 		 */		
-		public function getTowerLevelupSheetByLvl(lvl:int):TowerLevelupSheetItem
+		public function getTowerLevelupSheetByLvl(lvl:int):ITowerLevelupSheetItem
 		{
-			return genSheetElement(lvl) as TowerLevelupSheetItem;
+			return genSheetElement(lvl) as ITowerLevelupSheetItem;
 		}
 	}
 }

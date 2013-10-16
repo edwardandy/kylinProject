@@ -1,29 +1,31 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import com.shinezone.towerDefense.fight.manager.applicationManagers.GamePreloadResMgr;
+	import kylin.echo.edward.utilities.string.KylinStringUtil;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.item.ItemData;
-	import framecore.structure.model.user.item.ItemInfo;
-	import framecore.structure.model.user.item.ItemTemplateInfo;
-	import framecore.tools.GameStringUtil;
+	import mainModule.model.gameData.sheetData.item.IItemSheetDataModel;
+	import mainModule.model.gameData.sheetData.item.IItemSheetItem;
+	
+	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
 	
 	public class ItemPreLoad extends BasicPreLoad
 	{
-		public function ItemPreLoad(mgr:GamePreloadResMgr)
+		[Inject]
+		public var itemModel:IItemSheetDataModel;
+		
+		public function ItemPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);
 		}
 		
 		override public function checkCurLoadRes(id:uint):void
 		{
-			var itemTemp:ItemTemplateInfo = TemplateDataFactory.getInstance().getItemTemplateById(id);
+			var itemTemp:IItemSheetItem = itemModel.getItemSheetById(id);
 			if(!itemTemp)
 				return;
 			
 			if(1 == itemTemp.effectType)
 			{
-				var param:Object = GameStringUtil.deserializeString(itemTemp.effectValue);
+				var param:Object = KylinStringUtil.parseCommaString(itemTemp.effectValue);
 				if(param && param.hasOwnProperty("magic"))
 					preloadMagicRes(param.magic);
 			}

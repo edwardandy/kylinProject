@@ -10,12 +10,22 @@ package mainModule.model.gameData.dynamicData.hero
 	 */	
 	public class HeroDynamicDataModel extends BaseDynamicItemsModel implements IHeroDynamicDataModel
 	{
+		private var _arrHeroIdsInFight:Array = [];
+		
 		public function HeroDynamicDataModel()
 		{
 			super();
 			dataId = DynamicDataNameConst.HeroData;
 			updateEventType = GameDataUpdateEvent.GameDataUpdate_HeroData;
 			itemClazz = HeroDynamicItem;
+		}
+
+		/**
+		 * @inheritDoc
+		 */	
+		public function get arrHeroIdsInFight():Array
+		{
+			return _arrHeroIdsInFight;
 		}
 		/**
 		 * @inheritDoc

@@ -14,6 +14,6 @@ package mainModule.model.gameData.sheetData.tower
 		 * @return 
 		 * 
 		 */		
-		function getTowerSheetById(id:uint):TowerSheetItem;
+		function getTowerSheetById(id:uint):ITowerSheetItem;
 	}
 }

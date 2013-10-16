@@ -3,14 +3,14 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	
 	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
-	import mainModule.model.gameData.dynamicData.interfaces.IDynamicDataDictionaryModel;
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.interfaces.IDynamicDataDictionaryModel;
 	import mainModule.model.gameData.sheetData.subwave.ISubwaveSheetDataModel;
+	import mainModule.model.gameData.sheetData.subwave.ISubwaveSheetItem;
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
+	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
 	import mainModule.model.gameData.sheetData.wave.IWaveSheetDataModel;
-	import mainModule.model.gameData.sheetData.subwave.SubwaveSheetItem;
-	import mainModule.model.gameData.sheetData.tollgate.TollgateSheetItem;
-	import mainModule.model.gameData.sheetData.wave.WaveSheetItem;
+	import mainModule.model.gameData.sheetData.wave.IWaveSheetItem;
 
 	/**
 	 * 单机时根据配置表填充虚拟的战斗数据 
@@ -54,17 +54,17 @@ package release.module.kylinFightModule.controller.fightInitSteps
 			fightObj.newItems = ["131124","131125"];
 			fightObj.waveInfo = [];
 			
-			var tollgateItem:TollgateSheetItem = tollgateSheet.getTollgateSheetById(fightObj.tollgateId);
+			var tollgateItem:ITollgateSheetItem = tollgateSheet.getTollgateSheetById(fightObj.tollgateId);
 			for each(var waveId:int in tollgateItem.arrWaves)
 			{
 				var waveObj:Object = {};
 				waveObj.offsetStartTick = 20;
 				waveObj.subWaves = [];
-				var waveItem:WaveSheetItem = waveSheet.getWaveSheetById(waveId);
+				var waveItem:IWaveSheetItem = waveSheet.getWaveSheetById(waveId);
 				for each(var subWaveId:int in waveItem.arrSubWaves)
 				{
 					var subObj:Object = {};
-					var subwaveItem:SubwaveSheetItem = subWaveSheet.getSubwaveSheetById(subWaveId);
+					var subwaveItem:ISubwaveSheetItem = subWaveSheet.getSubwaveSheetById(subWaveId);
 					subObj.startTime = subwaveItem.startTime;
 					subObj.interval = subwaveItem.interval;
 					subObj.times = subwaveItem.times;

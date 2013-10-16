@@ -1,12 +1,13 @@
 package mainModule.model.gameData.sheetData.hero
 {
-	import mainModule.model.gameData.sheetData.interfaces.IBaseSheetItem;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseMoveFighterSheetItem;
+
 	/**
 	 * 英雄数值表项 
 	 * @author Edward
 	 * 
 	 */
-	public interface IHeroSheetItem extends IBaseSheetItem
+	public interface IHeroSheetItem extends IBaseMoveFighterSheetItem
 	{
 		/**
 		 * 是否已开放 

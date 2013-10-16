@@ -1,7 +1,7 @@
 package release.module.kylinFightModule.service
 {
 	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
-	import release.module.kylinFightModule.service.interfaces.IFightResPreloadService;
+	import release.module.kylinFightModule.service.fightResPreload.IFightResPreloadService;
 	
 	import robotlegs.bender.framework.api.IInjector;
 

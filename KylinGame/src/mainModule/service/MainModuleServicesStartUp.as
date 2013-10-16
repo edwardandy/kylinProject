@@ -3,6 +3,8 @@ package mainModule.service
 	import kylin.echo.edward.utilities.loader.LoaderProgress;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
 	
+	import mainModule.service.gameDataServices.helpServices.ITollgateService;
+	import mainModule.service.gameDataServices.helpServices.TollgateService;
 	import mainModule.service.gameDataServices.interfaces.ISheetDataService;
 	import mainModule.service.gameDataServices.sheetData.CSVSheetDataService;
 	import mainModule.service.loadServices.LoadAssetsServices;
@@ -37,6 +39,9 @@ package mainModule.service
 			inject.map(ISoundService).toSingleton(SoundService);	
 			
 			inject.map(HttpRequestParam).toType(HttpRequestParam);
+			
+			//帮助类，提供具体的功能
+			inject.map(ITollgateService).toSingleton(TollgateService);	
 		}
 	}
 }

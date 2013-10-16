@@ -1,4 +1,4 @@
-package release.module.kylinFightModule.service.interfaces
+package release.module.kylinFightModule.service.fightResPreload
 {
 	/**
 	 * 战斗前预加载资源，包括怪物，英雄，技能，法术等的动画

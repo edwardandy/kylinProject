@@ -1,6 +1,9 @@
 package mainModule.model.gameData.sheetData.monster
 {
+	import kylin.echo.edward.utilities.string.KylinStringUtil;
+	
 	import mainModule.model.gameData.sheetData.BaseMoveFighterSheetItem;
+
 	/**
 	 * 怪物数值表项 
 	 * @author Edward
@@ -177,7 +180,7 @@ package mainModule.model.gameData.sheetData.monster
 			_arrFeatureLanIds.length = 0;
 			if(!value)
 				return;
-			_arrFeatureLanIds = value.split(",").map(function(lan:String,...args):uint{return uint(lan);});
+			_arrFeatureLanIds = KylinStringUtil.splitStringArrayToIntArray(value);
 		}
 		
 		public function MonsterSheetItem()

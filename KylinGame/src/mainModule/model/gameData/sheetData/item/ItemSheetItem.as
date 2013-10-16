@@ -10,7 +10,7 @@ package mainModule.model.gameData.sheetData.item
 	public class ItemSheetItem extends BaseDescSheetItem implements IItemSheetItem
 	{
 		private var _type:uint;
-		private var _fightUse:uint;
+		private var _fightUse:Boolean;
 		private var _salePrice:uint;
 		private var _effectValue:String;
 		private var _effectType:uint;
@@ -378,7 +378,7 @@ package mainModule.model.gameData.sheetData.item
 		/**
 		 * 是否可战斗中使用  0 不可以  1 可以
 		 */
-		public function get fightUse():uint
+		public function get fightUse():Boolean
 		{
 			return _fightUse;
 		}
@@ -386,7 +386,7 @@ package mainModule.model.gameData.sheetData.item
 		/**
 		 * @private
 		 */
-		public function set fightUse(value:uint):void
+		public function set fightUse(value:Boolean):void
 		{
 			_fightUse = value;
 		}

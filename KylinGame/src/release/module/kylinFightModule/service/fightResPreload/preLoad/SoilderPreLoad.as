@@ -1,21 +1,24 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.manager.applicationManagers.GamePreloadResMgr;
+	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetDataModel;
+	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetItem;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.soldier.SoldierTemplateInfo;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.service.fightResPreload.FightResPreloadService;
 	
 	public class SoilderPreLoad extends BasicPreLoad
 	{
-		public function SoilderPreLoad(mgr:GamePreloadResMgr)
+		[Inject]
+		public var soldierModel:ISoldierSheetDataModel;
+		
+		public function SoilderPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);
 		}
 		
 		override public function checkCurLoadRes(id:uint):void
 		{
-			var info:SoldierTemplateInfo = TemplateDataFactory.getInstance().getSoldierTemplateById(id);
+			var info:ISoldierSheetItem = soldierModel.getSoldierSheetById(id);
 			if(!info)
 				return;
 			
@@ -26,15 +29,15 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 			parseSkill(info);
 		}
 		
-		private function parseWeapon(info:SoldierTemplateInfo):void
+		private function parseWeapon(info:ISoldierSheetItem):void
 		{
 			if(info.weapon>0)
 				preloadWeaponRes(info.weapon);
 		}
 		
-		private function parseSkill(info:SoldierTemplateInfo):void
+		private function parseSkill(info:ISoldierSheetItem):void
 		{
-			for each(var skillId:uint in info.getskillIds())
+			for each(var skillId:uint in info.skillIds)
 			{
 				preloadSkillRes(skillId);
 			}	

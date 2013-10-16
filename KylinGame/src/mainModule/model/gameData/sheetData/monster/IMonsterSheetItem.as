@@ -1,12 +1,13 @@
 package mainModule.model.gameData.sheetData.monster
 {
-	import mainModule.model.gameData.sheetData.interfaces.IBaseSheetItem;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseMoveFighterSheetItem;
+
 	/**
 	 * 怪物数值表项 
 	 * @author Edward
 	 * 
 	 */
-	public interface IMonsterSheetItem extends IBaseSheetItem
+	public interface IMonsterSheetItem extends IBaseMoveFighterSheetItem
 	{
 		/**
 		 * 使用的资源id 

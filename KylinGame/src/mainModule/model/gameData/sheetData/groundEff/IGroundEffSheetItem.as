@@ -1,11 +1,13 @@
 package mainModule.model.gameData.sheetData.groundEff
 {
+	import mainModule.model.gameData.sheetData.interfaces.IBaseSheetItem;
+
 	/**
 	 * 地表特效动态项 
 	 * @author Edward
 	 * 
 	 */
-	public interface IGroundEffSheetItem
+	public interface IGroundEffSheetItem extends IBaseSheetItem
 	{
 		/**
 		 * 影响范围
