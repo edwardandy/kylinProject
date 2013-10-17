@@ -1,0 +1,28 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="元件 2" itemID="5149815c-000001e7" lastModified="1363776338">
+  <timeline>
+    <DOMTimeline name="元件 2">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMTLFText name="txtNum" left="-839" right="920" bottom="1100">
+                  <matrix>
+                    <Matrix a="3.18182373046875" d="3.18182373046875" tx="-6.45" ty="-87.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="43.95" y="27.5"/>
+                  </transformationPoint>
+                  <tlfFonts>
+                    <TLFFont platformName="Showcard Gothic" psName="ShowcardGothic-Reg"/>
+                  </tlfFonts>
+                  <markup><tlfTextObject type="Point" editPolicy="readSelect" columnCount="1" columnGap="20" verticalAlign="top" firstBaselineOffset="auto" paddingLeft="2" paddingTop="2" paddingRight="2" paddingBottom="2" background="false" backgroundColor="#ffffff" backgroundAlpha="1" border="false" borderColor="#000000" borderAlpha="1" borderWidth="1" paddingLock="false" multiline="true" antiAliasType="advanced" embedFonts="true"><TextFlow blockProgression="tb" lineBreak="explicit" locale="zh_CN" whiteSpaceCollapse="preserve" version="2.0.0" xmlns="http://ns.adobe.com/textLayout/2008"><p direction="ltr" paragraphEndIndent="0" paragraphSpaceAfter="0" paragraphSpaceBefore="0" paragraphStartIndent="0" textAlign="center" textAlignLast="start" textIndent="0" textJustify="interWord" xmlns="http://ns.adobe.com/textLayout/2008"><span color="#fff535" fontFamily="Showcard Gothic" fontSize="51" fontStyle="normal" fontWeight="normal" kerning="auto" lineHeight="120%" textAlpha="1" textRotation="auto" trackingRight="0%" xmlns="http://ns.adobe.com/textLayout/2008">999</span></p></TextFlow></tlfTextObject></markup>
+                </DOMTLFText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

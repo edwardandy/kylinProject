@@ -1,0 +1,33 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="重复项目文件夹/元件 5" itemID="51498da1-000004c3" lastModified="1361435188">
+  <timeline>
+    <DOMTimeline name="元件 5">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMShape>
+                  <fills>
+                    <FillStyle index="1">
+                      <LinearGradient>
+                        <matrix>
+                          <Matrix a="0.122528076171875" d="0.194931030273438" tx="100.35" ty="82.15"/>
+                        </matrix>
+                        <GradientEntry color="#FFFFFF" alpha="0" ratio="0"/>
+                        <GradientEntry color="#FFFFFF" ratio="0.533333333333333"/>
+                        <GradientEntry color="#FFFFFF" alpha="0" ratio="1"/>
+                      </LinearGradient>
+                    </FillStyle>
+                  </fills>
+                  <edges>
+                    <Edge fillStyle1="1" edges="!4015 -1550|4015 4837!4015 4837|0 4837!0 4837|0 -1550!0 -1550|4015 -1550"/>
+                  </edges>
+                </DOMShape>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

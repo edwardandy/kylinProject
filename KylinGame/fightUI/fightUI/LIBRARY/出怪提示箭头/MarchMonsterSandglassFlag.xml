@@ -1,0 +1,101 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="出怪提示箭头/MarchMonsterSandglassFlag" itemID="5063e98f-0000129b" lastModified="1355140001" lastUniqueIdentifier="2">
+  <timeline>
+    <DOMTimeline name="MarchMonsterSandglassFlag" currentFrame="99">
+      <layers>
+        <DOMLayer name="图层 4" color="#FF4FFF" current="true" isSelected="true" layerType="mask">
+          <frames>
+            <DOMFrame index="0" duration="98" tweenType="shape" keyMode="17922">
+              <MorphShape>
+                <morphSegments>
+                  <MorphSegment startPointA="#FFFFFF.55, #FFFFFF.0F" startPointB="#FFFFFF.55, -0.1171875" strokeIndex1="0" strokeIndex2="0" fillIndex1="0" fillIndex2="0">
+                    <MorphCurves controlPointA="#FFFFFF.FB, #FFFFFF.0F" anchorPointA="#0.A1, #FFFFFF.0F" controlPointB="#FFFFFF.FB, -0.1171875" anchorPointB="#0.A1, -0.1171875" isLine="true"/>
+                    <MorphCurves controlPointA="#0.A1, #FFFFFF.87" anchorPointA="#0.A1, #FFFFFF.FF" controlPointB="#0.A1, #FFFFFF.ED" anchorPointB="#0.A1, -0.03125" isLine="true"/>
+                    <MorphCurves controlPointA="#FFFFFF.FB, #FFFFFF.FF" anchorPointA="#FFFFFF.55, #FFFFFF.FF" controlPointB="#FFFFFF.FB, -0.03125" anchorPointB="#FFFFFF.55, -0.03125" isLine="true"/>
+                    <MorphCurves controlPointA="#FFFFFF.55, #FFFFFF.87" anchorPointA="#FFFFFF.55, #FFFFFF.0F" controlPointB="#FFFFFF.55, #FFFFFF.ED" anchorPointB="#FFFFFF.55, -0.1171875" isLine="true"/>
+                  </MorphSegment>
+                  <MorphSegment startPointA="#FFFFFF.55, #0.F" startPointB="#FFFFFF.55, #0.0D" strokeIndex1="0" strokeIndex2="0" fillIndex1="0" fillIndex2="0">
+                    <MorphCurves controlPointA="#FFFFFF.FB, #0.F" anchorPointA="#0.A1, #0.F" controlPointB="#FFFFFF.FB, #0.0D" anchorPointB="#0.A1, #0.0D" isLine="true"/>
+                    <MorphCurves controlPointA="#0.A1, #1.68" anchorPointA="#0.A1, #1.E" controlPointB="#0.A1, #0.85" anchorPointB="#0.A1, #0.FD" isLine="true"/>
+                    <MorphCurves controlPointA="#FFFFFF.FB, #1.E" anchorPointA="#FFFFFF.55, #1.E" controlPointB="#FFFFFF.FB, #0.FD" anchorPointB="#FFFFFF.55, #0.FD" isLine="true"/>
+                    <MorphCurves controlPointA="#FFFFFF.55, #1.68" anchorPointA="#FFFFFF.55, #0.F" controlPointB="#FFFFFF.55, #0.85" anchorPointB="#FFFFFF.55, #0.0D" isLine="true"/>
+                  </MorphSegment>
+                </morphSegments>
+                <morphHintsList/>
+              </MorphShape>
+              <elements>
+                <DOMShape>
+                  <fills>
+                    <FillStyle index="1">
+                      <SolidColor/>
+                    </FillStyle>
+                  </fills>
+                  <edges>
+                    <Edge fillStyle1="1" edges="!161 -1|-171 -1!-171 -1|-171 -241!-171 -241|161 -241!161 -241|161 -1!-171 240|161 240!161 240|161 480!161 480|-171 480!-171 480|-171 240"/>
+                  </edges>
+                </DOMShape>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="98" tweenType="shape" keyMode="17922">
+              <MorphShape>
+                <morphSegments>
+                  <MorphSegment startPointA="#FFFFFF.55, -0.1171875" startPointB="#FFFFFF.55, #0.0B" strokeIndex1="0" strokeIndex2="0" fillIndex1="0" fillIndex2="0">
+                    <MorphCurves controlPointA="#FFFFFF.FB, -0.1171875" anchorPointA="#0.A1, -0.1171875" controlPointB="#FFFFFF.FB, #0.0B" anchorPointB="#0.A1, #0.0B" isLine="true"/>
+                    <MorphCurves controlPointA="#0.A1, #FFFFFF.ED" anchorPointA="#0.A1, -0.03125" controlPointB="#0.A1, #0.83" anchorPointB="#0.A1, #0.FB" isLine="true"/>
+                    <MorphCurves controlPointA="#FFFFFF.FB, -0.03125" anchorPointA="#FFFFFF.55, -0.03125" controlPointB="#FFFFFF.FB, #0.FB" anchorPointB="#FFFFFF.55, #0.FB" isLine="true"/>
+                    <MorphCurves controlPointA="#FFFFFF.55, #FFFFFF.ED" anchorPointA="#FFFFFF.55, -0.1171875" controlPointB="#FFFFFF.55, #0.83" anchorPointB="#FFFFFF.55, #0.0B" isLine="true"/>
+                  </MorphSegment>
+                  <MorphSegment startPointA="#FFFFFF.55, #0.0D" startPointB="#FFFFFF.55, #0.0B" strokeIndex1="0" strokeIndex2="0" fillIndex1="0" fillIndex2="0">
+                    <MorphCurves controlPointA="#FFFFFF.FB, #0.0D" anchorPointA="#0.A1, #0.0D" controlPointB="#FFFFFF.FB, #0.0B" anchorPointB="#0.A1, #0.0B" isLine="true"/>
+                    <MorphCurves controlPointA="#0.A1, #0.85" anchorPointA="#0.A1, #0.FD" controlPointB="#0.A1, #0.83" anchorPointB="#0.A1, #0.FB" isLine="true"/>
+                    <MorphCurves controlPointA="#FFFFFF.FB, #0.FD" anchorPointA="#FFFFFF.55, #0.FD" controlPointB="#FFFFFF.FB, #0.FB" anchorPointB="#FFFFFF.55, #0.FB" isLine="true"/>
+                    <MorphCurves controlPointA="#FFFFFF.55, #0.85" anchorPointA="#FFFFFF.55, #0.0D" controlPointB="#FFFFFF.55, #0.83" anchorPointB="#FFFFFF.55, #0.0B" isLine="true"/>
+                  </MorphSegment>
+                </morphSegments>
+                <morphHintsList/>
+              </MorphShape>
+              <elements>
+                <DOMShape>
+                  <fills>
+                    <FillStyle index="1">
+                      <SolidColor/>
+                    </FillStyle>
+                  </fills>
+                  <edges>
+                    <Edge fillStyle1="1" edges="!161 -8|-171 -8!-171 -8|-171 -30!-171 -30|161 -30!161 -30|161 -8!-171 13|161 13!161 13|161 253!161 253|-171 253!-171 253|-171 13"/>
+                  </edges>
+                </DOMShape>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="99" keyMode="9728">
+              <elements>
+                <DOMShape>
+                  <fills>
+                    <FillStyle index="1">
+                      <SolidColor/>
+                    </FillStyle>
+                  </fills>
+                  <edges>
+                    <Edge fillStyle1="1" edges="!161 251|-171 251!-171 251|-171 11!-171 11|161 11!161 11|161 251"/>
+                  </edges>
+                </DOMShape>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 2" color="#9933CC" parentLayerIndex="0" locked="true" visible="false">
+          <frames>
+            <DOMFrame index="0" duration="100" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="出怪提示箭头/Fight_butten_start_icon.png">
+                  <matrix>
+                    <Matrix tx="-11" ty="-14"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

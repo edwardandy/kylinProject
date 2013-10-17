@@ -1,0 +1,39 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="建造圆形菜单/BuildingCircleItemTextSkin" itemID="50ea963c-0000071f" lastModified="1378374166">
+  <timeline>
+    <DOMTimeline name="BuildingCircleItemTextSkin">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/fight_Choice_bg_02.png">
+                  <matrix>
+                    <Matrix ty="1.35"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMDynamicText name="goldTextField" fontRenderingMode="device" width="27.25" height="14.9" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="15.5" ty="1.25"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>Max</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFFF00"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMBitmapInstance libraryItemName="icon_wu-zi_03.png">
+                  <matrix>
+                    <Matrix tx="0.5" ty="2.2"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

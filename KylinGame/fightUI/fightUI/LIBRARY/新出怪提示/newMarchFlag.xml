@@ -1,0 +1,76 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="新出怪提示/newMarchFlag" itemID="50cffe81-0000027d" linkageExportForAS="true" linkageClassName="MarchMonsterFlagBg" lastModified="1358943007" lastUniqueIdentifier="1">
+  <timeline>
+    <DOMTimeline name="newMarchFlag">
+      <layers>
+        <DOMLayer name="图层 4" color="#FF4FFF">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 3" color="#FF800A" locked="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="wing" name="wing" centerPoint3DX="-2.55" centerPoint3DY="-5">
+                  <matrix>
+                    <Matrix tx="-19.05" ty="-21.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="16.5" y="16.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="新出怪提示/Fight_butten_start_02.png">
+                  <matrix>
+                    <Matrix tx="-20.35" ty="-21.1"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="Fight_butten_start_03.png" color="#FF4FFF" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="新出怪提示/marchClock" name="flag" centerPoint3DX="0.65" centerPoint3DY="-0.1">
+                  <matrix>
+                    <Matrix tx="-20.35" ty="-21.1"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="21" y="21"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 2" color="#9933CC" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="新出怪提示/newArrow" name="arrow" centerPoint3DX="0.65" centerPoint3DY="4.45">
+                  <matrix>
+                    <Matrix tx="0.15"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="0.5" y="4.45"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

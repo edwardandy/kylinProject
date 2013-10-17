@@ -1,0 +1,38 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="加物资减法术cd/wuzishuzhi" itemID="50de5729-000001d3" lastModified="1369636058">
+  <timeline>
+    <DOMTimeline name="wuzishuzhi">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="txtNum" fontRenderingMode="device" width="34.2" height="14.9" autoExpand="true" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="-6.85" ty="-7.05"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>+500</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFF600"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMGroup>
+                  <members>
+                    <DOMBitmapInstance libraryItemName="加物资减法术cd/{2BD87D71-71D1-4375-9C18-7D54D8B5278D}.png">
+                      <matrix>
+                        <Matrix tx="-41.65" ty="-16.65"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                  </members>
+                </DOMGroup>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

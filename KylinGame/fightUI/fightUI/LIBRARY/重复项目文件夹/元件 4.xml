@@ -1,0 +1,64 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="重复项目文件夹/元件 4" itemID="51498da1-000004bf" lastModified="1363772747" lastUniqueIdentifier="3">
+  <timeline>
+    <DOMTimeline name="元件 4" currentFrame="12">
+      <layers>
+        <DOMLayer name="图层 2" color="#9933CC" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" duration="12" tweenType="motion" motionTweenSnap="true" keyMode="22017" acceleration="-100">
+              <elements>
+                <DOMSymbolInstance libraryItemName="重复项目文件夹/元件 6">
+                  <matrix>
+                    <Matrix tx="-41.45" ty="-2.2"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="67.9" y="19.2"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="12" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="重复项目文件夹/元件 6">
+                  <matrix>
+                    <Matrix tx="-28.45" ty="-2.2"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="67.9" y="19.2"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F">
+          <frames>
+            <DOMFrame index="0" duration="12" tweenType="motion" motionTweenSnap="true" keyMode="22017" acceleration="-100">
+              <elements>
+                <DOMSymbolInstance libraryItemName="元件 7">
+                  <matrix>
+                    <Matrix tx="14.05" ty="49.1"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="71.25" y="18.8"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="12" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="元件 7">
+                  <matrix>
+                    <Matrix tx="2.05" ty="49.1"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="71.25" y="18.8"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

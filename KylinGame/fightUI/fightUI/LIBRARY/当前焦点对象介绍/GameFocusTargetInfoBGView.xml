@@ -1,0 +1,257 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="当前焦点对象介绍/GameFocusTargetInfoBGView" itemID="5048730b-00000527" linkageExportForAS="true" linkageBaseClass="flash.display.Sprite" linkageClassName="GameFocusTargetInfoBGView" lastModified="1357611983" lastUniqueIdentifier="4" isSpriteSubclass="true">
+  <timeline>
+    <DOMTimeline name="GameFocusTargetInfoBGView">
+      <layers>
+        <DOMLayer name="三属性" color="#FF800A" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/GongJiJianGeIcon" name="jianGeIcon" centerPoint3DX="223.95" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="212.45" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/SheChengIcon" name="areaIcon" centerPoint3DX="306.75" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="295.25" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/RebuildIcon" name="rebirthIcon" centerPoint3DX="331.25" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="319.75" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMDynamicText name="label4" fontRenderingMode="device" width="59.55" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="146.45" ty="10.9"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>name</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMDynamicText name="label3" fontRenderingMode="device" width="42.95" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="343.35" ty="11.05"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>name</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMDynamicText name="label5" fontRenderingMode="device" width="55.65" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="235.3" ty="10.9"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>name</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="四属性" color="#4FFF4F" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/LifeIcon" name="lifeIcon" centerPoint3DX="134.5" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="123" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/WuGongIcon" name="wuGongIcon" centerPoint3DX="197" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="185.5" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/MoGongIcon" name="moGongIcon" centerPoint3DX="197" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="185.5" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/HurtIcon" name="hurtIcon" centerPoint3DX="331.25" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="319.75" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/WuFangIcon" name="wuFangIcon" centerPoint3DX="267.25" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="255.75" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/MoFangIcon" name="moFangIcon" centerPoint3DX="267.25" centerPoint3DY="20">
+                  <matrix>
+                    <Matrix tx="255.75" ty="8.5"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.5" y="11.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMDynamicText name="nameLabel" selected="true" fontRenderingMode="device" width="70.1" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="50" ty="11.05"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>name</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMDynamicText name="label0" fontRenderingMode="device" width="43.2" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="146.45" ty="11.05"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>20-20</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMDynamicText name="label1" fontRenderingMode="device" width="45.25" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="210.5" ty="11.05"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>99-99</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMDynamicText name="label6" fontRenderingMode="device" width="58.45" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="321.4" ty="10.9"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>10</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMDynamicText name="label2" fontRenderingMode="device" width="37.95" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="278.65" ty="11.05"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>NO.</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="iconContainer" color="#9933CC" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="IconTainer" name="iconContainer" centerPoint3DX="49" centerPoint3DY="40">
+                  <matrix>
+                    <Matrix tx="24" ty="15"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="25" y="25"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="bg" color="#9933CC" current="true" isSelected="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/MidBG" name="midBg" centerPoint3DX="252.5" centerPoint3DY="21">
+                  <matrix>
+                    <Matrix tx="129"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="123.5" y="21"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="当前焦点对象介绍/LeftBg" name="leftBg" centerPoint3DX="385" centerPoint3DY="21">
+                  <matrix>
+                    <Matrix tx="376"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="9" y="21"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMBitmapInstance libraryItemName="tips_bg_03_01_01.png"/>
+                <DOMSymbolInstance libraryItemName="NameMidBg" name="nameMidBg" selected="true" centerPoint3DX="83.5" centerPoint3DY="21">
+                  <matrix>
+                    <Matrix tx="48"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="35.5" y="21"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="NameLeftBg" name="nameLeftBg" centerPoint3DX="124" centerPoint3DY="21">
+                  <matrix>
+                    <Matrix tx="119"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="5" y="21"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

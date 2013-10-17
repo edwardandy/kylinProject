@@ -1,17 +1,13 @@
 package release.module.kylinFightModule.controller.fightInitSteps
 {
-	import flash.events.Event;
-	
-	import br.com.stimuli.loading.loadingtypes.XMLItem;
-	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	import kylin.echo.edward.utilities.loader.AssetInfo;
-	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
+	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 
 	/**
 	 * 加载战斗地图配置
@@ -24,6 +20,8 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		public var fightData:IFightDynamicDataModel;
 		[Inject]
 		public var roadData:IMapRoadModel;
+		[Inject]
+		public var sceneModel:ISceneDataModel;
 		
 		public function FightLoadMapCfgCmd()
 		{
@@ -39,7 +37,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		private function parseCfg(asset:AssetInfo):void
 		{
 			roadData.updateData(asset.content as XML);
-			
+			sceneModel.updateSceneElements(asset.content as XML);
 			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightPreLoadRes));
 		}
 	}

@@ -1,0 +1,490 @@
+<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#999999" width="760" height="650" frameRate="30" currentTimeline="1" xflVersion="2.2" creatorInfo="Adobe Flash Professional CS6" platform="Windows" versionInfo="Saved by Adobe Flash Windows 12.0 build 481" majorVersion="12" buildNumber="481" viewAngle3D="71.4571198868195" nextSceneIdentifier="2" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false" autoSaveHasPrompted="true">
+     <folders>
+          <DOMFolderItem name="Component Assets" itemID="44e488a0-000016d6" isExpanded="true"/>
+          <DOMFolderItem name="Component Assets/_private" itemID="4573a4bc-000003c6" isExpanded="true"/>
+          <DOMFolderItem name="Effects" itemID="512afc5e-00000217" isExpanded="true"/>
+          <DOMFolderItem name="Effects/EndlessWaveEffect" itemID="51498954-0000041b" isExpanded="true"/>
+          <DOMFolderItem name="Effects/finalWaveEffect" itemID="512afd10-00000242" isExpanded="true"/>
+          <DOMFolderItem name="Effects/hurtNumEffect" itemID="512d72a6-0000030d"/>
+          <DOMFolderItem name="Effects/hurWarnEffect" itemID="512afcff-0000023d"/>
+          <DOMFolderItem name="mc" itemID="50e7b73a-0000171f" isExpanded="true"/>
+          <DOMFolderItem name="出怪提示箭头" itemID="5045c403-00000396"/>
+          <DOMFolderItem name="当前焦点对象介绍" itemID="504872e4-00000525"/>
+          <DOMFolderItem name="加物资减法术cd" itemID="50ea2488-0000027d"/>
+          <DOMFolderItem name="建造圆形菜单" itemID="50ea963c-000006e7" isExpanded="true"/>
+          <DOMFolderItem name="建造圆形菜单/建造项" itemID="50ea963c-000006e8"/>
+          <DOMFolderItem name="设置按钮" itemID="503215b8-0000031e"/>
+          <DOMFolderItem name="书按钮" itemID="5032146f-000002d5" isExpanded="true"/>
+          <DOMFolderItem name="玩家当前信息" itemID="503210d9-00000283"/>
+          <DOMFolderItem name="无极幻境" itemID="51468a2a-000002c3"/>
+          <DOMFolderItem name="新出怪提示" itemID="50cffc7c-00000258"/>
+          <DOMFolderItem name="英雄icon" itemID="50d05f78-00002ae1"/>
+          <DOMFolderItem name="游戏暂停界面" itemID="5032d44b-00000230"/>
+          <DOMFolderItem name="暂停按钮" itemID="5032d1ed-000001ef"/>
+          <DOMFolderItem name="战斗底部条界面" itemID="5032d7eb-000002e4" isExpanded="true"/>
+          <DOMFolderItem name="战斗底部条界面/道具数量文字" itemID="50652034-0000024d" isExpanded="true"/>
+          <DOMFolderItem name="战斗终点标记" itemID="5045aa73-00000341" isExpanded="true"/>
+          <DOMFolderItem name="重复项目文件夹" itemID="51498da1-000004b9"/>
+     </folders>
+     <fonts>
+          <DOMFontItem name="字体 3" itemID="50ea25a0-00000284" font="TwCenMT-CondensedExtraBold" size="0" id="3" sourceLastImported="1357522336" embeddedCharacters="-S" embedRanges="3"/>
+          <DOMFontItem name="字体 2" itemID="50402d00-0000032a" font="Tahoma" size="0" id="2" sourceLastImported="1346383104" embedRanges="1|2|3"/>
+          <DOMFontItem name="字体 1" itemID="50402c2a-00000328" font="ShowcardGothic-Reg" size="0" id="1" sourceLastImported="1346382890" embedRanges="1|2|3"/>
+     </fonts>
+     <media>
+          <DOMBitmapItem name="加物资减法术cd/{2BD87D71-71D1-4375-9C18-7D54D8B5278D}.png" itemID="50fe66e9-00000c48" sourceExternalFilepath="./LIBRARY/加物资减法术cd/{2BD87D71-71D1-4375-9C18-7D54D8B5278D}.png" sourceLastImported="1354520121" externalFileCRC32="1175335525" externalFileSize="2183" originalCompressionType="lossless" quality="50" href="加物资减法术cd/{2BD87D71-71D1-4375-9C18-7D54D8B5278D}.png" bitmapDataHRef="M 87 1357522021.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="{A790FE00-22A2-43B7-B86B-3B09AF946326}.png" itemID="50ffd240-00000ca9" sourceExternalFilepath="./LIBRARY/{A790FE00-22A2-43B7-B86B-3B09AF946326}.png" sourceLastImported="1358942773" externalFileCRC32="2106584336" externalFileSize="24619" originalCompressionType="lossless" quality="50" href="{A790FE00-22A2-43B7-B86B-3B09AF946326}.png" bitmapDataHRef="M 123 1358942784.dat" frameRight="4720" frameBottom="1740"/>
+          <DOMBitmapItem name="无极幻境/Blitz-Acres_butten_BD_down.png" itemID="5146b058-00000304" sourceExternalFilepath="./LIBRARY/无极幻境/Blitz-Acres_butten_BD_down.png" sourceLastImported="1363154033" externalFileCRC32="3020094770" externalFileSize="4751" originalCompressionType="lossless" quality="50" href="无极幻境/Blitz-Acres_butten_BD_down.png" bitmapDataHRef="M 134 1363587160.dat" frameRight="840" frameBottom="900"/>
+          <DOMBitmapItem name="无极幻境/Blitz-Acres_butten_BD_over.png" itemID="5146b058-00000309" sourceExternalFilepath="./LIBRARY/无极幻境/Blitz-Acres_butten_BD_over.png" sourceLastImported="1363154034" externalFileCRC32="780500610" externalFileSize="5435" originalCompressionType="lossless" quality="50" href="无极幻境/Blitz-Acres_butten_BD_over.png" bitmapDataHRef="M 135 1363587160.dat" frameRight="840" frameBottom="900"/>
+          <DOMBitmapItem name="无极幻境/Blitz-Acres_butten_BD_up.png" itemID="5146b058-000002ff" sourceExternalFilepath="./LIBRARY/无极幻境/Blitz-Acres_butten_BD_up.png" sourceLastImported="1363154034" externalFileCRC32="2847303990" externalFileSize="5428" originalCompressionType="lossless" quality="50" href="无极幻境/Blitz-Acres_butten_BD_up.png" bitmapDataHRef="M 133 1363587160.dat" frameRight="840" frameBottom="900"/>
+          <DOMBitmapItem name="玩家当前信息/Blitz-Acres_icon_01.png" itemID="5146a869-000002ea" sourceExternalFilepath="./LIBRARY/玩家当前信息/Blitz-Acres_icon_01.png" sourceLastImported="1363154034" externalFileCRC32="446619762" externalFileSize="3533" originalCompressionType="lossless" quality="50" href="玩家当前信息/Blitz-Acres_icon_01.png" bitmapDataHRef="M 132 1363585129.dat" frameRight="540" frameBottom="680"/>
+          <DOMBitmapItem name="玩家当前信息/Blitz-Acres_icon_011.png" itemID="5146b354-0000039a" sourceExternalFilepath="./LIBRARY/玩家当前信息/Blitz-Acres_icon_011.png" sourceLastImported="1363154034" externalFileCRC32="3125334733" externalFileSize="3391" originalCompressionType="lossless" quality="50" href="玩家当前信息/Blitz-Acres_icon_011.png" bitmapDataHRef="M 136 1363587924.dat" frameRight="640" frameBottom="640"/>
+          <DOMBitmapItem name="玩家当前信息/Blitz-Acres_icon_03.png" itemID="5146b354-0000039f" sourceExternalFilepath="./LIBRARY/玩家当前信息/Blitz-Acres_icon_03.png" sourceLastImported="1363154034" externalFileCRC32="2351445121" externalFileSize="3829" originalCompressionType="lossless" quality="50" href="玩家当前信息/Blitz-Acres_icon_03.png" bitmapDataHRef="M 137 1363587924.dat" frameRight="640" frameBottom="640"/>
+          <DOMCompiledClipItem name="Component Assets/_private/ComponentShim" itemID="4d08cfa8-000001ee" sourceExternalFilepath="./LIBRARY/Component Assets/_private/ComponentShim" sourceLastImported="1359029147" displayAsComponent="false" customIconID="0" actionscriptClass="fl.core.ComponentShim" swfScmHRef="kbx0udh422.swf" swfScmSourceFilename="C:\Users\jkamerer\AppData\Local\Adobe\Flash CS5.5\en_US\Configuration\TMPkavphdh40p..swf" persistLivePreview11="true" livePreview11ScmHRef="kbx0udh4221.swf" livePreview11ScmSourceFilename="C:\Users\jkamerer\AppData\Local\Adobe\Flash CS5.5\en_US\Configuration\TMPkavphdh40p..swf" editFrameIndex="1" requiredMinimumPlayerVersion="0" requiredMinimumASVersion="0" parametersAreLocked="true" swcPath="Component Assets/_private/ComponentShim.xml" rootSymbolLinkageID="fl.core.ComponentShim" playerVersion="9" actionscriptVersion="3" hashKey="k718tUOF1.A1OSpQnqdJJ0">
+               <classProperties><![CDATA[<component id="fl/core/ComponentShim" class="fl.core.ComponentShim" modified="1292423059130">
+<movieBounds xmin="0" xmax="0" ymin="0" ymax="0" />
+<classDefs>
+	<classDef id="fl.core.AccessibilityShim"/>
+	<classDef id="fl.controls.CheckBox"/>
+	<classDef id="fl.controls.LabelButton"/>
+	<classDef id="fl.controls.List"/>
+	<classDef id="fl.controls.ComboBox"/>
+	<classDef id="fl.controls.ProgressBarDirection"/>
+	<classDef id="fl.data.SimpleCollectionItem"/>
+	<classDef id="fl.controls.TextArea"/>
+	<classDef id="fl.display.ProLoaderInfo"/>
+	<classDef id="fl.controls.Slider"/>
+	<classDef id="fl.events.DataChangeEvent"/>
+	<classDef id="fl.accessibility.ComboBoxAccImpl"/>
+	<classDef id="fl.events.DataChangeType"/>
+	<classDef id="fl.accessibility.TileListAccImpl"/>
+	<classDef id="fl.accessibility.ButtonAccImpl"/>
+	<classDef id="fl.controls.BaseButton"/>
+	<classDef id="fl.core.UIComponent"/>
+	<classDef id="fl.controls.DataGrid"/>
+	<classDef id="fl.display.ProLoader"/>
+	<classDef id="fl.containers.BaseScrollPane"/>
+	<classDef id="fl.livepreview.LivePreviewParent"/>
+	<classDef id="fl.controls.Label"/>
+	<classDef id="fl.managers.IFocusManagerComponent"/>
+	<classDef id="fl.controls.UIScrollBar"/>
+	<classDef id="fl.controls.listClasses.ICellRenderer"/>
+	<classDef id="fl.controls.ColorPicker"/>
+	<classDef id="fl.controls.dataGridClasses.DataGridCellEditor"/>
+	<classDef id="fl.managers.FocusManager"/>
+	<classDef id="fl.events.ProLoaderRSLPreloaderSandboxEvent"/>
+	<classDef id="fl.events.DataGridEventReason"/>
+	<classDef id="fl.events.SliderEvent"/>
+	<classDef id="fl.events.SliderEventClickTarget"/>
+	<classDef id="fl.controls.progressBarClasses.IndeterminateBar"/>
+	<classDef id="fl.controls.listClasses.ListData"/>
+	<classDef id="fl.core.InvalidationType"/>
+	<classDef id="fl.controls.NumericStepper"/>
+	<classDef id="fl.controls.RadioButtonGroup"/>
+	<classDef id="fl.accessibility.LabelButtonAccImpl"/>
+	<classDef id="fl.containers.UILoader"/>
+	<classDef id="fl.events.ColorPickerEvent"/>
+	<classDef id="fl.controls.ButtonLabelPlacement"/>
+	<classDef id="fl.accessibility.CheckBoxAccImpl"/>
+	<classDef id="fl.controls.TileList"/>
+	<classDef id="fl.managers.StyleManager"/>
+	<classDef id="fl.controls.RadioButton"/>
+	<classDef id="fl.containers.ScrollPane"/>
+	<classDef id="fl.controls.listClasses.TileListData"/>
+	<classDef id="fl.events.InteractionInputType"/>
+	<classDef id="fl.controls.Button"/>
+	<classDef id="fl.core.ComponentShim"/>
+	<classDef id="fl.accessibility.UIComponentAccImpl"/>
+	<classDef id="fl.controls.SelectableList"/>
+	<classDef id="fl.events.ComponentEvent"/>
+	<classDef id="fl.accessibility.RadioButtonAccImpl"/>
+	<classDef id="fl.controls.listClasses.CellRenderer"/>
+	<classDef id="fl.managers.IFocusManagerGroup"/>
+	<classDef id="fl.controls.ScrollPolicy"/>
+	<classDef id="fl.controls.ProgressBar"/>
+	<classDef id="fl.controls.ScrollBar"/>
+	<classDef id="fl.controls.listClasses.ImageCell"/>
+	<classDef id="fl.managers.IFocusManager"/>
+	<classDef id="fl.controls.ProgressBarMode"/>
+	<classDef id="fl.accessibility.SelectableListAccImpl"/>
+	<classDef id="fl.controls.TextInput"/>
+	<classDef id="fl.events.ListEvent"/>
+	<classDef id="fl.accessibility.AccImpl"/>
+	<classDef id="fl.accessibility.DataGridAccImpl"/>
+	<classDef id="fl.events.ScrollEvent"/>
+	<classDef id="fl.controls.dataGridClasses.DataGridColumn"/>
+	<classDef id="fl.events.DataGridEvent"/>
+	<classDef id="fl.data.TileListCollectionItem"/>
+	<classDef id="fl.data.DataProvider"/>
+	<classDef id="fl.accessibility.ListAccImpl"/>
+	<classDef id="fl.controls.dataGridClasses.HeaderRenderer"/>
+	<classDef id="fl.controls.ScrollBarDirection"/>
+	<classDef id="fl.controls.SliderDirection"/>
+</classDefs>
+<class id="fl.core.ComponentShim" >
+	<method id="ComponentShim" isConstructor="true" isProperty="false">
+	</method>
+</class></component>
+]]></classProperties>
+               <customIcon>
+                    <CustomIcon rowByteCount="72" colorDepth="32" width="18" height="18" frameRight="360" frameBottom="360" isTransparent="true" href="kbx0udh4222.dat"/>
+               </customIcon>
+               <SwcItem name="fl.core.ComponentShim" version="1292423059" isTopLevel="true"/>
+          </DOMCompiledClipItem>
+          <DOMBitmapItem name="战斗底部条界面/Fight_bg_01.png" itemID="521ebb85-00000418" sourceExternalFilepath="./LIBRARY/战斗底部条界面/Fight_bg_01.png" sourceLastImported="1376629023" externalFileSize="23627" originalCompressionType="lossless" quality="50" href="战斗底部条界面/Fight_bg_01.png" bitmapDataHRef="M 138 1377745639.dat" frameRight="15240" frameBottom="540"/>
+          <DOMBitmapItem name="Fight_bg_03.png" itemID="521ebfb5-00000465" sourceExternalFilepath="./LIBRARY/Fight_bg_03.png" sourceLastImported="1376629023" externalFileSize="1346" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Fight_bg_03.png" bitmapDataHRef="M 139 1377746535.dat" frameRight="760" frameBottom="300"/>
+          <DOMBitmapItem name="Fight_bg_04.png" itemID="521ec02f-0000046c" sourceExternalFilepath="./LIBRARY/Fight_bg_04.png" sourceLastImported="1376629023" externalFileSize="2158" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Fight_bg_04.png" bitmapDataHRef="M 140 1377746888.dat" frameRight="940" frameBottom="340"/>
+          <DOMBitmapItem name="书按钮/fight_butten_book_down.png" itemID="50321441-000002c2" sourceExternalFilepath="./LIBRARY/书按钮/fight_butten_book_down.png" sourceLastImported="1345457789" externalFileCRC32="1498607491" externalFileSize="3342" originalCompressionType="lossless" quality="50" href="书按钮/fight_butten_book_down.png" bitmapDataHRef="M 7 1345459265.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="书按钮/fight_butten_book_over.png" itemID="50321441-000002c6" sourceExternalFilepath="./LIBRARY/书按钮/fight_butten_book_over.png" sourceLastImported="1345457789" externalFileCRC32="3564701054" externalFileSize="6635" originalCompressionType="lossless" quality="50" href="书按钮/fight_butten_book_over.png" bitmapDataHRef="M 8 1345459265.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="书按钮/fight_butten_book_up.png" itemID="50321441-000002ca" sourceExternalFilepath="./LIBRARY/书按钮/fight_butten_book_up.png" sourceLastImported="1345457789" externalFileCRC32="376637812" externalFileSize="4688" originalCompressionType="lossless" quality="50" href="书按钮/fight_butten_book_up.png" bitmapDataHRef="M 9 1345459265.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="暂停按钮/fight_butten_Pause_down.png" itemID="5032d1fa-000001fb" sourceExternalFilepath="./LIBRARY/暂停按钮/fight_butten_Pause_down.png" sourceLastImported="1345457789" externalFileCRC32="1895750944" externalFileSize="2789" originalCompressionType="lossless" quality="50" href="暂停按钮/fight_butten_Pause_down.png" bitmapDataHRef="M 15 1345507834.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="暂停按钮/fight_butten_Pause_over.png" itemID="5032d1fa-000001f3" sourceExternalFilepath="./LIBRARY/暂停按钮/fight_butten_Pause_over.png" sourceLastImported="1345457789" externalFileCRC32="2186618438" externalFileSize="4854" originalCompressionType="lossless" quality="50" href="暂停按钮/fight_butten_Pause_over.png" bitmapDataHRef="M 13 1345507834.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="暂停按钮/fight_butten_Pause_up.png" itemID="5032d1fa-000001f7" sourceExternalFilepath="./LIBRARY/暂停按钮/fight_butten_Pause_up.png" sourceLastImported="1345457789" externalFileCRC32="1120977945" externalFileSize="3742" originalCompressionType="lossless" quality="50" href="暂停按钮/fight_butten_Pause_up.png" bitmapDataHRef="M 14 1345507834.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="新出怪提示/Fight_butten_start_01.png" itemID="50cffc6f-0000024a" sourceExternalFilepath="./LIBRARY/新出怪提示/Fight_butten_start_01.png" sourceLastImported="1352381702" externalFileCRC32="664911830" externalFileSize="1143" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="新出怪提示/Fight_butten_start_01.png" bitmapDataHRef="M 65 1355807855.dat" frameRight="840" frameBottom="840"/>
+          <DOMBitmapItem name="出怪提示箭头/Fight_butten_start_02.png" itemID="5063e54f-000011d7" sourceExternalFilepath="./LIBRARY/出怪提示箭头/Fight_butten_start_02.png" sourceLastImported="1348719792" externalFileCRC32="3957953540" externalFileSize="3746" originalCompressionType="lossless" quality="50" href="出怪提示箭头/Fight_butten_start_02.png" bitmapDataHRef="M 54 1348724047.dat" frameRight="1040" frameBottom="1080"/>
+          <DOMBitmapItem name="新出怪提示/Fight_butten_start_02.png" itemID="50cffc6f-0000024f" sourceExternalFilepath="./LIBRARY/新出怪提示/Fight_butten_start_02.png" sourceLastImported="1352381702" externalFileCRC32="2713484382" externalFileSize="3081" originalCompressionType="lossless" quality="50" href="新出怪提示/Fight_butten_start_02.png" bitmapDataHRef="M 66 1355807855.dat" frameRight="840" frameBottom="840"/>
+          <DOMBitmapItem name="出怪提示箭头/Fight_butten_start_03.png" itemID="5063e54f-000011cf" sourceExternalFilepath="./LIBRARY/出怪提示箭头/Fight_butten_start_03.png" sourceLastImported="1348719792" externalFileCRC32="3675530903" externalFileSize="3900" originalCompressionType="lossless" quality="50" href="出怪提示箭头/Fight_butten_start_03.png" bitmapDataHRef="M 52 1348724047.dat" frameRight="1040" frameBottom="1080"/>
+          <DOMBitmapItem name="新出怪提示/Fight_butten_start_03.png" itemID="50cffc6f-00000254" sourceExternalFilepath="./LIBRARY/新出怪提示/Fight_butten_start_03.png" sourceLastImported="1352381702" externalFileCRC32="3810790911" externalFileSize="647" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="新出怪提示/Fight_butten_start_03.png" bitmapDataHRef="M 67 1355807855.dat" frameRight="840" frameBottom="840"/>
+          <DOMBitmapItem name="新出怪提示/Fight_butten_start_04.png" itemID="50cffc6e-00000245" sourceExternalFilepath="./LIBRARY/新出怪提示/Fight_butten_start_04.png" sourceLastImported="1352381702" externalFileCRC32="1954726492" externalFileSize="186" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="新出怪提示/Fight_butten_start_04.png" bitmapDataHRef="M 64 1355807854.dat" frameRight="160" frameBottom="200"/>
+          <DOMBitmapItem name="出怪提示箭头/Fight_butten_start_icon.png" itemID="5063e54f-000011d3" sourceExternalFilepath="./LIBRARY/出怪提示箭头/Fight_butten_start_icon.png" sourceLastImported="1348719792" externalFileCRC32="706515553" externalFileSize="829" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="出怪提示箭头/Fight_butten_start_icon.png" bitmapDataHRef="M 53 1348724047.dat" frameRight="440" frameBottom="580"/>
+          <DOMBitmapItem name="设置按钮/fight_butten_System_down.png" itemID="5032158e-00000306" sourceExternalFilepath="./LIBRARY/设置按钮/fight_butten_System_down.png" sourceLastImported="1345457789" externalFileCRC32="2875480040" externalFileSize="2780" originalCompressionType="lossless" quality="50" href="设置按钮/fight_butten_System_down.png" bitmapDataHRef="M 10 1345459598.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="设置按钮/fight_butten_System_over.png" itemID="5032158e-0000030a" sourceExternalFilepath="./LIBRARY/设置按钮/fight_butten_System_over.png" sourceLastImported="1345457789" externalFileCRC32="2280539106" externalFileSize="5630" originalCompressionType="lossless" quality="50" href="设置按钮/fight_butten_System_over.png" bitmapDataHRef="M 11 1345459598.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="设置按钮/fight_butten_System_up.png" itemID="5032158e-0000030e" sourceExternalFilepath="./LIBRARY/设置按钮/fight_butten_System_up.png" sourceLastImported="1345457789" externalFileCRC32="858378205" externalFileSize="3939" originalCompressionType="lossless" quality="50" href="设置按钮/fight_butten_System_up.png" bitmapDataHRef="M 12 1345459598.dat" frameRight="1160" frameBottom="1100"/>
+          <DOMBitmapItem name="建造圆形菜单/fight_Choice_bg_01.png" itemID="50335569-0000044a" sourceExternalFilepath="./LIBRARY/建造圆形菜单/fight_Choice_bg_01.png" sourceLastImported="1345457789" externalFileCRC32="3536343679" externalFileSize="9829" originalCompressionType="lossless" quality="50" href="建造圆形菜单/fight_Choice_bg_01.png" bitmapDataHRef="M 235 1357551164.dat" frameRight="1800" frameBottom="1800"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/fight_Choice_bg_02.png" itemID="50374ab0-00000538" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/fight_Choice_bg_02.png" sourceLastImported="1345457789" externalFileCRC32="360173616" externalFileSize="214" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/fight_Choice_bg_02.png" bitmapDataHRef="M 189 1357551164.dat" frameRight="900" frameBottom="300"/>
+          <DOMBitmapItem name="建造圆形菜单/fight_Choice_bg_03.png" itemID="50e936e3-00001998" sourceExternalFilepath="./LIBRARY/建造圆形菜单/fight_Choice_bg_03.png" sourceLastImported="1354085491" externalFileCRC32="911735670" externalFileSize="169" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/fight_Choice_bg_03.png" bitmapDataHRef="M 236 1357551164.dat" frameRight="260" frameBottom="260"/>
+          <DOMBitmapItem name="建造圆形菜单/fight_Choice_bg_04.png" itemID="50e936e3-00001993" sourceExternalFilepath="./LIBRARY/建造圆形菜单/fight_Choice_bg_04.png" sourceLastImported="1354085491" externalFileCRC32="2927090087" externalFileSize="174" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/fight_Choice_bg_04.png" bitmapDataHRef="M 237 1357551164.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="建造圆形菜单/fight_Choice_bg_05.png" itemID="510e032e-000002e1" sourceExternalFilepath="./LIBRARY/建造圆形菜单/fight_Choice_bg_05.png" sourceLastImported="1359426756" externalFileCRC32="1495210926" externalFileSize="1059" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/fight_Choice_bg_05.png" bitmapDataHRef="M 126 1359872814.dat" frameRight="260" frameBottom="260"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/fight_Choice_butten_01.png" itemID="50374a7a-0000052f" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/fight_Choice_butten_01.png" sourceLastImported="1345457789" externalFileCRC32="1892889966" externalFileSize="4184" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/fight_Choice_butten_01.png" bitmapDataHRef="M 190 1357551164.dat" frameRight="920" frameBottom="920"/>
+          <DOMBitmapItem name="建造圆形菜单/fight_Choice_butten_03.png" itemID="510e027f-000002c2" sourceExternalFilepath="./LIBRARY/建造圆形菜单/fight_Choice_butten_03.png" sourceLastImported="1359426756" externalFileCRC32="3725742791" externalFileSize="3279" originalCompressionType="lossless" quality="50" href="建造圆形菜单/fight_Choice_butten_03.png" bitmapDataHRef="M 125 1359872639.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="fight_Choice_butten_03.png" itemID="5209ea22-000009fa" sourceExternalFilepath="./LIBRARY/fight_Choice_butten_03.png" sourceLastImported="1375087149" externalFileSize="4996" originalCompressionType="lossless" quality="50" href="fight_Choice_butten_03.png" bitmapDataHRef="M 138 1376381435.dat" frameRight="640" frameBottom="640"/>
+          <DOMBitmapItem name="fight_Choice_butten_04.png" itemID="5209e9ab-000009f2" sourceExternalFilepath="./LIBRARY/fight_Choice_butten_04.png" sourceLastImported="1375087149" externalFileSize="6528" originalCompressionType="lossless" quality="50" href="fight_Choice_butten_04.png" bitmapDataHRef="M 137 1376381338.dat" frameRight="920" frameBottom="920"/>
+          <DOMBitmapItem name="fight_Choice_icon_01.png" itemID="5209e949-000009e4" sourceExternalFilepath="./LIBRARY/fight_Choice_icon_01.png" sourceLastImported="1375087149" externalFileSize="2142" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="fight_Choice_icon_01.png" bitmapDataHRef="M 134 1376381234.dat" frameRight="720" frameBottom="700"/>
+          <DOMBitmapItem name="fight_Choice_icon_02.png" itemID="5209e966-000009e9" sourceExternalFilepath="./LIBRARY/fight_Choice_icon_02.png" sourceLastImported="1375087149" externalFileSize="2114" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="fight_Choice_icon_02.png" bitmapDataHRef="M 135 1376381272.dat" frameRight="520" frameBottom="500"/>
+          <DOMBitmapItem name="战斗底部条界面/fight_hero_butten_01(调亮).png" itemID="50d06145-00002af8" sourceExternalFilepath="./LIBRARY/战斗底部条界面/fight_hero_butten_01(调亮).png" sourceLastImported="1355833669" externalFileCRC32="86544154" externalFileSize="11277" originalCompressionType="lossless" quality="50" href="战斗底部条界面/fight_hero_butten_01(调亮).png" bitmapDataHRef="M 37 1346387739.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="英雄icon/fight_hero_butten_01.png" itemID="50d05f67-00002ac9" sourceExternalFilepath="./LIBRARY/英雄icon/fight_hero_butten_01.png" sourceLastImported="1352381703" externalFileCRC32="1412916554" externalFileSize="11508" originalCompressionType="lossless" quality="50" href="英雄icon/fight_hero_butten_01.png" bitmapDataHRef="M 68 1355833191.dat" frameRight="1620" frameBottom="1560"/>
+          <DOMBitmapItem name="战斗底部条界面/fight_hero_butten_02(调亮).png" itemID="5057fc5c-0000022e" linkageExportForAS="true" linkageClassName="HeroIconNormalBackgroundBitmapData" sourceExternalFilepath="./LIBRARY/战斗底部条界面/fight_hero_butten_02(调亮).png" sourceLastImported="1355833103" externalFileCRC32="1333477359" externalFileSize="14599" originalCompressionType="lossless" quality="50" href="战斗底部条界面/fight_hero_butten_02(调亮).png" bitmapDataHRef="M 44 1347943516.dat" frameRight="1600" frameBottom="1540"/>
+          <DOMBitmapItem name="英雄icon/fight_hero_butten_02.png" itemID="50d05f67-00002ace" sourceExternalFilepath="./LIBRARY/英雄icon/fight_hero_butten_02.png" sourceLastImported="1352381703" externalFileCRC32="1333477359" externalFileSize="14599" originalCompressionType="lossless" quality="50" href="英雄icon/fight_hero_butten_02.png" bitmapDataHRef="M 69 1355833191.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="战斗底部条界面/fight_hero_butten_03(调亮).png" itemID="50582c4a-00000244" sourceExternalFilepath="./LIBRARY/战斗底部条界面/fight_hero_butten_03(调亮).png" sourceLastImported="1355833705" externalFileCRC32="1900026731" externalFileSize="12776" originalCompressionType="lossless" quality="50" href="战斗底部条界面/fight_hero_butten_03(调亮).png" bitmapDataHRef="M 47 1347955786.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="英雄icon/fight_hero_butten_03.png" itemID="50d05f67-00002ad3" linkageExportForAS="true" linkageClassName="HeroIconDisablelBackgroundBitmapData" sourceExternalFilepath="./LIBRARY/英雄icon/fight_hero_butten_03.png" sourceLastImported="1355833708" externalFileCRC32="4110216879" externalFileSize="8502" originalCompressionType="lossless" quality="50" href="英雄icon/fight_hero_butten_03.png" bitmapDataHRef="M 70 1355833191.dat" frameRight="1620" frameBottom="1560"/>
+          <DOMBitmapItem name="英雄icon/fight_hero_icon_01.png" itemID="50d05f67-00002ad8" linkageExportForAS="true" linkageClassName="HeroIconGreenBlood" sourceExternalFilepath="./LIBRARY/英雄icon/fight_hero_icon_01.png" sourceLastImported="1355834154" externalFileCRC32="4050813483" externalFileSize="5168" originalCompressionType="lossless" quality="50" href="英雄icon/fight_hero_icon_01.png" bitmapDataHRef="M 71 1355833191.dat" frameRight="1620" frameBottom="1560"/>
+          <DOMBitmapItem name="英雄icon/fight_hero_icon_02.png" itemID="50d05f67-00002add" linkageExportForAS="true" linkageClassName="HeroIconRedBlood" sourceExternalFilepath="./LIBRARY/英雄icon/fight_hero_icon_02.png" sourceLastImported="1355834175" externalFileCRC32="2202637858" externalFileSize="5005" originalCompressionType="lossless" quality="50" href="英雄icon/fight_hero_icon_02.png" bitmapDataHRef="M 72 1355833191.dat" frameRight="1620" frameBottom="1560"/>
+          <DOMBitmapItem name="玩家当前信息/fight_icon_01.png" itemID="50e92903-0000098c" sourceExternalFilepath="./LIBRARY/玩家当前信息/fight_icon_01.png" sourceLastImported="1354520121" externalFileCRC32="1476887411" externalFileSize="1452" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="玩家当前信息/fight_icon_01.png" bitmapDataHRef="M 6 1345458667.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="玩家当前信息/fight_icon_02.png" itemID="50e92936-0000098d" sourceExternalFilepath="./LIBRARY/玩家当前信息/fight_icon_02.png" sourceLastImported="1354520121" externalFileCRC32="1175335525" externalFileSize="2183" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="玩家当前信息/fight_icon_02.png" bitmapDataHRef="M 4 1345458667.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="玩家当前信息/fight_icon_03.png" itemID="50e9293e-0000098e" sourceExternalFilepath="./LIBRARY/玩家当前信息/fight_icon_03.png" sourceLastImported="1354520121" externalFileCRC32="1941720379" externalFileSize="2418" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="玩家当前信息/fight_icon_03.png" bitmapDataHRef="M 5 1345458667.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="战斗底部条界面/fight_Magic_butten_02(调亮).png" itemID="50643bdf-0000173d" linkageExportForAS="true" linkageClassName="MagicNormalIconBackgroundBitmapData" sourceExternalFilepath="./LIBRARY/战斗底部条界面/fight_Magic_butten_02(调亮).png" sourceLastImported="1348746240" externalFileCRC32="833371687" externalFileSize="9238" originalCompressionType="lossless" quality="50" href="战斗底部条界面/fight_Magic_butten_02(调亮).png" bitmapDataHRef="M 55 1348746207.dat" frameRight="1120" frameBottom="1120"/>
+          <DOMBitmapItem name="游戏暂停界面/fight_-paused_bg_01.png" itemID="50ebe86e-00000829" sourceExternalFilepath="./LIBRARY/游戏暂停界面/fight_-paused_bg_01.png" sourceLastImported="1357520852" externalFileCRC32="4073609773" externalFileSize="37880" originalCompressionType="lossless" quality="50" href="游戏暂停界面/fight_-paused_bg_01.png" bitmapDataHRef="M 32 1346381607.dat" frameRight="7700" frameBottom="2720"/>
+          <DOMBitmapItem name="游戏暂停界面/fight_paused_butten_continue_down.png" itemID="50ebe971-0000082d" sourceExternalFilepath="./LIBRARY/游戏暂停界面/fight_paused_butten_continue_down.png" sourceLastImported="1357520852" externalFileCRC32="2837628335" externalFileSize="6327" originalCompressionType="lossless" quality="50" href="游戏暂停界面/fight_paused_butten_continue_down.png" bitmapDataHRef="M 33 1346381607.dat" frameRight="2100" frameBottom="600"/>
+          <DOMBitmapItem name="游戏暂停界面/fight_paused_butten_continue_over.png" itemID="50ebe968-0000082c" sourceExternalFilepath="./LIBRARY/游戏暂停界面/fight_paused_butten_continue_over.png" sourceLastImported="1357520852" externalFileCRC32="1014213185" externalFileSize="7176" originalCompressionType="lossless" quality="50" href="游戏暂停界面/fight_paused_butten_continue_over.png" bitmapDataHRef="M 34 1346381607.dat" frameRight="2100" frameBottom="600"/>
+          <DOMBitmapItem name="游戏暂停界面/fight_paused_butten_continue_up.png" itemID="50ebe960-0000082b" sourceExternalFilepath="./LIBRARY/游戏暂停界面/fight_paused_butten_continue_up.png" sourceLastImported="1357520852" externalFileCRC32="1685289754" externalFileSize="7120" originalCompressionType="lossless" quality="50" href="游戏暂停界面/fight_paused_butten_continue_up.png" bitmapDataHRef="M 35 1346381607.dat" frameRight="2100" frameBottom="600"/>
+          <DOMBitmapItem name="玩家当前信息/fight_player_bg_01.png" itemID="5032101e-0000027a" sourceExternalFilepath="./LIBRARY/玩家当前信息/fight_player_bg_01.png" sourceLastImported="1345457789" originalCompressionType="lossless" quality="50" href="玩家当前信息/fight_player_bg_01.png" bitmapDataHRef="M 1 1345458206.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="玩家当前信息/fight_player_bg_01.png 副本" itemID="50a5dce7-00001433" sourceExternalFilepath="./LIBRARY/玩家当前信息/fight_player_bg_01.png 副本" sourceLastImported="1352381703" externalFileCRC32="860239719" externalFileSize="395" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="玩家当前信息/fight_player_bg_01.png 副本" bitmapDataHRef="M 63 1353047243.dat" frameRight="2840" frameBottom="1400"/>
+          <DOMBitmapItem name="玩家当前信息/fight_player_bg_02.png" itemID="50457a79-00000337" sourceExternalFilepath="./LIBRARY/玩家当前信息/fight_player_bg_02.png" sourceLastImported="1346730572" externalFileCRC32="59204358" externalFileSize="9252" originalCompressionType="lossless" quality="50" href="玩家当前信息/fight_player_bg_02.png" bitmapDataHRef="M 2 1345458206.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="战斗底部条界面/fight_Prop_butten_01.png" itemID="50457aa1-00000339" sourceExternalFilepath="./LIBRARY/战斗底部条界面/fight_Prop_butten_01.png" sourceLastImported="1346730572" externalFileCRC32="1281988806" externalFileSize="9411" originalCompressionType="lossless" quality="50" href="战斗底部条界面/fight_Prop_butten_01.png" bitmapDataHRef="M 38 1346387775.dat" frameRight="1120" frameBottom="1120"/>
+          <DOMBitmapItem name="战斗底部条界面/fight_Prop_butten_02(调亮).png" itemID="50643bc7-00001739" linkageExportForAS="true" linkageClassName="PropNormalIconBackgroundBitmapData" sourceExternalFilepath="./LIBRARY/战斗底部条界面/fight_Prop_butten_02(调亮).png" sourceLastImported="1348746221" externalFileCRC32="3901070104" externalFileSize="9402" originalCompressionType="lossless" quality="50" href="战斗底部条界面/fight_Prop_butten_02(调亮).png" bitmapDataHRef="M 45 1347944598.dat" frameRight="1120" frameBottom="1120"/>
+          <DOMBitmapItem name="战斗底部条界面/fight_Prop_butten_03(调亮).png" itemID="50582ca2-00000248" linkageExportForAS="true" linkageClassName="PropAndMagicDisableIconBackgroundBitmapData" sourceExternalFilepath="./LIBRARY/战斗底部条界面/fight_Prop_butten_03(调亮).png" sourceLastImported="1346730572" externalFileCRC32="3508085728" externalFileSize="8668" originalCompressionType="lossless" quality="50" href="战斗底部条界面/fight_Prop_butten_03(调亮).png" bitmapDataHRef="M 48 1347955874.dat" frameRight="1120" frameBottom="1120"/>
+          <DOMBitmapItem name="战斗底部条界面/fight_skill_bg_01.png" itemID="50457aac-0000033a" sourceExternalFilepath="./LIBRARY/战斗底部条界面/fight_skill_bg_01.png" sourceLastImported="1346730572" externalFileCRC32="1596804320" externalFileSize="25315" originalCompressionType="lossless" quality="50" href="战斗底部条界面/fight_skill_bg_01.png" bitmapDataHRef="M 36 1346387460.dat" frameRight="3420" frameBottom="1160"/>
+          <DOMBitmapItem name="当前焦点对象介绍/Fight_tips_01.png" itemID="50e94f53-00000cfa" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/Fight_tips_01.png" sourceLastImported="1355966289" externalFileCRC32="2051777128" externalFileSize="10726" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/Fight_tips_01.png" bitmapDataHRef="M 50 1348468586.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="final.png" itemID="5125e27b-00000bff" sourceExternalFilepath="./LIBRARY/final.png" sourceLastImported="1363772290" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="final.png" bitmapDataHRef="M 139 1363774881.dat" frameRight="5260" frameBottom="1500"/>
+          <DOMBitmapItem name="Effects/finalWaveEffect/final.png" itemID="514ac1d1-000002e2" sourceExternalFilepath="./LIBRARY/Effects/finalWaveEffect/final.png" sourceLastImported="1361436842" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Effects/finalWaveEffect/final.png" bitmapDataHRef="M 129 1361771795.dat" frameRight="3400" frameBottom="1500"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_bing-ying.png" itemID="5060051c-00000241" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_bing-ying.png" sourceLastImported="1347499391" externalFileCRC32="1967859784" externalFileSize="2133" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_bing-ying.png" bitmapDataHRef="M 191 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_bo-ci_02.png" itemID="50e94fb3-00000d0a" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_bo-ci_02.png" sourceLastImported="1354520121" externalFileCRC32="124283876" externalFileSize="1209" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_bo-ci_02.png" bitmapDataHRef="M 81 1357467571.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_chu-shou.png" itemID="505ffe73-00000235" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_chu-shou.png" sourceLastImported="1347499391" externalFileCRC32="2889523197" externalFileSize="2282" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_chu-shou.png" bitmapDataHRef="M 192 1357551164.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="战斗终点标记/icon_finsh.png" itemID="506177b5-00000507" sourceExternalFilepath="./LIBRARY/战斗终点标记/icon_finsh.png" sourceLastImported="1348564883" externalFileCRC32="301450484" externalFileSize="14977" originalCompressionType="lossless" quality="50" href="战斗终点标记/icon_finsh.png" bitmapDataHRef="M 51 1348564917.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_gong-ji-fan-wei_02.png" itemID="50e94fb7-00000d0e" linkageExportForAS="true" linkageClassName="TowerMenuToolTipItemAttackAreaIcon" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_gong-ji-fan-wei_02.png" sourceLastImported="1360047415" externalFileCRC32="3255229378" externalFileSize="1158" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_gong-ji-fan-wei_02.png" bitmapDataHRef="M 82 1357467575.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_jian-ta.png" itemID="50600595-00000247" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_jian-ta.png" sourceLastImported="1347499391" externalFileCRC32="3306022044" externalFileSize="1567" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_jian-ta.png" bitmapDataHRef="M 193 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_ji-jie-dian.png" itemID="505adad1-00000768" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_ji-jie-dian.png" sourceLastImported="1347499391" externalFileCRC32="3252630071" externalFileSize="1299" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_ji-jie-dian.png" bitmapDataHRef="M 194 1357551164.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_ji-jie-dian_xiao.png" itemID="510dfb16-000002a4" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_ji-jie-dian_xiao.png" sourceLastImported="1359426756" externalFileCRC32="3874724384" externalFileSize="1742" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_ji-jie-dian_xiao.png" bitmapDataHRef="M 124 1359870742.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_mo-fa-gong-ji-li_02.png" itemID="50e94fc0-00000d12" linkageExportForAS="true" linkageClassName="TowerMenuToolTipItemMagAttackIcon" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_mo-fa-gong-ji-li_02.png" sourceLastImported="1360047430" externalFileCRC32="2514306639" externalFileSize="986" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_mo-fa-gong-ji-li_02.png" bitmapDataHRef="M 83 1357467584.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_mo-fa-hu-jia_02.png" itemID="50e94fc7-00000d16" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_mo-fa-hu-jia_02.png" sourceLastImported="1354520121" externalFileCRC32="3784901398" externalFileSize="998" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_mo-fa-hu-jia_02.png" bitmapDataHRef="M 84 1357467591.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_mo-fa-ta.png" itemID="5060054f-00000243" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_mo-fa-ta.png" sourceLastImported="1347499391" externalFileCRC32="2731001915" externalFileSize="2117" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_mo-fa-ta.png" bitmapDataHRef="M 195 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_pao-ta.png" itemID="50600573-00000245" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_pao-ta.png" sourceLastImported="1347499391" externalFileCRC32="1432493611" externalFileSize="2060" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_pao-ta.png" bitmapDataHRef="M 196 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_sheng-ji.png" itemID="505ffe4e-00000233" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_sheng-ji.png" sourceLastImported="1347499391" externalFileCRC32="439141787" externalFileSize="1838" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_sheng-ji.png" bitmapDataHRef="M 197 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_sheng-ming_02.png" itemID="50e94f9b-00000cfe" linkageExportForAS="true" linkageClassName="TowerMenuToolTipItemLifeIcon" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_sheng-ming_02.png" sourceLastImported="1360047427" externalFileCRC32="3872451061" externalFileSize="800" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_sheng-ming_02.png" bitmapDataHRef="M 78 1357467547.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/icon_suo-ding.png" itemID="505ffe27-00000231" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/icon_suo-ding.png" sourceLastImported="1347499391" externalFileCRC32="1452789795" externalFileSize="1878" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/icon_suo-ding.png" bitmapDataHRef="M 198 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_wu-li-gong-ji-li_02.png" itemID="50e94fa3-00000d02" linkageExportForAS="true" linkageClassName="TowerMenuToolTipItemPhyAttackIcon" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_wu-li-gong-ji-li_02.png" sourceLastImported="1360047433" externalFileCRC32="2912499991" externalFileSize="1226" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_wu-li-gong-ji-li_02.png" bitmapDataHRef="M 79 1357467555.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_wu-li-hu-jia_02.png" itemID="50e94fd1-00000d1a" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_wu-li-hu-jia_02.png" sourceLastImported="1354520121" externalFileCRC32="583934987" externalFileSize="1076" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_wu-li-hu-jia_02.png" bitmapDataHRef="M 85 1357467601.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_wu-zi_02.png" itemID="51109d69-000000ec" linkageExportForAS="true" linkageClassName="TowerMenuToolTipItemBoxIcon" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_wu-zi_02.png" sourceLastImported="1360047424" externalFileCRC32="3511814440" externalFileSize="1198" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_wu-zi_02.png" bitmapDataHRef="M 127 1360043369.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="加物资减法术cd/icon_wu-zi_03.png" itemID="51a2fbb6-000002f1" sourceExternalFilepath="./LIBRARY/加物资减法术cd/icon_wu-zi_03.png" sourceLastImported="1350375701" externalFileCRC32="1070449877" externalFileSize="677" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="加物资减法术cd/icon_wu-zi_03.png" bitmapDataHRef="M 141 1369635766.dat" frameRight="300" frameBottom="260"/>
+          <DOMBitmapItem name="icon_wu-zi_03.png" itemID="51f6003e-00000999" sourceExternalFilepath="./LIBRARY/icon_wu-zi_03.png" sourceLastImported="1350375701" externalFileSize="677" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="icon_wu-zi_03.png" bitmapDataHRef="M 132 1375076400.dat" frameRight="300" frameBottom="260"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_zai-sheng-shi-jian_02.png" itemID="50e94faa-00000d06" linkageExportForAS="true" linkageClassName="TowerMenuToolTipItemRebirthIcon" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_zai-sheng-shi-jian_02.png" sourceLastImported="1360047405" externalFileCRC32="3003598833" externalFileSize="1191" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_zai-sheng-shi-jian_02.png" bitmapDataHRef="M 80 1357467562.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="当前焦点对象介绍/icon_zhuang-dan-shi-jian_02.png" itemID="50e9520d-00000d43" linkageExportForAS="true" linkageClassName="TowerMenuToolTipItemAttackSpeedIcon" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/icon_zhuang-dan-shi-jian_02.png" sourceLastImported="1360047419" externalFileCRC32="1595131138" externalFileSize="952" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/icon_zhuang-dan-shi-jian_02.png" bitmapDataHRef="M 86 1357468173.dat" frameRight="460" frameBottom="460"/>
+          <DOMBitmapItem name="Effects/hurWarnEffect/img01.png" itemID="512b375d-0000081c" sourceExternalFilepath="./LIBRARY/Effects/hurWarnEffect/img01.png" sourceLastImported="1361786684" externalFileCRC32="3775089695" externalFileSize="169678" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Effects/hurWarnEffect/img01.png" bitmapDataHRef="M 128 1361771617.dat" frameRight="15200" frameBottom="13000"/>
+          <DOMBitmapItem name="img307.png" itemID="4fa8e7ff-00000122" sourceExternalFilepath="./LIBRARY/img307.png" sourceLastImported="1336469497" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="img307.png" bitmapDataHRef="M 138 1363774881.dat" frameRight="7500" frameBottom="3720"/>
+          <DOMBitmapItem name="Effects/finalWaveEffect/img307.png" itemID="514ac1d1-000002e3" sourceExternalFilepath="./LIBRARY/Effects/finalWaveEffect/img307.png" sourceLastImported="1336469497" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Effects/finalWaveEffect/img307.png" bitmapDataHRef="M 130 1361771795.dat" frameRight="7500" frameBottom="3720"/>
+          <DOMBitmapItem name="当前焦点对象介绍/Monster_141002_12.png" itemID="50ea9489-00000a72" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/Monster_141002_12.png" sourceLastImported="1357547723" externalFileCRC32="1621576523" externalFileSize="4001" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/Monster_141002_12.png" bitmapDataHRef="M 91 1357550729.dat" frameRight="1000" frameBottom="1000"/>
+          <DOMBitmapItem name="战斗终点标记/new_finish.png" itemID="50f8c0e0-00001679" sourceExternalFilepath="./LIBRARY/战斗终点标记/new_finish.png" sourceLastImported="1358479584" externalFileCRC32="867743737" externalFileSize="13603" originalCompressionType="lossless" quality="50" href="战斗终点标记/new_finish.png" bitmapDataHRef="M 122 1358479568.dat" frameRight="2660" frameBottom="2500"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152032_1.png" itemID="50e933ee-0000184b" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152032_1.png" sourceLastImported="1350375695" externalFileCRC32="2298192254" externalFileSize="2376" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152032_1.png" bitmapDataHRef="M 199 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152033_1.png" itemID="50e933ee-00001850" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152033_1.png" sourceLastImported="1350375695" externalFileCRC32="807597770" externalFileSize="2510" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152033_1.png" bitmapDataHRef="M 200 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152034_1.png" itemID="50e933ee-00001855" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152034_1.png" sourceLastImported="1350375695" externalFileCRC32="3847870568" externalFileSize="2343" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152034_1.png" bitmapDataHRef="M 201 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152035_1.png" itemID="50e933ee-0000185a" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152035_1.png" sourceLastImported="1350375695" externalFileCRC32="6739368" externalFileSize="2208" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152035_1.png" bitmapDataHRef="M 202 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152036_1.png" itemID="50e933ee-0000185f" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152036_1.png" sourceLastImported="1350375695" externalFileCRC32="3067631995" externalFileSize="2567" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152036_1.png" bitmapDataHRef="M 203 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152037_1.png" itemID="50e933ee-00001864" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152037_1.png" sourceLastImported="1350375695" externalFileCRC32="1609799431" externalFileSize="2056" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152037_1.png" bitmapDataHRef="M 204 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152038_1.png" itemID="50e933ee-00001869" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152038_1.png" sourceLastImported="1350375695" externalFileCRC32="818960551" externalFileSize="2733" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152038_1.png" bitmapDataHRef="M 205 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152039_1.png" itemID="50e933ee-0000186e" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152039_1.png" sourceLastImported="1350375695" externalFileCRC32="277237139" externalFileSize="2531" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152039_1.png" bitmapDataHRef="M 206 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152040_1.png" itemID="50e933ee-00001873" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152040_1.png" sourceLastImported="1350375695" externalFileCRC32="494322271" externalFileSize="1508" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152040_1.png" bitmapDataHRef="M 207 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152041_1.png" itemID="50e933ee-00001878" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152041_1.png" sourceLastImported="1350375695" externalFileCRC32="3177492213" externalFileSize="1386" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152041_1.png" bitmapDataHRef="M 208 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152042_1.png" itemID="50e933ee-0000187d" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152042_1.png" sourceLastImported="1350375695" externalFileCRC32="765969519" externalFileSize="1243" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152042_1.png" bitmapDataHRef="M 209 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152043_1.png" itemID="50e933ee-00001882" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152043_1.png" sourceLastImported="1350375695" externalFileCRC32="582313704" externalFileSize="2066" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152043_1.png" bitmapDataHRef="M 210 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152044_1.png" itemID="50e933ee-00001887" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152044_1.png" sourceLastImported="1350375695" externalFileCRC32="47951768" externalFileSize="2133" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152044_1.png" bitmapDataHRef="M 211 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152045_1.png" itemID="50e933ee-0000188c" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152045_1.png" sourceLastImported="1350375695" externalFileCRC32="2951720116" externalFileSize="1665" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152045_1.png" bitmapDataHRef="M 212 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152046_1.png" itemID="50e933ee-00001891" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152046_1.png" sourceLastImported="1350375696" externalFileCRC32="3607053756" externalFileSize="2230" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152046_1.png" bitmapDataHRef="M 213 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152047_1.png" itemID="50e933ee-00001896" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152047_1.png" sourceLastImported="1350375696" externalFileCRC32="2383783176" externalFileSize="1981" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152047_1.png" bitmapDataHRef="M 214 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152048_1.png" itemID="50e933ee-0000189b" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152048_1.png" sourceLastImported="1350375696" externalFileCRC32="2661245171" externalFileSize="1286" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152048_1.png" bitmapDataHRef="M 215 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152049_1.png" itemID="50e933ef-000018a0" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152049_1.png" sourceLastImported="1350375696" externalFileCRC32="2619407800" externalFileSize="2355" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152049_1.png" bitmapDataHRef="M 216 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152050_1.png" itemID="50e933ef-000018a5" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152050_1.png" sourceLastImported="1350375695" externalFileCRC32="2452874239" externalFileSize="2313" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152050_1.png" bitmapDataHRef="M 217 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152051_1.png" itemID="51020ab6-000002a3" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152051_1.png" sourceLastImported="1359085692" externalFileCRC32="3733688527" externalFileSize="2585" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152051_1.png" bitmapDataHRef="M 124 1359088310.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152052_1.png" itemID="50e933ef-000018af" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152052_1.png" sourceLastImported="1350375695" externalFileCRC32="1784670136" externalFileSize="1873" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152052_1.png" bitmapDataHRef="M 219 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152053_1.png" itemID="50e933ed-0000183c" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152053_1.png" sourceLastImported="1350375695" externalFileCRC32="139747361" externalFileSize="1433" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152053_1.png" bitmapDataHRef="M 220 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152054_1.png" itemID="51020ae7-000002aa" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152054_1.png" sourceLastImported="1359085692" externalFileCRC32="655039117" externalFileSize="3699" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152054_1.png" bitmapDataHRef="M 125 1359088359.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/skill_152055_1.png" itemID="51020af4-000002af" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/skill_152055_1.png" sourceLastImported="1359085692" externalFileCRC32="2067569858" externalFileSize="3873" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/skill_152055_1.png" bitmapDataHRef="M 126 1359088372.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="当前焦点对象介绍/tips_bg_03_01.png" itemID="50ea9414-00000a66" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/tips_bg_03_01.png" sourceLastImported="1357546055" externalFileCRC32="1582103137" externalFileSize="5775" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/tips_bg_03_01.png" bitmapDataHRef="M 88 1357550612.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="tips_bg_03_01_01.png" itemID="50eb81dc-0000027e" sourceExternalFilepath="./LIBRARY/tips_bg_03_01_01.png" sourceLastImported="1357610078" externalFileCRC32="4069304151" externalFileSize="3353" originalCompressionType="lossless" quality="50" href="tips_bg_03_01_01.png" bitmapDataHRef="M 118 1357611484.dat" frameRight="960" frameBottom="840"/>
+          <DOMBitmapItem name="tips_bg_03_01_02.png" itemID="50eb81dc-00000282" sourceExternalFilepath="./LIBRARY/tips_bg_03_01_02.png" sourceLastImported="1357610078" externalFileCRC32="1333634290" externalFileSize="3302" originalCompressionType="lossless" quality="50" href="tips_bg_03_01_02.png" bitmapDataHRef="M 119 1357611484.dat" frameRight="1420" frameBottom="840"/>
+          <DOMBitmapItem name="tips_bg_03_01_03.png" itemID="50eb81dc-00000286" sourceExternalFilepath="./LIBRARY/tips_bg_03_01_03.png" sourceLastImported="1357610078" externalFileCRC32="3840079390" externalFileSize="1339" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="tips_bg_03_01_03.png" bitmapDataHRef="M 120 1357611484.dat" frameRight="200" frameBottom="840"/>
+          <DOMBitmapItem name="当前焦点对象介绍/tips_bg_03_02.png" itemID="50ea9414-00000a6a" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/tips_bg_03_02.png" sourceLastImported="1357546055" externalFileCRC32="2211250286" externalFileSize="5325" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/tips_bg_03_02.png" bitmapDataHRef="M 89 1357550612.dat" frameRight="4940" frameBottom="840"/>
+          <DOMBitmapItem name="当前焦点对象介绍/tips_bg_03_03.png" itemID="50ea9414-00000a6e" sourceExternalFilepath="./LIBRARY/当前焦点对象介绍/tips_bg_03_03.png" sourceLastImported="1357546055" externalFileCRC32="1292235909" externalFileSize="2266" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="当前焦点对象介绍/tips_bg_03_03.png" bitmapDataHRef="M 90 1357550612.dat" frameRight="360" frameBottom="840"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_111004_1.png" itemID="506548dd-00000b19" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_111004_1.png" sourceLastImported="1348814396" externalFileCRC32="1068628291" externalFileSize="2176" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_111004_1.png" bitmapDataHRef="M 223 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_111005_1.png" itemID="506548f1-00000b1d" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_111005_1.png" sourceLastImported="1348814396" externalFileCRC32="2609493424" externalFileSize="2020" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_111005_1.png" bitmapDataHRef="M 224 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_111006_1.png" itemID="506548fd-00000b21" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_111006_1.png" sourceLastImported="1348814396" externalFileCRC32="2238219735" externalFileSize="1846" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_111006_1.png" bitmapDataHRef="M 225 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_112010_1.png" itemID="50654c6e-00000b3d" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_112010_1.png" sourceLastImported="1348814396" externalFileCRC32="448245801" externalFileSize="1827" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_112010_1.png" bitmapDataHRef="M 226 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_112011_1.png" itemID="50654c7d-00000b41" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_112011_1.png" sourceLastImported="1348814396" externalFileCRC32="678275996" externalFileSize="1926" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_112011_1.png" bitmapDataHRef="M 227 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_112012_1.png" itemID="50654c8a-00000b45" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_112012_1.png" sourceLastImported="1348814396" externalFileCRC32="3398303395" externalFileSize="1473" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_112012_1.png" bitmapDataHRef="M 228 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_113016_1.png" itemID="50654bbc-00000b31" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_113016_1.png" sourceLastImported="1348815778" externalFileCRC32="1893790369" externalFileSize="1886" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_113016_1.png" bitmapDataHRef="M 229 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_113017_1.png" itemID="50654bcd-00000b35" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_113017_1.png" sourceLastImported="1348815778" externalFileCRC32="237674749" externalFileSize="1907" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_113017_1.png" bitmapDataHRef="M 230 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_113018_1.png" itemID="50654c58-00000b39" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_113018_1.png" sourceLastImported="1348815778" externalFileCRC32="1967939570" externalFileSize="1885" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_113018_1.png" bitmapDataHRef="M 231 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_114022_1.png" itemID="50654c9b-00000b49" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_114022_1.png" sourceLastImported="1348815778" externalFileCRC32="1107100575" externalFileSize="2369" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_114022_1.png" bitmapDataHRef="M 232 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_114023_1.png" itemID="50654caa-00000b4d" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_114023_1.png" sourceLastImported="1348815778" externalFileCRC32="2891559131" externalFileSize="2435" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_114023_1.png" bitmapDataHRef="M 233 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="建造圆形菜单/建造项/Tower_114024_1.png" itemID="50654cbe-00000b51" sourceExternalFilepath="./LIBRARY/建造圆形菜单/建造项/Tower_114024_1.png" sourceLastImported="1348815778" externalFileCRC32="1468623444" externalFileSize="2620" originalCompressionType="lossless" quality="50" href="建造圆形菜单/建造项/Tower_114024_1.png" bitmapDataHRef="M 234 1357551164.dat" frameRight="680" frameBottom="680"/>
+          <DOMBitmapItem name="wave.png" itemID="5125e27b-00000bfe" sourceExternalFilepath="./LIBRARY/wave.png" sourceLastImported="1361436869" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="wave.png" bitmapDataHRef="M 140 1363774881.dat" frameRight="3520" frameBottom="1500"/>
+          <DOMBitmapItem name="Effects/finalWaveEffect/wave.png" itemID="514ac1d1-000002e4" sourceExternalFilepath="./LIBRARY/Effects/finalWaveEffect/wave.png" sourceLastImported="1361436869" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="Effects/finalWaveEffect/wave.png" bitmapDataHRef="M 131 1361771795.dat" frameRight="3520" frameBottom="1500"/>
+          <DOMBitmapItem name="新出怪提示/wing.png" itemID="50ffd1d4-00000ca5" sourceExternalFilepath="./LIBRARY/新出怪提示/wing.png" sourceLastImported="1358942210" externalFileCRC32="4036220542" externalFileSize="2459" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="新出怪提示/wing.png" bitmapDataHRef="M 121 1357786228.dat" frameRight="720" frameBottom="720"/>
+          <DOMBitmapItem name="宝藏猎人.png" itemID="51fa1f49-0000033c" sourceExternalFilepath="./LIBRARY/宝藏猎人.png" sourceLastImported="1375345371" externalFileCRC32="1062780308" externalFileSize="5007" originalCompressionType="lossless" quality="50" href="宝藏猎人.png" bitmapDataHRef="M 133 1375346482.dat" frameRight="780" frameBottom="940"/>
+          <DOMBitmapItem name="战斗界面.png" itemID="50e92969-00000992" sourceExternalFilepath="./LIBRARY/战斗界面.png" sourceLastImported="1354520110" externalFileCRC32="546216684" externalFileSize="818259" originalCompressionType="lossless" quality="50" href="战斗界面.png" bitmapDataHRef="M 77 1357457769.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="战斗底部条界面/战斗界面改2.png" itemID="50457ab4-0000033b" sourceExternalFilepath="./LIBRARY/战斗底部条界面/战斗界面改2.png" sourceLastImported="1346730572" externalFileCRC32="3987533265" externalFileSize="26641" originalCompressionType="lossless" quality="50" href="战斗底部条界面/战斗界面改2.png" bitmapDataHRef="M 17 1345509335.dat" frameLeft="-115200" frameTop="-115200" frameRight="-115200" frameBottom="-115200"/>
+          <DOMBitmapItem name="战斗内道具购买禁用状态A.png" itemID="52256cdd-00000308" sourceExternalFilepath="./LIBRARY/战斗内道具购买禁用状态A.png" sourceLastImported="1378184246" externalFileCRC32="1139802084" externalFileSize="1950" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="战斗内道具购买禁用状态A.png" bitmapDataHRef="M 141 1378184305.dat" frameRight="1120" frameBottom="1160"/>
+          <DOMBitmapItem name="战斗内道具购买禁用状态B.png" itemID="52256cdd-00000309" sourceExternalFilepath="./LIBRARY/战斗内道具购买禁用状态B.png" sourceLastImported="1378184259" externalFileCRC32="2462467250" externalFileSize="1939" useImportedJPEGData="false" compressionType="lossless" originalCompressionType="lossless" quality="50" href="战斗内道具购买禁用状态B.png" bitmapDataHRef="M 142 1378184305.dat" frameRight="1120" frameBottom="1160"/>
+     </media>
+     <symbols>
+          <Include href="BoxIcon.xml" loadImmediate="false" itemID="50ffd502-00000d88" lastModified="1361771649"/>
+          <Include href="Component Assets/_private/Component_avatar.xml" loadImmediate="false" itemID="44f89322-00000020" lastModified="1168286780"/>
+          <Include href="Effects/EndlessWaveEffect/wave.xml" itemID="51498db1-000004e2" lastModified="1363778564"/>
+          <Include href="Effects/EndlessWaveEffect/wavenumeff.xml" itemID="51499bb4-000005a1" lastModified="1363780800"/>
+          <Include href="Effects/finalWaveEffect/FinalWaveEffect.xml" itemID="512afce2-0000022c" lastModified="1363780731"/>
+          <Include href="Effects/hurtNumEffect/Crit.xml" loadImmediate="false" itemID="512d7efc-000006ac" lastModified="1361936131"/>
+          <Include href="Effects/hurtNumEffect/CritHurtEffectMC.xml" itemID="512d7ed3-000005b5" lastModified="1361936161"/>
+          <Include href="Effects/hurtNumEffect/HurtNumEffectMC.xml" itemID="512d7283-0000021b" lastModified="1361932941"/>
+          <Include href="Effects/hurWarnEffect/HurtWarnEffect.xml" itemID="512afc25-0000020c" lastModified="1362132148"/>
+          <Include href="Effects/hurWarnEffect/元件 1.xml" loadImmediate="false" itemID="5125a689-00000644" lastModified="1361421961"/>
+          <Include href="Effects/hurWarnEffect/元件 2.xml" loadImmediate="false" itemID="5125a69a-00000649" lastModified="1361421978"/>
+          <Include href="IconTainer.xml" loadImmediate="false" itemID="50ea9492-00000a74" lastModified="1357550754"/>
+          <Include href="jianCDshuzhi.xml" loadImmediate="false" itemID="50de575d-000001e0" lastModified="1357540126"/>
+          <Include href="LifeIcon.xml" loadImmediate="false" itemID="50ffd4f5-00000d82" lastModified="1361772847"/>
+          <Include href="lifeTextField.xml" loadImmediate="false" itemID="512b0621-0000063b" lastModified="1369988651"/>
+          <Include href="mc/mc_ditu.xml" loadImmediate="false" itemID="4f964ca4-00000010" lastModified="1373354122"/>
+          <Include href="MonsterWarnTip_Header0.xml" itemID="51fa1f3b-00000337" lastModified="1375346502"/>
+          <Include href="NameLeftBg.xml" loadImmediate="false" itemID="50eb8232-00000293" lastModified="1357611570"/>
+          <Include href="NameMidBg.xml" loadImmediate="false" itemID="50eb8221-0000028e" lastModified="1357611553"/>
+          <Include href="PropIconDisableA.xml" itemID="52256ca4-000002ff" lastModified="1378184399"/>
+          <Include href="PropIconDisableB.xml" itemID="52256cbc-00000304" lastModified="1378184410"/>
+          <Include href="TestButton.xml" itemID="5048526c-00000520" lastModified="1348831781"/>
+          <Include href="TextScore.xml" loadImmediate="false" itemID="51540ac4-00000316" lastModified="1364462325"/>
+          <Include href="WaveIcon.xml" loadImmediate="false" itemID="50ffd50e-00000d8e" lastModified="1358943502"/>
+          <Include href="wing.xml" loadImmediate="false" itemID="50ee5fca-0000024e" lastModified="1358942754"/>
+          <Include href="补间 1.xml" itemIcon="1" loadImmediate="false" itemID="5125c7c5-00000a5d" lastModified="1361430469"/>
+          <Include href="补间 2.xml" itemIcon="1" loadImmediate="false" itemID="5125c7c5-00000a60" lastModified="1361430469"/>
+          <Include href="补间 3.xml" itemIcon="1" loadImmediate="false" itemID="5125c7c5-00000a63" lastModified="1361430469"/>
+          <Include href="补间 4.xml" itemIcon="1" loadImmediate="false" itemID="5125c7c5-00000a66" lastModified="1361430469"/>
+          <Include href="出怪提示箭头/MarchMonsterArrow.xml" loadImmediate="false" itemID="5045c644-000003e2" lastModified="1355809517"/>
+          <Include href="出怪提示箭头/MarchMonsterFlagBg.xml" loadImmediate="false" itemID="5045c664-000003e6" lastModified="1355811527"/>
+          <Include href="出怪提示箭头/MarchMonsterSandglassFlag.xml" loadImmediate="false" itemID="5063e98f-0000129b" lastModified="1355140001"/>
+          <Include href="当前焦点对象介绍/GameFocusTargetInfoBGView.xml" itemID="5048730b-00000527" lastModified="1357611983"/>
+          <Include href="当前焦点对象介绍/GongJiJianGeIcon.xml" loadImmediate="false" itemID="50e95224-00000d45" lastModified="1357468196"/>
+          <Include href="当前焦点对象介绍/HurtIcon.xml" loadImmediate="false" itemID="50e951be-00000d2f" lastModified="1357468094"/>
+          <Include href="当前焦点对象介绍/LeftBg.xml" loadImmediate="false" itemID="50ea94db-00000a7e" lastModified="1357550811"/>
+          <Include href="当前焦点对象介绍/LifeIcon.xml" loadImmediate="false" itemID="50e9518e-00000d1c" lastModified="1357468046"/>
+          <Include href="当前焦点对象介绍/MidBG.xml" loadImmediate="false" itemID="50ea94cf-00000a79" lastModified="1357550799"/>
+          <Include href="当前焦点对象介绍/MoFangIcon.xml" loadImmediate="false" itemID="50e951ce-00000d3b" lastModified="1357468110"/>
+          <Include href="当前焦点对象介绍/MoGongIcon.xml" loadImmediate="false" itemID="50e9519e-00000d29" lastModified="1357468062"/>
+          <Include href="当前焦点对象介绍/RebuildIcon.xml" loadImmediate="false" itemID="50e9528d-00000d51" lastModified="1357468301"/>
+          <Include href="当前焦点对象介绍/SheChengIcon.xml" loadImmediate="false" itemID="50e95230-00000d4b" lastModified="1357468208"/>
+          <Include href="当前焦点对象介绍/WuFangIcon.xml" loadImmediate="false" itemID="50e951c8-00000d35" lastModified="1357468104"/>
+          <Include href="当前焦点对象介绍/WuGongIcon.xml" loadImmediate="false" itemID="50e95197-00000d23" lastModified="1357468055"/>
+          <Include href="加物资减法术cd/CDtanzi.xml" itemIcon="1" itemID="50de60ae-00001682" lastModified="1357540130"/>
+          <Include href="加物资减法术cd/wuzishuzhi.xml" loadImmediate="false" itemID="50de5729-000001d3" lastModified="1369636058"/>
+          <Include href="加物资减法术cd/wuzishuzhismall.xml" loadImmediate="false" itemID="51a2fc06-00000303" lastModified="1369636089"/>
+          <Include href="加物资减法术cd/wuzitanzi.xml" itemIcon="1" itemID="50de5bb0-000001ef" lastModified="1369636100"/>
+          <Include href="加物资减法术cd/wuzitanzismall.xml" itemIcon="1" itemID="51a2fbd3-000002fa" lastModified="1369636110"/>
+          <Include href="建造圆形菜单/BuildingCircleBGSkin.xml" itemID="50ea963c-0000071c" lastModified="1348131687"/>
+          <Include href="建造圆形菜单/BuildingCircleBuildItemSkin.xml" itemID="50ea963c-0000071d" lastModified="1378373804"/>
+          <Include href="建造圆形菜单/BuildingCircleItemTextSkin.xml" loadImmediate="false" itemID="50ea963c-0000071f" lastModified="1378374166"/>
+          <Include href="建造圆形菜单/skillupstate.xml" loadImmediate="false" itemID="50ea963c-0000071e" lastModified="1359872983"/>
+          <Include href="设置按钮/FightSettingBtn.xml" itemID="503215ab-00000315" lastModified="1373355325"/>
+          <Include href="书按钮/FightBookBtn.xml" itemID="50448098-00000410" lastModified="1373355992"/>
+          <Include href="玩家当前信息/battledrumsbuff.xml" itemID="5146b39c-000003ab" lastModified="1372068970"/>
+          <Include href="玩家当前信息/CurrentUserInfoView.xml" itemID="5032111a-00000285" lastModified="1369988683"/>
+          <Include href="玩家当前信息/endlessWaveIcon.xml" loadImmediate="false" itemID="5146a8b9-000002ed" lastModified="1363585228"/>
+          <Include href="玩家当前信息/retrievedBuff.xml" loadImmediate="false" itemID="5146b3e9-000003b1" lastModified="1363588073"/>
+          <Include href="玩家当前信息/UILoader.xml" loadImmediate="false" itemID="44b8178c-0000000e" lastModified="1359029191"/>
+          <Include href="无极幻境/battleDrumsBtn.xml" itemID="5146b07b-0000030b" lastModified="1373354614"/>
+          <Include href="新出怪提示/marchClock.xml" loadImmediate="false" itemID="50cffe9b-0000027e" lastModified="1355812842"/>
+          <Include href="新出怪提示/newArrow.xml" loadImmediate="false" itemID="50cffeb9-00000281" lastModified="1358942627"/>
+          <Include href="新出怪提示/newMarchFlag.xml" itemID="50cffe81-0000027d" lastModified="1358943007"/>
+          <Include href="游戏暂停界面/GamePauseBgView.xml" itemID="50405322-00000473" lastModified="1363584958"/>
+          <Include href="游戏暂停界面/GamePauseView_PuaseBtn.xml" loadImmediate="false" itemID="504027ad-0000030e" lastModified="1357638549"/>
+          <Include href="元件 1.xml" loadImmediate="false" itemID="50ffd251-00000cae" lastModified="1358942801"/>
+          <Include href="元件 1 副本.xml" loadImmediate="false" itemID="51498dbb-000004e4" lastModified="1363853833"/>
+          <Include href="元件 2.xml" loadImmediate="false" itemID="5149815c-000001e7" lastModified="1363776338"/>
+          <Include href="元件 3.xml" loadImmediate="false" itemID="4fa7a897-00000040" lastModified="1336469522"/>
+          <Include href="元件 4.xml" loadImmediate="false" itemID="514982b3-000001f1" lastModified="1363778540"/>
+          <Include href="元件 6.xml" loadImmediate="false" itemID="514983d6-0000020a" lastModified="1363772679"/>
+          <Include href="元件 7.xml" loadImmediate="false" itemID="5125dbb0-00000bcf" lastModified="1361435568"/>
+          <Include href="暂停按钮/FightPauseBtn.xml" itemID="5032d208-000001fd" lastModified="1373354514"/>
+          <Include href="战斗底部条界面/FightControllBarBGView.xml" itemID="5032d81f-000002e6" lastModified="1377746300"/>
+          <Include href="战斗底部条界面/道具数量文字/PropItemCountTextField.xml" itemID="50652070-0000024e" lastModified="1377746491"/>
+          <Include href="战斗底部条界面/道具数量文字/PropNumText.xml" itemID="521ebe3b-0000045a" lastModified="1377746921"/>
+          <Include href="战斗底部条界面/道具数量文字/PropPriceText.xml" itemID="521ebe58-0000045e" lastModified="1377763194"/>
+          <Include href="战斗终点标记/EndPointFlag.xml" itemID="5045ab76-00000375" lastModified="1359884357"/>
+          <Include href="战斗终点标记/zhongdianfazhen.xml" itemIcon="1" loadImmediate="false" itemID="510e1da4-00000242" lastModified="1359883918"/>
+          <Include href="战斗终点标记/zhongdianfazhen_faguang.xml" loadImmediate="false" itemID="510e1e14-0000024a" lastModified="1359879700"/>
+          <Include href="战斗终点标记/草地.xml" itemID="510e2df8-00000461" lastModified="1363859528"/>
+          <Include href="战斗终点标记/熔岩.xml" itemID="510e2e27-00000485" lastModified="1363859341"/>
+          <Include href="战斗终点标记/沙漠.xml" itemID="510e2e1b-0000047d" lastModified="1363859408"/>
+          <Include href="战斗终点标记/无极幻境.xml" itemID="514ad7cb-000002eb" lastModified="1363859528"/>
+          <Include href="战斗终点标记/雪地.xml" itemID="510e2e0e-0000046b" lastModified="1363859356"/>
+          <Include href="战斗终点标记/沼泽.xml" itemID="510e2e08-00000469" lastModified="1363859352"/>
+          <Include href="重复项目文件夹/补间 1.xml" itemIcon="1" loadImmediate="false" itemID="51498da1-000004cf" lastModified="1361430469"/>
+          <Include href="重复项目文件夹/补间 2.xml" itemIcon="1" loadImmediate="false" itemID="51498da1-000004d0" lastModified="1361430469"/>
+          <Include href="重复项目文件夹/补间 3.xml" itemIcon="1" loadImmediate="false" itemID="51498da1-000004dc" lastModified="1361430469"/>
+          <Include href="重复项目文件夹/补间 4.xml" itemIcon="1" loadImmediate="false" itemID="51498da1-000004dd" lastModified="1361430469"/>
+          <Include href="重复项目文件夹/元件 1.xml" loadImmediate="false" itemID="51498da1-000004e1" lastModified="1361434464"/>
+          <Include href="重复项目文件夹/元件 2.xml" loadImmediate="false" itemID="51499bf1-000005c9" lastModified="1363776299"/>
+          <Include href="重复项目文件夹/元件 3.xml" loadImmediate="false" itemID="51498da1-000004d9" lastModified="1336469522"/>
+          <Include href="重复项目文件夹/元件 4.xml" loadImmediate="false" itemID="51498da1-000004bf" lastModified="1363772747"/>
+          <Include href="重复项目文件夹/元件 4 副本.xml" loadImmediate="false" itemID="51499bf1-000005d0" lastModified="1363780548"/>
+          <Include href="重复项目文件夹/元件 5.xml" loadImmediate="false" itemID="51498da1-000004c3" lastModified="1361435188"/>
+          <Include href="重复项目文件夹/元件 6.xml" loadImmediate="false" itemID="51498da1-000004c1" lastModified="1363772453"/>
+          <Include href="重复项目文件夹/元件 6 副本.xml" loadImmediate="false" itemID="51499bf1-000005d1" lastModified="1363772679"/>
+     </symbols>
+     <timelines>
+          <DOMTimeline name="场景 1">
+               <layers>
+                    <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements/>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+               </layers>
+          </DOMTimeline>
+     </timelines>
+     <persistentData>
+          <PD n="com.air.sdk.path"/>
+     </persistentData>
+     <PrinterSettings/>
+     <publishHistory>
+          <PublishItem publishSize="922442" publishTime="1378374188"/>
+          <PublishItem publishSize="922439" publishTime="1378373988"/>
+          <PublishItem publishSize="920678" publishTime="1377747160"/>
+          <PublishItem publishSize="919447" publishTime="1376381497"/>
+          <PublishItem publishSize="919447" publishTime="1376381481"/>
+          <PublishItem publishSize="918961" publishTime="1375692550"/>
+          <PublishItem publishSize="918960" publishTime="1375692534"/>
+          <PublishItem publishSize="917553" publishTime="1375076491"/>
+          <PublishItem publishSize="916818" publishTime="1373356004"/>
+          <PublishItem publishSize="916823" publishTime="1373355873"/>
+          <PublishItem publishSize="916823" publishTime="1373355774"/>
+          <PublishItem publishSize="916819" publishTime="1373355741"/>
+          <PublishItem publishSize="916819" publishTime="1373354787"/>
+          <PublishItem publishSize="1018408" publishTime="1369635366"/>
+          <PublishItem publishSize="1018399" publishTime="1363859458"/>
+          <PublishItem publishSize="1026071" publishTime="1363780571"/>
+          <PublishItem publishSize="1026065" publishTime="1363780342"/>
+          <PublishItem publishSize="1026108" publishTime="1363778580"/>
+          <PublishItem publishSize="1026088" publishTime="1363778177"/>
+          <PublishItem publishSize="1025462" publishTime="1363777870"/>
+     </publishHistory>
+     <swcCache>
+          <Swc hashKey="k718tUOF1.A1OSpQnqdJJ0" href="mx9hz91ugt.swc">
+               <classDefinitions>
+                    <ClassDefinition value="fl.core.AccessibilityShim"/>
+                    <ClassDefinition value="fl.controls.CheckBox"/>
+                    <ClassDefinition value="fl.controls.LabelButton"/>
+                    <ClassDefinition value="fl.controls.List"/>
+                    <ClassDefinition value="fl.controls.ComboBox"/>
+                    <ClassDefinition value="fl.controls.ProgressBarDirection"/>
+                    <ClassDefinition value="fl.data.SimpleCollectionItem"/>
+                    <ClassDefinition value="fl.controls.TextArea"/>
+                    <ClassDefinition value="fl.display.ProLoaderInfo"/>
+                    <ClassDefinition value="fl.controls.Slider"/>
+                    <ClassDefinition value="fl.events.DataChangeEvent"/>
+                    <ClassDefinition value="fl.accessibility.ComboBoxAccImpl"/>
+                    <ClassDefinition value="fl.events.DataChangeType"/>
+                    <ClassDefinition value="fl.accessibility.TileListAccImpl"/>
+                    <ClassDefinition value="fl.accessibility.ButtonAccImpl"/>
+                    <ClassDefinition value="fl.controls.BaseButton"/>
+                    <ClassDefinition value="fl.core.UIComponent"/>
+                    <ClassDefinition value="fl.controls.DataGrid"/>
+                    <ClassDefinition value="fl.display.ProLoader"/>
+                    <ClassDefinition value="fl.containers.BaseScrollPane"/>
+                    <ClassDefinition value="fl.livepreview.LivePreviewParent"/>
+                    <ClassDefinition value="fl.controls.Label"/>
+                    <ClassDefinition value="fl.managers.IFocusManagerComponent"/>
+                    <ClassDefinition value="fl.controls.UIScrollBar"/>
+                    <ClassDefinition value="fl.controls.listClasses.ICellRenderer"/>
+                    <ClassDefinition value="fl.controls.ColorPicker"/>
+                    <ClassDefinition value="fl.controls.dataGridClasses.DataGridCellEditor"/>
+                    <ClassDefinition value="fl.managers.FocusManager"/>
+                    <ClassDefinition value="fl.events.ProLoaderRSLPreloaderSandboxEvent"/>
+                    <ClassDefinition value="fl.events.DataGridEventReason"/>
+                    <ClassDefinition value="fl.events.SliderEvent"/>
+                    <ClassDefinition value="fl.events.SliderEventClickTarget"/>
+                    <ClassDefinition value="fl.controls.progressBarClasses.IndeterminateBar"/>
+                    <ClassDefinition value="fl.controls.listClasses.ListData"/>
+                    <ClassDefinition value="fl.core.InvalidationType"/>
+                    <ClassDefinition value="fl.controls.NumericStepper"/>
+                    <ClassDefinition value="fl.controls.RadioButtonGroup"/>
+                    <ClassDefinition value="fl.accessibility.LabelButtonAccImpl"/>
+                    <ClassDefinition value="fl.containers.UILoader"/>
+                    <ClassDefinition value="fl.events.ColorPickerEvent"/>
+                    <ClassDefinition value="fl.controls.ButtonLabelPlacement"/>
+                    <ClassDefinition value="fl.accessibility.CheckBoxAccImpl"/>
+                    <ClassDefinition value="fl.controls.TileList"/>
+                    <ClassDefinition value="fl.managers.StyleManager"/>
+                    <ClassDefinition value="fl.controls.RadioButton"/>
+                    <ClassDefinition value="fl.containers.ScrollPane"/>
+                    <ClassDefinition value="fl.controls.listClasses.TileListData"/>
+                    <ClassDefinition value="fl.events.InteractionInputType"/>
+                    <ClassDefinition value="fl.controls.Button"/>
+                    <ClassDefinition value="fl.core.ComponentShim"/>
+                    <ClassDefinition value="fl.accessibility.UIComponentAccImpl"/>
+                    <ClassDefinition value="fl.controls.SelectableList"/>
+                    <ClassDefinition value="fl.events.ComponentEvent"/>
+                    <ClassDefinition value="fl.accessibility.RadioButtonAccImpl"/>
+                    <ClassDefinition value="fl.controls.listClasses.CellRenderer"/>
+                    <ClassDefinition value="fl.managers.IFocusManagerGroup"/>
+                    <ClassDefinition value="fl.controls.ScrollPolicy"/>
+                    <ClassDefinition value="fl.controls.ProgressBar"/>
+                    <ClassDefinition value="fl.controls.ScrollBar"/>
+                    <ClassDefinition value="fl.controls.listClasses.ImageCell"/>
+                    <ClassDefinition value="fl.managers.IFocusManager"/>
+                    <ClassDefinition value="fl.controls.ProgressBarMode"/>
+                    <ClassDefinition value="fl.accessibility.SelectableListAccImpl"/>
+                    <ClassDefinition value="fl.controls.TextInput"/>
+                    <ClassDefinition value="fl.events.ListEvent"/>
+                    <ClassDefinition value="fl.accessibility.AccImpl"/>
+                    <ClassDefinition value="fl.accessibility.DataGridAccImpl"/>
+                    <ClassDefinition value="fl.events.ScrollEvent"/>
+                    <ClassDefinition value="fl.controls.dataGridClasses.DataGridColumn"/>
+                    <ClassDefinition value="fl.events.DataGridEvent"/>
+                    <ClassDefinition value="fl.data.TileListCollectionItem"/>
+                    <ClassDefinition value="fl.data.DataProvider"/>
+                    <ClassDefinition value="fl.accessibility.ListAccImpl"/>
+                    <ClassDefinition value="fl.controls.dataGridClasses.HeaderRenderer"/>
+                    <ClassDefinition value="fl.controls.ScrollBarDirection"/>
+                    <ClassDefinition value="fl.controls.SliderDirection"/>
+               </classDefinitions>
+          </Swc>
+     </swcCache>
+</DOMDocument>

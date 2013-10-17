@@ -1,0 +1,70 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Effects/hurWarnEffect/HurtWarnEffect" itemID="512afc25-0000020c" linkageExportForAS="true" linkageClassName="HurtWarnEffect" lastModified="1362132148">
+  <timeline>
+    <DOMTimeline name="HurtWarnEffect" currentFrame="25">
+      <layers>
+        <DOMLayer name="图层 2" color="#9933CC">
+          <frames>
+            <DOMFrame index="0" duration="25" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="25" keyMode="9728">
+              <Actionscript>
+                <script><![CDATA[stop();]]></script>
+              </Actionscript>
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" duration="6" tweenType="motion" motionTweenSnap="true" keyMode="22017" acceleration="-100">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Effects/hurWarnEffect/元件 2">
+                  <matrix>
+                    <Matrix tx="-380" ty="-325"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="380" y="325"/>
+                  </transformationPoint>
+                  <color>
+                    <Color alphaMultiplier="0"/>
+                  </color>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="6" duration="12" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Effects/hurWarnEffect/元件 2">
+                  <matrix>
+                    <Matrix tx="-380" ty="-325"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="380" y="325"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="18" duration="7" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Effects/hurWarnEffect/元件 2">
+                  <matrix>
+                    <Matrix tx="-380" ty="-325"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="380" y="325"/>
+                  </transformationPoint>
+                  <color>
+                    <Color alphaMultiplier="0"/>
+                  </color>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="25" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

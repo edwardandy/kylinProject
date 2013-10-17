@@ -1,0 +1,21 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="PropIconDisableB" itemID="52256cbc-00000304" linkageExportForAS="true" linkageBaseClass="flash.display.Sprite" linkageClassName="PropIconDisableB" lastModified="1378184410" isSpriteSubclass="true">
+  <timeline>
+    <DOMTimeline name="PropIconDisableB">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance selected="true" libraryItemName="战斗内道具购买禁用状态B.png">
+                  <matrix>
+                    <Matrix tx="-28" ty="-29"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

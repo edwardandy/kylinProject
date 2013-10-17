@@ -8,6 +8,7 @@ package release.module.kylinFightModule.configuration
 	
 	import release.module.kylinFightModule.controller.FightModuleCommandsStartUp;
 	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;
+	import release.module.kylinFightModule.gameplay.FightGamePlayStartUp;
 	import release.module.kylinFightModule.gameplay.main.MainFightScene;
 	import release.module.kylinFightModule.model.FightModuleModelsStartUp;
 	import release.module.kylinFightModule.service.FightModuleServicesStartUp;
@@ -55,11 +56,11 @@ package release.module.kylinFightModule.configuration
 			Security.allowDomain("*");
 			
 			//injector.map(MainFightScene).asSingleton();
-			injector.map(TimeManager).asSingleton();
 			
 			new FightModuleCommandsStartUp(eventCommandMap);
 			new FightModuleModelsStartUp(injector);
 			new FightModuleServicesStartUp(injector);
+			new FightGamePlayStartUp(injector);
 			
 			//startup
 			context.afterInitializing(startup);

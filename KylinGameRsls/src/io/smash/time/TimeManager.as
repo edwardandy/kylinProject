@@ -247,7 +247,7 @@ package io.smash.time
          * (first-processed) priority is Number.MAX_VALUE. The lowest (last-processed) 
          * priority is -Number.MAX_VALUE.
          */
-        public function addAnimatedObject(object:IAnimated, priority:Number = 0.0):void
+        public function addAnimatedObject(object:IRenderAble, priority:Number = 0.0):void
         {
             addObject(object, priority, animatedObjects);
         }
@@ -300,7 +300,7 @@ package io.smash.time
          * 
          * @param object The object to remove.
          */
-        public function removeAnimatedObject(object:IAnimated):Boolean
+        public function removeAnimatedObject(object:IRenderAble):Boolean
         {
             return removeObject(object, animatedObjects);
         }
@@ -541,7 +541,7 @@ package io.smash.time
                     continue;
                 
                 //Profiler.enter(animatedObject.profilerKey);
-                (animatedObject.listener as IAnimated).onFrame(elapsed);
+                (animatedObject.listener as IRenderAble).render(elapsed);
                 //Profiler.exit(animatedObject.profilerKey);
             }
             duringAdvance = false;
@@ -600,7 +600,7 @@ package io.smash.time
                     continue;
                 
                 //Profiler.enter(object.profilerKey);
-                (object.listener as IAnimated).onFrame(elapsed);
+                (object.listener as IRenderAble).render(elapsed);
                 //Profiler.exit(object.profilerKey);
             }
             duringAdvance = false;

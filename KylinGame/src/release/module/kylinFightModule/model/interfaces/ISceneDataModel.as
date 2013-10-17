@@ -2,6 +2,8 @@ package release.module.kylinFightModule.model.interfaces
 {
 	
 	import kylin.echo.edward.gameplay.IKylinGameManager;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.vo.map.SceneElementVO;
 
 	/**
 	 * 战斗场景数据 
@@ -36,5 +38,17 @@ package release.module.kylinFightModule.model.interfaces
 		 */		
 		function get sceneGoods():int;
 		function set sceneGoods(value:int):void;
+		/**
+		 * 场景初始元素，比如塔基 
+		 * @return 
+		 * 
+		 */		
+		function get sceneInitElementsVo():Vector.<SceneElementVO>;
+		/**
+		 * 场景初始元素，比如塔基 
+		 * @param data
+		 * 
+		 */		
+		function updateSceneElements(data:XML):void;
 	}
 }

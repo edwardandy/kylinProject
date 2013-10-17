@@ -1,0 +1,86 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="新出怪提示/newArrow" itemID="50cffeb9-00000281" lastModified="1358942627">
+  <timeline>
+    <DOMTimeline name="newArrow" currentFrame="1">
+      <layers>
+        <DOMLayer name="图层 3" color="#FF800A">
+          <frames>
+            <DOMFrame index="0" name="down" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="1" name="top" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="2" name="left" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="3" name="right" labelType="name" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="箭头" color="#9933CC" current="true" isSelected="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="新出怪提示/Fight_butten_start_04.png">
+                  <matrix>
+                    <Matrix a="-1" d="-1" tx="5.5" ty="29.95"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="4" y="5"/>
+                  </transformationPoint>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="1" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance selected="true" libraryItemName="新出怪提示/Fight_butten_start_04.png">
+                  <matrix>
+                    <Matrix tx="-3.65" ty="-30.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="2" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="新出怪提示/Fight_butten_start_04.png">
+                  <matrix>
+                    <Matrix a="9.1552734375e-005" b="-1" c="1" d="9.1552734375e-005" tx="-30.45" ty="4.35"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="4" y="5"/>
+                  </transformationPoint>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="3" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="新出怪提示/Fight_butten_start_04.png">
+                  <matrix>
+                    <Matrix a="7.62939453125e-005" b="0.999984741210938" c="-0.999984741210938" d="7.62939453125e-005" tx="30.35" ty="-3.65"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="3.95" y="5.05"/>
+                  </transformationPoint>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F">
+          <frames>
+            <DOMFrame index="0" duration="4" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="新出怪提示/Fight_butten_start_01.png">
+                  <matrix>
+                    <Matrix tx="-20.5" ty="-21.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

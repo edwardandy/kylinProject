@@ -1,0 +1,145 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="玩家当前信息/CurrentUserInfoView" itemID="5032111a-00000285" linkageExportForAS="true" linkageBaseClass="flash.display.Sprite" linkageClassName="CurrentUserInfoView" lastModified="1369988683" lastUniqueIdentifier="5" isSpriteSubclass="true">
+  <timeline>
+    <DOMTimeline name="CurrentUserInfoView">
+      <layers>
+        <DOMLayer name="图层 2" color="#9933CC">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="玩家当前信息/endlessWaveIcon" name="endlessIcon" centerPoint3DX="17" centerPoint3DY="54.35">
+                  <matrix>
+                    <Matrix tx="16" ty="54"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="1" y="0.35"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="玩家当前信息/battledrumsbuff" name="drumsBuff" centerPoint3DX="163.35" centerPoint3DY="17.35">
+                  <matrix>
+                    <Matrix tx="147.35" ty="1.35"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="16" y="16"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="玩家当前信息/retrievedBuff" name="retrievedBuff" centerPoint3DX="201.35" centerPoint3DY="17.35">
+                  <matrix>
+                    <Matrix tx="185.35" ty="1.35"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="16" y="16"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 4" color="#FF4FFF" current="true" isSelected="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="goldTextField" fontRenderingMode="device" width="51.3" height="14.9" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="91.4" ty="8.85"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>999999</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                  <filters>
+                    <GlowFilter blurX="4" blurY="4" color="#333333" strength="10"/>
+                  </filters>
+                </DOMDynamicText>
+                <DOMDynamicText name="waveTextField" fontRenderingMode="device" width="37.8" height="14.9" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="87.85" ty="45.4"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>99/99</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                  <filters>
+                    <GlowFilter blurX="4" blurY="4" color="#333333" strength="10"/>
+                  </filters>
+                </DOMDynamicText>
+                <DOMDynamicText name="waveLabel" fontRenderingMode="device" width="51.1" height="14.9" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="32.75" ty="45.4"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>WAVE</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                  <filters>
+                    <GlowFilter blurX="4" blurY="4" color="#333333" strength="10"/>
+                  </filters>
+                </DOMDynamicText>
+                <DOMSymbolInstance libraryItemName="BoxIcon" name="boxIcon" centerPoint3DX="76" centerPoint3DY="17">
+                  <matrix>
+                    <Matrix tx="59"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="17" y="17"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="WaveIcon" name="waveIcon" centerPoint3DX="18.45" centerPoint3DY="53.4">
+                  <matrix>
+                    <Matrix tx="1.45" ty="36.4"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="17" y="17"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="LifeIcon" name="lifeIcon" centerPoint3DX="35.25" centerPoint3DY="33.4">
+                  <matrix>
+                    <Matrix tx="18.25" ty="16.4"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="lifeTextField" name="lifeTextField" centerPoint3DX="54.35" centerPoint3DY="25.55">
+                  <matrix>
+                    <Matrix tx="43.35" ty="16.1"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMSymbolInstance libraryItemName="TextScore" name="txtScore" centerPoint3DX="137.7" centerPoint3DY="61.85">
+                  <matrix>
+                    <Matrix tx="90.45" ty="52.4"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="玩家当前信息/fight_player_bg_01.png 副本"/>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

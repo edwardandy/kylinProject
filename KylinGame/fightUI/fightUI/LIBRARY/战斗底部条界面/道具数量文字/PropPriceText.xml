@@ -1,0 +1,42 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="战斗底部条界面/道具数量文字/PropPriceText" itemID="521ebe58-0000045e" linkageExportForAS="true" linkageClassName="PropPriceText" lastModified="1377746970">
+  <timeline>
+    <DOMTimeline name="PropPriceText">
+      <layers>
+        <DOMLayer name="图层 2" color="#9933CC" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="txtNum" fontRenderingMode="device" width="23" height="14.4" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="-3" ty="-7.25"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>999</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" lineSpacing="0" bitmapSize="240" face="Museo-700" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="Fight_bg_04.png">
+                  <matrix>
+                    <Matrix tx="-23.5" ty="-8.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

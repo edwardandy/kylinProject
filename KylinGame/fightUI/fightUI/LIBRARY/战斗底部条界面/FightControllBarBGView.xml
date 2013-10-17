@@ -1,0 +1,60 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="战斗底部条界面/FightControllBarBGView" itemID="5032d81f-000002e6" linkageExportForAS="true" linkageBaseClass="flash.display.Sprite" linkageClassName="FightControllBarBGView" lastModified="1377745932" isSpriteSubclass="true">
+  <timeline>
+    <DOMTimeline name="FightControllBarBGView">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMGroup selected="true">
+                  <members>
+                    <DOMBitmapInstance libraryItemName="战斗底部条界面/Fight_bg_01.png">
+                      <matrix>
+                        <Matrix tx="-2" ty="61"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                    <DOMBitmapInstance libraryItemName="英雄icon/fight_hero_butten_01.png 副本">
+                      <matrix>
+                        <Matrix tx="4" ty="3"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                    <DOMBitmapInstance libraryItemName="英雄icon/fight_hero_butten_01.png 副本">
+                      <matrix>
+                        <Matrix tx="84" ty="3"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                    <DOMBitmapInstance libraryItemName="英雄icon/fight_hero_butten_01.png 副本">
+                      <matrix>
+                        <Matrix tx="164" ty="3"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                    <DOMBitmapInstance libraryItemName="战斗底部条界面/fight_Prop_butten_01.png 副本">
+                      <matrix>
+                        <Matrix tx="245" ty="26"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                    <DOMBitmapInstance libraryItemName="战斗底部条界面/fight_Prop_butten_01.png 副本">
+                      <matrix>
+                        <Matrix tx="301" ty="26"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                    <DOMBitmapInstance libraryItemName="战斗底部条界面/fight_Prop_butten_01.png 副本">
+                      <matrix>
+                        <Matrix tx="357" ty="26"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                    <DOMBitmapInstance libraryItemName="战斗底部条界面/fight_Prop_butten_01.png 副本">
+                      <matrix>
+                        <Matrix tx="413" ty="26"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                  </members>
+                </DOMGroup>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

@@ -1,0 +1,46 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="重复项目文件夹/元件 1" itemID="51498da1-000004e1" lastModified="1361434464">
+  <timeline>
+    <DOMTimeline name="元件 1">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMShape>
+                  <fills>
+                    <FillStyle index="1">
+                      <SolidColor/>
+                    </FillStyle>
+                    <FillStyle index="2">
+                      <SolidColor alpha="0.498039215686275"/>
+                    </FillStyle>
+                    <FillStyle index="3">
+                      <SolidColor alpha="0.349019607843137"/>
+                    </FillStyle>
+                    <FillStyle index="4">
+                      <SolidColor alpha="0.149019607843137"/>
+                    </FillStyle>
+                    <FillStyle index="5">
+                      <SolidColor alpha="0.749019607843137"/>
+                    </FillStyle>
+                  </fills>
+                  <edges>
+                    <Edge fillStyle1="4" edges="!14839 0|13399 2619!13399 2619|13300 2619!13300 2619|14720 0!14720 0|14839 0"/>
+                    <Edge fillStyle1="3" edges="!14560 0|13100 2619!13100 2619|12881 2619!12881 2619|14301 0!14301 0|14560 0"/>
+                    <Edge fillStyle1="2" edges="!14158 0|12698 2619!12698 2619|12219 2619!12219 2619|13639 0!13639 0|14158 0"/>
+                    <Edge fillStyle1="5" edges="!12379 0|13458 0!13458 0|12058 2619!12058 2619|10959 2619!10959 2619|12379 0"/>
+                    <Edge fillStyle1="1" edges="!10739 2619|160 2619!160 2619|1580 0!1580 0|12179 0!12179 0|10739 2619"/>
+                    <Edge fillStyle1="5" edges="!1360 0|-40 2619!-40 2619|-1139 2619!-1139 2619|281 0!281 0|1360 0"/>
+                    <Edge fillStyle1="4" edges="!-1079 0|-2519 2619!-2519 2619|-2618 2619!-2618 2619|-1198 0!-1198 0|-1079 0"/>
+                    <Edge fillStyle1="3" edges="!-620 0|-2080 2619!-2080 2619|-2299 2619!-2299 2619|-879 0!-879 0|-620 0"/>
+                    <Edge fillStyle1="2" edges="!-419 0|100 0!100 0|-1360 2619!-1360 2619|-1839 2619!-1839 2619|-419 0"/>
+                  </edges>
+                </DOMShape>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

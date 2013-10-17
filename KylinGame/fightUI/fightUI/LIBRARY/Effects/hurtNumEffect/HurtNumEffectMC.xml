@@ -1,0 +1,32 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Effects/hurtNumEffect/HurtNumEffectMC" itemID="512d7283-0000021b" linkageExportForAS="true" linkageClassName="HurtNumEffectMC" lastModified="1361932941">
+  <timeline>
+    <DOMTimeline name="HurtNumEffectMC">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="numLabel" fontRenderingMode="device" width="43.7" height="14.9" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="-22.9" ty="-6.95"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>1760</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                  <filters>
+                    <GlowFilter blurX="4" blurY="4" color="#383627" strength="10"/>
+                  </filters>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

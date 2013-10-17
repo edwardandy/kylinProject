@@ -1,0 +1,29 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="jianCDshuzhi" itemID="50de575d-000001e0" lastModified="1357540126">
+  <timeline>
+    <DOMTimeline name="jianCDshuzhi">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="txtNum" width="26.5" height="14.15" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="-10.5" ty="-7.05"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>-6 S</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" bitmapSize="240" face="TwCenMT-CondensedExtraBold" fillColor="#3333FF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

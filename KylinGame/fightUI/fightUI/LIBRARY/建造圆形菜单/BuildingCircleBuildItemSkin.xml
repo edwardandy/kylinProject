@@ -1,0 +1,518 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="建造圆形菜单/BuildingCircleBuildItemSkin" itemID="50ea963c-0000071d" linkageExportForAS="true" linkageClassName="BuildingCircleBuildItemSkin" lastModified="1378373804" lastUniqueIdentifier="3">
+  <timeline>
+    <DOMTimeline name="BuildingCircleBuildItemSkin">
+      <layers>
+        <DOMLayer name="通用Icons" color="#9933CC" locked="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" duration="4" name="lock" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/icon_suo-ding.png">
+                  <matrix>
+                    <Matrix tx="-15.85" ty="-17.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="4" duration="6" name="update" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/icon_sheng-ji.png">
+                  <matrix>
+                    <Matrix tx="-17.5" ty="-16.25"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="10" duration="4" name="mettingPoint" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="fight_Choice_icon_01.png">
+                  <matrix>
+                    <Matrix tx="-18" ty="-17.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="14" duration="9" name="sell" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="fight_Choice_icon_02.png">
+                  <matrix>
+                    <Matrix tx="-13" ty="-12.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="兵营塔 " color="#4FFFFF" locked="true" autoNamed="false" visible="false">
+          <frames>
+            <DOMFrame index="0" duration="23" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="23" duration="7" name="T_111001" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/icon_bing-ying.png">
+                  <matrix>
+                    <Matrix tx="-16" ty="-17.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="30" duration="7" name="T_111004" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_111004_1.png">
+                  <matrix>
+                    <Matrix tx="-16.6" ty="-17.4"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="37" duration="7" name="T_111005" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_111005_1.png">
+                  <matrix>
+                    <Matrix tx="-16" ty="-16.8"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="44" duration="7" name="T_111006" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_111006_1.png">
+                  <matrix>
+                    <Matrix tx="-16.4" ty="-17"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="法师塔" color="#FF4FFF" locked="true" autoNamed="false" visible="false">
+          <frames>
+            <DOMFrame index="0" duration="51" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="51" duration="7" name="T_113013" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/icon_mo-fa-ta.png">
+                  <matrix>
+                    <Matrix tx="-17" ty="-18.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="58" duration="7" name="T_113016" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_113016_1.png">
+                  <matrix>
+                    <Matrix tx="-17.6" ty="-17.7"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="65" duration="7" name="T_113017" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_113017_1.png">
+                  <matrix>
+                    <Matrix tx="-16.8" ty="-17.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="72" duration="7" name="T_113018" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_113018_1.png">
+                  <matrix>
+                    <Matrix tx="-16.6" ty="-16.7"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="箭塔" color="#FF800A" locked="true" autoNamed="false" visible="false">
+          <frames>
+            <DOMFrame index="0" duration="79" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="79" duration="7" name="T_112007" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/icon_jian-ta.png">
+                  <matrix>
+                    <Matrix tx="-17" ty="-17.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="86" duration="7" name="T_112010" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_112010_1.png">
+                  <matrix>
+                    <Matrix tx="-17" ty="-16.7"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="93" duration="7" name="T_112011" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_112011_1.png">
+                  <matrix>
+                    <Matrix tx="-17.4" ty="-17.7"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="100" duration="7" name="T_112012" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_112012_1.png">
+                  <matrix>
+                    <Matrix tx="-17.4" ty="-17.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="炮塔" color="#9933CC" locked="true" autoNamed="false" visible="false">
+          <frames>
+            <DOMFrame index="0" duration="107" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="107" duration="7" name="T_114019" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/icon_pao-ta.png">
+                  <matrix>
+                    <Matrix tx="-16.75" ty="-16.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="114" duration="7" name="T_114022" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_114022_1.png">
+                  <matrix>
+                    <Matrix tx="-16.6" ty="-16.9"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="121" duration="7" name="T_114023" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_114023_1.png">
+                  <matrix>
+                    <Matrix tx="-17.8" ty="-16.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="128" duration="7" name="T_114024" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/Tower_114024_1.png">
+                  <matrix>
+                    <Matrix tx="-17.4" ty="-17.9"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 3" color="#FF800A" locked="true" visible="false">
+          <frames>
+            <DOMFrame index="0" duration="135" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="135" duration="24" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="建造圆形菜单/skillupstate" name="skillstate" centerPoint3DX="0.6" centerPoint3DY="-29.5">
+                  <matrix>
+                    <Matrix tx="0.25" ty="-29.85"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="0.35" y="0.35"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 2" color="#9933CC" locked="true" visible="false">
+          <frames>
+            <DOMFrame index="0" duration="135" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="135" name="TS_152032" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152032_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-15.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="136" name="TS_152033" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152033_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="137" name="TS_152034" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152034_1.png">
+                  <matrix>
+                    <Matrix tx="-17.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="138" name="TS_152035" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152035_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="139" name="TS_152036" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152036_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="140" name="TS_152037" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152037_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="141" name="TS_152038" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152038_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-15.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="142" name="TS_152039" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152039_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="143" name="TS_152040" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152040_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-15.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="144" name="TS_152041" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152041_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="145" name="TS_152042" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152042_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="146" name="TS_152043" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152043_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-17.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="147" name="TS_152044" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152044_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-18.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="148" name="TS_152045" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152045_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-18.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="149" name="TS_152046" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152046_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-17.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="150" name="TS_152047" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152047_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="151" name="TS_152048" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152048_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-18.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="152" name="TS_152049" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152049_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-18.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="153" name="TS_152050" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152050_1.png">
+                  <matrix>
+                    <Matrix tx="-17.65" ty="-17.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="154" name="TS_152051" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152051_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-17.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="155" name="TS_152052" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152052_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-16.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="156" name="TS_152053" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152053_1.png">
+                  <matrix>
+                    <Matrix tx="-17.65" ty="-17.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="157" name="TS_152054" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152054_1.png">
+                  <matrix>
+                    <Matrix tx="-16.65" ty="-15.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="158" name="TS_152055" labelType="name" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/skill_152055_1.png">
+                  <matrix>
+                    <Matrix tx="-15.65" ty="-17.65"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="text" color="#9933CC" current="true" isSelected="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" duration="159" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="建造圆形菜单/BuildingCircleItemTextSkin" name="itemTextSkin" selected="true" centerPoint3DX="-1" centerPoint3DY="29.15">
+                  <matrix>
+                    <Matrix tx="-23.5" ty="20.45"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="22.5" y="8.7"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="bg" color="#4FFF4F" locked="true" autoNamed="false">
+          <frames>
+            <DOMFrame index="0" duration="10" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/fight_Choice_butten_01.png">
+                  <matrix>
+                    <Matrix tx="-23" ty="-23"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="10" duration="4" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="fight_Choice_butten_04.png">
+                  <matrix>
+                    <Matrix tx="-23" ty="-23"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="14" duration="9" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="fight_Choice_butten_03.png">
+                  <matrix>
+                    <Matrix tx="-16" ty="-16"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="23" duration="136" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/建造项/fight_Choice_butten_01.png">
+                  <matrix>
+                    <Matrix tx="-23" ty="-23"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

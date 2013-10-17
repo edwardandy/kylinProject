@@ -1,0 +1,43 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Effects/hurtNumEffect/CritHurtEffectMC" itemID="512d7ed3-000005b5" linkageExportForAS="true" linkageClassName="CritHurtEffectMC" lastModified="1361936161">
+  <timeline>
+    <DOMTimeline name="CritHurtEffectMC">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="numLabel" fontRenderingMode="device" width="43.7" height="14.9" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="-23.05" ty="-4.6"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>5600</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFCC00"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                  <filters>
+                    <GlowFilter blurX="4" blurY="4" color="#383627" strength="10"/>
+                  </filters>
+                </DOMDynamicText>
+                <DOMSymbolInstance libraryItemName="Effects/hurtNumEffect/Crit" selected="true" centerPoint3DX="-0.95" centerPoint3DY="-7.35">
+                  <matrix>
+                    <Matrix tx="-12.5" ty="-10.95"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point x="11.55" y="3.6"/>
+                  </transformationPoint>
+                  <filters>
+                    <GlowFilter blurX="3" blurY="3" color="#FFFFFF" strength="10.01"/>
+                  </filters>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

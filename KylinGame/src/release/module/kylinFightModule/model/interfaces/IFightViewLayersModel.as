@@ -1,7 +1,7 @@
 package release.module.kylinFightModule.model.interfaces
 {
+	import flash.display.Shape;
 	import flash.display.Sprite;
-	
 	
 	import kylin.echo.edward.gameplay.IKylinGameManager;
 
@@ -24,6 +24,10 @@ package release.module.kylinFightModule.model.interfaces
 		 * 显示下层 
 		 */
 		function get bottomLayer():Sprite;	
+		/**
+		 * 道路形状层，用于测试某个点是否在怪物逃跑路线上 
+		 */		
+		function get roadHitTestShape():Shape;
 		/**
 		 * 地表层 
 		 */

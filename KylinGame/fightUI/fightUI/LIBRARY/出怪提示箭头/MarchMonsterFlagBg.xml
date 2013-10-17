@@ -1,0 +1,34 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="出怪提示箭头/MarchMonsterFlagBg" itemID="5045c664-000003e6" lastModified="1355811527">
+  <timeline>
+    <DOMTimeline name="MarchMonsterFlagBg">
+      <layers>
+        <DOMLayer name="图层 2" color="#9933CC" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="出怪提示箭头/MarchMonsterSandglassFlag" name="flag" centerPoint3DY="0.5">
+                  <transformationPoint>
+                    <Point y="0.5"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F">
+          <frames>
+            <DOMFrame index="0" tweenType="motion" motionTweenSnap="true" keyMode="22017">
+              <elements>
+                <DOMSymbolInstance libraryItemName="出怪提示箭头/MarchMonsterArrow" name="arrow" centerPoint3DX="-0.3" centerPoint3DY="5.8">
+                  <transformationPoint>
+                    <Point x="-0.3" y="5.8"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

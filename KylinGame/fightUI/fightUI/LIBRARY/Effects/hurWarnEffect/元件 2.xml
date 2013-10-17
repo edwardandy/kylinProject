@@ -1,0 +1,21 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Effects/hurWarnEffect/元件 2" itemID="5125a69a-00000649" lastModified="1361421978" lastUniqueIdentifier="1">
+  <timeline>
+    <DOMTimeline name="元件 2">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMSymbolInstance libraryItemName="Effects/hurWarnEffect/元件 1" centerPoint3DX="380" centerPoint3DY="325">
+                  <transformationPoint>
+                    <Point x="380" y="325"/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

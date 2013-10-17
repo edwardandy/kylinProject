@@ -1,0 +1,32 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="战斗底部条界面/道具数量文字/PropItemCountTextField" itemID="50652070-0000024e" linkageExportForAS="true" linkageClassName="PropItemCountTextField" lastModified="1351060222">
+  <timeline>
+    <DOMTimeline name="PropItemCountTextField">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="textField" fontRenderingMode="standard" width="32" height="22.25" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="2" ty="2"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>99</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" lineSpacing="0" size="18" bitmapSize="360" face="ShowcardGothic-Reg" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                  <filters>
+                    <GlowFilter blurX="4" blurY="4" color="#000000" strength="4"/>
+                  </filters>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

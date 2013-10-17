@@ -24,7 +24,7 @@ package io.smash.debug
     import io.smash.input.KeyboardKey;
     import io.smash.input.KeyboardManager;
     import io.smash.smash_internal;
-    import io.smash.time.IAnimated;
+    import io.smash.time.IRenderAble;
     import io.smash.time.ITicked;
     import io.smash.time.TimeManager;
     import io.smash.util.TypeUtility;

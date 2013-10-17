@@ -16,7 +16,7 @@ package io.smash.time
      * Base class for components that need to perform actions every frame. This
      * needs to be subclassed to be useful.
      */
-    public class AnimatedComponent extends SmashComponent implements IAnimated
+    public class AnimatedComponent extends SmashComponent implements IRenderAble
     {
         /**
          * The update priority for this component. Higher numbered priorities have
@@ -64,7 +64,7 @@ package io.smash.time
         /**
          * @inheritDoc
          */
-        public function onFrame(iElapse:int):void
+        public function render(iElapse:int):void
         {
             applyBindings();
         }

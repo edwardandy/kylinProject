@@ -1,0 +1,38 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="加物资减法术cd/wuzishuzhismall" itemID="51a2fc06-00000303" lastModified="1369636089">
+  <timeline>
+    <DOMTimeline name="wuzishuzhismall">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="txtNum" fontRenderingMode="device" width="34.2" height="14.9" autoExpand="true" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="-6.85" ty="-7.05"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>+500</characters>
+                      <textAttrs>
+                        <DOMTextAttrs aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFF600"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+                <DOMGroup selected="true">
+                  <members>
+                    <DOMBitmapInstance libraryItemName="加物资减法术cd/icon_wu-zi_03.png">
+                      <matrix>
+                        <Matrix tx="-23.5" ty="-5.15"/>
+                      </matrix>
+                    </DOMBitmapInstance>
+                  </members>
+                </DOMGroup>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

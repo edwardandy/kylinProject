@@ -1,0 +1,33 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="玩家当前信息/battledrumsbuff" itemID="5146b39c-000003ab" linkageExportForAS="true" linkageClassName="BattleDrumsBuff" lastModified="1372068970" lastUniqueIdentifier="1">
+  <timeline>
+    <DOMTimeline name="battledrumsbuff">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="玩家当前信息/Blitz-Acres_icon_03.png"/>
+                <DOMDynamicText name="buffNum" fontRenderingMode="device" width="25" height="14.9" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="5" ty="17.1"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>9</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="right" aliasText="false" bitmapSize="240" face="Humanist531BT-UltraBlackA" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                  <filters>
+                    <GlowFilter blurX="4" blurY="4" color="#333333" strength="10"/>
+                  </filters>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

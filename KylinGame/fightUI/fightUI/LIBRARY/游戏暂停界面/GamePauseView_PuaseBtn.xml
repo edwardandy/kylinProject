@@ -1,0 +1,63 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="游戏暂停界面/GamePauseView_PuaseBtn" itemID="504027ad-0000030e" lastModified="1357638549">
+  <timeline>
+    <DOMTimeline name="GamePauseView_PuaseBtn">
+      <layers>
+        <DOMLayer name="图层 2" color="#9933CC" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" duration="4" keyMode="9728">
+              <elements>
+                <DOMDynamicText name="label" fontRenderingMode="device" width="102" height="22.35" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="-51" ty="-12.45"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>Continue</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="18" bitmapSize="360" face="Humanist531BT-UltraBlackA" fillColor="#FFFFFF"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                  <filters>
+                    <GlowFilter blurX="4" blurY="4" color="#31758B" strength="10"/>
+                  </filters>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="游戏暂停界面/fight_paused_butten_continue_up.png">
+                  <matrix>
+                    <Matrix tx="-52.5" ty="-15"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="1" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="游戏暂停界面/fight_paused_butten_continue_over.png">
+                  <matrix>
+                    <Matrix tx="-52.5" ty="-15"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="2" duration="2" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="游戏暂停界面/fight_paused_butten_continue_down.png">
+                  <matrix>
+                    <Matrix tx="-52.5" ty="-15"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

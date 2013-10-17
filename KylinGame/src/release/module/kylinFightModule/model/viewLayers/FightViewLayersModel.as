@@ -1,6 +1,7 @@
 package release.module.kylinFightModule.model.viewLayers
 {
 	import flash.display.DisplayObjectContainer;
+	import flash.display.Shape;
 	import flash.display.Sprite;
 	
 	import kylin.echo.edward.framwork.model.KylinActor;
@@ -20,6 +21,7 @@ package release.module.kylinFightModule.model.viewLayers
 		[Inject]
 		public var mainViewLayers:ViewLayersMgr;
 		private var _groundLayer:Sprite;
+		private var _roadHitTestShape:Shape;
 		private var _bottomLayer:Sprite;
 		private var _middleLayer:Sprite;
 		private var _topLayer:Sprite;
@@ -29,6 +31,11 @@ package release.module.kylinFightModule.model.viewLayers
 			super();
 		}
 		
+		public function get roadHitTestShape():Shape
+		{
+			return _roadHitTestShape;
+		}
+
 		public function get topLayer():Sprite
 		{
 			return _topLayer;
@@ -53,9 +60,14 @@ package release.module.kylinFightModule.model.viewLayers
 		public function postConstruct():void
 		{
 			_groundLayer = new Sprite;
+			_groundLayer.mouseEnabled = false;
+			_roadHitTestShape = new Shape;
 			_bottomLayer = new Sprite;
+			_bottomLayer.mouseEnabled = false;
 			_middleLayer = new Sprite;
+			_middleLayer.mouseEnabled = false;
 			_topLayer = new Sprite;
+			_topLayer.mouseEnabled = false;
 		}
 		
 		/**
@@ -65,6 +77,7 @@ package release.module.kylinFightModule.model.viewLayers
 		public function initialize():void
 		{
 			mainViewLayers.fightScene.addChild(_groundLayer);
+			mainViewLayers.fightScene.addChild(_roadHitTestShape);
 			mainViewLayers.fightScene.addChild(_bottomLayer);
 			mainViewLayers.fightScene.addChild(_middleLayer);
 			mainViewLayers.fightScene.addChild(_topLayer);
@@ -73,8 +86,19 @@ package release.module.kylinFightModule.model.viewLayers
 		 * 销毁
 		 * 
 		 */		
+		[PreDestroy]
 		public function destroy():void
 		{
+			_groundLayer.removeChildren();
+			_bottomLayer.removeChildren();
+			_middleLayer.removeChildren();
+			_topLayer.removeChildren();
+			
+			mainViewLayers.fightScene.removeChild(_groundLayer);
+			mainViewLayers.fightScene.removeChild(_roadHitTestShape);
+			mainViewLayers.fightScene.removeChild(_bottomLayer);
+			mainViewLayers.fightScene.removeChild(_middleLayer);
+			mainViewLayers.fightScene.removeChild(_topLayer);
 		}
 	}
 }

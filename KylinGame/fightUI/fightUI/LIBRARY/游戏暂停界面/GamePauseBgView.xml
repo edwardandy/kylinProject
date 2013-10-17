@@ -1,0 +1,38 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="游戏暂停界面/GamePauseBgView" itemID="50405322-00000473" linkageExportForAS="true" linkageBaseClass="flash.display.Sprite" linkageClassName="GamePauseBgView" lastModified="1363584958" isSpriteSubclass="true">
+  <timeline>
+    <DOMTimeline name="GamePauseBgView">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance selected="true" libraryItemName="游戏暂停界面/fight_-paused_bg_01.png"/>
+                <DOMSymbolInstance libraryItemName="游戏暂停界面/GamePauseView_PuaseBtn" name="pauseBtn" centerPoint3DX="194.5" centerPoint3DY="109">
+                  <matrix>
+                    <Matrix tx="194.5" ty="109"/>
+                  </matrix>
+                  <transformationPoint>
+                    <Point/>
+                  </transformationPoint>
+                </DOMSymbolInstance>
+                <DOMDynamicText name="contentTF" fontRenderingMode="device" left="24.15" width="359" height="16.8" isSelectable="false">
+                  <matrix>
+                    <Matrix tx="-10.15" ty="49.95"/>
+                  </matrix>
+                  <textRuns>
+                    <DOMTextRun>
+                      <characters>You can disable autopause via the options menu.</characters>
+                      <textAttrs>
+                        <DOMTextAttrs alignment="center" aliasText="false" size="14" bitmapSize="280" face="Museo-700" fillColor="#68381B"/>
+                      </textAttrs>
+                    </DOMTextRun>
+                  </textRuns>
+                </DOMDynamicText>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

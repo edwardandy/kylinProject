@@ -1,0 +1,80 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="建造圆形菜单/skillupstate" itemID="50ea963c-0000071e" lastModified="1359872983">
+  <timeline>
+    <DOMTimeline name="skillupstate" currentFrame="3">
+      <layers>
+        <DOMLayer name="图层 2" color="#9933CC" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements/>
+            </DOMFrame>
+            <DOMFrame index="1" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_05.png">
+                  <matrix>
+                    <Matrix tx="-21.3" ty="-6.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="2" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_05.png">
+                  <matrix>
+                    <Matrix tx="-21.3" ty="-6.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_05.png">
+                  <matrix>
+                    <Matrix tx="-6.15" ty="-8.75"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="3" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_05.png">
+                  <matrix>
+                    <Matrix tx="-21.3" ty="-6.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_05.png">
+                  <matrix>
+                    <Matrix tx="-6.15" ty="-8.75"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_05.png">
+                  <matrix>
+                    <Matrix tx="8.85" ty="-6.05"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+        <DOMLayer name="图层 1" color="#4FFF4F" locked="true">
+          <frames>
+            <DOMFrame index="0" duration="4" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_03.png">
+                  <matrix>
+                    <Matrix tx="-21.15" ty="-6.15"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_03.png">
+                  <matrix>
+                    <Matrix tx="-6.15" ty="-8.15"/>
+                  </matrix>
+                </DOMBitmapInstance>
+                <DOMBitmapInstance libraryItemName="建造圆形菜单/fight_Choice_bg_03.png">
+                  <matrix>
+                    <Matrix tx="8.85" ty="-6.15"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>

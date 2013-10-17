@@ -21,7 +21,7 @@ package io.smash.time
      * @see ProcessManager
      * @see ITickedObject
      */
-    public interface IAnimated
+    public interface IRenderAble
     {
         /**
          * This method is called every frame by the ProcessManager on any objects
@@ -32,6 +32,6 @@ package io.smash.time
          * 
          * @see ProcessManager#AddAnimatedObject()
          */
-        function onFrame(iElapse:int):void;
+        function render(iElapse:int):void;
     }
 }

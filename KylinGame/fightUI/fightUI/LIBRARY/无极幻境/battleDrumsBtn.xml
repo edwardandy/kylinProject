@@ -1,0 +1,48 @@
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="无极幻境/battleDrumsBtn" itemID="5146b07b-0000030b" linkageExportForAS="true" linkageClassName="BattleDrumsBtn" lastModified="1373354614">
+  <timeline>
+    <DOMTimeline name="battleDrumsBtn">
+      <layers>
+        <DOMLayer name="图层 1" color="#4FFF4F" current="true" isSelected="true">
+          <frames>
+            <DOMFrame index="0" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="无极幻境/Blitz-Acres_butten_BD_up.png">
+                  <matrix>
+                    <Matrix tx="-21" ty="-22.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="1" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="无极幻境/Blitz-Acres_butten_BD_over.png">
+                  <matrix>
+                    <Matrix tx="-21" ty="-22.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="2" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="无极幻境/Blitz-Acres_butten_BD_down.png">
+                  <matrix>
+                    <Matrix tx="-21" ty="-22.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+            <DOMFrame index="3" keyMode="9728">
+              <elements>
+                <DOMBitmapInstance libraryItemName="无极幻境/Blitz-Acres_butten_BD_down.png">
+                  <matrix>
+                    <Matrix tx="-21" ty="-22.5"/>
+                  </matrix>
+                </DOMBitmapInstance>
+              </elements>
+            </DOMFrame>
+          </frames>
+        </DOMLayer>
+      </layers>
+    </DOMTimeline>
+  </timeline>
+</DOMSymbolItem>
