@@ -1,13 +1,10 @@
 package release.module.kylinFightModule.gameplay.oldcore.utils
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.IPositionUnit;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.LineVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
-	
 	import flash.display.Sprite;
 	import flash.geom.Point;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
     public final class GameMathUtil
     {

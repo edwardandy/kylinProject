@@ -3,6 +3,7 @@ package release.module.kylinFightModule.model.marchWave
 	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.utilities.datastructures.FillObjectUtil;
 	
+	import release.module.kylinFightModule.gameplay.oldcore.events.GameDataInfoEvent;
 	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
 	
 
@@ -53,6 +54,19 @@ package release.module.kylinFightModule.model.marchWave
 		public function get totalWaveCount():int
 		{
 			return _vecMonsterWaves.length;
+		}
+		
+		public function increaseSceneWave():void
+		{
+			if(_isCompleteWave) 
+				return;
+			
+			if(_curWaveCount < totalWaveCount)
+			{
+				_curWaveCount++;
+				var event:GameDataInfoEvent = new GameDataInfoEvent(GameDataInfoEvent.UPDATE_SCENE_WAVE);
+				dispatch(event);
+			}
 		}
 		
 		public function initialize():void

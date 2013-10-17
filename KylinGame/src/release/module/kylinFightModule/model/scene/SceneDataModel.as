@@ -6,6 +6,8 @@ package release.module.kylinFightModule.model.scene
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
 	
+	import release.module.kylinFightModule.gameplay.oldcore.events.GameDataInfoEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.map.SceneElementVO;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 
@@ -90,6 +92,47 @@ package release.module.kylinFightModule.model.scene
 				sceneElementVO.xmlData = elementXML;
 				_vecSceneInitElements.push(sceneElementVO);
 			}
+		}
+		
+		/**
+		 * 更新场景生命
+		 * @param value
+		 * 
+		 */		
+		public function updateSceneLife(value:int):void
+		{
+			_sceneLife += value;
+			
+			if(_sceneLife < 0)
+				_sceneLife = 0;
+			
+			var event:GameDataInfoEvent = new GameDataInfoEvent(GameDataInfoEvent.UPDATE_SCENE_LIFE);
+			dispatch(event);
+		}
+		
+		/**
+		 * 更新场景物资
+		 * @param value
+		 * 
+		 */		
+		public function updateSceneGold(value:int):void
+		{
+			_sceneGoods += value;
+			
+			if(_sceneGoods < 0)
+				_sceneGoods = 0;
+			
+			var event:GameDataInfoEvent = new GameDataInfoEvent(GameDataInfoEvent.UPDATE_SCENE_GOLD);
+			dispatch(event);
+		}
+		/**
+		 * 更新场景积分 
+		 * 
+		 */		
+		public function updateSceneScore():void
+		{
+			var event:GameDataInfoEvent = new GameDataInfoEvent(GameDataInfoEvent.UPDATE_SCENE_SCORE);
+			dispatch(event);
 		}
 		
 		public function destroy():void

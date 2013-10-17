@@ -1,17 +1,10 @@
 package release.module.kylinFightModule.gameplay.oldcore.vo
 {
 	public class NewMonsterList
-	{
-		private static var _instance:NewMonsterList;
-		
+	{		
 		private var _monsterIds:Array;
 		public function NewMonsterList()
 		{
-		}
-		
-		public static function get instance():NewMonsterList
-		{
-			return _instance ||= new NewMonsterList;
 		}
 		
 		public function set monsterIds(ids:Array):void

@@ -50,5 +50,22 @@ package release.module.kylinFightModule.model.interfaces
 		 * 
 		 */		
 		function updateSceneElements(data:XML):void;
+		/**
+		 * 更新场景物资
+		 * @param value
+		 * 
+		 */		
+		function updateSceneGold(value:int):void;
+		/**
+		 * 更新场景生命
+		 * @param value
+		 * 
+		 */		
+		function updateSceneLife(value:int):void;
+		/**
+		 * 更新场景积分 
+		 * 
+		 */		
+		function updateSceneScore():void;
 	}
 }

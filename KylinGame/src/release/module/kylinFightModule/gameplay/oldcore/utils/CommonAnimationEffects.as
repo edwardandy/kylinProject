@@ -3,16 +3,16 @@ package release.module.kylinFightModule.gameplay.oldcore.utils
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
 	
-	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.geom.Point;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	
-	import framecore.tools.font.FontUtil;
-	import framecore.tools.objectPool.PoolManager;
+	import kylin.echo.edward.utilities.font.FontMgr;
+	import kylin.echo.edward.utilities.objectPool.PoolManager;
+	
+	import utili.font.FontClsName;
 
 	public class CommonAnimationEffects
 	{
@@ -82,7 +82,8 @@ package release.module.kylinFightModule.gameplay.oldcore.utils
 		private static function hurtEffInit( effMC:MovieClip ):void
 		{
 			effMC.mouseChildren = effMC.mouseEnabled = false;
-			FontUtil.useFont( effMC.numLabel, FontUtil.FONT_TYPE_BUTTON );
+			FontMgr.instance.setTextStyle(effMC.numLabel,FontClsName.ButtonFont);
+			effMC.numLabel.text = effMC.numLabel.text;
 			TextField(effMC.numLabel).autoSize = TextFieldAutoSize.CENTER;
 			effMC.cacheAsBitmap = true;
 		}

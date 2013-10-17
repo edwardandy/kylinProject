@@ -8,6 +8,8 @@ package release.module.kylinFightModule.model
 	import release.module.kylinFightModule.model.marchWave.MonsterWaveModel;
 	import release.module.kylinFightModule.model.roads.MapRoadModel;
 	import release.module.kylinFightModule.model.scene.SceneDataModel;
+	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
+	import release.module.kylinFightModule.model.sceneElements.SceneElementsModel;
 	import release.module.kylinFightModule.model.viewLayers.FightViewLayersModel;
 	
 	import robotlegs.bender.framework.api.IInjector;
@@ -20,6 +22,7 @@ package release.module.kylinFightModule.model
 			injector.map(IFightViewLayersModel).toSingleton(FightViewLayersModel);
 			injector.map(IMapRoadModel).toSingleton(MapRoadModel);
 			injector.map(ISceneDataModel).toSingleton(SceneDataModel);
+			injector.map(ISceneElementsModel).toSingleton(SceneElementsModel);
 		}
 	}
 }

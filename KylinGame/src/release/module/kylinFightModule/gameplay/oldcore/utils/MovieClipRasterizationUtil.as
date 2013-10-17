@@ -1,120 +1,28 @@
 package release.module.kylinFightModule.gameplay.oldcore.utils
 {
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
-	import flash.filters.ColorMatrixFilter;
-	import flash.geom.ColorTransform;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import flash.sampler.getSize;
-	import flash.utils.getTimer;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
 	
 	public class MovieClipRasterizationUtil
 	{
-		private static const pt:Point = new Point();
-		private static var rect:Rectangle;
-		private static var realRect:Rectangle;
-		private static var mt:Matrix = new Matrix();
-		private static var emptyBitmapData:BitmapData = new BitmapData(1, 1, true, 0);
+		private const pt:Point = new Point();
+		private var rect:Rectangle;
+		private var realRect:Rectangle;
+		private var mt:Matrix = new Matrix();
+		private var emptyBitmapData:BitmapData = new BitmapData(1, 1, true, 0);
+		private var pot:Point = new Point;
 		
 		public function MovieClipRasterizationUtil()
 		{
 			super();
 		}
 		
-		/**
-		 * 将mc cache为bitmapData数组
-		 * @param mc 资源动画
-		 * @param smoothing 是否平滑
-		 * @return BitmapFrameInfo数组
-		 */ 
-		public static function rasterize(mc:MovieClip):Vector.<BitmapFrameInfo>
-		{
-//			var t:int = getTimer();
-			
-//			var colorMatrixFilter:ColorMatrixFilter = new ColorMatrixFilter();
-//			colorMatrixFilter.matrix = [1.1200000047683716,0,0,0,37.179996490478516,0,1.1200000047683716,0,0,37.179996490478516,0,0,1.1200000047683716,0,37.179996490478516,0,0,0,1,0];
-//			mc.filters = [colorMatrixFilter];
-			
-			var bitmapFrameInfoArr:Vector.<BitmapFrameInfo>=new Vector.<BitmapFrameInfo>();
-			var i:int;
-			var n:int = mc.totalFrames;
-			var lastBitmapFrameName:String = null;
-			var bitmapFrameInfo:BitmapFrameInfo = null;
-			for(i = 0; i< n; i++)
-			{
-				mc.gotoAndStop(i+1);
-				bitmapFrameInfo = rasterizeCurrentFrame(mc, lastBitmapFrameName);
-				lastBitmapFrameName = mc.currentLabel; 
-				bitmapFrameInfoArr.push(bitmapFrameInfo);
-			}
-//			trace(getTimer() - t);
-			return bitmapFrameInfoArr;
-		}
-		
-		private static function rasterizeCurrentFrame(mc:MovieClip, lastFramName:String):BitmapFrameInfo
-		{
-			rect = mc.getBounds(mc);
-			
-			rect.x *= mc.scaleX;
-			rect.y *= mc.scaleY;
-			rect.width *= mc.scaleX;
-			rect.height *= mc.scaleY;
-			
-			mt.a = mc.scaleX;
-			mt.d = mc.scaleY;
-			mt.tx = -rect.x;
-			mt.ty = -rect.y;
-			
-			var bitmapData:BitmapData = null;
-			
-			//防止空白帧报错
-			if(rect.isEmpty())
-			{
-				bitmapData = emptyBitmapData;
-			}
-			else
-			{
-				//截图
-				bitmapData = new BitmapData(Math.ceil(rect.width), Math.ceil(rect.height), true, 0x000000);
-				bitmapData.draw(mc, mt);
-				
-				//剔除透明边界, 这里一定是整数
-				realRect = bitmapData.getColorBoundsRect(0xFF000000, 0x00000000, false);
-				
-				if(!realRect.isEmpty() && 
-					(bitmapData.width + bitmapData.height - realRect.width - realRect.height > 20))
-				{
-					var realBitData:BitmapData = new BitmapData(Math.ceil(realRect.width), Math.ceil(realRect.height), true, 0x000000);
-					realBitData.copyPixels(bitmapData, realRect, pt);
-					
-					bitmapData.dispose();
-					bitmapData = realBitData;
-
-					rect.x += realRect.x;
-					rect.y += realRect.y;
-				}
-			}
-			
-			var btmapFrameInfo:BitmapFrameInfo = new BitmapFrameInfo();
-			btmapFrameInfo.bitmapData= bitmapData;
-			if(mc.currentLabel != lastFramName)
-			{
-				btmapFrameInfo.name = mc.currentLabel;
-			}
-			btmapFrameInfo.frame = mc.currentFrame;
-			
-//			trace(rect);
-			btmapFrameInfo.x = Math.ceil(rect.x);
-			btmapFrameInfo.y = Math.ceil(rect.y);
-			
-			return btmapFrameInfo;
-		}
-		
-		public static function rasterizeNew(ptTraceSize:Point,mc:MovieClip,scale:Number = 1,ioVecInfos:Vector.<BitmapFrameInfo> = null,startFrameName:Object=null,endFrameName:Object=null):Vector.<BitmapFrameInfo>
+		public function rasterizeNew(ptTraceSize:Point,mc:MovieClip,scale:Number = 1,ioVecInfos:Vector.<BitmapFrameInfo> = null,startFrameName:Object=null,endFrameName:Object=null):Vector.<BitmapFrameInfo>
 		{	
 			var bitmapFrameInfoArr:Vector.<BitmapFrameInfo>= (ioVecInfos || new Vector.<BitmapFrameInfo>(mc.totalFrames));
 			var i:int;
@@ -169,8 +77,7 @@ package release.module.kylinFightModule.gameplay.oldcore.utils
 			return bitmapFrameInfoArr;
 		}
 		
-		private static var pot:Point = new Point;
-		private static function rasterizeCurrentFrameNew(mc:MovieClip, lastFramName:String,scale:Number = 1):BitmapFrameInfo
+		private function rasterizeCurrentFrameNew(mc:MovieClip, lastFramName:String,scale:Number = 1):BitmapFrameInfo
 		{	
 			var bitInfo:BitmapFrameInfo = new BitmapFrameInfo();
 			if(mc.currentLabel != lastFramName)
@@ -184,7 +91,7 @@ package release.module.kylinFightModule.gameplay.oldcore.utils
 			return bitInfo;
 		}
 		
-		public static function rasterizeCurrentFrameToBitmap(mc:MovieClip,bitInfo:BitmapFrameInfo,scale:Number = 1):void
+		public function rasterizeCurrentFrameToBitmap(mc:MovieClip,bitInfo:BitmapFrameInfo,scale:Number = 1):void
 		{
 			if(!mc || !bitInfo)
 				return;

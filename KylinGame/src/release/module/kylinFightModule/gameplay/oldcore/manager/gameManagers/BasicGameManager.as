@@ -1,11 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IGameLifecycleBeNotifyer;
-	import com.shinezone.towerDefense.fight.constants.TowerDefenseGameState;
-	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	
+	import release.module.kylinFightModule.gameplay.constant.TowerDefenseGameState;
+	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
+	import release.module.kylinFightModule.gameplay.oldcore.core.IGameLifecycleBeNotifyer;
 
 	public class BasicGameManager extends EventDispatcher implements IDisposeObject, IGameLifecycleBeNotifyer
 	{

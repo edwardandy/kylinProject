@@ -11,7 +11,6 @@ package release.module.kylinFightModule.model.sceneElements
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.ToftElement;
@@ -20,7 +19,6 @@ package release.module.kylinFightModule.model.sceneElements
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.map.SceneElementVO;
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
@@ -36,7 +34,7 @@ package release.module.kylinFightModule.model.sceneElements
 	 * @author Edward
 	 * 
 	 */	
-	public class SceneElementsModel extends KylinActor implements IDisposeObject
+	public class SceneElementsModel extends KylinActor implements ISceneElementsModel
 	{
 		[Inject]
 		public var fightViewLayers:IFightViewLayersModel;
@@ -64,118 +62,36 @@ package release.module.kylinFightModule.model.sceneElements
 			super();
 		}
 		
+		public function get summonDoors():Vector.<SummonDemonDoorSkillRes>
+		{
+			return _summonDoors;
+		}
+
+		public function get groundEffElements():Vector.<BasicGroundEffect>
+		{
+			return _groundEffElements;
+		}
+
+		public function get organismsElements():Vector.<BasicOrganismElement>
+		{
+			return _organismsElements;
+		}
+
+		public function get towerElements():Vector.<BasicTowerElement>
+		{
+			return _towerElements;
+		}
+
+		public function get allDepthRenderElements():Vector.<DisplayObject>
+		{
+			return _allDepthRenderElements;
+		}
+
 		public function initBeforeFightStart():void
 		{
 			updateMapRoadShape();
 			checkEndPointFlag(sceneModel.sceneType);
-		}
-		
-		public function initializeSceneElement():void
-		{
-			//配置
-			var elementVOs:Vector.<SceneElementVO> = sceneModel.sceneInitElementsVo;
-			for each(var elementVO:SceneElementVO in elementVOs)
-			{
-				var category:String = elementVO.category;
-				if(category == GameObjectCategoryType.HERO) 
-					continue;//不允许配置文件里面添加英雄单位
-				
-				var sceneElement:BasicSceneElement = ObjectPoolManager.getInstance()
-					.createSceneElementObject(category, elementVO.typeId, false) as BasicSceneElement; 
-				
-				if(sceneElement != null)
-				{
-					sceneElement.x = elementVO.x;
-					sceneElement.y = elementVO.y;
-					
-					if(category == GameObjectCategoryType.TOFT)
-					{
-						var toftPointArr:Array = String(elementVO.xmlData.@meetPoint).split("|");
-						ToftElement(sceneElement).setMeetingCenterPoint(new PointVO(int(toftPointArr[0]), int(toftPointArr[1])));
-						sceneElement.notifyLifecycleActive();
-						sceneElement.render(0);
-						if(1 == int(elementVO.xmlData.@locked))
-							ToftElement(sceneElement).enable = false;
-						else
-							ToftElement(sceneElement).enable = true;
-					}
-					else
-						sceneElement.notifyLifecycleActive();
-				}
-			}
-			
-			//英雄
-			var currentHeroIds:Array = heroData.arrHeroIdsInFight;
-			if(currentHeroIds == null || currentHeroIds.length == 0) return;
-			
-			var endPointMarkPosition:PointVO = mapRoadModel.ptRoadEnd;
-			//这里终点是应该所有的路都合并了，所以取任意一条路都可以
-			var roadLinePointPath:Vector.<PointVO> = mapRoadModel.getMapRoad(0).lineVOs[1].points;
-			
-			//最后一点和前面一点的角度
-			var directionRadian:Number = GameMathUtil.caculateDirectionRadianByTwoPoint(
-				roadLinePointPath[roadLinePointPath.length - 1], 
-				roadLinePointPath[roadLinePointPath.length - 2]);
-			
-			var heroElement0:HeroElement = null;//左边
-			var heroElement1:HeroElement = null;//中间
-			var heroElement2:HeroElement = null;//右边
-			
-			var n:uint = currentHeroIds.length;//n可能的值为0，1，2，3
-			if(n == 1)
-			{
-				heroElement1 = ObjectPoolManager.getInstance()
-					.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
-				heroElement1.x = endPointMarkPosition.x;
-				heroElement1.y = endPointMarkPosition.y;
-				heroElement1.notifyLifecycleActive();
-				heroElement1.setAngle(directionRadian, true);
-			}
-			else if(n > 1)
-			{
-				var leftAndRightHeroStandPoints:Array =  GameMathUtil.caculateTwoEqualDistanceLRPointByCenterPointAndDirection(endPointMarkPosition,
-					directionRadian, GameFightConstant.HERO_DEFAULT_STAND_CIRCLE_RADIUS);
-				
-				if(n == 2)
-				{
-					heroElement0 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
-					heroElement0.x = leftAndRightHeroStandPoints[0].x;
-					heroElement0.y = leftAndRightHeroStandPoints[0].y;
-					heroElement0.notifyLifecycleActive();
-					heroElement0.setAngle(directionRadian, true);
-					
-					heroElement2 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[1], false) as HeroElement;
-					heroElement2.x = leftAndRightHeroStandPoints[1].x;
-					heroElement2.y = leftAndRightHeroStandPoints[1].y;
-					heroElement2.notifyLifecycleActive();
-					heroElement2.setAngle(directionRadian, true);
-				}
-				else if(n == 3)
-				{
-					heroElement0 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
-					heroElement0.x = leftAndRightHeroStandPoints[0].x;
-					heroElement0.y = leftAndRightHeroStandPoints[0].y;
-					heroElement0.notifyLifecycleActive();
-					heroElement0.setAngle(directionRadian, true);
-					
-					heroElement1 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[1], false) as HeroElement;
-					heroElement1.x = endPointMarkPosition.x;
-					heroElement1.y = endPointMarkPosition.y;
-					heroElement1.notifyLifecycleActive();
-					heroElement1.setAngle(directionRadian, true);
-					
-					heroElement2 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[2], false) as HeroElement;
-					heroElement2.x = leftAndRightHeroStandPoints[1].x;
-					heroElement2.y = leftAndRightHeroStandPoints[1].y;
-					heroElement2.notifyLifecycleActive();
-					heroElement2.setAngle(directionRadian, true);
-				}
-			}
+			initializeSceneElement();
 		}
 		
 		public final function addSceneElemet(e:BasicSceneElement):void
@@ -450,6 +366,118 @@ package release.module.kylinFightModule.model.sceneElements
 			_endPointFlag.mouseChildren = false;
 			_endPointFlag.gotoAndPlay(1);
 			fightViewLayers.groundLayer.addChild(_endPointFlag);
+		}
+		
+		/**
+		 * 初始化场景元素，包括塔基，英雄等 
+		 * 
+		 */		
+		private function initializeSceneElement():void
+		{
+			//配置
+			var elementVOs:Vector.<SceneElementVO> = sceneModel.sceneInitElementsVo;
+			for each(var elementVO:SceneElementVO in elementVOs)
+			{
+				var category:String = elementVO.category;
+				if(category == GameObjectCategoryType.HERO) 
+					continue;//不允许配置文件里面添加英雄单位
+				
+				var sceneElement:BasicSceneElement = ObjectPoolManager.getInstance()
+					.createSceneElementObject(category, elementVO.typeId, false) as BasicSceneElement; 
+				
+				if(sceneElement != null)
+				{
+					sceneElement.x = elementVO.x;
+					sceneElement.y = elementVO.y;
+					
+					if(category == GameObjectCategoryType.TOFT)
+					{
+						var toftPointArr:Array = String(elementVO.xmlData.@meetPoint).split("|");
+						ToftElement(sceneElement).setMeetingCenterPoint(new PointVO(int(toftPointArr[0]), int(toftPointArr[1])));
+						sceneElement.notifyLifecycleActive();
+						sceneElement.render(0);
+						if(1 == int(elementVO.xmlData.@locked))
+							ToftElement(sceneElement).enable = false;
+						else
+							ToftElement(sceneElement).enable = true;
+					}
+					else
+						sceneElement.notifyLifecycleActive();
+				}
+			}
+			
+			//英雄
+			var currentHeroIds:Array = heroData.arrHeroIdsInFight;
+			if(currentHeroIds == null || currentHeroIds.length == 0) return;
+			
+			var endPointMarkPosition:PointVO = mapRoadModel.ptRoadEnd;
+			//这里终点是应该所有的路都合并了，所以取任意一条路都可以
+			var roadLinePointPath:Vector.<PointVO> = mapRoadModel.getMapRoad(0).lineVOs[1].points;
+			
+			//最后一点和前面一点的角度
+			var directionRadian:Number = GameMathUtil.caculateDirectionRadianByTwoPoint(
+				roadLinePointPath[roadLinePointPath.length - 1], 
+				roadLinePointPath[roadLinePointPath.length - 2]);
+			
+			var heroElement0:HeroElement = null;//左边
+			var heroElement1:HeroElement = null;//中间
+			var heroElement2:HeroElement = null;//右边
+			
+			var n:uint = currentHeroIds.length;//n可能的值为0，1，2，3
+			if(n == 1)
+			{
+				heroElement1 = ObjectPoolManager.getInstance()
+					.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
+				heroElement1.x = endPointMarkPosition.x;
+				heroElement1.y = endPointMarkPosition.y;
+				heroElement1.notifyLifecycleActive();
+				heroElement1.setAngle(directionRadian, true);
+			}
+			else if(n > 1)
+			{
+				var leftAndRightHeroStandPoints:Array =  GameMathUtil.caculateTwoEqualDistanceLRPointByCenterPointAndDirection(endPointMarkPosition,
+					directionRadian, GameFightConstant.HERO_DEFAULT_STAND_CIRCLE_RADIUS);
+				
+				if(n == 2)
+				{
+					heroElement0 = ObjectPoolManager.getInstance()
+						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
+					heroElement0.x = leftAndRightHeroStandPoints[0].x;
+					heroElement0.y = leftAndRightHeroStandPoints[0].y;
+					heroElement0.notifyLifecycleActive();
+					heroElement0.setAngle(directionRadian, true);
+					
+					heroElement2 = ObjectPoolManager.getInstance()
+						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[1], false) as HeroElement;
+					heroElement2.x = leftAndRightHeroStandPoints[1].x;
+					heroElement2.y = leftAndRightHeroStandPoints[1].y;
+					heroElement2.notifyLifecycleActive();
+					heroElement2.setAngle(directionRadian, true);
+				}
+				else if(n == 3)
+				{
+					heroElement0 = ObjectPoolManager.getInstance()
+						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
+					heroElement0.x = leftAndRightHeroStandPoints[0].x;
+					heroElement0.y = leftAndRightHeroStandPoints[0].y;
+					heroElement0.notifyLifecycleActive();
+					heroElement0.setAngle(directionRadian, true);
+					
+					heroElement1 = ObjectPoolManager.getInstance()
+						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[1], false) as HeroElement;
+					heroElement1.x = endPointMarkPosition.x;
+					heroElement1.y = endPointMarkPosition.y;
+					heroElement1.notifyLifecycleActive();
+					heroElement1.setAngle(directionRadian, true);
+					
+					heroElement2 = ObjectPoolManager.getInstance()
+						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[2], false) as HeroElement;
+					heroElement2.x = leftAndRightHeroStandPoints[1].x;
+					heroElement2.y = leftAndRightHeroStandPoints[1].y;
+					heroElement2.notifyLifecycleActive();
+					heroElement2.setAngle(directionRadian, true);
+				}
+			}
 		}
 	}
 }
