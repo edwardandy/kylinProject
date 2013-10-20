@@ -27,24 +27,28 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			//if(vecFrames)
 			{
 				myBodySkin = new NewBitmapMovieClip([bodySkinResourceURL],[myScaleRatioType]);
+				injector.injectInto(myBodySkin);
 				myBodySkin.smoothing = true;
 				addChild(myBodySkin);
 				myBodySkin.x = 200;
 				myBodySkin.y = 250;
 				
 				_myBodySkin1 = new NewBitmapMovieClip([bodySkinResourceURL],[myScaleRatioType]);
+				injector.injectInto(_myBodySkin1);
 				_myBodySkin1.smoothing = true;
 				addChild(_myBodySkin1);
 				_myBodySkin1.x = 200;
 				_myBodySkin1.y = 450;
 				
 				_myBodySkin2 = new NewBitmapMovieClip([bodySkinResourceURL],[myScaleRatioType]);
+				injector.injectInto(_myBodySkin2);
 				_myBodySkin2.smoothing = true;
 				addChild(_myBodySkin2);
 				_myBodySkin2.x = 600;
 				_myBodySkin2.y = 250;
 				
 				_myBodySkin3 = new NewBitmapMovieClip([bodySkinResourceURL],[myScaleRatioType]);
+				injector.injectInto(_myBodySkin3);
 				_myBodySkin3.smoothing = true;
 				addChild(_myBodySkin3);
 				_myBodySkin3.x = 600;

@@ -1,34 +1,43 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 {
-	import com.shinezone.core.datastructures.HashMap;
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import kylin.echo.edward.utilities.datastructures.HashMap;
+	
+	import mainModule.model.gameData.dynamicData.heroSkill.IHeroSkillDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.heroSkill.IHeroSkillDynamicItem;
+	import mainModule.model.gameData.sheetData.skill.heroSkill.IHeroSkillSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.skillBullets.BasicSkillBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.BasicSkillLogicUnit;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillProcessor;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillResult;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.BasicBufferProcessor;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.GameFightBufferProcessorMgr;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.GameFightSkillResultMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.heroSkill.HeroSkillData;
-	import framecore.structure.model.user.heroSkill.HeroSkillInfo;
 	
 	/**
 	 * 技能逻辑处理类
 	 */
 	public class BasicSkillProcessor extends BasicSkillLogicUnit implements ISkillProcessor
 	{
+		[Inject]
+		public var skillResultMgr:GameFightSkillResultMgr;
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
+		[Inject]
+		public var heroSkillData:IHeroSkillDynamicDataModel;
+		[Inject]
+		public var buffProcessorMgr:GameFightBufferProcessorMgr;
 		//private var _hashResults:HashMap = new HashMap;
 		private var _arrResultKeys:Array = [];
 		private var _effectParam:Object = {};
@@ -51,8 +60,8 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 		{
 			super.dispose();
 			_hashBuffs.clear();
-			//_hashBuffs = null;
-			//_arrResultKeys = null;
+			_hashBuffs = null;
+			_arrResultKeys = null;
 		}
 		
 		public function get effectParam():Object
@@ -69,7 +78,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 			var skillResult:ISkillResult;
 			for each(var strId:String in _arrResultKeys)
 			{
-				skillResult = GameAGlobalManager.getInstance().gameSkillResultMgr.getSkillResultById(strId);
+				skillResult = skillResultMgr.getSkillResultById(strId);
 				if(skillResult)
 				{
 					skillResult.effect(changeParamBeforeUse(_effectParam,state.owner),target,state.owner);
@@ -105,7 +114,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 			{
 				for each(var target:ISkillTarget in state.vecTargets)
 				{
-					bulletEffect = ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.BULLET, _skillInfo.weapon, false) as BasicSkillBulletEffect;
+					bulletEffect = objPoolMgr.createSceneElementObject(GameObjectCategoryType.BULLET, _skillInfo.weapon, false) as BasicSkillBulletEffect;
 					if(!bulletEffect)
 						return; 
 					bulletEffect.skillFire(state,(target as BasicOrganismElement),state.owner.getGlobalFirePoint(),-1);
@@ -118,19 +127,14 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 		//处理技能的直接结果
 		protected function initResult():void
 		{
-			if(!_skillInfo.effect)
+			if(!_skillInfo.objEffect)
 				return;
-			var arrResults:Array = _skillInfo.effect.split(",");
-			for each(var unit:String in arrResults)
+			for(var key:String in _skillInfo.objEffect)
 			{
-				var sub:Array = unit.split(":");
-				if(sub && sub.length>1)
-				{
-					var skillResult:ISkillResult = GameAGlobalManager.getInstance().gameSkillResultMgr.getSkillResultById(sub[0]);
-					if(skillResult)
-						_arrResultKeys.push(sub[0]);	
-					_effectParam[sub[0]] = sub[1];
-				}
+				var skillResult:ISkillResult = skillResultMgr.getSkillResultById(key);
+				if(skillResult)
+					_arrResultKeys.push(key);	
+				_effectParam[key] = _skillInfo.objEffect[key];
 			}
 		}
 	
@@ -168,7 +172,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 		
 		protected function processEachResult(id:String,state:SkillState):void
 		{
-			var skillResult:ISkillResult = GameAGlobalManager.getInstance().gameSkillResultMgr.getSkillResultById(id);
+			var skillResult:ISkillResult = skillResultMgr.getSkillResultById(id);
 			if(!skillResult)
 				return;
 			var vecTargets:Vector.<ISkillTarget> = state.vecTargets;
@@ -186,16 +190,14 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 			var arrPairs:Array;
 			var arrFields:Array;
 			var param:Object;
-			for each(var buf:String in arrBuffs)
+			for each(var buf:Object in arrBuffs)
 			{
-				param = [];
-				arrPairs = buf.split(",");
-				for each(var pair:String in arrPairs)
+				param = {};
+				for(var key:String in buf)
 				{
-					arrFields = pair.split(":");
-					if(arrFields.length > 1 && arrFields[0])
-						param[arrFields[0]] = arrFields[1];
+					param[key] = buf[key];
 				}
+				
 				if(param.hasOwnProperty(BufferFields.BUFF))
 				{
 					_hashBuffs.put(uint(param[BufferFields.BUFF]),param);
@@ -218,7 +220,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 		{
 			for each(var strId:String in _arrResultKeys)
 			{
-				var skillResult:ISkillResult = GameAGlobalManager.getInstance().gameSkillResultMgr.getSkillResultById(strId);
+				var skillResult:ISkillResult = skillResultMgr.getSkillResultById(strId);
 				if(!skillResult)
 					continue;
 				
@@ -228,7 +230,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 
 			for each(var buffId:uint in _hashBuffs.keys())
 			{
-				var processer:BasicBufferProcessor = GameAGlobalManager.getInstance().gameBufferProcessorMgr.getBufferProcessorById(buffId);
+				var processer:BasicBufferProcessor = buffProcessorMgr.getBufferProcessorById(buffId);
 				if(processer && processer.canUse(target,owner,_hashBuffs.get(buffId)))
 					return true;
 			}
@@ -240,8 +242,9 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 			if(!_isHeroSkill || !src || !(owner is HeroElement))
 				return src;
 			
-			var _heroInfo:HeroSkillInfo = HeroSkillData.getInstance().getHeroSkillByHeroIdAndSkillId(owner.objId,_id);
-			if(!_heroInfo || _heroInfo.skillLevel<=1 || 0 == _heroInfo.heroSkillTemplateInfo.growth)
+			var heroSkillInfo:IHeroSkillDynamicItem = heroSkillData.getHeroSkillDataById(owner.objId,_id);
+			var heroSkillSheet:IHeroSkillSheetItem = heroSkillModel.getHeroSkillSheetById(_id);
+			if(!heroSkillInfo || heroSkillInfo.level<=1 || 0 == heroSkillSheet.growth)
 				return src;
 			
 			var param:Object = {};
@@ -250,7 +253,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.process
 			{
 				param[field] = src[field];
 			}
-			var grow:Number = _heroInfo.skillLevel * _heroInfo.heroSkillTemplateInfo.growth;
+			var grow:Number = heroSkillInfo.level * heroSkillSheet.growth;
 			var arrValue:Array;
 			for(field in param)
 			{

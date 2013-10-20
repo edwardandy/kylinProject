@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;

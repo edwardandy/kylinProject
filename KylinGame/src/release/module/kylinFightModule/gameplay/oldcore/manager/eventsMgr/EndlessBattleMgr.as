@@ -1,32 +1,10 @@
 package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 {
-	import com.shinezone.core.structure.controls.GameEvent;
-	import com.shinezone.core.structure.moudle.PanelData;
-	import com.shinezone.towerDefense.fight.constants.EndlessBattleConst;
-	import com.shinezone.towerDefense.fight.constants.identify.ItemID;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
 	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
-	import framecore.structure.controls.battleCommand.Battle_CMD_Const;
-	import framecore.structure.controls.battleCommand.CMD_EndlessSaveProgress;
-	import framecore.structure.controls.httpCommand.HttpCommand;
-	import framecore.structure.controls.uiCommand.UI_CMD_Const;
-	import framecore.structure.model.constdata.AttributeConst;
-	import framecore.structure.model.constdata.GameConst;
-	import framecore.structure.model.constdata.HttpConst;
-	import framecore.structure.model.constdata.PopConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.UserData;
-	import framecore.structure.model.user.dreamland.DreamLandData;
-	import framecore.structure.model.user.dreamland.DreamLandNode;
-	import framecore.structure.model.user.item.ItemData;
-	import framecore.structure.model.user.item.ItemTemplateInfo;
-	import framecore.structure.model.user.pub.PubData;
-	import framecore.tools.logger.logch;
-	import framecore.tools.txts.TextFlyEffect;
-	import framecore.tools.txts.TextFlyEffectMgr;
+	import release.module.kylinFightModule.gameplay.constant.EndlessBattleConst;
+	import release.module.kylinFightModule.gameplay.constant.identify.ItemID;
 
 	public class EndlessBattleMgr
 	{

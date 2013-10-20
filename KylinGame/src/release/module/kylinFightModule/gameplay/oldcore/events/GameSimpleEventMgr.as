@@ -1,7 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.events
 {
 	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
 	
 	public class GameSimpleEventMgr extends EventDispatcher
 	{

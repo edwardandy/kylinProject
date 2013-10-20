@@ -1,45 +1,50 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 {
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.BasicSkillLogicMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.BasicSkillLogicUnit;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition.concreteConditions.AfterUseSkillTriggerCondition;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition.concreteConditions.LowLifeLimitCondition;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.BasicGameManager;
 	
-	import flash.utils.Dictionary;
+	import robotlegs.bender.framework.api.IInjector;
 
 	/**
 	 * 技能使用条件管理器
 	 */
 	public class GameFightSkillConditionMgr extends BasicSkillLogicMgr
 	{				
+		[Inject]
+		public var injector:IInjector;
+		
 		public function GameFightSkillConditionMgr()
 		{
 			super();
 		}
 		
-		public function getSkillConditionById(id:uint,isHero:Boolean = false):BasicSkillUseCondition
+		public function getSkillConditionById(id:uint):BasicSkillUseCondition
 		{
-			var result:BasicSkillUseCondition = getSkillLogicById(id,isHero) as BasicSkillUseCondition;
+			var result:BasicSkillUseCondition = getSkillLogicById(id) as BasicSkillUseCondition;
 			return result;	
 		}
 		
 		override protected function getLogic(id:uint):BasicSkillLogicUnit
 		{
+			var result:BasicSkillLogicUnit;
 			switch(id)
 			{
 				case SkillID.KnightSpirit:
-					return new LowLifeLimitCondition;
+					result = new LowLifeLimitCondition;
 				case SkillID.FastShoot:
-					return new AfterUseSkillTriggerCondition;
+					result = new AfterUseSkillTriggerCondition;
 			}
-			return null;
+			if(result)
+				injector.injectInto(result);
+			return result;
 		}
 		
 		override protected function createDefaultLogic():BasicSkillLogicUnit
 		{
-			return new BasicSkillUseCondition;
+			return injector.instantiateUnmapped(BasicSkillUseCondition);
 		}
 	}
 }

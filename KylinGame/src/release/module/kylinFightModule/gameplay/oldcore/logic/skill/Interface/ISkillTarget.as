@@ -2,7 +2,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface
 {
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.hurt.FightUnitState;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	
 	public interface ISkillTarget extends IPositionUnit

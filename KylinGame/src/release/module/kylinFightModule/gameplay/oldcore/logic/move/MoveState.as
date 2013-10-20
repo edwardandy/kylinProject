@@ -2,7 +2,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.move
 {
 	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveUnit;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class MoveState implements IDisposeObject
 	{

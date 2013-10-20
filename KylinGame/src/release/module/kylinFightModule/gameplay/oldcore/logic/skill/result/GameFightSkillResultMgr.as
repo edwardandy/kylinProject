@@ -1,12 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 {
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.BasicHashMapMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SKillResult_MagicDef;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SKillResult_PassiveMagicDef;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_MagicDef;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveMagicDef;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddAtk;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddGoodsPct;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddAtkArea;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddGoodsPct;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddGroundEff;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddMaxLifePct;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddSoldierAtk;
@@ -77,10 +77,6 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_SummonAfterDie;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_TargetDmgPctToLife;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_WeaknessAtk;
-	
-	import flash.system.ApplicationDomain;
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
 	
 	public class GameFightSkillResultMgr extends BasicHashMapMgr
 	{
@@ -165,7 +161,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 					break;
 				case SkillResultTyps.MAGICDEF:
 				{
-					result = new SKillResult_MagicDef(id);
+					result = new SkillResult_MagicDef(id);
 				}
 					break;
 				case SkillResultTyps.PASSIVE_MAXLIFE:
@@ -185,7 +181,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 					break;
 				case SkillResultTyps.PASSIVE_MAGIC_DEF:
 				{
-					result = new SKillResult_PassiveMagicDef(id);
+					result = new SkillResult_PassiveMagicDef(id);
 				}
 					break;
 				case SkillResultTyps.PASSIVE_ATK:

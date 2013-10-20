@@ -3,6 +3,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import com.shinezone.core.resource.ClassLibrary;
 	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
 	import com.shinezone.towerDefense.fight.constants.OrganismBodySizeType;
+	
+	import flash.display.MovieClip;
+	import flash.filters.GlowFilter;
+	
+	import framecore.tools.loadmgr.LoadMgr;
+	
 	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
@@ -10,10 +16,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	
-	import flash.display.MovieClip;
-	import flash.filters.GlowFilter;
-	
-	import framecore.tools.loadmgr.LoadMgr;
+	import robotlegs.bender.framework.api.IInjector;
 
 	/**
 	 * 此类聚合了 BitmapMovieClip 对象， 实现了通过bodySkinResourceURL对动画数据的映射
@@ -22,6 +25,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	 */	
 	public class BasicBodySkinSceneElement extends BasicSceneElement
 	{
+		[Inject]
+		public var injector:IInjector;
+		
 		protected var myBodySkin:NewBitmapMovieClip;
 		protected var myOldBodySkin:NewBitmapMovieClip;
 		protected var myScaleRatioType:int = OrganismBodySizeType.SIZE_NORMAL;
@@ -51,9 +57,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			createBodySkin();
 		}
 		
-		override protected function onLifecycleActivate():void
+		override protected function onLifecycleFreeze():void
 		{
-			super.onLifecycleActivate();
+			super.onLifecycleFreeze();
+			if(myBodySkin)
+				myBodySkin.clear();
 		}
 		
 		protected final function setScaleRatioType(scaleRatioType:int):void
@@ -70,15 +78,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			//if(vecFrames)
 			{
 				myBodySkin = new NewBitmapMovieClip([bodySkinResourceURL], [myScaleRatioType]);
+				injector.injectInto(myBodySkin);
 				myBodySkin.smoothing = true;
 				addChild(myBodySkin);
 			}
-		}
-		
-		override public function update(iElapse:int):void
-		{
-			if(myBodySkin != null) 
-				myBodySkin.update(iElapse);
 		}
 
 		override public function render(iElapse:int):void
@@ -93,7 +96,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			super.dispose();
 			
-			if(myBodySkin != null)
+			if(myBodySkin)
 			{
 				removeChild(myBodySkin);
 				myBodySkin.dispose();

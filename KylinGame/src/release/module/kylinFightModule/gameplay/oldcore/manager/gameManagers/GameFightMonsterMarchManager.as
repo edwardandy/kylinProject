@@ -1,42 +1,53 @@
 package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
-{
-	import com.shinezone.towerDefense.fight.constants.BattleEffectType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
-	import release.module.kylinFightModule.gameplay.oldcore.display.IMonsterMarchImplementor;
-	import release.module.kylinFightModule.gameplay.oldcore.display.TowerDefenseGame;
+{	
+	import flash.events.IEventDispatcher;
+	
+	import mainModule.model.gameData.sheetData.monster.IMonsterSheetDataModel;
+	
+	import release.module.kylinFightModule.gameplay.constant.BattleEffectType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
 	import release.module.kylinFightModule.gameplay.oldcore.events.GameMarchMonsterEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.NewMonsterList;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.MonsterMarchSubWaveVO;
-	import com.shinezone.towerDefense.fight.vo.map.MonsterMarchWaveVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
-	
-	import framecore.structure.model.constdata.NewbieConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.tollgate.TollgateData;
-	import framecore.structure.views.newguidPanel.NewbieGuideManager;
+	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
+	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
+	import release.module.kylinFightModule.model.marchWave.MonsterSubWaveVO;
+	import release.module.kylinFightModule.model.marchWave.MonsterWaveVO;
+	import release.module.kylinFightModule.model.state.FightState;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public final class GameFightMonsterMarchManager extends BasicGameManager
 	{
-		private static const MAX_MONSTER_MARCH_SUB_WAVE_TIME_TASK_INFO_CACHE_COUNT:uint = 50;
+		[Inject]
+		public var monsterWaveModel:IMonsterWaveModel;
+		[Inject]
+		public var eventDispatcher:IEventDispatcher;
+		[Inject]
+		public var monsterModel:IMonsterSheetDataModel;
+		[Inject]
+		public var mapRoadModel:IMapRoadModel;
+		[Inject]
+		public var fightState:FightState;
+		[Inject]
+		public var newMonsters:NewMonsterList;
+		[Inject]
+		public var timeTaskMgr:TimeTaskManager;
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
 		
+		private static const MAX_MONSTER_MARCH_SUB_WAVE_TIME_TASK_INFO_CACHE_COUNT:uint = 50;
 		private static const MARCHING:int = 1;
 		private static const WAITTING:int = 0;
 		private static const CURWAVECOMPLETE:int = 2;
-		
-		private var _monsterMarchImplementor:IMonsterMarchImplementor;
-		private var _monsterMarchWaveVOs:Vector.<MonsterMarchWaveVO>;
-		
+				
 		private var _timeHandlerId:int = -1;
 		private var _marchBehaviorState:int = WAITTING;
 		
-		private var _currentMonsterMarchWaveVO:MonsterMarchWaveVO;
+		private var _currentMonsterMarchWaveVO:MonsterWaveVO;
 		private var _currentMonsterMarchSubWaveTimeTaskInfoMap:Array;//[index->value]
 		
 		private var _monsterMarchSubWaveTimeTaskInfoPool:Array;//MonsterMarchSubWaveTimeTaskInfo
@@ -46,37 +57,30 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			super();
 		}
 		
-		override public function initialize(...parameters:Array):void
-		{
-			_monsterMarchImplementor = GameAGlobalManager.getInstance().groundScene;
-		}
-		
-		//IDisposeObject Interface
-		override public function dispose():void
-		{
-			_monsterMarchImplementor = null;
-			_monsterMarchWaveVOs = null;
-		}
-		
-		override public function onGameStart():void
+		override public function onFightStart():void
 		{
 			_monsterMarchSubWaveTimeTaskInfoPool = [];
-			
-			_monsterMarchWaveVOs = GameAGlobalManager
-				.getInstance()
-				.gameDataInfoManager
-				.currentSceneMapInfo
-				.monsterMarchWaveVOs;
+			_currentMonsterMarchSubWaveTimeTaskInfoMap = [];
+			_currentMonsterMarchWaveVO = null;
 			_marchBehaviorState = WAITTING;
 
-			dispatchEvent(new GameMarchMonsterEvent(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE));
+			eventDispatcher.dispatchEvent(new GameMarchMonsterEvent(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE));
 		}
 		
-		override public function onGameEnd():void
+		override public function onFightEnd():void
 		{
 			if(_timeHandlerId>0)
-				TimeTaskManager.getInstance().destoryTimeTask(_timeHandlerId);
+				timeTaskMgr.destoryTimeTask(_timeHandlerId);
 			_timeHandlerId = -1;
+		}
+		[PreDestroy]
+		override public function dispose():void
+		{
+			super.dispose();
+			_monsterMarchSubWaveTimeTaskInfoPool = [];
+			_currentMonsterMarchSubWaveTimeTaskInfoMap = [];
+			_currentMonsterMarchWaveVO = null;
+			_marchBehaviorState = WAITTING;
 		}
 		
 		//GameMonsterMarchManager API
@@ -98,22 +102,19 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 
 				if(_timeHandlerId != -1)
 				{
-					var timeProgress:Number = TimeTaskManager.getInstance().getTaskTimeTaskProgress(_timeHandlerId);
+					var timeProgress:Number = timeTaskMgr.getTaskTimeTaskProgress(_timeHandlerId);
 					var leftTime:int = int(timeProgress * GameFightConstant.MONSTER_WAVE_DURATION);
 					
-					TimeTaskManager.getInstance().destoryTimeTask(_timeHandlerId);
+					timeTaskMgr.destoryTimeTask(_timeHandlerId);
 				}
 				
-				_currentMonsterMarchWaveVO = GameAGlobalManager
-					.getInstance()
-					.gameDataInfoManager
-					.getCurrentWaveVO();
+				_currentMonsterMarchWaveVO = monsterWaveModel.getMonsterWave(monsterWaveModel.curWaveCount);
 				
-				var subWaveVOs:Vector.<MonsterMarchSubWaveVO> = _currentMonsterMarchWaveVO.subWaveVOs;
+				var subWaveVOs:Vector.<MonsterSubWaveVO> = _currentMonsterMarchWaveVO.vecSubWaves;
 				var subWaveCount:uint = subWaveVOs.length;
 				_currentMonsterMarchSubWaveTimeTaskInfoMap = [];
 				var subWaveTimeTaskInfo:MonsterMarchSubWaveTimeTaskInfo = null;
-				var subWaveVO:MonsterMarchSubWaveVO = null;
+				var subWaveVO:MonsterSubWaveVO = null;
 				for(var i:int = 0; i < subWaveCount; i++)
 				{
 					subWaveVO = subWaveVOs[i];
@@ -135,23 +136,16 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 
 					subWaveTimeTaskInfo.monsterTypeId = subWaveVO.monsterTypeId;
 					subWaveTimeTaskInfo.roadIndex = subWaveVO.roadIndex;
-					subWaveTimeTaskInfo.roadType = subWaveVO.roadType;
+					subWaveTimeTaskInfo.bRandomLine = subWaveVO.bRandomLine;
 					
-					GameAGlobalManager.getInstance().gameFightInfoRecorder.addBattleOPRecord( GameFightInfoRecorder.BATTLE_OP_TYPE_COUNT_MONSTER, subWaveVO.monsterTypeId, subWaveVO.monsterCount );
 				}
 
 				var event:GameMarchMonsterEvent = new GameMarchMonsterEvent(GameMarchMonsterEvent.MARCH_NEXT_WAVE);
 				event.nextWavepreactTime = marchNextWavePreactTime;
-				dispatchEvent(new GameMarchMonsterEvent(GameMarchMonsterEvent.MARCH_NEXT_WAVE));
-				
-				//新手引导
-				NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_WAVE,{"param":[GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount,TollgateData.currentLevelId]});
-				NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_MONSTER_BTN,{"param":[GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount]});
-				
+				eventDispatcher.dispatchEvent(new GameMarchMonsterEvent(GameMarchMonsterEvent.MARCH_NEXT_WAVE));
+								
 				//do it
-				_timeHandlerId = TimeTaskManager
-					.getInstance()
-					.createTimeTask(GameFightConstant.TIME_UINT, 
+				_timeHandlerId = timeTaskMgr.createTimeTask(GameFightConstant.TIME_UINT, 
 						marchMonsterWaveTimerTickHandler, null, 
 						_currentMonsterMarchWaveVO.duration / GameFightConstant.TIME_UINT, 
 						marchNextWaveCompleteHandler);
@@ -163,34 +157,27 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			if(!EndlessBattleMgr.instance.isEndless)
 			{
 				var marchNextWavePreactTime:uint = (1 - getWaitNextWaveProgress()) * GameFightConstant.MONSTER_WAVE_DURATION;
-				GameAGlobalManager.getInstance().gameFightInfoRecorder.addWavePreactTime(marchNextWavePreactTime);
 				GameAGlobalManager.getInstance().gameDataInfoManager.marchMonsterEarler(marchNextWavePreactTime);
 				GameAGlobalManager.getInstance()
 					.game.gameFightMainUIView.fightControllBarView
 					.reduceMagicSkillCDTime(0, marchNextWavePreactTime, 0,true);
 			}
 			
-			var curWave:int = GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount;
+			var curWave:int =  monsterWaveModel.curWaveCount;
+			const totalWave:int = monsterWaveModel.totalWaveCount;
 			//战斗开始
-			if(0 == GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount
-			||(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.recordWave == GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount))
+			if(0 == curWave
+			||(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.recordWave == curWave))
 			{
-				GameAGlobalManager.getInstance().gameDataInfoManager.bStartFight = true;
+				fightState.state = FightState.StartFight;
 				if(EndlessBattleMgr.instance.isEndless)
 					GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.ENDLESS_WAVE_NUM_EFFECT, [curWave+1]);
 			}
 			//最后一波
-			else if(GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount 
-				== GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveTotalCount - 1)
+			else if(curWave == totalWave - 1)
 			{
 				GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.FINAL_WAVE_EFFECT );
 			}
-			//无极幻境每5波一个节点
-			/*else if(EndlessBattleMgr.instance.isSavePointWave(GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount+1))
-			{
-				if(EndlessBattleMgr.instance.isEndless)
-					GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.ENDLESS_WAVE_NUM_EFFECT, curWave+1);
-			}*/
 			//无极幻境每波都提示
 			else
 			{
@@ -198,13 +185,12 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 					GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.ENDLESS_WAVE_NUM_EFFECT, [curWave+1]);
 			}
 			
-			GameAGlobalManager.getInstance().gameDataInfoManager.increaseSceneWave();
-			
+			monsterWaveModel.increaseSceneWave();
+			curWave =  monsterWaveModel.curWaveCount;
 			if(EndlessBattleMgr.instance.isEndless)
 			{
 				EndlessBattleMgr.instance.checkRetrieveBuffEnd();
-				EndlessBattleMgr.instance.setCurWaveMonsterCnts(GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount,
-				GameAGlobalManager.getInstance().gameDataInfoManager.getCurrentWaveVO().totalMonsters);
+				EndlessBattleMgr.instance.setCurWaveMonsterCnts(curWave,monsterWaveModel.getMonsterWave(curWave).totalMonsters);
 			}
 		}
 		
@@ -214,7 +200,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			{
 				if(_timeHandlerId > 0)
 				{
-					return Math.min(Math.max(TimeTaskManager.getInstance().getTaskTimeTaskProgress(_timeHandlerId),0),1);
+					return Math.min(Math.max(timeTaskMgr.getTaskTimeTaskProgress(_timeHandlerId),0),1);
 				}
 			}
 
@@ -230,34 +216,27 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		{
 			_timeHandlerId = -1;
 			
-			if(GameAGlobalManager
-				.getInstance()
-				.gameDataInfoManager
-				.sceneWaveCurrentCount >= GameAGlobalManager
-											.getInstance()
-											.gameDataInfoManager.sceneWaveTotalCount)
+			if(monsterWaveModel.curWaveCount >= monsterWaveModel.totalWaveCount)
 			{
-				GameAGlobalManager.getInstance().gameDataInfoManager.setIsCompleteWave();
+				monsterWaveModel.isCompleteWave = true;
 				return;
 			}
 			
 			_marchBehaviorState = CURWAVECOMPLETE;
 			
-			if(!(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.isSavePointWave(GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount)))
+			if(!(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.isSavePointWave(monsterWaveModel.curWaveCount)))
 				waitNextWave();
 		}
 		
 		private function waitNextWave():void
 		{
-			_timeHandlerId = TimeTaskManager
-				.getInstance()
-				.createTimeTask(GameFightConstant.TIME_UINT, 
+			_timeHandlerId = timeTaskMgr.createTimeTask(GameFightConstant.TIME_UINT, 
 					marchMonsterWaveTimerTickHandler, null, 
 					GameFightConstant.MONSTER_WAVE_DURATION / GameFightConstant.TIME_UINT, waitNextWaveCompleteHandler);
 			
 			_marchBehaviorState = WAITTING;
 			if(!EndlessBattleMgr.instance.isEndless)
-				dispatchEvent(new GameMarchMonsterEvent(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE));
+				eventDispatcher.dispatchEvent(new GameMarchMonsterEvent(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE));
 		}
 		
 		private function waitNextWaveCompleteHandler():void
@@ -269,17 +248,13 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		//event handler
 		private function marchMonsterWaveTimerTickHandler():void
 		{
-			var timeUintIndex:int = TimeTaskManager
-				.getInstance().getTimeTaskCurrentRepeatCount(_timeHandlerId);
+			var timeUintIndex:int = timeTaskMgr.getTimeTaskCurrentRepeatCount(_timeHandlerId);
 			
 			for each(var subWaveTimeTaskInfo:MonsterMarchSubWaveTimeTaskInfo in _currentMonsterMarchSubWaveTimeTaskInfoMap)
 			{
 				if(subWaveTimeTaskInfo.startUintTimeIndex == timeUintIndex)
 				{
 					subWaveTimeTaskInfo.isStartCountting = true;
-					NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_TOLLGATE_AND_WAVE
-						,{"param":[TollgateData.currentLevelId,GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount
-							,_currentMonsterMarchSubWaveTimeTaskInfoMap.indexOf(subWaveTimeTaskInfo) + 1]});
 				}
 				
 				if(subWaveTimeTaskInfo.isStartCountting)
@@ -305,12 +280,12 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 						
 						var monsterTypeId:int = subWaveTimeTaskInfo.monsterTypeId; 
 						var monsterRoadIndex:int = subWaveTimeTaskInfo.roadIndex;
-						var roadType:int = subWaveTimeTaskInfo.roadType;
+						var bRandomLine:Boolean = subWaveTimeTaskInfo.bRandomLine;
 						
 						var monsterCountPerTime:Number = subWaveTimeTaskInfo.monsterCountPerTime;
 						if(monsterCountPerTime == 1)
 						{
-							march1MonsterPerTime(monsterTypeId, monsterRoadIndex,roadType, true);
+							march1MonsterPerTime(monsterTypeId, monsterRoadIndex,bRandomLine, true);
 						}
 						else if(monsterCountPerTime == 2)
 						{
@@ -334,9 +309,9 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		}
 
 		//每次出一个怪道路随机
-		private function march1MonsterPerTime(monsterTypeId:int, roadIndex:int,roadType:int, checkIsBoos:Boolean = false):void
+		private function march1MonsterPerTime(monsterTypeId:int, roadIndex:int,bRandomLine:Boolean, checkIsBoos:Boolean = false):void
 		{
-			if(1 == roadType ||(checkIsBoos && TemplateDataFactory.getInstance().getMonsterTemplateById(monsterTypeId).isBoss))
+			if(bRandomLine ||(checkIsBoos && monsterModel.getMonsterSheetById(monsterTypeId).isBoss))
 				marchMonster(monsterTypeId, roadIndex, 1);
 			else
 				marchMonster(monsterTypeId, roadIndex, int(Math.random() * 3));
@@ -379,7 +354,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			}
 			else
 			{
-				march1MonsterPerTime(monsterTypeId, roadIndex,subWaveTimeTaskInfo.roadType);
+				march1MonsterPerTime(monsterTypeId, roadIndex,subWaveTimeTaskInfo.bRandomLine);
 			}
 		}
 
@@ -398,25 +373,29 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		
 		private function marchMonster(monsterTypeId:int, roadIndex:int, lineIndex:int):void
 		{
-			var m0:BasicMonsterElement = ObjectPoolManager.getInstance()
-				.createSceneElementObject(GameObjectCategoryType.MONSTER, monsterTypeId) as BasicMonsterElement;
+			var m0:BasicMonsterElement = objPoolMgr.createSceneElementObject(GameObjectCategoryType.MONSTER, monsterTypeId) as BasicMonsterElement;
 			
-			_monsterMarchImplementor.marchMonster(m0, 
-
-				GameAGlobalManager.getInstance().gameDataInfoManager.currentSceneMapInfo.roadVOs[roadIndex].lineVOs[lineIndex].points, roadIndex, lineIndex);
+			startMarchMonster(m0, mapRoadModel.getMapRoad(roadIndex).lineVOs[lineIndex].points, roadIndex, lineIndex);
 			
-			m0.ownWave = GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount;
+			m0.ownWave = monsterWaveModel.curWaveCount;	
 			
 			checkNewMonster(m0.monsterTemplateInfo.resId || monsterTypeId);
 		}
 		
+		private function startMarchMonster(m:BasicMonsterElement, pathPoints:Vector.<PointVO>, roadIndex:int, lineIndex:int):void
+		{
+			m.x = pathPoints[0].x;
+			m.y = pathPoints[0].y;
+			m.startEscapeByPath(pathPoints, roadIndex, lineIndex);
+		}
+		
 		private function checkNewMonster(id:uint):void
 		{
-			if(NewMonsterList.instance.isNewMonster(id))
+			if(newMonsters.isNewMonster(id))
 			{
-				GameAGlobalManager.getInstance().game.gameFightMainUIView.newMonsterIconView.pushMonster(id);
-				GameAGlobalManager.getInstance().game.gameFightMainUIView.newMonsterIconView.show();
-				NewMonsterList.instance.removeNewMonster(id);
+				//GameAGlobalManager.getInstance().game.gameFightMainUIView.newMonsterIconView.pushMonster(id);
+				//GameAGlobalManager.getInstance().game.gameFightMainUIView.newMonsterIconView.show();
+				newMonsters.removeNewMonster(id);
 			}
 		}
 	}
@@ -440,7 +419,7 @@ class MonsterMarchSubWaveTimeTaskInfo
 	/**
 	 * 怪物所走的道路类型，0为随机，1为只走中间 
 	 */		
-	public var roadType:int;
+	public var bRandomLine:Boolean;
 	
 	//那怪物总数除以次数的剩余怪的数量
 	public var monsterMoreUnOutCount:uint = 0;

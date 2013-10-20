@@ -11,6 +11,7 @@ package release.module.kylinFightModule.service.sceneElements
 	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
 	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.SummonDemonDoorSkillRes;
@@ -19,7 +20,6 @@ package release.module.kylinFightModule.service.sceneElements
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.IPositionUnit;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
@@ -34,7 +34,7 @@ package release.module.kylinFightModule.service.sceneElements
 	 * @author Edward
 	 * 
 	 */	
-	public class SceneElementsService extends KylinActor implements IRenderAble,ISceneElementsService
+	public class SceneElementsService extends KylinActor implements IRenderAble,ISceneElementsService,IFightLifecycle
 	{
 		[Inject]
 		public var sceneElementsModel:ISceneElementsModel;
@@ -61,7 +61,6 @@ package release.module.kylinFightModule.service.sceneElements
 		public function onPostConstruct():void
 		{
 			_sceneElementsModel = sceneElementsModel as SceneElementsModel;
-			renderMgr.attachToTicker(this);
 		}
 		
 		public function render(iElapse:int):void
@@ -374,8 +373,8 @@ package release.module.kylinFightModule.service.sceneElements
 			if(minLineIdx > lineVO.points.length - 1)
 				minLineIdx = lineVO.points.length - 1;
 			
-			while(GameAGlobalManager.getInstance().gameDataInfoManager.currentSceneMapInfo.getDisRatioByPosIndex(lineVO.points[maxLineIdx].x
-				,lineVO.points[maxLineIdx].y,maxLineIdx,lineIndex,roadIndex,false) < minDistance)
+			while(mapRoadModel.getDisRatioByPosIndex(lineVO.points[maxLineIdx].x,lineVO.points[maxLineIdx].y,maxLineIdx,lineIndex,roadIndex,false)
+				< minDistance)
 			{
 				--maxLineIdx;
 				if(maxLineIdx == minLineIdx)
@@ -486,6 +485,35 @@ package release.module.kylinFightModule.service.sceneElements
 				else//最坏的情况所有全都相等//原来在上层的还是在上层
 					return fightViewModel.middleLayer.getChildIndex(a) < fightViewModel.middleLayer.getChildIndex(DisplayObject(b)) ? 1 : -1;
 			}
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightStart():void
+		{
+			renderMgr.attachToTicker(this);
+		}
+		/**
+		 * 战斗结束 
+		 * 
+		 */		
+		public function onFightEnd():void
+		{
+			dispose();
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightPause():void
+		{
+			
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightResume():void
+		{
+			
 		}
 		/**
 		 * @inheritDoc 

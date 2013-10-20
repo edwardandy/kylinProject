@@ -31,6 +31,7 @@ package release.module.kylinFightModule.model.roads
 		{
 		}
 		
+		[PreDestroy]
 		public function destroy():void
 		{
 			if(_vecRoads)

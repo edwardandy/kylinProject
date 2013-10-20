@@ -13,6 +13,10 @@ package release.module.kylinFightModule.model.interfaces
 	public interface IFightViewLayersModel extends IKylinGameManager
 	{
 		/**
+		 * 鼠标指针显示层 
+		 */		
+		function get mouseCursorLayer():Sprite;
+		/**
 		 * 显示顶层 
 		 */
 		function get topLayer():Sprite;
@@ -32,5 +36,15 @@ package release.module.kylinFightModule.model.interfaces
 		 * 地表层 
 		 */
 		function get groundLayer():Sprite;
+		/**
+		 * 地图显示层 
+		 */		
+		function get mapLayer():Sprite;
+		/**
+		 * 战斗UI层 
+		 * @return 
+		 * 
+		 */		
+		function get UILayer():Sprite;
 	}
 }

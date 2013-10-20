@@ -3,7 +3,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.IOrganismSkiller;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.BasicSummonSoldier;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public interface ISkillOwner extends ISkillTarget, IOrganismSkiller
 	{

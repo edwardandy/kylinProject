@@ -24,6 +24,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			//if(vecFrames)
 			{
 				myBodySkin2 = new NewBitmapMovieClip([bodySkinResourceURL+"_1"],[myScaleRatioType]);
+				injector.injectInto(myBodySkin2);
 				addChild(myBodySkin2);
 			}	
 			super.createBodySkin();

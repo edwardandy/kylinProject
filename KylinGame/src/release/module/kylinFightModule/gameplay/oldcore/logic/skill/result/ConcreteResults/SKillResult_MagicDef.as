@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults
 {
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;
@@ -8,9 +8,9 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.Conc
 	/**
 	 * 增加魔法防御
 	 */
-	public class SKillResult_MagicDef extends BasicSkillResult
+	public class SkillResult_MagicDef extends BasicSkillResult
 	{
-		public function SKillResult_MagicDef(strId:String)
+		public function SkillResult_MagicDef(strId:String)
 		{
 			super(strId);
 			_triggerCondition = TriggerConditionType.BUFFER_START_END;

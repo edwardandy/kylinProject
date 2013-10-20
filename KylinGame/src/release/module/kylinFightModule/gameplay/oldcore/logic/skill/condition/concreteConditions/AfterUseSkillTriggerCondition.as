@@ -1,8 +1,8 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition.concreteConditions
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition.BasicSkillUseCondition;
 
 	/**

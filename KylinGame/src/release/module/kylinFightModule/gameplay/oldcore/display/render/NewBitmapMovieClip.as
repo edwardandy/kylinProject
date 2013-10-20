@@ -1,20 +1,16 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.render
 {
-	import com.shinezone.towerDefense.fight.constants.BattleAppDomainType;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IRenderAble;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	
 	import flash.display.Bitmap;
 	import flash.display.FrameLabel;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.utils.Dictionary;
-	import flash.utils.getTimer;
 	
-	import framecore.tools.loadmgr.LoadMgr;
-	
+	import io.smash.time.IRenderAble;
 	import io.smash.time.TimeManager;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	
 	/**
 	 * 此类为战斗系统，场景元素动画实现部分的核心类。
@@ -25,6 +21,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 	 */	
 	public final class NewBitmapMovieClip extends Sprite implements IRenderAble, IDisposeObject
 	{
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
+		[Inject]
+		public var timeMgr:TimeManager;
+		
 		private var _bitmapFrameInfos:Vector.<BitmapFrameInfo>;
 		private var _frameNames:Dictionary = new Dictionary;
 		private var _bitmap:Bitmap;
@@ -54,9 +55,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 		
 		private var _iFirstFrameWidth:int;
 		private var _iFirstFrameHeight:int;
-		
-		private var _lastStopTimeFromFrameToToFrameOffSet:int = -1;
-		
+				
 		//appendBitmapFrameInfos 为附加动画数据，可以为空
 		public function NewBitmapMovieClip(arrSource:Array,arrScale:Array = null)
 		{		
@@ -66,14 +65,17 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 			this.mouseEnabled = false;
 			_arrSrcUrl = arrSource;
 			_arrScaleRatio = (arrScale || []);
-			_totalFrame = 0;
-			
-			genFrameNames();
-			
+			_totalFrame = 0;	
 			_currentFrame = 1;
 			
 			_bitmap = new Bitmap();
 			addChild(_bitmap);
+		}
+		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
+			genFrameNames();
 		}
 		
 		public function get iFirstFrameHeight():int
@@ -93,7 +95,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 	
 			for each(var url:String in _arrSrcUrl)
 			{
-				var mc:MovieClip = ObjectPoolManager.getInstance().getMCByUrl(url);
+				var mc:MovieClip = objPoolMgr.getMCByUrl(url);
 				if(mc)
 				{
 					_totalFrame += mc.totalFrames;
@@ -181,47 +183,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 			return null;
 		}
 		
-		//IRenderAble
-		public function update(iElapse:int):void
-		{
-			/*if(!_isCurrentFrameRendered)//如果当前帧已经渲染过，则不再渲染
-			{					
-			if(_midleCareFrame > 0 && 
-			_currentFrame == _midleCareFrame && 
-			_playMiddleCareCallback != null)
-			{
-			_playMiddleCareCallback();
-			}
-			
-			if(_loopTimes > 0)
-			{
-			if(_currentFrame == _toFrame)
-			{
-			_loopTimes--;
-			if(_loopTimes <= 0)
-			{
-			//innerstop
-			_loopTimes = -1;
-			_isPlaying = false;
-			
-			//这里要获取引用不然会有问题
-			var nowPlayEndCallback:Function = _playEndCallback;
-			
-			_playEndCallback = null;
-			_playMiddleCareCallback = null;
-			
-			if(nowPlayEndCallback != null)
-			{
-			nowPlayEndCallback();
-			nowPlayEndCallback = null;
-			}				
-			return;
-			}
-			}
-			}
-			}*/
-		}
-		
 		public function render(iElapse:int):void
 		{
 			if(!_isCurrentFrameRendered)//如果当前帧已经渲染过，则不再渲染
@@ -234,7 +195,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 				{
 					if(_arrSrcUrl[_curUrlIdx] == "OrganismSkillBuffer_221021")
 						var gaojian:int =0;
-					_bitmapFrameInfos = ObjectPoolManager.getInstance().getNewBitmapFrameInfos(_arrSrcUrl[_curUrlIdx],_arrScaleRatio[_curUrlIdx],_currentFrame);
+					_bitmapFrameInfos = objPoolMgr.getNewBitmapFrameInfos(_arrSrcUrl[_curUrlIdx],_arrScaleRatio[_curUrlIdx],_currentFrame);
 					if(!_bitmapFrameInfos)
 					{
 						throw(new Error("getNewBitmapFrameInfos Error! url:"+_arrSrcUrl[_curUrlIdx]+" curFrame:"+_currentFrame));
@@ -247,7 +208,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 				
 				if(null == _tempCurrentFrameInfo.bitmapData)
 				{
-					ObjectPoolManager.getInstance().rasterizeCurFrameInfo(_arrSrcUrl[_curUrlIdx],_arrScaleRatio[_curUrlIdx],_currentFrame);
+					objPoolMgr.rasterizeCurFrameInfo(_arrSrcUrl[_curUrlIdx],_arrScaleRatio[_curUrlIdx],_currentFrame);
 				}
 				_bitmap.bitmapData = _tempCurrentFrameInfo.bitmapData;
 				_bitmap.x = _tempCurrentFrameInfo.x;
@@ -258,7 +219,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 					_currentFrame == _midleCareFrame && 
 					_playMiddleCareCallback != null)
 				{
-					TimeManager.instance.callLater(_playMiddleCareCallback);
+					timeMgr.callLater(_playMiddleCareCallback);
 					//_playMiddleCareCallback();
 				}
 				
@@ -281,7 +242,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 							
 							if(nowPlayEndCallback != null)
 							{
-								TimeManager.instance.callLater(nowPlayEndCallback);
+								timeMgr.callLater(nowPlayEndCallback);
 								//nowPlayEndCallback();
 								nowPlayEndCallback = null;
 							}				
@@ -318,7 +279,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 					return;
 				}
 				_curUrlIdx = _arrSrcUrl.indexOf(url);
-				_bitmapFrameInfos = ObjectPoolManager.getInstance().getNewBitmapFrameInfos(url,_arrScaleRatio[_curUrlIdx],fromFrame,toFrame);
+				_bitmapFrameInfos = objPoolMgr.getNewBitmapFrameInfos(url,_arrScaleRatio[_curUrlIdx],fromFrame,toFrame);
 			}
 			
 			fromFrameInfo = getFrameInfo(fromFrame);
@@ -411,7 +372,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 				if(!url)
 					return;
 				_curUrlIdx = _arrSrcUrl.indexOf(url);
-				_bitmapFrameInfos = ObjectPoolManager.getInstance().getNewBitmapFrameInfos(url,_arrScaleRatio[_curUrlIdx],frame);
+				_bitmapFrameInfos = objPoolMgr.getNewBitmapFrameInfos(url,_arrScaleRatio[_curUrlIdx],frame);
 				_tempCurrentFrameInfo = getFrameInfo(frame);
 				if(_tempCurrentFrameInfo == null)
 					return;
@@ -429,7 +390,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 		{
 			_loopTimes = -1;
 			_isPlaying = false;
+			_currentFrame = 1;			
+			_fromFrame = 1;
+			_toFrame = 1;
+			_midleCareFrame = -1;
+			_isCurrentFrameRendered = false;
+			_curUrlIdx = 0;
 			
+			_tempCurrentFrameInfo = null;
 			_playEndCallback = null;
 			_playMiddleCareCallback = null;
 		}
@@ -437,8 +405,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.render
 		//IDisposeObject Interface
 		public function dispose():void
 		{
-			_arrSrcUrl;
-			_arrScaleRatio;//[1,2,...]
+			_arrSrcUrl = null;
+			_arrScaleRatio = null;//[1,2,...]
 			_dicLableToUrl = null;
 			
 			_iFirstFrameWidth = 0;

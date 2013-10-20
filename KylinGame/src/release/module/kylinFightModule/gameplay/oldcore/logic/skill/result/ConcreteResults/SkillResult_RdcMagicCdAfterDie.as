@@ -1,10 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults
 {
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 
 	/**
 	 * 死亡后减少战场法术的cd

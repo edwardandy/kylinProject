@@ -1,6 +1,7 @@
 package release.module.kylinFightModule.model.sceneElements
 {
 	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
+	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
 
 	/**
@@ -8,7 +9,7 @@ package release.module.kylinFightModule.model.sceneElements
 	 * @author Edward
 	 * 
 	 */
-	public interface ISceneElementsModel extends IDisposeObject
+	public interface ISceneElementsModel extends IFightLifecycle
 	{
 		/**
 		 * 战斗开始前的初始化，包括怪物路径形状的描绘，生成路径终点动画以及初始化场景元素(塔基，英雄) 

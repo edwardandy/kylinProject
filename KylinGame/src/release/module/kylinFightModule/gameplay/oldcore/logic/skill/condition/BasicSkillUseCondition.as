@@ -1,35 +1,32 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FightUnitType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillAttackType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillTargetType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillType;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.FightUnitType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillAttackType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillTargetType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.BasicSkillLogicUnit;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.IPositionUnit;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillProcessor;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillUseCondition;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	
-	import flash.utils.getTimer;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseSkillInfo;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.GameFightSkillProcessorMgr;
+	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
 	
 	/**
 	 * 技能使用条件判断类
 	 */
 	public class BasicSkillUseCondition extends BasicSkillLogicUnit implements ISkillUseCondition
 	{	
+		[Inject]
+		public var skillProcessorMgr:GameFightSkillProcessorMgr;
+		[Inject]
+		public var sceneElementsService:ISceneElementsService;
+		
 		private var _curOwner:ISkillOwner;
 		protected var _processer:ISkillProcessor;
 		
@@ -43,10 +40,10 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 			return _id;
 		}
 		
-		override public function setData(skillId:uint, bIsHero:Boolean=false):void
+		override public function setData(skillId:uint):void
 		{
-			super.setData(skillId,bIsHero);
-			_processer = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(_id,bIsHero);
+			super.setData(skillId);
+			_processer = skillProcessorMgr.getSkillProcessorById(_id);
 		}
 		
 		public function canUse(owner:ISkillOwner,state:SkillState):Boolean
@@ -103,9 +100,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 			if(null == centerTarget && _skillInfo.hasTargetType(SkillTargetType.TOWER))
 			{
 				//技能所有者的攻击范围+作用范围内的所有塔
-				vecTower = GameAGlobalManager.getInstance().
-					groundSceneHelper.
-					searchTowersBySearchArea(owner.x,owner.y,skillArea,1,necessarySearchConditionFilter);
+				vecTower = sceneElementsService.searchTowersBySearchArea(owner.x,owner.y,skillArea,1,necessarySearchConditionFilter);
 				if(vecTower && 1 == vecTower.length)
 				{	
 					centerTarget = vecTower[0] as ISkillTarget;
@@ -115,9 +110,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 			//技能作用于本方
 			if(null == centerTarget && _skillInfo.hasTargetType(SkillTargetType.SAMECAMP))
 			{
-				centerTarget = GameAGlobalManager.getInstance().
-					groundSceneHelper.
-					searchOrganismElementEnemy(owner.x,owner.y,skillArea,
+				centerTarget = sceneElementsService.searchOrganismElementEnemy(owner.x,owner.y,skillArea,
 						FightElementCampType.FRIENDLY_CAMP == owner.campType?FightElementCampType.FRIENDLY_CAMP:FightElementCampType.ENEMY_CAMP,
 						necessarySearchConditionFilter,ignoreAlive) as ISkillTarget;
 				if(centerTarget)
@@ -126,9 +119,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 			//技能作用于对方
 			if(null == centerTarget && _skillInfo.hasTargetType(SkillTargetType.OPPOSECAMP))
 			{
-				centerTarget = GameAGlobalManager.getInstance().
-					groundSceneHelper.
-					searchOrganismElementEnemy(owner.x,owner.y,skillArea,
+				centerTarget = sceneElementsService.searchOrganismElementEnemy(owner.x,owner.y,skillArea,
 						FightElementCampType.ENEMY_CAMP == owner.campType?FightElementCampType.FRIENDLY_CAMP:FightElementCampType.ENEMY_CAMP,
 						necessarySearchConditionFilter,ignoreAlive) as ISkillTarget;
 				if(centerTarget)
@@ -165,9 +156,8 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 			if(_skillInfo.hasTargetType(SkillTargetType.TOWER))
 			{
 				//技能所有者的攻击范围+作用范围内的所有塔
-				vecTower = GameAGlobalManager.getInstance().
-					groundSceneHelper.
-					searchTowersBySearchArea(centerTarget.x,centerTarget.y,_skillInfo.range,searchCount,necessarySearchConditionFilter);
+				vecTower = sceneElementsService.searchTowersBySearchArea(centerTarget.x,centerTarget.y
+					,_skillInfo.range,searchCount,necessarySearchConditionFilter);
 				if(vecTower && vecTower.length>0)
 					vecUnits = vecUnits.concat(vecTower);
 				if(targetCount>0)
@@ -182,9 +172,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 			//技能作用于本方
 			if(!bEndSearch && _skillInfo.hasTargetType(SkillTargetType.SAMECAMP))
 			{
-				vecTemp = GameAGlobalManager.getInstance().
-					groundSceneHelper.
-					searchOrganismElementsBySearchArea(centerTarget.x,centerTarget.y,_skillInfo.range,
+				vecTemp = sceneElementsService.searchOrganismElementsBySearchArea(centerTarget.x,centerTarget.y,_skillInfo.range,
 						FightElementCampType.FRIENDLY_CAMP == owner.campType?FightElementCampType.FRIENDLY_CAMP:FightElementCampType.ENEMY_CAMP,
 					necessarySearchConditionFilter,ignoreAlive,(targetCount>0?searchCount:0));
 				if(vecTemp && vecTemp.length>0)
@@ -200,9 +188,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 			//技能作用于对方
 			if(!bEndSearch && _skillInfo.hasTargetType(SkillTargetType.OPPOSECAMP))
 			{
-				vecTemp = GameAGlobalManager.getInstance().
-					groundSceneHelper.
-					searchOrganismElementsBySearchArea(centerTarget.x,centerTarget.y,_skillInfo.range,
+				vecTemp = sceneElementsService.searchOrganismElementsBySearchArea(centerTarget.x,centerTarget.y,_skillInfo.range,
 						FightElementCampType.ENEMY_CAMP == owner.campType?FightElementCampType.FRIENDLY_CAMP:FightElementCampType.ENEMY_CAMP,
 						necessarySearchConditionFilter,ignoreAlive,(targetCount>0?searchCount:0));
 				if(vecTemp && vecTemp.length>0)
@@ -251,6 +237,13 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition
 			if(SkillAttackType.LAND_AIR == _skillInfo.canAirFight)
 				return true;
 			return false;
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			_curOwner = null;
+			_processer = null;
 		}
 	}
 }

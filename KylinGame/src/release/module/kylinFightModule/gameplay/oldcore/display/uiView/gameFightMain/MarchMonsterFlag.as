@@ -1,24 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain
 {
 	import com.greensock.TweenLite;
-	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GraphicsUtil;
-	import com.shinezone.towerDefense.fight.vo.map.MonsterMarchSubWaveVO;
-	import com.shinezone.towerDefense.fight.vo.map.MonsterMarchWaveVO;
 	
 	import flash.display.Shape;
-	import flash.display.Sprite;
-	import flash.events.Event;
 	
-	import framecore.main.TextDataManager;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.monster.MonsterTemplateInfo;
-	import framecore.tools.getText;
-	import framecore.tools.tips.ToolTipConst;
-	import framecore.tools.tips.ToolTipEvent;
-	import framecore.tools.tips.ToolTipManager;
+	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.GraphicsUtil;
 
 	public class MarchMonsterFlag extends BasicView
 	{
@@ -61,14 +49,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			_marchMonsterFlagBg.addChild(_flagMask);
 			_marchMonsterFlagBg.flag.mask = _flagMask;
 			
-			ToolTipManager.getInstance().registGameToolTipTarget( this, ToolTipConst.MARCH_MONSTER );
-			this.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTip );
+			//ToolTipManager.getInstance().registGameToolTipTarget( this, ToolTipConst.MARCH_MONSTER );
+			//this.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTip );
 		}
 		
-		protected function showTip(event:ToolTipEvent ):void
+		/*protected function showTip(event:ToolTipEvent ):void
 		{
-			// TODO Auto-generated method stub
-			//var data:String = TextDataManager.getInstance().getPanelConfigXML("tip").marchMonster + " [Z]";
 			var data:Array = [];
 			try
 			{
@@ -88,11 +74,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					continue;
 				var name:String = temp.getName();
 				var cnt:int = wave.waveMonsterSumInfos[roadIdx][monsterId];
-				data.push(/*(data.length>0?"\n":"")+*/name+" * "+cnt);
+				data.push(name+" * "+cnt);
 			}
 
 			event.toolTip.data = data;
-		}
+		}*/
 		
 		private function onHeartBeatTweenEndHandler():void
 		{

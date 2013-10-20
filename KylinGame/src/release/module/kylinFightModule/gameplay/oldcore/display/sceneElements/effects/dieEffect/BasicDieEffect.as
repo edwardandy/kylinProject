@@ -1,11 +1,13 @@
-package com.shinezone.towerDefense.fight.display.sceneElements.effects.dieEffect
+package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.dieEffect
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.display.sceneElements.basics.BasicBodySkinSceneElement;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.SkillEffect.SkillEffectBehaviorState;
-	import com.shinezone.towerDefense.fight.utils.SimpleCDTrelease.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimerBodySkinSceneElement
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.SkillEffectBehaviorState;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
+	
+	public class BasicDieEffect extends BasicBodySkinSceneElement
 	{
 		private var _endCallBack:Function;
 		private var _dieStayCd:SimpleCDTimer = new SimpleCDTimer(2000);

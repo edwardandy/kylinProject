@@ -11,25 +11,25 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill
 			super();
 		}
 		
-		protected function getSkillLogicById(id:uint,isHero:Boolean = false):BasicSkillLogicUnit
+		protected function getSkillLogicById(id:uint):BasicSkillLogicUnit
 		{
 			var result:BasicSkillLogicUnit = _hashMap.get(id) as BasicSkillLogicUnit;
 			if(result)
 			{
-				result.setData(id,isHero);
+				result.setData(id);
 				return result;
 			}
 			
 			result = getLogic(id);
 			if(result)
-				result.setData(id,isHero);
+				result.setData(id);
 			
 			if(!result)
 			{
 				if(!_defaultCondition)
 					_defaultCondition = createDefaultLogic();	
 				if(_defaultCondition)
-					_defaultCondition.setData(id,isHero);
+					_defaultCondition.setData(id);
 				result = _defaultCondition;
 			}
 			
@@ -46,6 +46,12 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill
 		protected function createDefaultLogic():BasicSkillLogicUnit
 		{
 			return null;
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			_defaultCondition = null;	
 		}
 	}
 }

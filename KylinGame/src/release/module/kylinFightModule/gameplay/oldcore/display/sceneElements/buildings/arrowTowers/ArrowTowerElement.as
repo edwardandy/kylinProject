@@ -58,10 +58,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				bodySkinResourceURL + GameMovieClipFrameNameType.SOLDIER_NAME_SUFFIX) as Vector.<BitmapFrameInfo>;*/
 			
 			myTowerSoldierLeftSkin = new NewBitmapMovieClip([bodySkinResourceURL + GameMovieClipFrameNameType.SOLDIER_NAME_SUFFIX]);
+			injector.injectInto(myTowerSoldierLeftSkin);
 			myTowerSoldierLeftSkin.x = -8;
 			addChild(myTowerSoldierLeftSkin);
 			
 			myTowerSoldierRightSkin = new NewBitmapMovieClip([bodySkinResourceURL + GameMovieClipFrameNameType.SOLDIER_NAME_SUFFIX]);
+			injector.injectInto(myTowerSoldierRightSkin);
 			myTowerSoldierRightSkin.x = 8;
 			addChild(myTowerSoldierRightSkin);
 			
@@ -69,6 +71,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			if(myObjectTypeId != 112012)
 			{
 				myTowerBarSkin = new NewBitmapMovieClip([bodySkinResourceURL + GameMovieClipFrameNameType.BAR_NAME_SUFFIX]);
+				injector.injectInto(myTowerBarSkin);
 				addChild(myTowerBarSkin);
 				myTowerBarSkin.render(0);//just rend once
 			}

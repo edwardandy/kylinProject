@@ -43,6 +43,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			if(myHasTowerSoldier)
 			{
 				myTowerSoldierSkin = new NewBitmapMovieClip([bodySkinResourceURL + GameMovieClipFrameNameType.SOLDIER_NAME_SUFFIX]);
+				injector.injectInto(myTowerSoldierSkin);
 				myTowerSoldierSkin.x = 4;
 				addChild(myTowerSoldierSkin);
 				myTowerSoldierSkin.visible = false;

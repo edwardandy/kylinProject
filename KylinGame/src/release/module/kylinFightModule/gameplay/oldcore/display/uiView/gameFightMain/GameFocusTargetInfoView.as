@@ -1,27 +1,33 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain
 {
-	import avmplus.getQualifiedClassName;
-	
 	import com.greensock.TweenLite;
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.TowerDefenseGameState;
-	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	
 	import flash.events.Event;
 	import flash.text.TextField;
 	
-	import framecore.structure.model.constdata.IconConst;
-	import framecore.tools.font.FontUtil;
-	import framecore.tools.icon.IconUtil;
+	import avmplus.getQualifiedClassName;
+	
+	import kylin.echo.edward.utilities.font.FontMgr;
+	
+	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.TowerDefenseGameState;
+	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
+	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
+	import release.module.kylinFightModule.model.state.FightState;
+	
+	import utili.font.FontClsName;
 
 	public class GameFocusTargetInfoView extends BasicView
 	{
 		private static const AUTO_HIDE_TIME:uint = 5000;
+		
+		[Inject]
+		public var fightState:FightState;
+		[Inject]
+		public var timeTaskMgr:TimeTaskManager;
 		
 		private var _isShowed:Boolean = false;
 		private var _autoHideTimeHandler:int = -1;
@@ -47,11 +53,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			_background.mouseEnabled = false;
 			_background.mouseChildren = false;
 			addChild(_background);
-			
-			FontUtil.useFont( _background["nameLabel"], FontUtil.FONT_TYPE_NORMAL );
+			FontMgr.instance.setTextStyle(_background["nameLabel"],FontClsName.NormalFont);
 			for ( var i:int=0; i<7; i++ )
 			{
-				FontUtil.useFont( _background["label" + i], FontUtil.FONT_TYPE_NORMAL );
+				FontMgr.instance.setTextStyle( _background["label" + i], FontClsName.NormalFont );
 				_background["label" + i].width = 100;
 				_background["label" + i].mouseEnabled = false;
 			}
@@ -93,10 +98,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		 */		
 		private function refreshData( e:Event ):void
 		{
-			if ( GameAGlobalManager.getInstance().game.gameState == TowerDefenseGameState.GAME_PAUSED )
-			{
+			if ( FightState.PauseFight == fightState.state )
 				return;
-			}
 			
 			var i:int = 0;
 			for ( i=0; i<7; i++ )
@@ -329,7 +332,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			if(_autoHideTimeHandler != -1)
 			{
-				TimeTaskManager.getInstance().destoryTimeTask(_autoHideTimeHandler);
+				timeTaskMgr.destoryTimeTask(_autoHideTimeHandler);
 				_autoHideTimeHandler = -1;
 			}
 		}

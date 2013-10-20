@@ -59,8 +59,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	public class PropIconView extends CDAbleIconView implements IShortCutKeyResponser
 	{
 		private static const ITEM_PROP_CD_TIME:int = 1000;
-		public static const ITEMIDS:Array = [131063,131127,131124,131125];
-
 		//private var _itemInfo:ItemInfo;
 		private var _itemTemp:ItemTemplateInfo;
 		

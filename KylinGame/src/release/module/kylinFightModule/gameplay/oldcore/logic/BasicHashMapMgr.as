@@ -1,6 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic
 {
-	import com.shinezone.core.datastructures.HashMap;
+	import flash.utils.Dictionary;
+	
+	import kylin.echo.edward.utilities.datastructures.HashMap;
+	
 	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.BasicGameManager;
 
@@ -8,6 +11,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic
 	public class BasicHashMapMgr extends BasicGameManager
 	{
 		protected var _hashMap:HashMap = new HashMap;
+		private var _dicTemp:Dictionary = new Dictionary;
 		
 		public function BasicHashMapMgr()
 		{
@@ -15,26 +19,30 @@ package release.module.kylinFightModule.gameplay.oldcore.logic
 		}
 		
 		//IGameLifecycleNotifyer
-		override public function onGameStart():void
+		override public function onFightStart():void
 		{
 		}
 		
-		override public function onGameEnd():void
+		override public function onFightEnd():void
 		{
 			_hashMap.eachValue(disposeEachCondition);
+			_dicTemp = new Dictionary;
 			_hashMap.clear();
 		}
 		
 		private function disposeEachCondition(e:IDisposeObject):void
 		{
+			if(_dicTemp[e])
+				return;
+			_dicTemp[e] = true;
 			e.dispose();
 		}
 		
 		//IDisposeObject Interface
 		override public function dispose():void
 		{
-			onGameEnd();
 			_hashMap = null;
+			_dicTemp = null;
 		}
 	}
 }

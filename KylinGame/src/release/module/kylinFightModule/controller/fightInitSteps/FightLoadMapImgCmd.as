@@ -39,7 +39,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		
 		private function initMapBg(asset:AssetInfo):void
 		{
-			viewLayers.groundLayer.addChild(asset.content as DisplayObject);
+			viewLayers.mapLayer.addChild(asset.content as DisplayObject);
 			
 			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightLoadMapCfg));
 		}

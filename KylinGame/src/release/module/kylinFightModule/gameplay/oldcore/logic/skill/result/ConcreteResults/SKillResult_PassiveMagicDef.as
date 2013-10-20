@@ -7,9 +7,9 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.Conc
 	/**
 	 * 被动技能增加魔法防御
 	 */
-	public class SKillResult_PassiveMagicDef extends BasicSkillResult
+	public class SkillResult_PassiveMagicDef extends BasicSkillResult
 	{
-		public function SKillResult_PassiveMagicDef(strId:String)
+		public function SkillResult_PassiveMagicDef(strId:String)
 		{
 			super(strId);
 		}

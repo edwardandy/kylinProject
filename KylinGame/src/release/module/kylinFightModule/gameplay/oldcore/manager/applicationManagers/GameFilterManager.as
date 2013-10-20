@@ -8,13 +8,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 
 	public class GameFilterManager implements IDisposeObject
 	{
-		private static var _instance:GameFilterManager;
-		
-		public static function getInstance():GameFilterManager
-		{
-			return _instance ||= new GameFilterManager();
-		}
-		
 		private var _defaultYellowGlowFilter:GlowFilter;
 		private var _yellowGlowFilter2:GlowFilter;
 		private var _blueGlowFilter:GlowFilter;
@@ -40,7 +33,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 			_delfaultColorMatrixFilter = null;
 			_cachedDefinedFilters = null;
 			_blueGlowFilter = null;
-			_instance = null;
 		}
 		
 		 //黄色外发光效果 

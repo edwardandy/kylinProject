@@ -1,9 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.ShortCutKeyResponser
 {
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMonsterMarchManager;
 
 	public class MarchMonsterShortCutRespon extends ShortCutKeyResponser
 	{
+		[Inject]
+		public var monsterMarchMgr:GameFightMonsterMarchManager;
+		
 		public function MarchMonsterShortCutRespon()
 		{
 			super();
@@ -11,7 +14,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.ShortCut
 		
 		override public function notifyShortCutKeyDown():void
 		{
-			GameAGlobalManager.getInstance().gameMonsterMarchManager.marchNextWave();
+			monsterMarchMgr.marchNextWave();
 		}
 	}
 }
