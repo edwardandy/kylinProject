@@ -1,8 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseValidators
 {
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	
-	import flash.events.MouseEvent;
 
 //	0: 点技能就释放
 //	1：地图任意位置都可以释放

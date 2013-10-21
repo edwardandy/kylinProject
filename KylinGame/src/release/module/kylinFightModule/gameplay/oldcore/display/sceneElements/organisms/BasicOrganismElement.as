@@ -1,72 +1,56 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms
 {
-	import com.shinezone.towerDefense.fight.algorithms.astar.MathUtil;
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FightUnitType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.OrganismBodySizeType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import com.shinezone.towerDefense.fight.constants.SoundFields;
-	import com.shinezone.towerDefense.fight.constants.TowerType;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.BasicOrganismSkillBufferEffect;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.OrganismSkillBufferInfo;
-	import com.shinezone.towerDefense.fight.display.sceneElements.organisms.OrganismBehaviorState;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadLineVOHelperUtil;
-	
 	import flash.display.Shape;
 	import flash.display.Sprite;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
 	
-	import framecore.structure.model.constdata.GameConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseFighterInfo;
-	import framecore.structure.model.user.base.BaseMoveFighterInfo;
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.base.SkillUseUnit;
-	import framecore.structure.model.user.buff.BuffTemplateInfo;
-	import framecore.structure.model.user.groundEff.GroundEffTemplateInfo;
+	import mainModule.model.gameData.sheetData.groundEff.IGroundEffSheetDataModel;
+	import mainModule.model.gameData.sheetData.groundEff.IGroundEffSheetItem;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseFighterSheetItem;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseMoveFighterSheetItem;
 	
-	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.FightUnitType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismBodySizeType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.SoundFields;
+	import release.module.kylinFightModule.gameplay.constant.TowerType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.SimpleProgressBar;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBufferAttacher;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneInteractiveElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.cannonTowers.LongXiTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.SpecialBufferRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.dieEffect.BasicDieEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect.BasicGroundEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SummonByOrganisms;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SupportSoldier;
 	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.move.GameFightMoveLogicMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.MoveState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveLogic;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveUnit;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightSuccessAndFailedDetector;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
+	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	/**
 	 * 此类为场景战斗对象的核心类，实现了两方阵营大部分的战斗状态逻辑 
@@ -75,8 +59,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	 */	
 	public class BasicOrganismElement extends BasicBufferAttacher implements IOrganismSkiller, ISkillOwner, IMoveUnit
 	{
+		[Inject]
+		public var moveLogicMgr:GameFightMoveLogicMgr;
+		[Inject]
+		public var sceneModel:ISceneDataModel;
+		[Inject]
+		public var successAndFailedDetector:GameFightSuccessAndFailedDetector;
+		[Inject]
+		public var groundEffModel:IGroundEffSheetDataModel
+		[Inject]
+		public var filterMgr:GameFilterManager;
 		//单位模板信息
-		protected var myMoveFighterInfo:BaseMoveFighterInfo;		
+		protected var myMoveFighterInfo:IBaseMoveFighterSheetItem;		
 		
 		//单位尺寸
 		private var _myBodySizeType:int = -1;
@@ -136,7 +130,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			super();
 			this.myObjectTypeId = typeId;
 			myMoveState = new MoveState(this);
-			myMoveLogic = GameAGlobalManager.getInstance().gameMoveLogicMgr.getMoveLogicByCategoryAndId(myElemeCategory,myObjectTypeId);
+			myMoveLogic = moveLogicMgr.getMoveLogicByCategoryAndId(myElemeCategory,myObjectTypeId);
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_MIDDLE;
 			this.buttonMode = true;	
 			myFocusTipEnable = true;
@@ -225,7 +219,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			//要放在前面，因为父类操作中会处理增加移动速度的被动技能
 			myMoveState.unit = this;
-			myMoveState.mySpeed = GameMathUtil.secondSpeedToFrameMoveSpeed( myMoveFighterInfo.moveSpeed);
+			myMoveState.mySpeed = GameMathUtil.secondSpeedToFrameMoveSpeed( myMoveFighterInfo.moveSpd);
 			
 			super.initStateWhenActive();
 			
@@ -363,7 +357,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		 */
 		override protected function getCanUseSkills():void
 		{
-			mySkillIds = myMoveFighterInfo.getskillIds().concat();
+			mySkillIds = myMoveFighterInfo.skillIds.concat();
 			
 		}
 		
@@ -371,14 +365,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			myFightState.baseAtkArea = myMoveFighterInfo.atkArea;
 			myFightState.searchArea = myMoveFighterInfo.searchArea;
-			myFightState.range = myMoveFighterInfo.range;
-			myFightState.cdTime = myMoveFighterInfo.cdTime;
-			myFightState.magicDefense = myMoveFighterInfo.magicDefense;
+			myFightState.range = myMoveFighterInfo.atkRange;
+			myFightState.cdTime = myMoveFighterInfo.atkInterval;
+			myFightState.magicDefense = myMoveFighterInfo.magicDef;
 			myFightState.maxAtk = myMoveFighterInfo.maxAtk;
 			myFightState.maxlife = myMoveFighterInfo.life;
-			myFightState.minAtk = myMoveFighterInfo.baseAtk;
-			myFightState.physicDefense = myMoveFighterInfo.physicDefense;
-			myFightState.atkType = myMoveFighterInfo.attacktype;
+			myFightState.minAtk = myMoveFighterInfo.minAtk;
+			myFightState.physicDefense = myMoveFighterInfo.physicDef;
+			myFightState.atkType = myMoveFighterInfo.atkType;
 			myFightState.weapon = myMoveFighterInfo.weapon;
 		}
 		
@@ -454,7 +448,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			return !_isRecieverdersMoveMode && !myFightState.bInvisible;
 		}
 		
-		override protected function getBaseFightInfo():BaseFighterInfo
+		override protected function getBaseFightInfo():IBaseFighterSheetItem
 		{
 			return myMoveFighterInfo;
 		}
@@ -633,7 +627,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				
 				if(myCampType == FightElementCampType.ENEMY_CAMP && (this is BasicMonsterElement))
 				{
-					GameAGlobalManager.getInstance().gameDataInfoManager.updateSceneGold((this as BasicMonsterElement).monsterTemplateInfo.rewardGoods);
+					
+					sceneModel.updateSceneGold((this as BasicMonsterElement).monsterTemplateInfo.rewardGoods);
 					if(!byTarget || GameObjectCategoryType.HERO != byTarget.elemeCategory)
 						GameAGlobalManager.getInstance().game.gameFightMainUIView.playAddGoodsAnim(0,-bodyHeight,(this as BasicMonsterElement).monsterTemplateInfo.rewardGoods,this,false,0xecda3e);
 				}
@@ -1252,7 +1247,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			else if(_myCurrentDieType > OrganismDieType.NONE_DIE)
 			{
 				this.myBodySkin.visible = false;
-				var dieEff:BasicDieEffect = ObjectPoolManager.getInstance().
+				var dieEff:BasicDieEffect = objPoolMgr.
 					createSceneElementObject(GameObjectCategoryType.DIEEFFECT,_myCurrentDieType,false) as BasicDieEffect;
 				dieEff.setDieEffectParam(onDiedAnimationEndHandlerStep1);
 				dieEff.x = x;
@@ -1283,7 +1278,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				if(campType == FightElementCampType.ENEMY_CAMP)
 				{
 					//胜利失败检测
-					GameAGlobalManager.getInstance().gameSuccessAndFailedDetector.onEnemyCampUintDied(this as BasicMonsterElement);
+					successAndFailedDetector.onEnemyCampUintDied(this as BasicMonsterElement);
 				}
 				
 				
@@ -1348,7 +1343,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				if(campType == FightElementCampType.ENEMY_CAMP)
 				{
 					//胜利失败检测
-					GameAGlobalManager.getInstance().gameSuccessAndFailedDetector.onEnemyCampUintDied(this as BasicMonsterElement);
+					successAndFailedDetector.onEnemyCampUintDied(this as BasicMonsterElement);
 				}
 				
 				
@@ -1363,7 +1358,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			if(campType == FightElementCampType.ENEMY_CAMP)
 			{
 				//胜利失败检测
-				GameAGlobalManager.getInstance().gameSuccessAndFailedDetector.onEnemyCampUintDied(this as BasicMonsterElement);
+				successAndFailedDetector.onEnemyCampUintDied(this as BasicMonsterElement);
 			}
 			
 			
@@ -1664,7 +1659,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				{
 					if(FightElementCampType.FRIENDLY_CAMP == myCampType)
 					{
-						tempEnemy = GameAGlobalManager.getInstance().groundSceneHelper
+						tempEnemy = sceneElementsService
 							.searchOrganismElementEnemy(searchCenterX, searchCenterY, myFightState.searchArea, 
 								oppositeCampType, searchCanInterceptOtherEnemy);
 					}
@@ -1674,7 +1669,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 					{
 						if(isFarAttackable)
 						{
-							tempEnemy = GameAGlobalManager.getInstance().groundSceneHelper
+							tempEnemy = sceneElementsService
 								.searchOrganismElementEnemy(searchCenterX, searchCenterY, myFightState.atkArea, 
 									oppositeCampType, searchAttackMySelfEnemy);
 							if(tempEnemy)
@@ -1700,17 +1695,17 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			}
 			else if(FightElementCampType.FRIENDLY_CAMP == myCampType || fightState.betrayState.bBetrayed)
 			{
-				searchedEnemy = GameAGlobalManager.getInstance().groundSceneHelper
+				searchedEnemy = sceneElementsService
 					.searchOrganismElementEnemy(searchCenterX, searchCenterY,myFightState.searchArea, 
 						oppositeCampType, searchCanInterceptEscapeEnemy);
 				if(!searchedEnemy)
 				{
-					searchedEnemy = GameAGlobalManager.getInstance().groundSceneHelper
+					searchedEnemy = sceneElementsService
 						.searchOrganismElementEnemy(searchCenterX, searchCenterY,myFightState.searchArea, 
 							oppositeCampType, searchCanInterceptEnemy);
 					if(!searchedEnemy && isFarAttackable)
 					{
-						searchedEnemy = GameAGlobalManager.getInstance().groundSceneHelper
+						searchedEnemy = sceneElementsService
 							.searchOrganismElementEnemy(searchCenterX, searchCenterY,myFightState.atkArea, 
 								oppositeCampType, searchFarAttackFlyUintSearchConditionFilter);
 					}
@@ -1718,7 +1713,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			}
 			else if(isFarAttackable)
 			{
-				searchedEnemy = GameAGlobalManager.getInstance().groundSceneHelper
+				searchedEnemy = sceneElementsService
 					.searchOrganismElementEnemy(searchCenterX, searchCenterY,myFightState.atkArea, oppositeCampType, searchCanBeFarAttackedFriendly);
 			}
 			
@@ -1977,7 +1972,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		protected function fireBullet(ptFire:PointVO):void
 		{
 			//伤害在onFarAttackTarget中计算
-			var bulletEffect:BasicBulletEffect = ObjectPoolManager.getInstance()
+			var bulletEffect:BasicBulletEffect = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.BULLET, 
 					myFightState.weapon, false) as BasicBulletEffect;
 			bulletEffect.fire(mySearchedEnemy, this, 
@@ -2085,7 +2080,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				var life:int = dmg*(myFightState.iAtkToLifePct+myFightState.equipBloodValuePct)/100;
 				if(myFightState.addLife(life))
 				{
-					var res:SpecialBufferRes = ObjectPoolManager.getInstance().createSceneElementObject(
+					var res:SpecialBufferRes = objPoolMgr.createSceneElementObject(
 						GameObjectCategoryType.ORGANISM_SKILL_BUFFER,BufferID.Vampire,false) as SpecialBufferRes;
 					res.initializeByParameters(this);
 					res.notifyLifecycleActive();
@@ -2385,7 +2380,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		 * *************************** 移动时状态检查逻辑   **************************
 		 * **************************************************************/	
 		private var _lastWalkPt:PointVO = new PointVO;
-		private var _groundEffTemp:GroundEffTemplateInfo;
+		private var _groundEffTemp:IGroundEffSheetItem;
 		private function checkWalkEff():void
 		{
 			if(0 == myFightState.groundEffcetState.effId)
@@ -2393,20 +2388,20 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			
 			var distance:int = GameMathUtil.distance(x,y/GameFightConstant.Y_X_RATIO,_lastWalkPt.x,_lastWalkPt.y/GameFightConstant.Y_X_RATIO);
 			if(!_groundEffTemp)
-				_groundEffTemp = TemplateDataFactory.getInstance().getGroundEffTemplateById(myFightState.groundEffcetState.effId);
+				_groundEffTemp = groundEffModel.getGroundEffSheetById(myFightState.groundEffcetState.effId);
 			if(distance<_groundEffTemp.range)
 				return;
 			
-			var temp:GroundEffTemplateInfo = TemplateDataFactory.getInstance().getGroundEffTemplateById(myFightState.groundEffcetState.effId);
+			var temp:IGroundEffSheetItem = groundEffModel.getGroundEffSheetById(myFightState.groundEffcetState.effId);
 			if(!temp)
 				return;
-			var vecGroundEff:Vector.<BasicGroundEffect> = GameAGlobalManager.getInstance().groundSceneHelper.searchGroundEffsBySearchArea(x,y,temp.range,1,onSearchGroundEffCondition);
+			var vecGroundEff:Vector.<BasicGroundEffect> = sceneElementsService.searchGroundEffsBySearchArea(x,y,temp.range,1,onSearchGroundEffCondition);
 			if(vecGroundEff && vecGroundEff.length>0)
 				return;
 			_lastWalkPt.x = x;
 			_lastWalkPt.y = y;
 			
-			var eff:BasicGroundEffect = ObjectPoolManager.getInstance().createSceneElementObject(
+			var eff:BasicGroundEffect = objPoolMgr.createSceneElementObject(
 				GameObjectCategoryType.GROUNDEFFECT,myFightState.groundEffcetState.effId,false) as BasicGroundEffect;
 			if(!eff)
 				return;
@@ -2431,8 +2426,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(myFightState.addTowerAtk.bHasState)
 			{
-				var vecTower:Vector.<BasicTowerElement> = GameAGlobalManager.getInstance().
-					groundSceneHelper.
+				var vecTower:Vector.<BasicTowerElement> = sceneElementsService.
 					searchTowersBySearchArea(this.x,this.y,myFightState.addTowerAtk.iArea*(1+myFightState.extraAddTowerAtk.extraAddTowerAtkAreaPct*0.01),0,searchNotBarrackTower);
 				if(!vecTower || 0 == vecTower.length)
 				{
@@ -2486,8 +2480,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(myFightState.addSoldierState.bHasState)
 			{
-				var vecSoldier:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().
-					groundSceneHelper.
+				var vecSoldier:Vector.<BasicOrganismElement> = sceneElementsService.
 					searchOrganismElementsBySearchArea(this.x,this.y,myFightState.addSoldierState.iAtkArea,myCampType,searchSoldierFilter);
 				if(!vecSoldier || 0 == vecSoldier.length)
 				{
@@ -2644,9 +2637,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		override public function atkRoundUnits(area:int,atk:int,camp:int,owner:ISkillOwner,dieType:int = 0):Boolean
 		{
-			var vecTargets:Vector.<BasicOrganismElement> = GameAGlobalManager
-			.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x,this.y,area,camp);
+			var vecTargets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x,this.y,area,camp);
 			for each(var target:BasicOrganismElement in vecTargets)
 			{
 				target.hurtBlood(atk,myFightState.atkType,false,this,false,dieType);
@@ -2754,9 +2745,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		override public function explodeAfterDie(dmg:int,range:int,owner:ISkillOwner,dieType:int):Boolean
 		{
-			var vecTargets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().
-				groundSceneHelper.
-				searchOrganismElementsBySearchArea(this.x,this.y,range,myCampType);
+			var vecTargets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x,this.y,range,myCampType);
 			if(OrganismDieType.NORMAL_DIE != dieType)
 				_myCurrentDieType = dieType;
 			for each(var target:BasicOrganismElement in vecTargets)
@@ -2791,7 +2780,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			for(var i:int=0;i<count;++i)
 			{
 				offX += 10;
-				var soldier:SummonByOrganisms = ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.SUMMON_BY_ORGANISM,uid,false) as SummonByOrganisms;
+				var soldier:SummonByOrganisms = objPoolMgr.createSceneElementObject(GameObjectCategoryType.SUMMON_BY_ORGANISM,uid,false) as SummonByOrganisms;
 				if(soldier)
 				{
 					soldier.master = this;
@@ -2807,7 +2796,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		override public function summonAfterDie(uid:uint,duration:int,owner:ISkillOwner):Boolean
 		{
-			var soldier:SupportSoldier = ObjectPoolManager.getInstance()
+			var soldier:SupportSoldier = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.SUPPORT_SOLDIER, uid, false) as SupportSoldier;
 			soldier.lifeDuration = duration;
 			soldier.visible = true;

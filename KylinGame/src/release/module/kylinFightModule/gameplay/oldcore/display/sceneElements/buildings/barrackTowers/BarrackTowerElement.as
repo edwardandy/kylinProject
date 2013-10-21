@@ -1,29 +1,21 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.barrackTowers
 {
-	import com.shinezone.core.datastructures.HashMap;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.SceneType;
-	import com.shinezone.towerDefense.fight.constants.SoundFields;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
+	import kylin.echo.edward.utilities.datastructures.HashMap;
+	
+	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.SceneType;
+	import release.module.kylinFightModule.gameplay.constant.SoundFields;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.ToftElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.TowerBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.BarrackSoldierElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.Shape;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	//士兵塔中的3个士兵的生命周期实际是有该塔一直控制的，直到该塔对象被移除，才会交还给缓存系统
 	public class BarrackTowerElement extends BasicTowerElement
@@ -180,6 +172,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			myTowerSoldiers = new Vector.<BarrackSoldierElement>(3, true);
 			
 			_lockFocusCDTimer = new SimpleCDTimer(800);
+			injector.injectInto(_lockFocusCDTimer);
 			
 //			_s = new Shape();
 //			addChild(_s);
@@ -202,6 +195,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			
 			if(myBuildingCircleMenu != null)
 			{
+				injector.injectInto(myBuildingCircleMenu);
 				addChild(myBuildingCircleMenu);
 			}
 		}
@@ -218,8 +212,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			//这里去缓存系统去申请士兵
 			for(var i:uint = 0; i < 3; i++)
 			{
-				soldier = ObjectPoolManager.getInstance()
-					.createSceneElementObject(GameObjectCategoryType.SOLDIER, myTowerTemplateInfo.soldierId, false) as BarrackSoldierElement;
+				soldier = objPoolMgr.createSceneElementObject(GameObjectCategoryType.SOLDIER
+					, myTowerTemplateInfo.soldierId, false) as BarrackSoldierElement;
 				soldier.soldierIndex = i;
 				soldier.ownerTower = this;		
 				myTowerSoldiers[i] = soldier;
@@ -362,7 +356,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override protected function getRangeColor():uint
 		{
-			switch(GameAGlobalManager.getInstance().gameDataInfoManager.sceneType)
+			switch(sceneModel.sceneType)
 			{
 				case SceneType.Grassland:
 					return 0xfff1bb;
@@ -397,7 +391,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				for(var i:uint = 0; i < 3; i++)
 				{
 					soldier = myTowerSoldiers[i];
-					soldier.setBodyFilter([GameFilterManager.getInstance().yellowGlowFilter]);
+					soldier.setBodyFilter([filterMgr.yellowGlowFilter]);
 				}
 				
 			}

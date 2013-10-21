@@ -1,11 +1,10 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors
 {
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers.WizardTowerElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers.WizardTowerElement;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 
 	public class WizardTowersMeetingPointMouseCursor extends BasicHasFlagMouseCursor
 	{
@@ -30,8 +29,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 		
 		override protected function checkIsValidMouseClick(mouseClickEvent:MouseEvent):Object
 		{
-			var pt:Point = GameMathUtil.convertStagePtToGame2(mouseClickEvent.stageX,mouseClickEvent.stageY,GameAGlobalManager.getInstance().game);
-			return GameAGlobalManager.getInstance().groundScene.hisTestMapRoad(mouseClickEvent.stageX,mouseClickEvent.stageY) &&
+			var pt:Point = GameMathUtil.convertStagePtToGame2(mouseClickEvent.stageX,mouseClickEvent.stageY,fightViewModel.groundLayer);
+			return sceneElementsModel.hisTestMapRoad(mouseClickEvent.stageX,mouseClickEvent.stageY) &&
 				GameMathUtil.containsPointInEllipseSearchArea(_myCurrentWizardTowerElement.x, _myCurrentWizardTowerElement.y,
 					_myCurrentWizardTowerElement.attackArea, pt.x, pt.y);
 		}

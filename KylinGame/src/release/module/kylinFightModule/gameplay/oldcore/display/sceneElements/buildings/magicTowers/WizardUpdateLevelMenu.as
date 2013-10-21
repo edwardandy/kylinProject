@@ -1,26 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers
 {
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import flash.events.MouseEvent;
+	
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.IMouseCursorSponsor;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.WizardTowersMeetingPointMouseCursor;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.MeetingPointCircleItem;
-	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.TowerSingleUpdateLevelMenu;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.TowerSkillUpdateLevelMenu;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.events.MouseEvent;
-	
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
 	
 	public class WizardUpdateLevelMenu extends TowerSkillUpdateLevelMenu implements IMouseCursorSponsor
 	{
 		private var _meetingPointCircleItem:MeetingPointCircleItem;
 		
-		public function WizardUpdateLevelMenu(buildingElement:BasicBuildingElement, towerTemplateInfo:TowerTemplateInfo)
+		public function WizardUpdateLevelMenu(buildingElement:BasicBuildingElement, towerTemplateInfo:ITowerSheetItem)
 		{
 			super(buildingElement, towerTemplateInfo);
 		}
@@ -30,6 +27,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			super.onInitialize();
 			
 			_meetingPointCircleItem = new MeetingPointCircleItem(onCircleMenuItemMettingPointClick, this);
+			injector.injectInto(_meetingPointCircleItem);
 			//_meetingPointCircleItem.x = 43;
 			_meetingPointCircleItem.y = 50;
 			addChild(_meetingPointCircleItem);
@@ -43,11 +41,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function onCircleMenuItemMettingPointClick():void
 		{
-			GameAGlobalManager.getInstance()
-				.gameMouseCursorManager.activeMouseCursorByName(GameFightMouseCursorManager.WIZARD_TOWERS_MEETING_POINT_MOUSE_CURSOR, this);
+			mouseCursorMgr.activeMouseCursorByName(GameFightMouseCursorManager.WIZARD_TOWERS_MEETING_POINT_MOUSE_CURSOR, this);
 			
-			var currentMouseCursor:WizardTowersMeetingPointMouseCursor = GameAGlobalManager.getInstance()
-				.gameMouseCursorManager.getCurrentMouseCursor() as WizardTowersMeetingPointMouseCursor;
+			var currentMouseCursor:WizardTowersMeetingPointMouseCursor = mouseCursorMgr
+				.getCurrentMouseCursor() as WizardTowersMeetingPointMouseCursor;
 			currentMouseCursor.setWizardTowerElement(WizardTowerElement(myBuildingElement));
 			
 			WizardTowerElement(myBuildingElement).isShowTowerRange(true);
@@ -58,7 +55,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			WizardTowerElement(myBuildingElement).isShowTowerRange(false);
 			
 			WizardTowerElement(myBuildingElement).moveAllSoldierToMeetingCenterPoint(
-				GameMathUtil.convertStagePtToGame(mouseClickEvent.stageX, mouseClickEvent.stageY,GameAGlobalManager.getInstance().game));
+				GameMathUtil.convertStagePtToGame(mouseClickEvent.stageX, mouseClickEvent.stageY,fightViewModel.groundLayer));
 		}
 		
 		public function notifyTargetMouseCursorCanceled():void

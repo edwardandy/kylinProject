@@ -1,32 +1,25 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.Heros
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.GroundEffectID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseFighterSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.identify.GroundEffectID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.SafeLaunchSkillRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.ParabolaBulletTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.LineVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
-	
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.heroSkill.HeroSkillTemplateInfo;
-	import framecore.structure.model.user.skill.SkillTemplateInfo;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 炸弹人
@@ -105,7 +98,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			myFightState.bInvincible = true;
 			var pct:int = getSkillDmgAddPct();
 			_safeDmg += _safeDmg*pct/10000;
-			var skillEffect:SafeLaunchSkillRes = ObjectPoolManager.getInstance()
+			var skillEffect:SafeLaunchSkillRes = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.SKILLRES, SkillID.SafeLaunch, false) as SafeLaunchSkillRes;
 			if(skillEffect)
 			{
@@ -122,11 +115,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		private function onSafeLaunchAtk(iArea:int,iDmg:int):void
 		{
-			var vecTarget:Vector.<BasicOrganismElement> = GameAGlobalManager
-				.getInstance()
-				.groundSceneHelper
-				.searchOrganismElementsBySearchArea(this.x, this.y, iArea, 
-					oppositeCampType);
+			var vecTarget:Vector.<BasicOrganismElement> = sceneElementsService
+				.searchOrganismElementsBySearchArea(this.x, this.y, iArea, oppositeCampType);
 			
 			if(vecTarget && vecTarget.length>0)
 			{	
@@ -139,7 +129,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		private function onLaunchSelf():void
 		{
-			var ptResult:PointVO = GameAGlobalManager.getInstance().groundSceneHelper.getCurrentSceneRandomRoadPointByCurrentRoadsData();
+			var ptResult:PointVO = sceneElementsService.getCurrentSceneRandomRoadPointByCurrentRoadsData();
 			_myCurrentRendTimes = 0;
 			_myTotalRendTimes = GameMathUtil.caculateFrameCountByTime(2000);
 			
@@ -169,10 +159,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(state && SkillID.HighBomb == state.id && !myFightState.bStun)
 			{	
-				var temp:BaseSkillInfo = getBaseSkillInfo(SkillID.HighBomb);
-				if(state.mainTarget && GameMathUtil.containsPointInEllipseSearchArea(state.mainTarget.x,state.mainTarget.y,temp.range,x, y) /*GameMathUtil.distance(x,y,state.mainTarget.x,state.mainTarget.y) <= temp.range*/)
+				var temp:IBaseFighterSheetItem = getBaseSkillInfo(SkillID.HighBomb);
+				if(state.mainTarget && GameMathUtil.containsPointInEllipseSearchArea(state.mainTarget.x,state.mainTarget.y,temp.atkRange,x, y) /*GameMathUtil.distance(x,y,state.mainTarget.x,state.mainTarget.y) <= temp.range*/)
 				{
-					var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(state.id,true);
+					var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(state.id);
 					var selfState:SkillState = new SkillState;
 					selfState.id = state.id;
 					selfState.owner = this;

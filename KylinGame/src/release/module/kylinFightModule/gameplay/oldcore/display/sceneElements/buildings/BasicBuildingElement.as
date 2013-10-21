@@ -1,34 +1,44 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBufferAttacher;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneInteractiveElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BasicBuildingCircleMenu;
-	import release.module.kylinFightModule.gameplay.oldcore.events.GameDataInfoEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
-	
 	import flash.display.Shape;
 	import flash.events.Event;
+	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.tower.TowerData;
-	import framecore.structure.model.user.tower.TowerLevelVo;
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
-	import framecore.tools.media.TowerMediaPlayer;
+	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicDataModel;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetDataModel;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
+	import mainModule.model.gameData.sheetData.towerLevelup.ITowerLevelupSheetDataModel;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBufferAttacher;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BasicBuildingCircleMenu;
+	import release.module.kylinFightModule.gameplay.oldcore.events.GameDataInfoEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 
 	public class BasicBuildingElement extends BasicBufferAttacher implements IBuildingCircleMenuOwner
 	{
+		[Inject]
+		public var eventDispatcher:IEventDispatcher;
+		[Inject]
+		public var gameInteractiveMgr:GameFightInteractiveManager;
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
+		[Inject]
+		public var filterMgr:GameFilterManager;
+		[Inject]
+		public var towerModel:ITowerSheetDataModel;
+		[Inject]
+		public var towerData:ITowerDynamicDataModel;
+		[Inject]
+		public var towerLvlModel:ITowerLevelupSheetDataModel;
+		
 		protected var myIsMouseOver:Boolean = false;
 		
 		protected var myBuildingCircleMenu:BasicBuildingCircleMenu;
@@ -111,7 +121,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			this.removeEventListener(MouseEvent.ROLL_OVER, mouseRollOverHandler);
 			this.removeEventListener(MouseEvent.ROLL_OUT, mouseRollOutHandler);
 			
-			GameAGlobalManager.getInstance().gameDataInfoManager.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, sceneGoldUpdateHandler);
+			eventDispatcher.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, sceneGoldUpdateHandler);
 			
 			myIsInFocus = false;
 			myIsMouseOver = false;
@@ -143,7 +153,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				if(myFightState.bStun)
 				{
 					myIsInFocus = false;
-					GameAGlobalManager.getInstance().gameInteractiveManager.setCurrentFocusdElement(null);
+					gameInteractiveMgr.setCurrentFocusdElement(null);
 					return;
 				}
 				if(!_hasSettedCircleMenuePosition)
@@ -151,7 +161,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 					_hasSettedCircleMenuePosition = true;
 
 					var p:Point = new Point(0, -myBodySkin.height / 2);
-					p = GameAGlobalManager.getInstance().game.globalToLocal(localToGlobal(p));
+					p = fightViewModel.towerMenuLayer.globalToLocal(localToGlobal(p));
 					
 					if(myBuildingCircleMenu != null)
 					{
@@ -165,7 +175,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 					showBuildingMenu();
 				}
 				
-				GameAGlobalManager.getInstance().gameDataInfoManager.addEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, sceneGoldUpdateHandler);
+				eventDispatcher.addEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, sceneGoldUpdateHandler);
 			}
 			else
 			{
@@ -174,7 +184,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 					hideBuildingMenu();
 				}
 				isShowNextTowerRange(false,0);
-				GameAGlobalManager.getInstance().gameDataInfoManager.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, sceneGoldUpdateHandler);
+				eventDispatcher.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, sceneGoldUpdateHandler);
 			}
 
 			onMouseInAndOut2FocusChanged();
@@ -190,7 +200,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			if(myIsInFocus || myIsMouseOver) 
 			{
 				if(!hasBuffer(BufferID.RdcTowerAtkSpd))
-					this.myBodySkin.filters = [GameFilterManager.getInstance().yellowGlowFilter];
+					this.myBodySkin.filters = [filterMgr.yellowGlowFilter];
 			}
 			else
 			{
@@ -205,9 +215,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			
 			if(myBuildingCircleMenu != null)
 			{
-				if(!GameAGlobalManager.getInstance().gameMenuLayer.contains(myBuildingCircleMenu))
+				if(!fightViewModel.towerMenuLayer.contains(myBuildingCircleMenu))
 				{
-					GameAGlobalManager.getInstance().gameMenuLayer.addChild(myBuildingCircleMenu);	
+					fightViewModel.towerMenuLayer.addChild(myBuildingCircleMenu);	
 				}
 			}
 		}
@@ -218,9 +228,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 
 			if(myBuildingCircleMenu != null)
 			{
-				if(GameAGlobalManager.getInstance().gameMenuLayer.contains(myBuildingCircleMenu))
+				if(fightViewModel.towerMenuLayer.contains(myBuildingCircleMenu))
 				{
-					GameAGlobalManager.getInstance().gameMenuLayer.removeChild(myBuildingCircleMenu);	
+					fightViewModel.towerMenuLayer.removeChild(myBuildingCircleMenu);	
 				}
 			}
 		}
@@ -257,13 +267,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function getNextTowerRange(builderId:uint):int
 		{
-			var temp:TowerTemplateInfo = TemplateDataFactory.getInstance().getTowerTemplateById(builderId);
+			var temp:ITowerSheetItem = towerModel.getTowerSheetById(builderId);
 			if(!temp)
 				return 0;
-			var lv:TowerLevelVo = TowerData.getInstance().getTowerLevelVoByTowerType(temp.type);
-			if(lv)
+			var lvl:int = towerData.getTowerLevelByType(temp.type);
+			if(lvl>1)
 			{
-				return temp.atkArea + TowerData.getInstance().getTowerAtkAreaByTypeAndLevel(temp.type,lv.level);
+				return temp.atkArea + towerLvlModel.getTowerLevelupSheetByLvl(lvl).getLevelupGrowth(temp.type)[1];
 			}
 			else
 				return temp.atkArea;

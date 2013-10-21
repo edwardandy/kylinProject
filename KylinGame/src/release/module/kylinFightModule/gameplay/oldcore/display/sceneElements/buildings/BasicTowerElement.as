@@ -1,60 +1,40 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FightUnitType;
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillType;
-	import com.shinezone.towerDefense.fight.constants.SoundFields;
-	import com.shinezone.towerDefense.fight.constants.TowerType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneInteractiveElement;
+	import flash.display.Shape;
+	import flash.events.MouseEvent;
+	
+	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicItem;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.TowerType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.IOrganismSkiller;
-	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BasicBuildingCircleMenu;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.TowerMultiUpdateLevelMenu;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.TowerSingleUpdateLevelMenu;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.TowerSkillUpdateLevelMenu;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.MovieClip;
-	import flash.display.Shape;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.utils.getTimer;
-	
-	import framecore.structure.model.constdata.NewbieConst;
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseFighterInfo;
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.base.SkillUseUnit;
-	import framecore.structure.model.user.tower.TowerData;
-	import framecore.structure.model.user.tower.TowerInfo;
-	import framecore.structure.model.user.tower.TowerLevelVo;
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
-	import framecore.structure.views.newguidPanel.NewbieGuideManager;
-	import framecore.tools.GameStringUtil;
-	import framecore.tools.media.TowerMediaPlayer;
+	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
+	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 
 	public class BasicTowerElement extends BasicBuildingElement implements IOrganismSkiller, ISkillOwner
-	{
-		protected var myTowerInfo:TowerInfo;
+	{	
+		[Inject]
+		public var sceneModel:ISceneDataModel;
+		
+		protected var myTowerInfo:ITowerDynamicItem;
+		protected var myTowerTemplateInfo:ITowerSheetItem;
 		
 		protected var myBuilddingToft:ToftElement;
 		private var _myRangeShape:Shape;
@@ -84,13 +64,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_MIDDLE;
 			this.mouseEnabled = false;//after building
 			myFocusTipEnable = true;
-			
-			myTowerInfo = TowerData.getInstance().getTowerInfoByTowerId(typeId);
-		}
-		
-		protected function get myTowerTemplateInfo():TowerTemplateInfo
-		{
-			return myTowerInfo?myTowerInfo.towerTemplateInfo:null;
+			myTowerTemplateInfo = towerModel.getTowerSheetById(typeId);
+			myTowerInfo = towerData.getTowerDataById(typeId);
 		}
 		
 		override public function get hurtPositionHeight():Number
@@ -104,8 +79,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			onFocusShowTowerRange(myIsInFocus);
 			if(myIsInFocus)
 			{
-				NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_TOWER,{"param":[myObjectTypeId],"target":this});
-				NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_CLICK_TOWER,{"param":[myObjectTypeId],"target":myBuildingCircleMenu});
+				//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_TOWER,{"param":[myObjectTypeId],"target":this});
+				//NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_CLICK_TOWER,{"param":[myObjectTypeId],"target":myBuildingCircleMenu});
 			}
 		}
 		
@@ -145,9 +120,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			changeToTargetBehaviorState(TowerBehaviorState.IDEL);
 			playBuilddingEffect();
-			playSound(getSoundId(SoundFields.Builded));
-			NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_BUILD_TOWER,{"param":[myObjectTypeId],"target":this});
-			NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_BUILD_TOWER,{"param":[myObjectTypeId],"target":this});
+			//playSound(getSoundId(SoundFields.Builded));
+			//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_BUILD_TOWER,{"param":[myObjectTypeId],"target":this});
+			//NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_BUILD_TOWER,{"param":[myObjectTypeId],"target":this});
 		}
 
 		override protected function onInitialize():void
@@ -177,6 +152,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			
 			if(myBuildingCircleMenu != null)
 			{
+				injector.injectInto(myBuildingCircleMenu);
 				addChild(myBuildingCircleMenu);
 			}
 		}
@@ -230,8 +206,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override public function notifyCircleMenuOnBuild(typeId:int):void
 		{
-			var targetTowerElement:BasicTowerElement = ObjectPoolManager.getInstance()
-				.createSceneElementObject(GameObjectCategoryType.TOWER, typeId) as BasicTowerElement;
+			var targetTowerElement:BasicTowerElement = objPoolMgr.createSceneElementObject(
+				GameObjectCategoryType.TOWER, typeId) as BasicTowerElement;
 
 			targetTowerElement.buildedByTower(this, _myTowerCostGold);
 			
@@ -245,7 +221,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				myBuilddingToft.notifyBuildedInTowerOnSell();
 				this.destorySelf();
 				
-				GameAGlobalManager.getInstance().gameDataInfoManager.updateSceneGold(uint(_myTowerCostGold / 2));
+				sceneModel.updateSceneGold(uint(_myTowerCostGold / 2));
 			}
 		}
 		
@@ -267,7 +243,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 					playClickEff();
 					break;
 				case BufferID.RdcTowerAtkSpd:
-					setBodyFilter([GameFilterManager.getInstance().colorBlueMatrixFilter]);
+					setBodyFilter([filterMgr.colorBlueMatrixFilter]);
 					break;
 			}
 			super.onBufferAttached(buffId);
@@ -333,9 +309,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			{
 				if(mySearchedEnemy == null)
 				{
-					mySearchedEnemy = GameAGlobalManager.getInstance()
-						.groundSceneHelper
-						.searchOrganismElementEnemy(this.x, this.y, myFightState.atkArea, 
+					mySearchedEnemy = sceneElementsService.searchOrganismElementEnemy(this.x, this.y, myFightState.atkArea, 
 							FightElementCampType.ENEMY_CAMP,
 							necessarySearchConditionFilter);
 					
@@ -398,7 +372,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function playAttackSound():void
 		{
-			playSound(getSoundId(SoundFields.Attack));
+			//playSound(getSoundId(SoundFields.Attack));
 		}
 		
 		override public function dispose():void
@@ -425,7 +399,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override protected function getBaseFightInfo():BaseFighterInfo
 		{
-			return myTowerInfo.towerTemplateInfo;
+			return myTowerTemplateInfo;
 		}
 		//技能相关
 		override protected function getCanUseSkills():void
@@ -445,23 +419,24 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		override protected function initFightState():void
 		{		
 			myFightState.baseAtkArea = myTowerTemplateInfo.atkArea;
-			myFightState.range = myTowerTemplateInfo.range;
-			myFightState.minAtk = myTowerTemplateInfo.baseAtk;
+			myFightState.range = myTowerTemplateInfo.atkRange;
+			myFightState.minAtk = myTowerTemplateInfo.minAtk;
 			myFightState.maxAtk = myTowerTemplateInfo.maxAtk;
-			myFightState.cdTime = myTowerTemplateInfo.cdTime*(1 - EndlessBattleMgr.instance.addAtkSpdPct*0.01);
+			myFightState.cdTime = myTowerTemplateInfo.atkInterval*(1 - EndlessBattleMgr.instance.addAtkSpdPct*0.01);
 			myFightState.weapon = myTowerTemplateInfo.weapon;
-			myFightState.atkType = myTowerTemplateInfo.attacktype;
-			var lv:TowerLevelVo = TowerData.getInstance().getTowerLevelVoByTowerType(myTowerTemplateInfo.type);
+			myFightState.atkType = myTowerTemplateInfo.atkType;
+			var lvl:int = towerData.getTowerLevelByType(myTowerTemplateInfo.type);
 			
 			if(TowerType.Barrack != myTowerTemplateInfo.type)
 			{
 				var addAtk:Number = 1;
-				if(lv)
+				if(lvl>1)
 				{
-					myFightState.baseAtkArea += TowerData.getInstance().getTowerAtkAreaByTypeAndLevel(myTowerTemplateInfo.type,lv.level);
-					addAtk += TowerData.getInstance().getTowerAtkByTypeAndLevel(myTowerTemplateInfo.type,lv.level)*0.01;
+					var arrGrowth:Array = towerLvlModel.getTowerLevelupSheetByLvl(lvl).getLevelupGrowth(myTowerTemplateInfo.type)
+					myFightState.baseAtkArea += arrGrowth[1];
+					addAtk += arrGrowth[0]*0.01;
 				}
-				addAtk += GlobalTemp.spiritTowerAttackAddition*0.01;
+				//addAtk += GlobalTemp.spiritTowerAttackAddition*0.01;
 				
 				var addAtk2:Number = 1+EndlessBattleMgr.instance.addAtkPct*0.01;
 				myFightState.minAtk *= addAtk * addAtk2;
@@ -479,18 +454,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			if(0 != atkPct)
 			{
-				var lvAtk:int = 0;
+				/*var lvAtk:int = 0;
 				var lv:TowerLevelVo = TowerData.getInstance().getTowerLevelVoByTowerType(myTowerTemplateInfo.type);
 				if(lv)
 					lvAtk = TowerData.getInstance().getTowerAtkByTypeAndLevel(myTowerTemplateInfo.type,lv.level);
 				var addAkt:Number = 1+EndlessBattleMgr.instance.addAtkPct*0.01;
 				myFightState.minAtk = myTowerTemplateInfo.baseAtk*(1 + (lvAtk+GlobalTemp.spiritTowerAttackAddition) * 0.01) * addAkt;
-				myFightState.maxAtk = myTowerTemplateInfo.maxAtk*(1 + (lvAtk+GlobalTemp.spiritTowerAttackAddition) * 0.01) * addAkt;
+				myFightState.maxAtk = myTowerTemplateInfo.maxAtk*(1 + (lvAtk+GlobalTemp.spiritTowerAttackAddition) * 0.01) * addAkt;*/
 			}
 			
 			if(0 != atkSpdPct)
 			{
-				myAttackCDTimer.setDurationTime(myAttackCDTimer.duration - (myTowerTemplateInfo.cdTime * atkSpdPct*0.01));
+				//myAttackCDTimer.setDurationTime(myAttackCDTimer.duration - (myTowerTemplateInfo.cdTime * atkSpdPct*0.01));
 			}
 		}
 		
@@ -534,10 +509,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override public function get curLevel():int
 		{
-			var lv:TowerLevelVo = TowerData.getInstance().getTowerLevelVoByTowerType(myTowerTemplateInfo.type);
-			if(!lv)
-				return 1;
-			return lv.level;
+			return towerData.getTowerLevelByType(myTowerTemplateInfo.type);
 		}
 		
 		override protected function cancleUseSkillState():void
@@ -552,7 +524,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override protected function getDefaultSoundString():String
 		{
-			return myTowerTemplateInfo?myTowerTemplateInfo.sound:null;
+			return "";//myTowerTemplateInfo?myTowerTemplateInfo.sound:null;
 		}
 	}
 }

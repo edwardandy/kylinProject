@@ -2,19 +2,22 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 {
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
-	import com.shinezone.core.interfaces.behavior.IDispose;
+	
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
 	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.IBuildingCircleMenuOwner;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
 	
-	import flash.display.Sprite;
-	import flash.utils.Dictionary;
+	import robotlegs.bender.framework.api.IInjector;
 	
 	public class BasicBuildingCircleMenu extends BasicView
 	{
+		[Inject]
+		public var gameInteractiveMgr:GameFightInteractiveManager;
+		[Inject]
+		public var injector:IInjector;
+		
 		private static const TWEEN_TIME:Number = 0.1;
 		
 		private var _buildingCircleBGSkin:BuildingCircleBGSkin;
@@ -122,7 +125,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 		{
 			if(myBuildingElement is ISceneFocusElement && circleItem.isClickToDisfocusBuilding())
 			{
-				GameAGlobalManager.getInstance().gameInteractiveManager.disFocusTargetElement(ISceneFocusElement(myBuildingElement));	
+				gameInteractiveMgr.disFocusTargetElement(ISceneFocusElement(myBuildingElement));	
 			}
 		}
 

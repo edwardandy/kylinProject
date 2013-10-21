@@ -1,15 +1,13 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import com.shinezone.towerDefense.fight.constants.identify.MonsterID;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.identify.MonsterID;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class OrcOnWolfMonster extends BasicMonsterElement
 	{
@@ -72,11 +70,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			{
 				var uid:uint = _bOrcDie?MonsterID.Wolf:MonsterID.Orc;
 				
-				var monster:BasicMonsterElement = ObjectPoolManager.getInstance()
+				var monster:BasicMonsterElement = objPoolMgr
 					.createSceneElementObject(GameObjectCategoryType.MONSTER, uid) as BasicMonsterElement;
 				monster.x = _restartX;
 				monster.y = _restartY;
-				var pathPoints:Vector.<PointVO> = GameAGlobalManager.getInstance().gameDataInfoManager.currentSceneMapInfo.roadVOs[_roadIdx].lineVOs[_pathIdx].points;
+				var pathPoints:Vector.<PointVO> = mapModel.getMapRoad(_roadIdx).lineVOs[_pathIdx].points;
 				monster.startEscapeByPath(pathPoints, _roadIdx, _pathIdx);
 				monster.updateWalkPathStepIndex(_pathStep);
 				if(currentSearchedEnemy)
@@ -85,7 +83,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			var checkGameOver:Boolean = _bDirectDeath;
 			destorySelf();
 			if(checkGameOver)
-				GameAGlobalManager.getInstance().gameSuccessAndFailedDetector.onEnemyCampUintDied(this as BasicMonsterElement);
+				successAndFailedDetector.onEnemyCampUintDied(this as BasicMonsterElement);
 		}
 	}
 }

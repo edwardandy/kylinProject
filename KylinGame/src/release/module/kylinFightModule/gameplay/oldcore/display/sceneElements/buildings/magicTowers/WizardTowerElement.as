@@ -1,21 +1,15 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.ToftElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.SkillEffectBehaviorState;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.BasicSummonSoldier;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SummonByTower;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.geom.Point;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 男巫，女巫塔，可召唤元素
@@ -32,7 +26,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		override protected function createBuildingCircleMenu():void
 		{
 			myBuildingCircleMenu = new WizardUpdateLevelMenu(this, myTowerTemplateInfo);
-	
+			injector.injectInto(myBuildingCircleMenu);
 			if(myBuildingCircleMenu != null)
 			{
 				addChild(myBuildingCircleMenu);
@@ -151,7 +145,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		private function updateAllPets(skillId:uint):void
 		{
-			var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(skillId);
+			var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(skillId);
 			var strPets:String = processor.effectParam[SkillResultTyps.SUMMON];
 			var arrPetData:Array = strPets.split("-");
 			var petId:uint = arrPetData[0];
@@ -197,7 +191,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			for(var i:int=0;i<count;++i)
 			{
 				offX += 10;				
-				var soldier:SummonByTower = ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.SUMMON_BY_TOWER,uid,false) as SummonByTower;
+				var soldier:SummonByTower = objPoolMgr.createSceneElementObject(GameObjectCategoryType.SUMMON_BY_TOWER,uid,false) as SummonByTower;
 				if(soldier)
 				{
 					myTowerSoldiers.push(soldier);

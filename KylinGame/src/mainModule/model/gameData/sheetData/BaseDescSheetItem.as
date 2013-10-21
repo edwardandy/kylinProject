@@ -1,5 +1,7 @@
 package mainModule.model.gameData.sheetData
 {
+	import kylin.echo.edward.utilities.string.KylinStringUtil;
+	
 	import mainModule.model.gameData.sheetData.interfaces.IBaseDescSheetItem;
 	import mainModule.model.gameData.sheetData.lang.ILangSheetDataModel;
 	import mainModule.model.gameData.sheetData.lang.ILangSheetItem;
@@ -13,6 +15,8 @@ package mainModule.model.gameData.sheetData
 	{
 		[Inject]
 		public var langData:ILangSheetDataModel;
+		
+		private var _objSound:Object;
 		
 		public function BaseDescSheetItem()
 		{
@@ -37,6 +41,16 @@ package mainModule.model.gameData.sheetData
 			if(item)
 				return item.desc;
 			return "";
+		}
+		
+		public function set sound(s:String):void
+		{
+			_objSound = KylinStringUtil.parseCommaString(s,";");
+		}
+		
+		public function get objSound():Object
+		{
+			return _objSound;
 		}
 	}
 }

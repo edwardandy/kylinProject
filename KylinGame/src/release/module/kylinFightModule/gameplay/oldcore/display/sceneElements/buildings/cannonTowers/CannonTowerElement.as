@@ -1,21 +1,14 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.cannonTowers
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.SubjectCategory;
+	import flash.utils.getTimer;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.SubjectCategory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.TowerBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.ShellBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.geom.Point;
-	import flash.utils.getTimer;
 
 	public class CannonTowerElement extends BasicTowerElement
 	{
@@ -66,8 +59,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override protected function onFireAnimationTimeHandler():void
 		{
- 			var bulletEffect:BasicBulletEffect = ObjectPoolManager.getInstance()
-				.createSceneElementObject(GameObjectCategoryType.BULLET, 
+ 			var bulletEffect:BasicBulletEffect = objPoolMgr.createSceneElementObject(GameObjectCategoryType.BULLET, 
 					myFightState.weapon, false) as BasicBulletEffect;
 			bulletEffect.fire(mySearchedEnemy, this, 
 				getGlobalFirePoint(), 

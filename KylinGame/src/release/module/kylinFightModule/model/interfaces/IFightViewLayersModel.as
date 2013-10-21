@@ -17,6 +17,10 @@ package release.module.kylinFightModule.model.interfaces
 		 */		
 		function get mouseCursorLayer():Sprite;
 		/**
+		 * 防御塔操作菜单层 
+		 */		
+		function get towerMenuLayer():Sprite;
+		/**
 		 * 显示顶层 
 		 */
 		function get topLayer():Sprite;

@@ -10,22 +10,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
 	import com.shinezone.towerDefense.fight.constants.identify.MagicID;
 	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundItem.BasicGroundItem;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.WorkerRopeMagicSkill;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.CommonAnimationEffects;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.MovieClipRasterizationUtil;
 	import com.shinezone.towerDefense.fight.vo.PointVO;
 	import com.shinezone.towerDefense.fight.vo.map.RoadLineVOHelperUtil;
 	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
@@ -41,6 +25,24 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import framecore.structure.model.user.dreamland.DreamLandTemplateInfo;
 	import framecore.structure.model.user.monster.MonsterTemplateInfo;
 	import framecore.structure.views.newguidPanel.NewbieGuideManager;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundItem.BasicGroundItem;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.WorkerRopeMagicSkill;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
+	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.CommonAnimationEffects;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.MovieClipRasterizationUtil;
+	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
 
 	/*
 		怪身边可以站的位置说明：，将圆分成12等份， 从X轴0 开始 0度， 30度， 60度， 120度， 150度
@@ -49,7 +51,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	public class BasicMonsterElement extends BasicOrganismElement
 	{
 		//private var _myIsBoos:Boolean = false;
-
+		[Inject]
+		public var mapModel:IMapRoadModel;
+		
 		private var _escapeRoadIndex:int = -1;
 		private var _escapePathIndex:int = -1;
 		

@@ -1,6 +1,5 @@
 package release.module.kylinFightModule.model.sceneElements
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
 

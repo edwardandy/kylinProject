@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters
 {
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 
 	/**
 	 * 冰晶凤凰

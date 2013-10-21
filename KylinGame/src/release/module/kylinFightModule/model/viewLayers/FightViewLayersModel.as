@@ -24,6 +24,7 @@ package release.module.kylinFightModule.model.viewLayers
 		private var _bottomLayer:Sprite;
 		private var _middleLayer:Sprite;
 		private var _topLayer:Sprite;
+		private var _towerMenuLayer:Sprite;
 		private var _mouseCursorLayer:Sprite;
 		private var _UILayer:Sprite;
 		
@@ -32,6 +33,11 @@ package release.module.kylinFightModule.model.viewLayers
 			super();
 		}
 		
+		public function get towerMenuLayer():Sprite
+		{
+			return _towerMenuLayer;
+		}
+
 		public function get UILayer():Sprite
 		{
 			return _UILayer;
@@ -96,6 +102,8 @@ package release.module.kylinFightModule.model.viewLayers
 			_middleLayer.mouseEnabled = false;
 			_topLayer = new Sprite;
 			_topLayer.mouseEnabled = false;
+			_towerMenuLayer = new Sprite;
+			_towerMenuLayer.mouseEnabled = false;
 			_mouseCursorLayer = new Sprite;
 			_mouseCursorLayer.mouseEnabled = false;
 			_mouseCursorLayer.mouseChildren = false;
@@ -116,6 +124,7 @@ package release.module.kylinFightModule.model.viewLayers
 			_groundLayer.addChild(_bottomLayer);
 			_groundLayer.addChild(_middleLayer);
 			_groundLayer.addChild(_topLayer);
+			_groundLayer.addChild(_towerMenuLayer);
 			_groundLayer.addChild(_mouseCursorLayer);
 			mainViewLayers.fightScene.addChild(_UILayer);
 		}
@@ -131,6 +140,7 @@ package release.module.kylinFightModule.model.viewLayers
 			_bottomLayer.removeChildren();
 			_middleLayer.removeChildren();
 			_topLayer.removeChildren();
+			_towerMenuLayer.removeChildren();
 			_mouseCursorLayer.removeChildren();		
 			mainViewLayers.fightScene.removeChildren();
 			_UILayer.removeChildren();
@@ -140,6 +150,7 @@ package release.module.kylinFightModule.model.viewLayers
 			_bottomLayer = null;
 			_middleLayer = null;
 			_topLayer = null;
+			_towerMenuLayer = null;
 			_roadHitTestShape = null;
 			_mouseCursorLayer = null;
 			_UILayer = null;

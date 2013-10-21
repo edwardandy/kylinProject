@@ -1,26 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.barrackTowers
 {
+	import flash.events.MouseEvent;
+	
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
+	
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.BarrackTowersMeetingPointMouseCursor;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.IMouseCursorSponsor;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.MeetingPointCircleItem;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.TowerMultiUpdateLevelMenu;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
 
 	public class BarrackTowerMutiUpdateLevelMenu extends TowerMultiUpdateLevelMenu implements IMouseCursorSponsor
 	{
 		private var _meetingPointCircleItem:MeetingPointCircleItem;
 		
 		public function BarrackTowerMutiUpdateLevelMenu(buildingElement:BasicBuildingElement, 
-														towerTemplateInfo:TowerTemplateInfo)
+														towerTemplateInfo:ITowerSheetItem)
 		{
 			super(buildingElement, towerTemplateInfo);
 		}
@@ -37,12 +34,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function onCircleMenuItemMettingPoint():void
 		{
-			GameAGlobalManager.getInstance()
-				.gameMouseCursorManager.activeMouseCursorByName(
+			mouseCursorMgr.activeMouseCursorByName(
 					GameFightMouseCursorManager.BARRACK_TOWERS_MEETING_POINT_MOUSE_CURSOR, this);
 			
-			var currentMouseCursor:BarrackTowersMeetingPointMouseCursor = GameAGlobalManager.getInstance()
-				.gameMouseCursorManager.getCurrentMouseCursor() as BarrackTowersMeetingPointMouseCursor;
+			var currentMouseCursor:BarrackTowersMeetingPointMouseCursor = mouseCursorMgr
+				.getCurrentMouseCursor() as BarrackTowersMeetingPointMouseCursor;
 			currentMouseCursor.setBarrackTowerElement(BarrackTowerElement(myBuildingElement));
 			
 			BarrackTowerElement(myBuildingElement).isShowTowerRange(true);
@@ -54,7 +50,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			BarrackTowerElement(myBuildingElement).isShowTowerRange(false);
 			
 			BarrackTowerElement(myBuildingElement).moveAllSoldierToMeetingCenterPoint(
-				GameMathUtil.convertStagePtToGame(mouseClickEvent.stageX, mouseClickEvent.stageY,GameAGlobalManager.getInstance().game));
+				GameMathUtil.convertStagePtToGame(mouseClickEvent.stageX, mouseClickEvent.stageY,fightViewModel.groundLayer));
 		}
 		
 		public function notifyTargetMouseCursorCanceled():void

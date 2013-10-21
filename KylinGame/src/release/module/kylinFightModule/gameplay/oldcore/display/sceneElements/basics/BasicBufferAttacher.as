@@ -1,14 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics
 {
-	import com.shinezone.towerDefense.fight.constants.Skill.BufferPosition;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
+	import flash.display.Sprite;
+	
+	import release.module.kylinFightModule.gameplay.constant.Skill.BufferPosition;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.bufferState.BufferStateMgr;
-	
-	import flash.display.MovieClip;
-	import flash.display.Sprite;
 
 	/**
 	 * 能够被buff影响的对象

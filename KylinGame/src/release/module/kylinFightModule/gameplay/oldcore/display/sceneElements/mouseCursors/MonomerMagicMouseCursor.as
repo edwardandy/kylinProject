@@ -1,14 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors
 {
-	import com.shinezone.core.resource.ClassLibrary;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseLogices.MagicMouseCursorReleaseLogic;
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetItem;
 	
-	import framecore.structure.model.user.magicSkill.MagicSkillTemplateInfo;
-	import framecore.tools.loadmgr.LoadMgr;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseLogices.MagicMouseCursorReleaseLogic;
 
 	public class MonomerMagicMouseCursor extends BasicMouseCursor
 	{
-		protected var magicSkillTemplateInfo:MagicSkillTemplateInfo;
+		protected var magicSkillTemplateInfo:IMagicSkillSheetItem;
 		
 		public function MonomerMagicMouseCursor()
 		{
@@ -16,15 +14,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 		}
 		
 		override protected function onInitialize():void
-		{	
+		{	loadService
 			//myErrorMouseCursorView = ClassLibrary.getInstance().getMovieClip("cursor_move2");
-			myErrorMouseCursorView = LoadMgr.instance.domainMgr.getMovieClipByDomain("cursor_move2");
+			myErrorMouseCursorView = loadService.domainMgr.getMovieClipByDomain("cursor_move2");
 			
 			super.onInitialize();
 		}
 		
 		//API
-		public function setMagicSkillTemplateInfo(value:MagicSkillTemplateInfo):void
+		public function setMagicSkillTemplateInfo(value:IMagicSkillSheetItem):void
 		{
 			if(value == magicSkillTemplateInfo)
 				return;
@@ -48,7 +46,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 			}
 
 				//myValideMouseCursorView = ClassLibrary.getInstance().getMovieClip("cursor_"+magicSkillTemplateInfo.cursorId);//new valideMouseCursorCls();
-				myValideMouseCursorView = LoadMgr.instance.domainMgr.getMovieClipByDomain("cursor_"+magicSkillTemplateInfo.cursorId);
+				myValideMouseCursorView = loadService.domainMgr.getMovieClipByDomain("cursor_"+magicSkillTemplateInfo.cursorId);
 			
 			if(myValideMouseCursorView != null)
 			{

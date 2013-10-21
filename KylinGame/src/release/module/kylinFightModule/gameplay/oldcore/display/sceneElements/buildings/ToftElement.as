@@ -1,29 +1,13 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.SimpleProgressBar;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneInteractiveElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BasicBuildingCircleMenu;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightDataInfoManager;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.Sprite;
-	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
-	
-	import framecore.structure.model.constdata.NewbieConst;
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.structure.views.newguidPanel.NewbieGuideManager;
-	import framecore.tools.media.TowerMediaPlayer;
+	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
+	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 塔基，能完成对已经开发塔的建造逻辑。 
@@ -32,6 +16,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	 */	
 	public final class ToftElement extends BasicBuildingElement
 	{
+		[Inject]
+		public var sceneModel:ISceneDataModel;
+		[Inject]
+		public var sceneElementsModel:ISceneElementsModel;
+		
 		protected var myMeetingCenterPoint:PointVO = new PointVO(-50, 40);//本地
 		
 		protected var myTowerBuilderBar:SimpleProgressBar;
@@ -46,7 +35,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			super();
 
 			this.myElemeCategory = GameObjectCategoryType.TOFT;
-			this.myObjectTypeId = GameAGlobalManager.getInstance().gameDataInfoManager.sceneType;
+			this.myObjectTypeId = sceneModel.sceneType;
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_BOTTOM;
 		}
 		
@@ -68,6 +57,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			super.onInitialize();
 			
 			myBuildingCircleMenu = new ToftElementCircleMenu(this);
+			injector.injectInto(myBuildingCircleMenu);
 			
 			myTowerBuilderBar = new SimpleProgressBar(0, 100, 
 				GameFightConstant.PROGRESS_BAR_COLOR_YELLOW, GameFightConstant.PROGRESS_BAR_COLOR_BROWN);
@@ -90,16 +80,16 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			if(myIsInFocus)
 			{
-				TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.CLICK_TOFT );
-				NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_TOWER_BASE,{"param":[],"target":this});
-				NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_CLICK_TOWER_BASE,{"param":[],"target":myBuildingCircleMenu});
+				//TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.CLICK_TOFT );
+				//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_TOWER_BASE,{"param":[],"target":this});
+				//NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_CLICK_TOWER_BASE,{"param":[],"target":myBuildingCircleMenu});
 			}
 			super.onFocusChanged();
 		}
 		
 		private function checkTypeChange():void
 		{
-			var sceneType:int = GameAGlobalManager.getInstance().gameDataInfoManager.sceneType;
+			var sceneType:int = sceneModel.sceneType;
 			if(sceneType == myObjectTypeId)
 				return;
 			myObjectTypeId = sceneType;
@@ -118,7 +108,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			super.onLifecycleFreeze();
 
 			myTowerBuilderBar.visible = false;
-			TimeTaskManager.getInstance().destoryTimeTask(_myBuildingTimrHandle);
+			timeTaskMgr.destoryTimeTask(_myBuildingTimrHandle);
 		}
 		
 		override public function dispose():void
@@ -141,16 +131,17 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			
 			if(_currentReadyToBuildTowerTypeId != -1)
 			{
-				_currentBuilddingTowerElement = ObjectPoolManager.getInstance()
-					.createSceneElementObject(GameObjectCategoryType.TOWER, _currentReadyToBuildTowerTypeId) as BasicTowerElement;
+				_currentBuilddingTowerElement = objPoolMgr.createSceneElementObject(GameObjectCategoryType.TOWER
+					, _currentReadyToBuildTowerTypeId) as BasicTowerElement;
 				
 				_currentBuilddingTowerElement.x = this.x;
 				_currentBuilddingTowerElement.y = this.y;
 				_currentBuilddingTowerElement.buildingToft = this;
-				TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.START_BUILD );
-				GameAGlobalManager.getInstance().groundScene.addSceneElemet(_currentBuilddingTowerElement);
+				//TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.START_BUILD );
 				
-				_myBuildingTimrHandle = TimeTaskManager.getInstance().createTimeTask(GameFightConstant.TIME_UINT, 
+				sceneElementsModel.addSceneElemet(_currentBuilddingTowerElement);
+				
+				_myBuildingTimrHandle = timeTaskMgr.createTimeTask(GameFightConstant.TIME_UINT, 
 					buiddingProgressHandler, null, 
 					GameFightConstant.BUILDING_TOWER_DURATION / GameFightConstant.TIME_UINT,
 					buiddingCompleteHandler);
@@ -159,7 +150,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 
 		private function buiddingProgressHandler():void
 		{
-			myTowerBuilderBar.currentValue = TimeTaskManager.getInstance().getTaskTimeTaskProgress(_myBuildingTimrHandle) * 100;
+			myTowerBuilderBar.currentValue = timeTaskMgr.getTaskTimeTaskProgress(_myBuildingTimrHandle) * 100;
 		}
 
 		private function buiddingCompleteHandler():void
@@ -220,13 +211,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BasicBuildingCircleMenu;
 import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BuildingCircleItem;
-import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 
-import framecore.structure.model.constdata.NewbieConst;
-import framecore.structure.views.newguidPanel.NewbieGuideManager;
+import robotlegs.bender.framework.api.IInjector;
 
 class ToftElementCircleMenu extends BasicBuildingCircleMenu
 {
+	[Inject]
+	public var injector:IInjector;
 	//矮人石炮 114019 
 	private var _buildingCircleItem0:BuildingCircleItem;
 	//见习法师塔 113013 
@@ -254,18 +245,22 @@ class ToftElementCircleMenu extends BasicBuildingCircleMenu
 		super.onInitialize();
 		
 		_buildingCircleItem0 = new BuildingCircleItem(114019, onCircleMenuItemBuildClick, this);
+		injector.injectInto(_buildingCircleItem0);
 		_buildingCircleItem0.y = -50;
 		addChild(_buildingCircleItem0);
 		
 		_buildingCircleItem1 = new BuildingCircleItem(113013, onCircleMenuItemBuildClick, this);
+		injector.injectInto(_buildingCircleItem1);
 		_buildingCircleItem1.x = -50;
 		addChild(_buildingCircleItem1);
 		
 		_buildingCircleItem2 = new BuildingCircleItem(112007, onCircleMenuItemBuildClick, this);
+		injector.injectInto(_buildingCircleItem2);
 		_buildingCircleItem2.x = 50;
 		addChild(_buildingCircleItem2);
 		
 		_buildingCircleItem3 = new BuildingCircleItem(111001, onCircleMenuItemBuildClick, this);
+		injector.injectInto(_buildingCircleItem3);
 		_buildingCircleItem3.y = 50;
 		addChild(_buildingCircleItem3);
 	}
@@ -282,7 +277,7 @@ class ToftElementCircleMenu extends BasicBuildingCircleMenu
 	override protected function onCircleMenuItemBuildClick(typeId:int):void
 	{
 		super.onCircleMenuItemBuildClick(typeId);
-		NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_BUILD_MENU,{"target":this});
+		//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_BUILD_MENU,{"target":this});
 	}
 	
 	override public function dispose():void

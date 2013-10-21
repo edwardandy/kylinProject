@@ -1,7 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.Heros
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;

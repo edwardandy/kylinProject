@@ -1,23 +1,25 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics
 {
-	import com.shinezone.core.datastructures.HashMap;
-	import com.shinezone.core.structure.controls.GameEvent;
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FightUnitType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import com.shinezone.towerDefense.fight.constants.SoundFields;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillSpecialType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.GroundSceneHelper;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
+	import kylin.echo.edward.utilities.datastructures.HashMap;
+	
+	import mainModule.model.gameData.sheetData.interfaces.IBaseFighterSheetItem;
+	import mainModule.model.gameData.sheetData.skill.IBaseOwnerSkillSheetItem;
+	import mainModule.model.gameData.sheetData.skill.SkillUseUnit;
+	import mainModule.model.gameData.sheetData.skill.heroSkill.IHeroSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.monsterSkill.IMonsterSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.towerSkill.ITowerSkillSheetDataModel;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillSpecialType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.TowerBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
@@ -33,28 +35,35 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition.BasicSkillUseCondition;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition.GameFightSkillConditionMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.GameFightSkillProcessorMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.Sprite;
-	
-	import framecore.structure.model.constdata.GameConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.AbsInfoManager;
-	import framecore.structure.model.user.base.BaseFighterInfo;
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.base.SkillUseUnit;
-	import framecore.structure.model.user.buff.BuffTemplateInfo;
-	import framecore.tools.logger.logch;
+	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class BasicSkillerElement extends BasicFightElement implements ISkillOwner
 	{
+		[Inject]
+		public var skillProcessorMgr:GameFightSkillProcessorMgr;
+		[Inject]
+		public var skillConditionMgr:GameFightSkillConditionMgr;
+		[Inject]
+		public var sceneElementsService:ISceneElementsService;
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
+		[Inject]
+		public var timeTaskMgr:TimeTaskManager;
+		[Inject]
+		public var towerSkillModel:ITowerSkillSheetDataModel;
+		[Inject]
+		public var heroSkillModel:IHeroSkillSheetDataModel;
+		[Inject]
+		public var monsterSkillModel:IMonsterSkillSheetDataModel;
+		
 		/**
 		 * 检查可用技能的间隔 
 		 */		
@@ -182,7 +191,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			
 			for each(var pet:BasicSummonSoldier in allPets)
 			{
-				/*ObjectPoolManager.getInstance().recycleSceneElementObject(pet);*/
 				pet.destorySelf();
 			}	
 		}		
@@ -207,7 +215,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				onFarAttackTarget(target);
 			else
 			{
-				var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(state.id,isHero);
+				var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(state.id);
 				if(processor)
 				{
 					processor.processSingleEnemy(state,target);
@@ -224,10 +232,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			if(range<=0)
 				return;
-			var vecTargets:Vector.<BasicOrganismElement> = GameAGlobalManager
-				.getInstance()
-				.groundSceneHelper
-				.searchOrganismElementsBySearchArea(target.x, target.y, range, 
+			var vecTargets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(target.x, target.y, range, 
 					oppositeCampType, searchCanAreaAtkTargets);
 			if(!vecTargets || vecTargets.length <=0)
 				return;
@@ -245,7 +250,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		public function processSkillState(state:SkillState):void
 		{
-			var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(state.id,isHero);
+			var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(state.id);
 			if(processor)
 			{
 				processor.processSkill(state);
@@ -288,9 +293,19 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			
 		}
 		
-		protected function getBaseSkillInfo(id:uint):BaseSkillInfo
+		protected function getBaseSkillInfo(id:uint):IBaseOwnerSkillSheetItem
 		{
-			return TemplateDataFactory.getInstance().getSkillTemplateById(id);
+			var skillInfo:IBaseOwnerSkillSheetItem;
+			switch(myElemeCategory)
+			{
+				case GameObjectCategoryType.TOWER:
+					skillInfo = towerSkillModel.getTowerSkillSheetById(id);
+				case GameObjectCategoryType.MONSTER:
+					skillInfo = monsterSkillModel.getMonsterSkillSheetById(id);
+				case GameObjectCategoryType.HERO:
+					skillInfo = heroSkillModel.getHeroSkillSheetById(id);	
+			}
+			return skillInfo;
 		}
 		
 		/**
@@ -298,7 +313,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		 */
 		protected function processPassiveSkills():void
 		{
-			var info:BaseSkillInfo;
+			var info:IBaseOwnerSkillSheetItem;
 			for (var i:int=0;i<mySkillIds.length;++i)
 			{
 				info = getBaseSkillInfo(mySkillIds[i]);
@@ -324,7 +339,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			state.owner = this;
 			state.vecTargets.push(this);
 			
-			var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(skillId,isHero);
+			var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(skillId);
 			if(processor)
 			{
 				state.id = skillId;	
@@ -345,10 +360,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function genSingleSkillUseUnit(skillId:uint):void
 		{
-			var info:BaseFighterInfo = getBaseFightInfo();
+			var info:IBaseFighterSheetItem = getBaseFightInfo();
 			if(!info)
 				return;
-			var arr:Array = info.getskillUseUnits();
+			
+			var arr:Array = info.skillUseUnits;
 			var skillUnit:SkillUseUnit;
 			for each(var unit:SkillUseUnit in arr)
 			{
@@ -369,7 +385,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function classifySkillType(skillId:uint,bRemove:Boolean = false):void
 		{
-			var skillTemp:BaseSkillInfo = getBaseSkillInfo(skillId);
+			var skillTemp:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
 			var idx:int;
 			if(!skillTemp)
 				return;
@@ -444,7 +460,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		private function addNewSkillByLvl(skillId:uint,iLvl:int):void
 		{
 			var curId:uint = getCurSkillIdByLvl(skillId,iLvl);
-			var info:BaseSkillInfo = getBaseSkillInfo(curId);
+			var info:IBaseOwnerSkillSheetItem = getBaseSkillInfo(curId);
 			
 			if(SkillType.PASSIVITY == info.type)
 			{
@@ -461,13 +477,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				genSingleSkillUseUnit(curId);
 			}
 			
-			playSound(getSoundId(SoundFields.Upgrade,0,info.sound));
+			//playSound(getSoundId(SoundFields.Upgrade,0,info.sound));
 		}
 		
 		private function removeOldSkillByLvl(skillId:uint,iLvl:int):void
 		{
 			var oldId:uint = getOldSkillIdByLvl(skillId,iLvl);
-			var info:BaseSkillInfo;
+			var info:IBaseOwnerSkillSheetItem;
 			if(oldId>0)
 			{
 				info = getBaseSkillInfo(oldId);
@@ -522,7 +538,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		protected function onBehaviorChangeToUseSkill():void
 		{
 			var skillId:uint = myFightState.curUseSkillId;
-			var skillTemp:BaseSkillInfo = getBaseSkillInfo(skillId);
+			var skillTemp:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
 			var useUnit:SkillUseUnit = mySkillUseUnits.get(skillId) as SkillUseUnit;
 			var state:SkillState = mySkillStates.get(skillId) as SkillState;
 			state.skillCd.resetCDTime();
@@ -608,7 +624,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			
 			var skillId:uint = myFightState.curUseSkillId;
 			var state:SkillState = mySkillStates.get(myFightState.curUseSkillId) as SkillState;
-			var skillTemp:BaseSkillInfo = getBaseSkillInfo(skillId);
+			var skillTemp:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
 			if(!state)
 			{
 				cancleUseSkillState();
@@ -619,7 +635,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			{
 				//需要等待技能处理器通知技能引导结束
 				onStartChant(state,skillTemp.chantDuration);
-				playSound(getSoundId(SoundFields.Chant,0,skillTemp.sound));
+				//playSound(getSoundId(SoundFields.Chant,0,skillTemp.sound));
 				return;
 			}
 			
@@ -670,7 +686,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function onStartChant(state:SkillState,duration:int):void
 		{
-			_skillChantTimeTick = TimeTaskManager.getInstance().createTimeTask(GameFightConstant.TIME_UINT*10,onSkillChantInterval,[state.id],
+			_skillChantTimeTick = timeTaskMgr.createTimeTask(GameFightConstant.TIME_UINT*10,onSkillChantInterval,[state.id],
 				duration/(GameFightConstant.TIME_UINT*10),onSkillChantEnd,[state.id]);
 			skillActionSkin.gotoAndPlay2(state.strIdleName + GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_START,
 				state.strIdleName + GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_END);
@@ -705,7 +721,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			if(_skillChantTimeTick>0)
 			{
-				TimeTaskManager.getInstance().destoryTimeTask(_skillChantTimeTick);
+				timeTaskMgr.destoryTimeTask(_skillChantTimeTick);
 				_skillChantTimeTick= 0;
 			}
 		}
@@ -727,7 +743,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				cancleUseSkillState();
 				return;
 			}
-			var buffTemp:BaseSkillInfo = getBaseSkillInfo(skillId);
+			var buffTemp:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
 			if(!buffTemp)
 				return;
 			if(buffTemp.weapon > 0)
@@ -749,7 +765,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		private function fireSkillWeapons(skillId:uint):void
 		{
-			var buffTemp:BaseSkillInfo = getBaseSkillInfo(skillId);
+			var buffTemp:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
 			var state:SkillState = mySkillStates.get(skillId) as SkillState;
 			
 			arrDelayWeapons.length = 0;
@@ -773,12 +789,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				if(!enemy || enemy.isFreezedState())
 					continue;
 				
-				var bulletEffect:BasicBulletEffect = ObjectPoolManager.getInstance()
-					.createSceneElementObject(GameObjectCategoryType.BULLET, buffTemp.weapon, false) as BasicBulletEffect;
+				var bulletEffect:BasicBulletEffect = objPoolMgr.createSceneElementObject(GameObjectCategoryType.BULLET
+					, buffTemp.weapon, false) as BasicBulletEffect;
 				
 				if(bulletEffect)
 				{
-					var info:AttackerInfo = ObjectPoolManager.getInstance().getEmptyAttackerInfo();
+					var info:AttackerInfo = objPoolMgr.getEmptyAttackerInfo();
 					info.skillId = skillId;
 					info.updateInfo(this);
 					bulletEffect.fire(enemy,this,getGlobalFirePoint(),0,100,null,state);
@@ -793,21 +809,21 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				}			
 			}	
 			if(arrDelayWeapons.length>0)
-				iDelayWeaponTick = TimeTaskManager.getInstance().createTimeTask(GameFightConstant.TIME_UINT,onIntervalDelayWeapon,null,delayCount,onCmpDelayWeapon,null);
+				iDelayWeaponTick = timeTaskMgr.createTimeTask(GameFightConstant.TIME_UINT,onIntervalDelayWeapon,null,delayCount,onCmpDelayWeapon,null);
 		}
 		
 		protected function playSkillSound(skillId:uint,field:String="use"):void
 		{
-			var info:BaseSkillInfo = getBaseSkillInfo(skillId);
-			if(!info || !info.sound)
-				return;
-			playSound(getSoundId(field,0,info.sound));
+			var info:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
+			//if(!info || !info.sound)
+			//	return;
+			//playSound(getSoundId(field,0,info.sound));
 		}
 			
 		
 		protected function showSkillEffect(resId:uint,state:SkillState):void
 		{
-			var skillEffect:BasicSkillEffectRes = ObjectPoolManager.getInstance()
+			var skillEffect:BasicSkillEffectRes = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.SKILLRES, resId, false) as BasicSkillEffectRes;
 			if(skillEffect)
 			{
@@ -926,7 +942,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		 */		
 		private function checkSkillCondition(skillId:uint):Boolean
 		{
-			var condition:BasicSkillUseCondition = GameAGlobalManager.getInstance().gameSkillConditionMgr.getSkillConditionById(skillId,isHero);
+			var condition:BasicSkillUseCondition = skillConditionMgr.getSkillConditionById(skillId);
 			var state:SkillState = getSkillState(skillId);
 			if(condition && condition.canUse(this,state))
 			{
@@ -1016,7 +1032,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				else /*if(!myFightState.weaknessAtkState.lastTarget.isBoss)*/
 				{
 					addDmg = myFightState.weaknessAtkState.atkTimes * myFightState.weaknessAtkState.addtionAtk;
-					logch("checkWeaknessAtk",addDmg.toString(),myFightState.weaknessAtkState.atkTimes.toString(),myFightState.weaknessAtkState.addtionAtk.toString());
+					//logch("checkWeaknessAtk",addDmg.toString(),myFightState.weaknessAtkState.atkTimes.toString(),myFightState.weaknessAtkState.addtionAtk.toString());
 					myFightState.weaknessAtkState.atkTimes++;
 				}
 			}
@@ -1220,7 +1236,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			else 
 				return false;
 			var count:int;
-			var vecTargets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().groundSceneHelper.searchOrganismElementsBySearchArea(this.x,this.y,area,searchCamp);
+			var vecTargets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x,this.y,area,searchCamp);
 			if(infectCount>0 && infectCount<vecTargets.length)
 				count = infectCount;
 			else 
@@ -1516,7 +1532,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		public function addGroundEff(effId:uint,duration:uint,param:Array,owner:ISkillOwner):Boolean
 		{
-			var eff:BasicGroundEffect = ObjectPoolManager.getInstance().createSceneElementObject(
+			var eff:BasicGroundEffect = objPoolMgr.createSceneElementObject(
 				GameObjectCategoryType.GROUNDEFFECT,effId,false) as BasicGroundEffect;
 			if(!eff)
 				return false;
