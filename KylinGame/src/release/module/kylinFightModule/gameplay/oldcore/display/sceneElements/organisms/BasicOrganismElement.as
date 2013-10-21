@@ -11,44 +11,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
 	import com.shinezone.towerDefense.fight.constants.OrganismBodySizeType;
 	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillType;
 	import com.shinezone.towerDefense.fight.constants.SoundFields;
 	import com.shinezone.towerDefense.fight.constants.TowerType;
 	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
+	import com.shinezone.towerDefense.fight.constants.Skill.SkillType;
 	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
-	import release.module.kylinFightModule.gameplay.oldcore.display.SimpleProgressBar;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBufferAttacher;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneInteractiveElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.cannonTowers.LongXiTowerElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.SpecialBufferRes;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.dieEffect.BasicDieEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect.BasicGroundEffect;
 	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.BasicOrganismSkillBufferEffect;
 	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.OrganismSkillBufferInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SummonByOrganisms;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SupportSoldier;
-	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveLogic;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveUnit;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.move.MoveState;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
+	import com.shinezone.towerDefense.fight.display.sceneElements.organisms.OrganismBehaviorState;
 	import com.shinezone.towerDefense.fight.vo.PointVO;
 	import com.shinezone.towerDefense.fight.vo.map.RoadLineVOHelperUtil;
 	
@@ -65,6 +36,37 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import framecore.structure.model.user.base.SkillUseUnit;
 	import framecore.structure.model.user.buff.BuffTemplateInfo;
 	import framecore.structure.model.user.groundEff.GroundEffTemplateInfo;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
+	import release.module.kylinFightModule.gameplay.oldcore.display.SimpleProgressBar;
+	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
+	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
+	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBufferAttacher;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneInteractiveElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.cannonTowers.LongXiTowerElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.SpecialBufferRes;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.dieEffect.BasicDieEffect;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect.BasicGroundEffect;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SummonByOrganisms;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SupportSoldier;
+	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.move.MoveState;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveLogic;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveUnit;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 	
 	/**
 	 * 此类为场景战斗对象的核心类，实现了两方阵营大部分的战斗状态逻辑 
@@ -2657,15 +2659,22 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		override public function stunSlef(bEnable:Boolean,owner:ISkillOwner):Boolean
 		{
-			if(myFightState.bStun && !bEnable)
+			if(bEnable)
+				++myFightState.iStun;
+			else
+				--myFightState.iStun;
+			if(myFightState.iStun<0)
+				throw new Error("myFightState.iStun cannot less than 0.");
+			
+			if(0 == myFightState.iStun)
 			{
-				myFightState.bStun = bEnable;
+				//myFightState.bStun = bEnable;
 				onDoDefaultBehavior();
 				return true;
 			}
 			if(!isAlive)
 				return false;
-			myFightState.bStun = bEnable;
+			//myFightState.bStun = bEnable;
 			changeToTargetBehaviorState(OrganismBehaviorState.IDLE);
 			return true;
 		}

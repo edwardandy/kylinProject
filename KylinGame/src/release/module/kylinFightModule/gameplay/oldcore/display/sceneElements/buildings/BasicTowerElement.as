@@ -515,7 +515,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override public function stunSlef(bEnable:Boolean,owner:ISkillOwner):Boolean
 		{
-			myFightState.bStun = bEnable;
+			if(bEnable)
+				++myFightState.iStun;
+			else
+				--myFightState.iStun;
 			return true;
 		}
 		

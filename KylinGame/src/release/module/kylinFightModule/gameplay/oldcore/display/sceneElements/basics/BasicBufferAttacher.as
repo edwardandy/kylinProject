@@ -68,6 +68,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		protected function clearBufferStates(bDie:Boolean = false):void
 		{
 			_buffStates.clear();
+			if(_mySkillBufferEffecstLayer && _mySkillBufferEffecstLayer.numChildren>0)
+				_mySkillBufferEffecstLayer.removeChildren();
+			if(_mySkillBufferBottomLayer && _mySkillBufferBottomLayer.numChildren>0)
+				_mySkillBufferBottomLayer.removeChildren();
 		}
 		
 		override public function dispose():void

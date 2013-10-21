@@ -32,7 +32,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.Conc
 		
 		override public function canUse(target:ISkillTarget, owner:ISkillOwner, param:Object):Boolean
 		{
-			return !target.isStun();
+			return true/*!target.isStun()*/;
 		}
 	}
 }

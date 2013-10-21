@@ -397,7 +397,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			var sceneExplosionEffectElement:ExplosionEffect = ObjectPoolManager.getInstance()
 				.createSceneElementObject(GameObjectCategoryType.EXPLOSION, explosionTypeId, false) as ExplosionEffect;
 			sceneExplosionEffectElement.blowUp(myHurtEffectFirer, (myTargetEnemy!=null && myTargetEnemy.isAlive)?
-				new PointVO(myTargetEnemy.x,myTargetEnemy.fightState.isFlyUnit?myTargetEnemy.y-(myTargetEnemy as BasicOrganismElement).bodyHeight:myTargetEnemy.y)
+				new PointVO(myTargetEnemy.x,myTargetEnemy.fightState.isFlyUnit?myTargetEnemy.y/*-(myTargetEnemy as BasicOrganismElement).bodyHeight*/:myTargetEnemy.y)
 				:getBulletExplosionPosition(), 
 				Math.round(myHurtValue * GameFightConstant.EXPLOSION_HURT_BY_BULLET_PERCENT), 
 				myAttackType,myBlletTemplateInfo.specialArea,mySkillState,myTargetEnemy/*, myAttackSceneTipTypeId*/);

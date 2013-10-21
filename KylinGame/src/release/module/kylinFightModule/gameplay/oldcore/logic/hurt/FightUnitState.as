@@ -120,7 +120,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.hurt
 		/**
 		 * 定身，无法移动
 		 */
-		public var bStun:Boolean;	
+		public var iStun:int;	
 		/**
 		 * 动态增加或减少的攻击速度百分比
 		 */
@@ -382,6 +382,11 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.hurt
 		public function get extraCdTime():int
 		{
 			return cdTime * extraAtkSpdPct/100;
+		}
+		
+		public function get bStun():Boolean
+		{
+			return iStun > 0;
 		}
 	}
 }
