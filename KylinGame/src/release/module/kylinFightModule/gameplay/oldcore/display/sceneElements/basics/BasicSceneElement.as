@@ -1,20 +1,13 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics
 {
+	import io.smash.time.IRenderAble;
+	
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.core.ILifecycleObject;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IRenderAble;
 	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
-	import release.module.kylinFightModule.gameplay.oldcore.display.TowerDefenseGame;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	
-	import flash.display.DisplayObject;
-	
-	import framecore.tools.GameStringUtil;
-	import framecore.tools.media.TowerMediaPlayer;
+	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 
 	/**
 	 * 此类为战斗场景元素的基础类，实现状态机的更新机制、对自己添加到显示列表的实现。 
@@ -23,6 +16,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	 */	
 	public class BasicSceneElement extends BasicView implements IRenderAble, ILifecycleObject
 	{
+		[Inject]
+		public var tickMgr:TickSynchronizer;
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
+		[Inject]
+		public var sceneElementsModel:ISceneElementsModel;
+		
 		protected var myElemeCategory:String = null;
 		protected var myObjectTypeId:int = -1;
 		
@@ -38,9 +38,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected var myGroundSceneLayerType:int = -1;//表示无效值
 		private var _mySourceGroundSceneLayerType:int = -1;
-		
-		protected var myDebugGraphic:Boolean = false;
-		
+				
 		public function BasicSceneElement()
 		{
 			super();
@@ -48,18 +46,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			//default
 			this.mouseChildren = false;
 			this.mouseEnabled = false;
-
-			//test
-			if(myDebugGraphic)
-			{
-				graphics.clear();
-				graphics.lineStyle(1, 0xFF0000);
-				graphics.moveTo(0, -10);
-				graphics.lineTo(0, 10);
-				graphics.moveTo(-10, 0);
-				graphics.lineTo(10, 0);
-				graphics.endFill();
-			}
 		}
 
 		//元素大分类
@@ -83,12 +69,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			_mySourceGroundSceneLayerType = myGroundSceneLayerType;
 		}
-
-		//IRenderAble Interface=================================================
-		public function update(iElapse:int):void
-		{
-			
-		}
 		
 		public function render(iElapse:int):void 
 		{
@@ -102,13 +82,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			onLifecycleActivate(); 
 			
 			//同步渲染迭代器
-			TickSynchronizer.getInstance().attachToTicker(this);
+			tickMgr.attachToTicker(this);
 		}
 		
 		public final function notifyLifecycleFreeze():void
 		{
 			//同步渲染迭代器
-			TickSynchronizer.getInstance().dettachFromTicker(this);
+			tickMgr.dettachFromTicker(this);
 			attach2DettachFromParentDisplayListFunction(false);
 			myGroundSceneLayerType = _mySourceGroundSceneLayerType;
 			_attach2DettachFromParentDisplayListFunction = null;
@@ -132,7 +112,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		//销毁自己 慎用！
 		public function destorySelf():void
 		{
-			ObjectPoolManager.getInstance().recycleSceneElementObject(this);
+			objPoolMgr.recycleSceneElementObject(this);
 		}
 		
 		//need override some times,  like some effects which is no in the groundscene display.
@@ -146,11 +126,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			{
 				if(isAttach)
 				{
-					GameAGlobalManager.getInstance().groundScene.addSceneElemet(this);	
+					sceneElementsModel.addSceneElemet(this);	
 				}
 				else
 				{
-					GameAGlobalManager.getInstance().groundScene.removeSceneElemet(this);
+					sceneElementsModel.removeSceneElemet(this);
 				}
 			}
 		}
@@ -159,24 +139,35 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		//数据在出现时同步
 		protected function onLifecycleActivate():void 
 		{
+			initStateWhenActive();
+		}
+		
+		protected function initStateWhenActive():void
+		{
+			
 		}
 
 		//显示部分要在冻结时，修改，不然会在出现时，出现视觉bug
 		protected function onLifecycleFreeze():void
 		{
+			clearStateWhenFreeze();
+		}
+		
+		protected function clearStateWhenFreeze(bDie:Boolean = false):void
+		{
 			
 		}
 		
-		/*override public function dispose():void
+		override public function dispose():void
 		{
-			super.dispose();
 			myElemeCategory = null;
 			myObjectTypeId = -1;
 			_attach2DettachFromParentDisplayListFunction = null;
-			
+			_behaviorState = -1;
 			myGroundSceneLayerType = -1;//表示无效值
 			_mySourceGroundSceneLayerType = -1;
-		}*/
+			super.dispose();
+		}
 
 		protected final function get currentBehaviorState():int
 		{
@@ -224,13 +215,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		protected function getSoundIdArray(field:String,soundString:String=null):Array
 		{
 			soundString ||= getDefaultSoundString();
-			return GameStringUtil.deserializeSoundString(field,soundString);
+			return [];//GameStringUtil.deserializeSoundString(field,soundString);
 		}
 		
 		protected function playSound(id:String):void
 		{
-			if(id)
-				TowerMediaPlayer.getInstance().playEffect(id);
+			//if(id)
+				//TowerMediaPlayer.getInstance().playEffect(id);
 		}
 	}
 }

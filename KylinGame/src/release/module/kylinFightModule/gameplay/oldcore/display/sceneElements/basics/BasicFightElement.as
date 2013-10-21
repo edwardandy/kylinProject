@@ -1,23 +1,20 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FightUnitType;
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseFighterSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.FightUnitType;
+	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.IOrganismSkiller;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.IFocusTargetInfo;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.hurt.FightUnitState;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import framecore.structure.model.user.base.BaseFighterInfo;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class BasicFightElement extends BasicSceneInteractiveElement implements IOrganismSkiller, IFocusTargetInfo
 	{
@@ -47,7 +44,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			initStateWhenActive();
 		}
 		
-		protected function initStateWhenActive():void
+		override protected function initStateWhenActive():void
 		{
 			if(myBodySkin)
 				myBodySkin.visible = true;
@@ -55,7 +52,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override protected function onLifecycleFreeze():void
 		{
-			super.onLifecycleFreeze();
 			clearStateWhenFreeze();
 			//myFightState = null;
 			//myFireLocalPoint = null;
@@ -63,9 +59,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			//myResurrectionCDTimer = null;
 			//myAttackCDTimer = null;
 			//mySearchedEnemy = null;
+			super.onLifecycleFreeze();
 		}
 		
-		protected function clearStateWhenFreeze(bDie:Boolean = false):void
+		override protected function clearStateWhenFreeze(bDie:Boolean = false):void
 		{
 			
 		}
@@ -78,6 +75,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			myAttackCDTimer = null;
 			mySearchedEnemy = null;
 			myFightState = null;
+			mySearchedEnemy = null;
+			myResurrectionCDTimer = null;
 		}
 		
 		protected function get myCampType():int
@@ -186,7 +185,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			return 0;
 		}
 		
-		protected function getBaseFightInfo():BaseFighterInfo
+		protected function getBaseFightInfo():IBaseFighterSheetItem
 		{
 			return null;
 		}

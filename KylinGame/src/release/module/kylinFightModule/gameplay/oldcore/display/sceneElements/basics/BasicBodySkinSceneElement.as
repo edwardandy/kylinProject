@@ -1,20 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics
 {
-	import com.shinezone.core.resource.ClassLibrary;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.OrganismBodySizeType;
-	
 	import flash.display.MovieClip;
-	import flash.filters.GlowFilter;
 	
-	import framecore.tools.loadmgr.LoadMgr;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
-	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
+	import release.module.kylinFightModule.gameplay.constant.OrganismBodySizeType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	
 	import robotlegs.bender.framework.api.IInjector;
 
@@ -27,6 +18,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	{
 		[Inject]
 		public var injector:IInjector;
+		[Inject]
+		public var loadAssetsService:ILoadAssetsServices;
 		
 		protected var myBodySkin:NewBitmapMovieClip;
 		protected var myOldBodySkin:NewBitmapMovieClip;
@@ -52,16 +45,19 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 
 		override protected function onInitialize():void
 		{
-			super.onInitialize();
-			
+			super.onInitialize();	
 			createBodySkin();
 		}
 		
-		override protected function onLifecycleFreeze():void
+		override protected function clearStateWhenFreeze(bDie:Boolean=false):void
 		{
-			super.onLifecycleFreeze();
 			if(myBodySkin)
+			{
+				myBodySkin.filters = null;
 				myBodySkin.clear();
+			}
+			stopClickEff();
+			super.clearStateWhenFreeze(bDie);
 		}
 		
 		protected final function setScaleRatioType(scaleRatioType:int):void
@@ -72,20 +68,16 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		protected function createBodySkin():void
 		{
 			if(!bodySkinResourceURL)
-				return;
-			//will stop inner default
-			//var vecFrames:Vector.<BitmapFrameInfo> = ObjectPoolManager.getInstance().getBitmapFrameInfos(bodySkinResourceURL, myScaleRatioType);
-			//if(vecFrames)
-			{
-				myBodySkin = new NewBitmapMovieClip([bodySkinResourceURL], [myScaleRatioType]);
-				injector.injectInto(myBodySkin);
-				myBodySkin.smoothing = true;
-				addChild(myBodySkin);
-			}
+				return;	
+			myBodySkin = new NewBitmapMovieClip([bodySkinResourceURL], [myScaleRatioType]);
+			injector.injectInto(myBodySkin);
+			myBodySkin.smoothing = true;
+			addChild(myBodySkin);
 		}
 
 		override public function render(iElapse:int):void
 		{
+			super.render(iElapse);
 			//有时会在render函数调用dispose(), 这样myBodySkin被设置为null了
 			if(myBodySkin != null) 
 				myBodySkin.render(iElapse);
@@ -93,23 +85,22 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		//IDisposeObject Interface
 		override public function dispose():void
-		{
-			super.dispose();
-			
+		{	
 			if(myBodySkin)
 			{
 				removeChild(myBodySkin);
 				myBodySkin.dispose();
 				myBodySkin = null;
 			}	
+			_mcClickEff = null;
+			super.dispose();
 		}
 		
 		protected function playClickEff():void
 		{
 			if(!_mcClickEff)
-			{
-				//_mcClickEff = ClassLibrary.getInstance().getMovieClip("click_effect");//new clickCls();
-				_mcClickEff = LoadMgr.instance.domainMgr.getMovieClipByDomain("click_effect");
+			{				
+				_mcClickEff = loadAssetsService.domainMgr.getMovieClipByDomain("click_effect");
 				_mcClickEff.mouseChildren = false;
 				_mcClickEff.mouseEnabled = false;
 				_mcClickEff.x = 0;
@@ -121,9 +112,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function stopClickEff():void
 		{
-			if(!_mcClickEff || !contains(_mcClickEff))
-				return;
-			removeChild(_mcClickEff);
+			if(_mcClickEff)
+			{
+				_mcClickEff.stop();
+				if(contains(_mcClickEff))
+					removeChild(_mcClickEff);
+			}
 		}
 	}
 }
