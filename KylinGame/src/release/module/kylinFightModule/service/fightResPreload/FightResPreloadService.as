@@ -304,5 +304,11 @@ package release.module.kylinFightModule.service.fightResPreload
 			//GameEvent.getInstance().sendEvent(FlashLogConst.CMD_FLASHLOADING_LOG,[HttpConst.HTTP_REQUEST,FlashLogConst.BATTLE_LOAD_END,"Dont need load battle res"]);
 			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightStartup));
 		}	
+		
+		[PreDestroy]
+		public function dispose():void
+		{
+			_dicPreloadRes = null;
+		}
 	}
 }

@@ -1,16 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.bufferState
 {
-	import com.shinezone.core.datastructures.HashMap;
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
+	import kylin.echo.edward.utilities.datastructures.HashMap;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
 	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.BasicBufferProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.GameFightBufferProcessorMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
+	
+	import robotlegs.bender.framework.api.IInjector;
 	
 	public class BufferStateMgr implements IDisposeObject
 	{
+		[Inject]
+		public var buffProcessorMgr:GameFightBufferProcessorMgr;
+		[Inject]
+		public var injector:IInjector;
 		/**
 		 * buffId->BasicBufferState
 		 */
@@ -40,7 +47,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 					state.updateByNewState(param,owner);
 				return true;
 			}
-			var processer:BasicBufferProcessor = GameAGlobalManager.getInstance().gameBufferProcessorMgr.getBufferProcessorById(id);
+			var processer:BasicBufferProcessor = buffProcessorMgr.getBufferProcessorById(id);
 			if(!processer || !processer.canUse(_target,owner,param))
 				return false;
 			//如果已经有相同覆盖类型的buff，则移除旧的，添加新的
@@ -63,6 +70,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 			}
 			//添加buff
 			state = new BasicBufferState(id,owner,_target,param);
+			injector.injectInto(state);
 			_hashStates.put(id,state);
 			return true;
 		}

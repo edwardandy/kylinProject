@@ -1,32 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers
 {
-    import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-    import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
-    
-    import flash.events.TimerEvent;
-    import flash.utils.Timer;
-    import flash.utils.getTimer;
-    
+ 
     import io.smash.time.TimeManager;
+    
+    import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
+    import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.BasicGameManager;
 
-    public class TimeTaskManager implements IDisposeObject
+    public class TimeTaskManager extends BasicGameManager
     {
 		private static const MAX_TIME_TASK_CACHE_COUNT:uint = 50;
 		
-		private static var _instance:TimeTaskManager;
-		
-		public static function getInstance():TimeTaskManager
-		{
-			return _instance ||= new TimeTaskManager();
-		}
-		
+		[Inject]
+		public var timeMgr:TimeManager;
         //private var _timer:Timer = null;
 		
-        private var _timeTasksTimeHandleIdMap:Object = {};//id -> TimeTask
-        private var _timeTasksPool:Array = [];
+        private var _timeTasksTimeHandleIdMap:Object;//id -> TimeTask
+        private var _timeTasksPool:Array;
 
-		private var _timeTaskHandleCount:int = 0;
-		private var _isRunning:Boolean = false;
+		private var _timeTaskHandleCount:int;
 
         public function TimeTaskManager()
         {
@@ -35,58 +26,39 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 			//_timer = new Timer(GameFightConstant.TIME_UINT);
 			//_timer.addEventListener(TimerEvent.TIMER, timerTimeHandler);
         }
-
+		
+		override public function onFightStart():void
+		{
+			super.onFightStart();
+			_timeTasksTimeHandleIdMap = {};
+			_timeTasksPool = [];
+			_timeTaskHandleCount = 0;
+		}
+		
+		override public function onFightEnd():void
+		{
+			super.onFightEnd();
+			clearTimeTasksTimeHandleIdMapAndPool();
+		}
 		//IDisposeObject Interface
-		public function dispose():void
+		[PreDestroy]
+		override public function dispose():void
 		{
 			//_timer.stop();
 			//_timer.removeEventListener(TimerEvent.TIMER, timerTimeHandler);
-			//_timer = null;
-			clearTimeTasksTimeHandleIdMapAndPool();
+			//_timer = null;	
 			_timeTasksTimeHandleIdMap = null;
 			_timeTasksPool = null;
-			
-			_instance = null;
-		}
-
-		//TimeTaskManager Interface
-		//暂停
-        /*public function pause():void
-        {
-			if(!_isRunning) return;
-			_isRunning = false;
-			//_timer.stop();
-        }*/
-        
-        /*public function resume():void
-        {
-			if(_isRunning) return;
-			_isRunning = true;
-			//_timer.start();
-        }*/
-		
-		//重置
-		public function reset():void
-		{
-			//pause();
-			clearTimeTasksTimeHandleIdMapAndPool();
-			_timeTasksTimeHandleIdMap = {};
-			_timeTaskHandleCount = 0;
 		}
 		
 		private function clearTimeTasksTimeHandleIdMapAndPool():void
 		{
 			var timeTask:TimeTask = null;
-			for each(timeTask in _timeTasksTimeHandleIdMap) timeTask.clear();
-			for each(timeTask in _timeTasksPool) timeTask.clear();
+			for each(timeTask in _timeTasksTimeHandleIdMap) 
+				timeTask.clear();
+			for each(timeTask in _timeTasksPool) 
+				timeTask.clear();
 		}
-		
-		/*public function start():void
-		{
-			if(_isRunning) return;
-			_isRunning = true;
-			//_timer.start();
-		}*/
 		
         public function createTimeTask(interval:uint/*单位毫秒, 一定是TIME_UINT 整数倍*/, 
 									   callBackFunc:Function = null, 
@@ -122,8 +94,8 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 			_timeTasksTimeHandleIdMap[_timeTaskHandleCount] = timeTask;
 			timeTask.timeTaskHandleId = _timeTaskHandleCount;
 			
-			timeTask.startTick = TimeManager.instance.virtualTime;
-			TimeManager.instance.schedule(interval,null,onTimeTaskInterval,timeTask.timeTaskHandleId);
+			timeTask.startTick = timeMgr.virtualTime;
+			timeMgr.schedule(interval,null,onTimeTaskInterval,timeTask.timeTaskHandleId);
 			
             return _timeTaskHandleCount;
         }
@@ -166,8 +138,8 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					timeTask.callbackFunc.apply(null, timeTask.callbackArgs);
 				}
 			}
-			timeTask.startTick = TimeManager.instance.virtualTime;
-			TimeManager.instance.schedule(timeTask.interval,null,onTimeTaskInterval,timeTask.timeTaskHandleId);
+			timeTask.startTick = timeMgr.virtualTime;
+			timeMgr.schedule(timeTask.interval,null,onTimeTaskInterval,timeTask.timeTaskHandleId);
 		}
 		
 		public function destoryTimeTask(timeTaskHandleId:int):void
@@ -213,7 +185,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 			var timeTask:TimeTask = getTaskTimeTaskByHandleId(timeTaskHandleId);
 			if(timeTask == null) return 0;
 			
-			var rate:Number = (TimeManager.instance.virtualTime - timeTask.startTick)/timeTask.interval;
+			var rate:Number = (timeMgr.virtualTime - timeTask.startTick)/timeTask.interval;
 			if(timeTask.totalRepeatCount <= 0) 
 				return rate;
 			
@@ -233,50 +205,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 			if(timeTaskHandleId < 0) return null;
 			return _timeTasksTimeHandleIdMap[timeTaskHandleId] as TimeTask;
 		}
-		
-		//event handler
-		/*private var tick:int = 0;
-		private function timerTimeHandler(event:TimerEvent):void
-		{	
-			var timeTask:TimeTask = null;
-			for each(timeTask in _timeTasksTimeHandleIdMap)
-			{
-				timeTask.currentCount++;
-				
-				if(timeTask.currentCount >= timeTask.totalCount)
-				{
-					timeTask.currentCount = 0;
-
-					if(timeTask.totalRepeatCount > 0)
-					{
-						timeTask.currentRepeatCount++;
-						
-						if(timeTask.callbackFunc != null)
-						{
-							timeTask.callbackFunc.apply(null, timeTask.callbackArgs);
-						}
-
-						if(timeTask.currentRepeatCount >= timeTask.totalRepeatCount)
-						{
-							if(timeTask.completeFunc != null)
-							{
-								timeTask.completeFunc.apply(null, timeTask.completeArgs);
-							}
-							
-							destoryTimeTask(timeTask.timeTaskHandleId);
-							break;
-						}
-					}
-					else
-					{
-						if(timeTask.callbackFunc != null)
-						{
-							timeTask.callbackFunc.apply(null, timeTask.callbackArgs);
-						}
-					}
-				}
-			}
-		}*/
     }
 }
 
@@ -288,9 +216,6 @@ class TimeTask
 	
 	public var completeFunc:Function = null;
 	public var completeArgs:Array = null;
-
-    //public var currentCount:int = 0;//当前次数
-	//public var totalCount:int = 0;
 	
 	public var currentRepeatCount:int = 0;
 	public var totalRepeatCount:int = 0;
@@ -309,8 +234,6 @@ class TimeTask
 		timeTaskHandleId = 0;
 		callbackFunc = null;
 		callbackArgs = null;
-		//currentCount = 0;
-		//totalCount = 0;
 		currentRepeatCount = 0;
 		totalRepeatCount = 0;
 		completeFunc = null;

@@ -37,12 +37,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				bodySkinResourceURL + GameMovieClipFrameNameType.SOLDIER_NAME_SUFFIX) as Vector.<BitmapFrameInfo>;*/
 			
 			myTowerSoldierSkin = new NewBitmapMovieClip([bodySkinResourceURL + GameMovieClipFrameNameType.SOLDIER_NAME_SUFFIX]);
+			injector.injectInto(myTowerSoldierSkin);
 			addChild(myTowerSoldierSkin);
 			myTowerSoldierSkin.render(0);
 			
 			/*var barBitmapFrameInfos:Vector.<BitmapFrameInfo> = ObjectPoolManager.getInstance().getBitmapFrameInfos(
 				bodySkinResourceURL + GameMovieClipFrameNameType.BAR_NAME_SUFFIX) as Vector.<BitmapFrameInfo>;*/
 			myTowerBarSkin = new NewBitmapMovieClip([bodySkinResourceURL + GameMovieClipFrameNameType.BAR_NAME_SUFFIX]);
+			injector.injectInto(myTowerBarSkin);
 			addChild(myTowerBarSkin);
 			myTowerBarSkin.render(0);
 			addChild(_mySkillBufferBottomLayer);

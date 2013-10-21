@@ -76,6 +76,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			destoryMyBuildBuilddingAnimation();
 			myBuildBuilddingAnimation = new NewBitmapMovieClip(["BuildingEffect"]);
+			injector.injectInto(myBuildBuilddingAnimation);
 			myBuildBuilddingAnimation.gotoAndPlay2(GameMovieClipFrameNameType.IDLE + GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_START, 
 				GameMovieClipFrameNameType.IDLE + GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_END, 1, destoryMyBuildBuilddingAnimation);
 			addChild(myBuildBuilddingAnimation);			

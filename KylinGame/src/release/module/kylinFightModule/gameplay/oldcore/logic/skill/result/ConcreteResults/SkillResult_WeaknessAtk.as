@@ -1,8 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults
 {
-	import com.shinezone.core.structure.controls.GameEvent;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;

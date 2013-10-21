@@ -1,9 +1,10 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults
 {
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;
+
 	/**
 	 * 死亡后召唤其他单位
 	 */

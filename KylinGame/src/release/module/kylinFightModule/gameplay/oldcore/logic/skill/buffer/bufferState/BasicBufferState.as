@@ -1,24 +1,36 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.bufferState
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
+	import mainModule.model.gameData.sheetData.buff.IBuffSheetDataModel;
+	import mainModule.model.gameData.sheetData.buff.IBuffSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.IBufferResource;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.BasicBufferProcessor;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.GameFightBufferProcessorMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.buff.BuffTemplateInfo;
+	import robotlegs.bender.framework.api.IInjector;
 	
 	public class BasicBufferState implements IDisposeObject
 	{
+		[Inject]
+		public var buffModel:IBuffSheetDataModel;
+		[Inject]
+		public var buffProcessorMgr:GameFightBufferProcessorMgr;
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
+		[Inject]
+		public var timeTaskMgr:TimeTaskManager;
+		[Inject]
+		public var injector:IInjector;
+		
 		private var _id:uint = 0;
 		private var _param:Object;
 		private var _owner:ISkillOwner;
@@ -30,21 +42,21 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 		
 		private var _buffRes:BasicBufferResource;
 		private var _iTimeTask:int = 0;
-		private var _buffInfo:BuffTemplateInfo;
+		private var _buffInfo:IBuffSheetItem;
 		
 		public function BasicBufferState(uid:uint,owner:ISkillOwner,target:ISkillTarget,param:Object)
 		{
 			_id = uid;
 			_owner = owner;
 			_target = target;
-			_param = param;
-			init();
+			_param = param;	
 		}
 		
-		private function init():void
+		[PostConstruct]
+		public function init():void
 		{
-			_buffInfo = TemplateDataFactory.getInstance().getBuffTemplateById(_id);
-			var processor:BasicBufferProcessor = GameAGlobalManager.getInstance().gameBufferProcessorMgr.getBufferProcessorById(_id);
+			_buffInfo = buffModel.getBuffSheetById(_id);
+			var processor:BasicBufferProcessor = buffProcessorMgr.getBufferProcessorById(_id);
 			if(!_buffInfo || !processor)
 				return;
 			initRes();
@@ -55,9 +67,9 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 		
 		private function initRes():void
 		{
-			if(int(_buffInfo.resourceId) == -1)
+			if(int(_buffInfo.resId) == -1)
 				return;
-			_buffRes = ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.ORGANISM_SKILL_BUFFER,_id,false) as BasicBufferResource;
+			_buffRes = objPoolMgr.createSceneElementObject(GameObjectCategoryType.ORGANISM_SKILL_BUFFER,_id,false) as BasicBufferResource;
 			if(!_buffRes)
 				return;
 			_buffRes.initializeByParameters(_target);
@@ -73,7 +85,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 		private function initTimerCd():void
 		{
 			clearTimeTask();
-			var processor:BasicBufferProcessor = GameAGlobalManager.getInstance().gameBufferProcessorMgr.getBufferProcessorById(_id);
+			var processor:BasicBufferProcessor = buffProcessorMgr.getBufferProcessorById(_id);
 			var dur:uint = 0;
 			if(_param.hasOwnProperty(BufferFields.DURATION))				
 				dur = uint(_param[BufferFields.DURATION]);
@@ -85,7 +97,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 				interval = GameFightConstant.TIME_UINT*10;
 			var repeat:int = (0 == dur?-1:(dur/interval));
 		
-			_iTimeTask = TimeTaskManager.getInstance().createTimeTask(interval,onBuffInterval,null,repeat,onBuffEnd,null);
+			_iTimeTask = timeTaskMgr.createTimeTask(interval,onBuffInterval,null,repeat,onBuffEnd,null);
 		}
 		
 		private function initTriggerCd():void
@@ -96,6 +108,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 				if(cd > 0)
 				{
 					_triggerCd = new SimpleCDTimer(cd);
+					injector.injectInto(_triggerCd);
 					_triggerCd.clearCDTime();
 				}
 			}
@@ -111,6 +124,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 					if(!_triggerCd)
 					{
 						_triggerCd = new SimpleCDTimer(cd);
+						injector.injectInto(_triggerCd);
 						_triggerCd.clearCDTime();
 					}
 					else
@@ -125,7 +139,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 		 */
 		private function onBuffInterval():void
 		{
-			var processor:BasicBufferProcessor = GameAGlobalManager.getInstance().gameBufferProcessorMgr.getBufferProcessorById(_id);
+			var processor:BasicBufferProcessor = buffProcessorMgr.getBufferProcessorById(_id);
 			if(processor.canUse(_target,_owner,_param))
 				processor.processBuff(_target,_param,_owner);
 		}
@@ -134,7 +148,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 		 */
 		public function notifyTriggerBuff(condition:int):void
 		{
-			var processor:BasicBufferProcessor = GameAGlobalManager.getInstance().gameBufferProcessorMgr.getBufferProcessorById(_id);
+			var processor:BasicBufferProcessor = buffProcessorMgr.getBufferProcessorById(_id);
 			if(processor.notifyTriggerBuff(condition,_target,_param,_owner) && _triggerCd)
 				_triggerCd.resetCDTime();
 		}
@@ -154,13 +168,13 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 		private function clearTimeTask():void
 		{
 			if(_iTimeTask)
-				TimeTaskManager.getInstance().destoryTimeTask(_iTimeTask);
+				timeTaskMgr.destoryTimeTask(_iTimeTask);
 			_iTimeTask = 0;
 		}
 		
 		public function notifyDettached(bImmediate:Boolean = true):void
 		{
-			var processor:BasicBufferProcessor = GameAGlobalManager.getInstance().gameBufferProcessorMgr.getBufferProcessorById(_id);
+			var processor:BasicBufferProcessor = buffProcessorMgr.getBufferProcessorById(_id);
 			processor.notifyBuffEnd(_target,_param,_owner);
 			
 			if(_buffRes)
@@ -224,7 +238,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.buff
 		 */
 		public function hasCondition(iCondition:int):Boolean
 		{
-			var processor:BasicBufferProcessor = GameAGlobalManager.getInstance().gameBufferProcessorMgr.getBufferProcessorById(_id);
+			var processor:BasicBufferProcessor = buffProcessorMgr.getBufferProcessorById(_id);
 			if(processor.triggerConditions && -1 != processor.triggerConditions.indexOf(iCondition))
 				return true;
 			return false;

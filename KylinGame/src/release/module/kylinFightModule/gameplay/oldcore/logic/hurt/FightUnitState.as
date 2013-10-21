@@ -1,11 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.hurt
 {
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import flash.utils.Dictionary;
+	
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
-	
-	import flash.utils.Dictionary;
 
 	/**
 	 * 战斗单位的状态，包括一些可能动态改变的属性

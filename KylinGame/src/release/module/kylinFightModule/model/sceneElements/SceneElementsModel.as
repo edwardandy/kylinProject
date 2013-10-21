@@ -44,6 +44,8 @@ package release.module.kylinFightModule.model.sceneElements
 		public var sceneModel:ISceneDataModel;
 		[Inject]
 		public var heroData:IHeroDynamicDataModel;
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
 		
 		private var _allDepthRenderElements:Vector.<DisplayObject> = new Vector.<DisplayObject>();
 		
@@ -91,7 +93,6 @@ package release.module.kylinFightModule.model.sceneElements
 		{
 			updateMapRoadShape();
 			checkEndPointFlag(sceneModel.sceneType);
-			initializeSceneElement();
 		}
 		
 		public final function addSceneElemet(e:BasicSceneElement):void
@@ -213,19 +214,28 @@ package release.module.kylinFightModule.model.sceneElements
 		
 		public final function destoryAllSceneElements():void
 		{
-			for(var sceneElement:* in _allElementsMap)
+			var element:BasicSceneElement = null;
+			var tempElements:Vector.<BasicSceneElement> = new Vector.<BasicSceneElement>;
+			
+			for each(element in _allElementsMap)
 			{
-				BasicSceneElement(sceneElement).destorySelf();
+				tempElements.push(element);	
 			}
+			
+			for each(element in tempElements)
+			{
+				element.destorySelf();
+			}
+			tempElements.length = 0;
 		}
 		
 		public final function getHeorElementByTypeId(heroTypeId:int):HeroElement
 		{
 			for each(var heroElement:HeroElement in _heroElements)
 			{
-				if(heroElement.objectTypeId == heroTypeId) return heroElement
+				if(heroElement.objectTypeId == heroTypeId) 
+					return heroElement;
 			}
-			
 			return null;
 		}
 		
@@ -263,6 +273,33 @@ package release.module.kylinFightModule.model.sceneElements
 			return fightViewLayers.roadHitTestShape.hitTestPoint(x, y, true);
 		}
 		
+		public function onFightStart():void
+		{
+			initializeSceneElement();
+		}
+		/**
+		 * 战斗结束 
+		 * 
+		 */		
+		public function onFightEnd():void
+		{
+			destoryAllSceneElements();
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightPause():void
+		{
+			
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightResume():void
+		{
+			
+		}
+		[PreDestroy]
 		public function dispose():void
 		{
 			super.dispose();
@@ -270,22 +307,9 @@ package release.module.kylinFightModule.model.sceneElements
 			_organismsElements = null;
 			_groundEffElements = null;
 			_summonDoors = null;
-			
-			var element:BasicSceneElement = null;
-			var tempElements:Vector.<BasicSceneElement> = new Vector.<BasicSceneElement>;
-			
-			for each(element in _allElementsMap)
-			{
-				tempElements.push(element);	
-			}
-			
-			for each(element in tempElements)
-			{
-				element.dispose();
-				delete _allElementsMap[element];
-			}
-			tempElements.length = 0;
 			_allElementsMap = null;
+			_endPointFlag = null;
+			_allDepthRenderElements = null;
 		}
 		
 		/**
@@ -382,8 +406,7 @@ package release.module.kylinFightModule.model.sceneElements
 				if(category == GameObjectCategoryType.HERO) 
 					continue;//不允许配置文件里面添加英雄单位
 				
-				var sceneElement:BasicSceneElement = ObjectPoolManager.getInstance()
-					.createSceneElementObject(category, elementVO.typeId, false) as BasicSceneElement; 
+				var sceneElement:BasicSceneElement = objPoolMgr.createSceneElementObject(category, elementVO.typeId, false) as BasicSceneElement; 
 				
 				if(sceneElement != null)
 				{
@@ -426,8 +449,7 @@ package release.module.kylinFightModule.model.sceneElements
 			var n:uint = currentHeroIds.length;//n可能的值为0，1，2，3
 			if(n == 1)
 			{
-				heroElement1 = ObjectPoolManager.getInstance()
-					.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
+				heroElement1 = objPoolMgr.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
 				heroElement1.x = endPointMarkPosition.x;
 				heroElement1.y = endPointMarkPosition.y;
 				heroElement1.notifyLifecycleActive();
@@ -440,15 +462,13 @@ package release.module.kylinFightModule.model.sceneElements
 				
 				if(n == 2)
 				{
-					heroElement0 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
+					heroElement0 = objPoolMgr.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
 					heroElement0.x = leftAndRightHeroStandPoints[0].x;
 					heroElement0.y = leftAndRightHeroStandPoints[0].y;
 					heroElement0.notifyLifecycleActive();
 					heroElement0.setAngle(directionRadian, true);
 					
-					heroElement2 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[1], false) as HeroElement;
+					heroElement2 = objPoolMgr.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[1], false) as HeroElement;
 					heroElement2.x = leftAndRightHeroStandPoints[1].x;
 					heroElement2.y = leftAndRightHeroStandPoints[1].y;
 					heroElement2.notifyLifecycleActive();
@@ -456,22 +476,19 @@ package release.module.kylinFightModule.model.sceneElements
 				}
 				else if(n == 3)
 				{
-					heroElement0 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
+					heroElement0 = objPoolMgr.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[0], false) as HeroElement;
 					heroElement0.x = leftAndRightHeroStandPoints[0].x;
 					heroElement0.y = leftAndRightHeroStandPoints[0].y;
 					heroElement0.notifyLifecycleActive();
 					heroElement0.setAngle(directionRadian, true);
 					
-					heroElement1 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[1], false) as HeroElement;
+					heroElement1 = objPoolMgr.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[1], false) as HeroElement;
 					heroElement1.x = endPointMarkPosition.x;
 					heroElement1.y = endPointMarkPosition.y;
 					heroElement1.notifyLifecycleActive();
 					heroElement1.setAngle(directionRadian, true);
 					
-					heroElement2 = ObjectPoolManager.getInstance()
-						.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[2], false) as HeroElement;
+					heroElement2 = objPoolMgr.createSceneElementObject(GameObjectCategoryType.HERO, currentHeroIds[2], false) as HeroElement;
 					heroElement2.x = leftAndRightHeroStandPoints[1].x;
 					heroElement2.y = leftAndRightHeroStandPoints[1].y;
 					heroElement2.notifyLifecycleActive();

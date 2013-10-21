@@ -1,15 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers
 {
-	import com.shinezone.core.structure.controls.GameEvent;
-	import com.shinezone.towerDefense.fight.constants.GamePlotProgress;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
-	import framecore.structure.controls.battlPlotCommand.BattlePlotConst;
-	import framecore.structure.model.user.battlePlot.BattlePlotData;
-	import framecore.structure.model.user.battlePlot.BattlePlotTemplateInfo;
-	import framecore.structure.model.user.fight.FightData;
-	import framecore.structure.model.user.tollgate.TollgateData;
-	import framecore.tools.logger.log;
+	import release.module.kylinFightModule.gameplay.constant.GamePlotProgress;
 
 	public class GamePlotMgr
 	{

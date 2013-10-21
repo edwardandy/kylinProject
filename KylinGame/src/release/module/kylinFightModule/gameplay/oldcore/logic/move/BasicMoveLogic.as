@@ -1,9 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.move
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveLogic;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class BasicMoveLogic implements IMoveLogic
 	{

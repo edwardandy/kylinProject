@@ -1,8 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.vo
 {
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.BasicGameManager;
 
-	public class GlobalTemp
+	public class GlobalTemp extends BasicGameManager
 	{
 		/**
 		 * 要用道具复活的英雄 
@@ -48,5 +49,20 @@ package release.module.kylinFightModule.gameplay.oldcore.vo
 		 */		
 		public var useTime:uint = 0;
 		public var bForcePause:Boolean = false;
+		
+		override public function onFightStart():void
+		{
+			rebirthHero = null;
+			enableMockMagicFlag = false;
+			enableMockItemFlag = false;
+			newGuideMockTollgateFlag = false;
+			enableMonsterMarchFlag = false;
+			quitDestFlag = 0;
+			spiritHeroAttackAddition = 0;
+			spiritTowerAttackAddition = 0;
+			tempTime = 0;
+			useTime = 0;
+			bForcePause = false;
+		}
 	}
 }

@@ -1,17 +1,17 @@
-package com.shinezone.towerDefense.fight.display1.sceneElements.effects
+package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import com.shinezone.towerDefense.fight.display.sceneElements.basics.BasicBodySkinSceneElement;
-	import com.shinezone.towerDefense.fight.display.sceneElements.organisms.BasicOrganismElement;
-	import com.shinezone.towerDefense.fight.display.sceneElements.organisms.IOrganismSkiller;
-	import com.shinezone.towerDefense.fight.logic.skill.SkillState;
-	imporelease.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillStatece.ISkillOwrelease.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwnerce.ISkillTarelease.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTargets.GameAGlobalManager;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 爆炸效果 

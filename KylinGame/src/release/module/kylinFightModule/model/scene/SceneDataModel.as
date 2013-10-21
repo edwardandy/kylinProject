@@ -7,7 +7,6 @@ package release.module.kylinFightModule.model.scene
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
 	
 	import release.module.kylinFightModule.gameplay.oldcore.events.GameDataInfoEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.map.SceneElementVO;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 
@@ -139,6 +138,44 @@ package release.module.kylinFightModule.model.scene
 		{
 			fightData = null;
 			tollgateSheet = null;
+		}
+		
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightStart():void
+		{
+			initialize();
+		}
+		/**
+		 * 战斗结束 
+		 * 
+		 */		
+		public function onFightEnd():void
+		{
+			
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightPause():void
+		{
+			
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightResume():void
+		{
+			
+		}
+		/**
+		 * @inheritDoc 
+		 */	
+		[PreDestroy]
+		public function dispose():void
+		{
+			destroy();
 		}
 	}
 }

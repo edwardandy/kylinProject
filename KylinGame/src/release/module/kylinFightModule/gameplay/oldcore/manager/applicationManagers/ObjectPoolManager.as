@@ -1,17 +1,22 @@
 package release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers
 {
-	import com.shinezone.core.resource.ClassLibrary;
-	import com.shinezone.towerDefense.fight.constants.BattleAppDomainType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.OrganismBodySizeType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.BulletID;
-	import com.shinezone.towerDefense.fight.constants.identify.ExplosionID;
-	import com.shinezone.towerDefense.fight.constants.identify.GroundEffectID;
-	import com.shinezone.towerDefense.fight.constants.identify.MagicID;
-	import com.shinezone.towerDefense.fight.constants.identify.MonsterID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import flash.display.MovieClip;
+	import flash.geom.Point;
+	import flash.utils.Dictionary;
+	import flash.utils.getTimer;
+	
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismBodySizeType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.identify.BulletID;
+	import release.module.kylinFightModule.gameplay.constant.identify.ExplosionID;
+	import release.module.kylinFightModule.gameplay.constant.identify.GroundEffectID;
+	import release.module.kylinFightModule.gameplay.constant.identify.MagicID;
+	import release.module.kylinFightModule.gameplay.constant.identify.MonsterID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
@@ -27,6 +32,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers.WizardTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.ExplosionEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.WitchRayEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.SpecialBufferRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.BasicSkillEffectRes;
@@ -36,16 +42,13 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.NuclareWeaponEff;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.SafeLaunchSkillRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.SummonDemonDoorSkillRes;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.WitchRayEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.AeroliteBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.ArcaneBombBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.ArrowBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BlazeBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.DeadlyShurikenBullet;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.GunTangDeYouBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.LetBulletFlyBulletEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.MagicFlySwordBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.ShellBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.ZiMuBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.skillBullets.TrackMissile;
@@ -70,12 +73,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.WorkerRopeMagicSkill;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.YiCiYuanZhiMenMagicSkill;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.ZiRanZhiRuMagicSkill;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.BasicOrganismSkillBufferEffect;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.DoubleFireSkillBuffer;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.ExplosionSkillBuffer;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.InvincibilitySkillBuffer;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.InvisibleSkillBuffer;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.organismSkillBufferEffects.StopWalkSkillBuffer;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.Heros.Bomber;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.Heros.MagicMan;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.Heros.PowerOfNatural;
@@ -94,25 +91,20 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss.KingOfSwamp;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss.WolfPioneer;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.BarrackSoldierElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.BasicSummonSoldier;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.CondottiereSoldier;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SummonByOrganisms;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SummonByTower;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SupportSoldier;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.hurt.AttackerInfo;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.BasicGameManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.MovieClipRasterizationUtil;
 	
-	import flash.display.MovieClip;
-	import flash.geom.Point;
-	import flash.utils.Dictionary;
-	import flash.utils.getTimer;
-	
-	import framecore.tools.loadmgr.LoadMgr;
-	import framecore.tools.logger.log;
+	import robotlegs.bender.framework.api.IInjector;
+	import robotlegs.bender.framework.api.ILogger;
 
 	//该类实际主要负责BasicSceneElement对象创建、缓存、销毁
-	public class ObjectPoolManager implements IDisposeObject
+	public class ObjectPoolManager extends BasicGameManager
 	{
 		public static const TOFT_CACHE_MAX_COUNT:int = 10;
 		public static const MONSTER_CACHE_MAX_COUNT:int = 10;
@@ -132,39 +124,74 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 		public static const DIEEFFECT_CACHE_MAX_COUNT:int = 5;
 		
 		private static const CREATENEW:String = "createNew";
+		
+		[Inject]
+		public var logger:ILogger;
+		[Inject]
+		public var rasterUtil:MovieClipRasterizationUtil;
+		[Inject]
+		public var assetsService:ILoadAssetsServices;
+		[Inject]
+		public var injector:IInjector;
 
-		private static var _instance:ObjectPoolManager;
-
-		public static function getInstance():ObjectPoolManager
-		{
-			return _instance ||= new ObjectPoolManager();
-		}
-
-		private var _bitmapFrameInfosPool:Array = [];//resourceURL-> [scaleRatioType->BitmapFrameInfos, ...]
-		private var _sceneElementsPool:Array = [];//category-> [objectTypeId->[object,...], ...
+		private var _bitmapFrameInfosPool:Array;//resourceURL-> [scaleRatioType->BitmapFrameInfos, ...]
+		private var _sceneElementsPool:Array;//category-> [objectTypeId->[object,...], ...
 		
 		private var _vecEmptyAttackerInfos:Vector.<AttackerInfo>;
+		
+		private var ptSize:Point = new Point;
+		private var _dicUrlToMc:Dictionary;
 		
 		public function ObjectPoolManager()
 		{
 			super();
 		}
+		
+		override public function onFightStart():void
+		{
+			super.onFightStart();
+			_bitmapFrameInfosPool = [];
+			_sceneElementsPool = [];
+			_vecEmptyAttackerInfos = new Vector.<AttackerInfo>;
+			_dicUrlToMc = new Dictionary(true);
+		}
+		
+		override public function onFightEnd():void
+		{
+			super.onFightEnd();
+		}
 
 		//IDisposeObject Interface
-		public function dispose():void
+		[PreDestroy]
+		override public function dispose():void
+		{	
+			disposeSceneElementsPool();
+			_sceneElementsPool = null;	
+			disposeBitmapFramePool();
+			_bitmapFrameInfosPool = null;	
+			_dicUrlToMc = null;
+			_vecEmptyAttackerInfos = null;
+		}
+		
+		private function disposeSceneElementsPool():void
 		{
 			var object:Object = null;
 			var groupObjects:Array = null;
 			
 			for each(groupObjects in _sceneElementsPool)
 			{
-				for each(object in groupObjects)
+				for each(var arrObjects:Array in groupObjects)
 				{
+					for each(object in arrObjects)
 					disposeObject(object);
 				}
 			}
-			_sceneElementsPool = null;
-			
+		}
+		
+		private function disposeBitmapFramePool():void
+		{
+			var object:Object = null;
+			var groupObjects:Array = null;
 			for each(groupObjects in _bitmapFrameInfosPool)
 			{
 				for each(object in groupObjects)
@@ -172,9 +199,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					disposeObject(object);
 				}
 			}
-			_bitmapFrameInfosPool = null;
-
-			_instance = null;
 		}
 		/**
 		 * 获得一个可用的空的攻击者信息用于填充
@@ -198,60 +222,9 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 			_vecEmptyAttackerInfos.push(info);
 			return info;
 		}
-
-		//ObjectPoolManager Interface
-		//对于Vector.<BitmapFrameInfo>是单独缓存的，以区别于其他对象， 缓存的key值为 resourceURL, scaleRatioType
-		public function getBitmapFrameInfos(resourceURL:String, 
-											scaleRatioType:int = OrganismBodySizeType.SIZE_NORMAL):Vector.<BitmapFrameInfo>
-		{
-			var subCategorys:Array = _bitmapFrameInfosPool[resourceURL];
-			if(!_bitmapFrameInfosPool[resourceURL])
-			{
-				subCategorys = [];
-				_bitmapFrameInfosPool[resourceURL] = subCategorys;
-			}
-			
-			var bitmapFrameInfos:Vector.<BitmapFrameInfo> = subCategorys[scaleRatioType] as Vector.<BitmapFrameInfo>;
-			if(!bitmapFrameInfos)
-			{
-				//var mc:MovieClip =  ClassLibrary.getInstance().getMovieClip(resourceURL);
-				var mc:MovieClip = getMCByUrl(resourceURL);
-				if(mc == null)
-				{
-					//return null;
-					log("ObjectPoolManager::getBitmapFrameInfos resourceURL: " + 
-						resourceURL + " scaleRatioType: " + 
-						scaleRatioType);
-					/*throw new Error("ObjectPoolManager::getBitmapFrameInfos resourceURL: " + 
-					resourceURL + " scaleRatioType: " + 
-					scaleRatioType);*/
-					return null;
-				}
-				
-				//var mc:MovieClip =  new cls();
-				
-				
-				var scale:Number = 1;
-				if(scaleRatioType != OrganismBodySizeType.SIZE_NORMAL)
-				{
-					/*mc.scaleX = mc.scaleY*/ scale = (scaleRatioType == OrganismBodySizeType.SIZE_MIDDLE ? 
-						GameFightConstant.MIDDLE_SIZE_BITMAP_SCLE_RATIO : 
-						GameFightConstant.BIG_SIZE_BITMAP_SCLE_RATIO);
-				}
-				
-				//bitmapFrameInfos = MovieClipRasterizationUtil.rasterize(mc);
-				bitmapFrameInfos = MovieClipRasterizationUtil.rasterizeNew(ptSize,mc,scale);
-				
-				subCategorys[scaleRatioType] = bitmapFrameInfos;
-			}
-			
-			return bitmapFrameInfos;
-		}
 		
-		private var ptSize:Point = new Point;
-		private var _dicUrlToMc:Dictionary = new Dictionary(true);
-		public function getNewBitmapFrameInfos(resourceURL:String, 
-											scaleRatioType:int = OrganismBodySizeType.SIZE_NORMAL,startFrameName:Object=null,endFrameName:Object=null):Vector.<BitmapFrameInfo>
+		public function getNewBitmapFrameInfos(resourceURL:String, scaleRatioType:int = OrganismBodySizeType.SIZE_NORMAL
+											,startFrameName:Object=null,endFrameName:Object=null):Vector.<BitmapFrameInfo>
 		{
 			var subCategorys:Array = _bitmapFrameInfosPool[resourceURL];
 			if(!_bitmapFrameInfosPool[resourceURL])
@@ -264,51 +237,36 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 			var bitmapFrameInfos:Vector.<BitmapFrameInfo> = subCategorys[scaleRatioType] as Vector.<BitmapFrameInfo>;
 			if(1 == startFrameName && bitmapFrameInfos && bitmapFrameInfos.length>0 && bitmapFrameInfos[0])
 				return bitmapFrameInfos;
-				
-			//if(!bitmapFrameInfos)
 			
-				//var mc:MovieClip =  ClassLibrary.getInstance().getMovieClip(resourceURL);
-				var mc:MovieClip = getMCByUrl(resourceURL);
-				
-				if(mc == null)
-				{
-					//return null;
-					log("ObjectPoolManager::getBitmapFrameInfos resourceURL: " + 
-						resourceURL + " scaleRatioType: " + 
-						scaleRatioType);
-					/*throw new Error("ObjectPoolManager::getBitmapFrameInfos resourceURL: " + 
-						resourceURL + " scaleRatioType: " + 
-						scaleRatioType);*/
-					return null;
-				}
-
-				//var mc:MovieClip =  new cls();
-				
-					
-				var scale:Number = 1;
-				if(scaleRatioType != OrganismBodySizeType.SIZE_NORMAL)
-				{
-					/*mc.scaleX = mc.scaleY*/ scale = (scaleRatioType == OrganismBodySizeType.SIZE_MIDDLE ? 
-						GameFightConstant.MIDDLE_SIZE_BITMAP_SCLE_RATIO : 
-						GameFightConstant.BIG_SIZE_BITMAP_SCLE_RATIO);
-				}
-
-				//bitmapFrameInfos = MovieClipRasterizationUtil.rasterize(mc);
-				var tick:int = getTimer();
-				subCategorys[scaleRatioType] = MovieClipRasterizationUtil.rasterizeNew(ptSize,mc,scale,subCategorys[scaleRatioType],startFrameName,endFrameName);
-				tick = getTimer() - tick;
-				if(tick>200)
-					log("[getNewBitmapFrameInfos] "+ resourceURL +" frameStart:"+startFrameName+" frameEnd:"+endFrameName +" tick: "+tick+" size: "+int(ptSize.x));
-				//subCategorys[scaleRatioType] = bitmapFrameInfos;
+			var mc:MovieClip = getMCByUrl(resourceURL);
 			
+			if(mc == null)
+			{
+				logger.warn("ObjectPoolManager::getBitmapFrameInfos resourceURL: " + 
+					resourceURL + " scaleRatioType: " + 
+					scaleRatioType);
+				return null;
+			}		
+			var scale:Number = 1;
+			if(scaleRatioType != OrganismBodySizeType.SIZE_NORMAL)
+			{
+				scale = (scaleRatioType == OrganismBodySizeType.SIZE_MIDDLE ? 
+					GameFightConstant.MIDDLE_SIZE_BITMAP_SCLE_RATIO : 
+					GameFightConstant.BIG_SIZE_BITMAP_SCLE_RATIO);
+			}
+
+			var tick:int = getTimer();
+			subCategorys[scaleRatioType] = rasterUtil.rasterizeNew(ptSize,mc,scale,subCategorys[scaleRatioType],startFrameName,endFrameName);
+			tick = getTimer() - tick;
+			if(tick>200)
+				logger.warn("[getNewBitmapFrameInfos] "+ resourceURL +" frameStart:"+startFrameName+" frameEnd:"+endFrameName +" tick: "+tick+" size: "+int(ptSize.x));			
 
 			return subCategorys[scaleRatioType];
 		}
 		
 		public function getMCByUrl(url:String):MovieClip
 		{		
-			if(null == _dicUrlToMc[url])
-				_dicUrlToMc[url] = LoadMgr.instance.domainMgr.getMovieClipByDomain(url,BattleAppDomainType.FightRes);
+			_dicUrlToMc[url] ||= assetsService.domainMgr.getMovieClipByDomain(url,"FightRes");
 			return _dicUrlToMc[url] as MovieClip;
 		}
 		
@@ -326,12 +284,8 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					GameFightConstant.BIG_SIZE_BITMAP_SCLE_RATIO);
 			}
 			
-			//var tick:int = getTimer();
 			mc.gotoAndStop(curFrame);
-			MovieClipRasterizationUtil.rasterizeCurrentFrameToBitmap(mc,subCategorys[scaleRatioType][curFrame-1],scale);
-			//tick = getTimer() - tick;
-			/*if(tick>200)
-				log("[getNewBitmapFrameInfos] "+ resourceURL +" frameStart:"+startFrameName+" frameEnd:"+endFrameName +" tick: "+tick+" size: "+int(ptSize.x));*/
+			rasterUtil.rasterizeCurrentFrameToBitmap(mc,subCategorys[scaleRatioType][curFrame-1],scale);
 		}
 
 		//isAutoLifecycleActive 是否立即激活, 不然要调用object.notifyLifecycleActive();手动激活
@@ -541,12 +495,13 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					monster = new BasicMonsterElement(elementTypeId);
 					break;
 			}
+			injector.injectInto(monster);
 			return monster;
 		}
 		
 		public function createNewToft(elementTypeId:int):ToftElement
 		{
-			var toftElement:ToftElement = new ToftElement();
+			var toftElement:ToftElement = injector.instantiateUnmapped(ToftElement);
 			return toftElement;
 		}
 
@@ -600,7 +555,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					basicTowerElement = new LongXiTowerElement(elementTypeId);
 					break;
 			}
-			
+			injector.injectInto(basicTowerElement);
 			return basicTowerElement;
 		}
 		
@@ -630,6 +585,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 				default:
 					heroElement = new HeroElement(elementTypeId);
 			}	
+			injector.injectInto(heroElement);
 			return heroElement;
 		}
 		
@@ -637,6 +593,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 		{
 			var soldierElement:BarrackSoldierElement = null;
 			soldierElement = new BarrackSoldierElement(elementTypeId);
+			injector.injectInto(soldierElement);
 			return soldierElement;
 		}
 		
@@ -644,6 +601,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 		{
 			var soldierElement:CondottiereSoldier = null;
 			soldierElement = new CondottiereSoldier(elementTypeId);
+			injector.injectInto(soldierElement);
 			return soldierElement;
 		}
 		
@@ -651,6 +609,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 		{
 			var soldierElement:SupportSoldier = null;
 			soldierElement = new SupportSoldier(elementTypeId);
+			injector.injectInto(soldierElement);
 			return soldierElement;
 		}
 		
@@ -663,6 +622,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					soldierElement = new SummonByOrganisms(elementTypeId);
 					break;
 			}
+			injector.injectInto(soldierElement);
 			return soldierElement;
 		}
 		
@@ -675,6 +635,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					soldierElement = new SummonByTower(elementTypeId);
 					break;
 			}
+			injector.injectInto(soldierElement);
 			return soldierElement;
 		}
 		
@@ -733,7 +694,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					bulletEffect = new BasicBulletEffect(elementTypeId);
 					break
 			}
-
+			injector.injectInto(bulletEffect);
 			return bulletEffect;
 		}
 		
@@ -749,7 +710,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					sceneExplosionEffect = new ExplosionEffect(elementTypeId);
 					break;
 			}
-			
+			injector.injectInto(sceneExplosionEffect);
 			return sceneExplosionEffect;
 		}
 		
@@ -780,6 +741,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					res = new BasicSkillEffectRes(elementTypeId);
 					break;
 			}
+			injector.injectInto(res);
 			return res;
 		}
 		
@@ -796,6 +758,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					res = new BasicGroundEffect(elementTypeId);
 					break;
 			}
+			injector.injectInto(res);
 			return res;
 		}
 		
@@ -808,6 +771,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					res = new BasicDieEffect(elementTypeId);
 					break;
 			}
+			injector.injectInto(res);
 			return res;
 		}
 		
@@ -820,6 +784,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					item = new BasicGroundItem(elementTypeId);
 					break;
 			}
+			injector.injectInto(item);
 			return item;
 		}
 
@@ -827,6 +792,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 		{
 			var sceneTipEffect:SceneTipEffect = null;
 			sceneTipEffect = new SceneTipEffect(elementTypeId);
+			injector.injectInto(sceneTipEffect);
 			return sceneTipEffect;
 		}
 		
@@ -843,6 +809,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					organismSkillBufferEffect = new BasicBufferResource(elementTypeId); 
 					break;
 			}	
+			injector.injectInto(organismSkillBufferEffect);
 			return organismSkillBufferEffect;
 		}	
 		
@@ -912,7 +879,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 					magicSkillEffect = new FullScreenFreezeEnemy(elementTypeId);
 					break;
 			}
-			
+			injector.injectInto(magicSkillEffect);
 			return magicSkillEffect;
 		}
 	}

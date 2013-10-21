@@ -1,6 +1,5 @@
 package release.module.kylinFightModule.model.viewLayers
 {
-	import flash.display.DisplayObjectContainer;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	
@@ -17,20 +16,47 @@ package release.module.kylinFightModule.model.viewLayers
 	 */	
 	public class FightViewLayersModel extends KylinActor implements IFightViewLayersModel
 	{
-		//private var _parent:DisplayObjectContainer;
 		[Inject]
 		public var mainViewLayers:ViewLayersMgr;
+		private var _mapLayer:Sprite;
 		private var _groundLayer:Sprite;
 		private var _roadHitTestShape:Shape;
 		private var _bottomLayer:Sprite;
 		private var _middleLayer:Sprite;
 		private var _topLayer:Sprite;
+		private var _mouseCursorLayer:Sprite;
+		private var _UILayer:Sprite;
 		
 		public function FightViewLayersModel()
 		{
 			super();
 		}
 		
+		public function get UILayer():Sprite
+		{
+			return _UILayer;
+		}
+
+		public function set UILayer(value:Sprite):void
+		{
+			_UILayer = value;
+		}
+
+		public function get mapLayer():Sprite
+		{
+			return _mapLayer;
+		}
+
+		public function set mapLayer(value:Sprite):void
+		{
+			_mapLayer = value;
+		}
+
+		public function get mouseCursorLayer():Sprite
+		{
+			return _mouseCursorLayer;
+		}
+
 		public function get roadHitTestShape():Shape
 		{
 			return _roadHitTestShape;
@@ -57,10 +83,12 @@ package release.module.kylinFightModule.model.viewLayers
 		}
 		
 		[PostConstruct]
-		public function postConstruct():void
+		public function initialize():void
 		{
+			_mapLayer = new Sprite;
+			_mapLayer.mouseEnabled = false;
+			_mapLayer.mouseChildren = false;
 			_groundLayer = new Sprite;
-			_groundLayer.mouseEnabled = false;
 			_roadHitTestShape = new Shape;
 			_bottomLayer = new Sprite;
 			_bottomLayer.mouseEnabled = false;
@@ -68,19 +96,28 @@ package release.module.kylinFightModule.model.viewLayers
 			_middleLayer.mouseEnabled = false;
 			_topLayer = new Sprite;
 			_topLayer.mouseEnabled = false;
+			_mouseCursorLayer = new Sprite;
+			_mouseCursorLayer.mouseEnabled = false;
+			_mouseCursorLayer.mouseChildren = false;
+			_UILayer = new Sprite;
+			_UILayer.mouseEnabled = false;
+			onInitialize();
 		}
 		
 		/**
 		 * 初始化 
 		 * 
 		 */		
-		public function initialize():void
+		private function onInitialize():void
 		{
+			mainViewLayers.fightScene.addChild(_mapLayer);
+			_mapLayer.addChild(_roadHitTestShape);
 			mainViewLayers.fightScene.addChild(_groundLayer);
-			mainViewLayers.fightScene.addChild(_roadHitTestShape);
-			mainViewLayers.fightScene.addChild(_bottomLayer);
-			mainViewLayers.fightScene.addChild(_middleLayer);
-			mainViewLayers.fightScene.addChild(_topLayer);
+			_groundLayer.addChild(_bottomLayer);
+			_groundLayer.addChild(_middleLayer);
+			_groundLayer.addChild(_topLayer);
+			_groundLayer.addChild(_mouseCursorLayer);
+			mainViewLayers.fightScene.addChild(_UILayer);
 		}
 		/**
 		 * 销毁
@@ -89,16 +126,23 @@ package release.module.kylinFightModule.model.viewLayers
 		[PreDestroy]
 		public function destroy():void
 		{
+			_mapLayer.removeChildren();
 			_groundLayer.removeChildren();
 			_bottomLayer.removeChildren();
 			_middleLayer.removeChildren();
 			_topLayer.removeChildren();
+			_mouseCursorLayer.removeChildren();		
+			mainViewLayers.fightScene.removeChildren();
+			_UILayer.removeChildren();
 			
-			mainViewLayers.fightScene.removeChild(_groundLayer);
-			mainViewLayers.fightScene.removeChild(_roadHitTestShape);
-			mainViewLayers.fightScene.removeChild(_bottomLayer);
-			mainViewLayers.fightScene.removeChild(_middleLayer);
-			mainViewLayers.fightScene.removeChild(_topLayer);
+			_mapLayer = null;
+			_groundLayer = null;
+			_bottomLayer = null;
+			_middleLayer = null;
+			_topLayer = null;
+			_roadHitTestShape = null;
+			_mouseCursorLayer = null;
+			_UILayer = null;
 		}
 	}
 }

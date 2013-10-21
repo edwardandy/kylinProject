@@ -4,9 +4,6 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import framecore.structure.model.user.base.BaseSkillInfo;
 
 	public class SkillState implements IDisposeObject
 	{

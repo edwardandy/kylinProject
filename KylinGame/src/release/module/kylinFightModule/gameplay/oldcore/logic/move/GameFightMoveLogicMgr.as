@@ -21,5 +21,11 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.move
 		{
 			return _defaultMoveLogic ||= (new BasicMoveLogic as IMoveLogic);
 		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			_defaultMoveLogic = null;
+		}
 	}
 }

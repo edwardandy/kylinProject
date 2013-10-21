@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.service.sceneElements
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
+	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.SummonDemonDoorSkillRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect.BasicGroundEffect;
@@ -15,7 +15,7 @@ package release.module.kylinFightModule.service.sceneElements
 	 * @author Edward
 	 * 
 	 */	
-	public interface ISceneElementsService extends IDisposeObject
+	public interface ISceneElementsService extends IFightLifecycle
 	{
 		/**
 		 * 获取当前场景敌方阵营的数量

@@ -1,10 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults
 {
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 
 	/**
 	 * 普通攻击时增加攻击百分比 如普通攻击有20%概率造成双倍伤害（远程造成1.5倍伤害

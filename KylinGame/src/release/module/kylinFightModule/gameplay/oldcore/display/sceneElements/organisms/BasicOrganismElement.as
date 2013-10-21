@@ -172,9 +172,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			addChild(_mySpecialEffectAnimationsLayer);
 			
 			_benefitBloodEffectAnimation1 = new NewBitmapMovieClip(["BenefitBloodEffect_1"]);
+			injector.injectInto(_benefitBloodEffectAnimation1);
 			_benefitBloodEffectAnimation2 = new NewBitmapMovieClip(["BenefitBloodEffect_2"]);
+			injector.injectInto(_benefitBloodEffectAnimation2);
 			_hurtBloodEffectAnimation = new NewBitmapMovieClip(["HurtBloodEffect"]);
-			
+			injector.injectInto(_hurtBloodEffectAnimation);
 			_benefitBloodEffectAnimation1.visible = _benefitBloodEffectAnimation2.visible = _hurtBloodEffectAnimation.visible = false;
 			
 			_hurtBloodEffectAnimation.y = myFireLocalPoint.y;
@@ -210,6 +212,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			{
 				myBodySkin = new NewBitmapMovieClip([bodySkinResourceURL], [myScaleRatioType]);
 			}
+			injector.injectInto(myBodySkin);
 			addChild(myBodySkin);
 		}
 		
@@ -915,6 +918,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				//if(vecFrames)
 				{
 					_rebirthAnim = new NewBitmapMovieClip(["Reborn"], [myScaleRatioType]);
+					injector.injectInto(_rebirthAnim);
 				}
 			}
 			_mySpecialEffectAnimationsLayer.addChild(_rebirthAnim);
@@ -1554,6 +1558,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				//if(vecFrames)
 				{
 					_AppearDisappearAnim = new NewBitmapMovieClip([GameObjectCategoryType.SPECIAL+"_152050"], [myScaleRatioType]);
+					injector.injectInto(_AppearDisappearAnim);
 				}
 			}
 			_mySpecialEffectAnimationsLayer.addChild(_AppearDisappearAnim);
@@ -2711,6 +2716,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 					myOldBodySkin = myBodySkin;
 					removeChild(myBodySkin);
 					myBodySkin = new NewBitmapMovieClip([res], [myScaleRatioType]);
+					injector.injectInto(myBodySkin);
 					addChildAt(myBodySkin,idx);
 					if(GameObjectCategoryType.MONSTER == myElemeCategory)
 					{

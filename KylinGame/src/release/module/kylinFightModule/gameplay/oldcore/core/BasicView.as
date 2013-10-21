@@ -66,5 +66,3 @@ package release.module.kylinFightModule.gameplay.oldcore.core
 		}
 	}
 }
-import release.module.kylinFightModule.gameplay.oldcore.core;
-

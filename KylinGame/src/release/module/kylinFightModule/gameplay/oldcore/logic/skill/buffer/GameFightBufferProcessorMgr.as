@@ -2,8 +2,13 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer
 {
 	import release.module.kylinFightModule.gameplay.oldcore.logic.BasicHashMapMgr;
 	
+	import robotlegs.bender.framework.api.IInjector;
+	
 	public class GameFightBufferProcessorMgr extends BasicHashMapMgr
 	{
+		[Inject]
+		public var injector:IInjector;
+		
 		public function GameFightBufferProcessorMgr()
 		{
 			super();
@@ -32,6 +37,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer
 					result = new BasicBufferProcessor(uid);
 					break;
 			}
+			injector.injectInto(result);
 			return result;
 		}
 	}

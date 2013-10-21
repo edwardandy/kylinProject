@@ -1,7 +1,5 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.render
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
-	
 	import flash.display.BitmapData;
 
 	/**

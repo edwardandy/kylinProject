@@ -113,5 +113,44 @@ package release.module.kylinFightModule.model.marchWave
 				_vecMonsterWaves.push(waveVo);
 			}
 		}
+		
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightStart():void
+		{
+			_curWaveCount = 0;
+			_isCompleteWave = false;
+		}
+		/**
+		 * 战斗结束 
+		 * 
+		 */		
+		public function onFightEnd():void
+		{
+			
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightPause():void
+		{
+			
+		}
+		/**
+		 * @inheritDoc 
+		 */		
+		public function onFightResume():void
+		{
+			
+		}
+		/**
+		 * @inheritDoc 
+		 */	
+		[PreDestroy]
+		public function dispose():void
+		{
+			destroy();
+		}
 	}
 }

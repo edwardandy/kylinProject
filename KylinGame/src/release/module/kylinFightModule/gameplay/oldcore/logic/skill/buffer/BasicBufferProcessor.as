@@ -1,20 +1,26 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer
 {
-	import com.shinezone.core.datastructures.HashMap;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import kylin.echo.edward.utilities.datastructures.HashMap;
+	
+	import mainModule.model.gameData.sheetData.buff.IBuffSheetDataModel;
+	import mainModule.model.gameData.sheetData.buff.IBuffSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.IBufferProcessor;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillResult;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.buff.BuffTemplateInfo;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.GameFightSkillResultMgr;
 	
 	public class BasicBufferProcessor implements IBufferProcessor
 	{
+		[Inject]
+		public var buffModel:IBuffSheetDataModel;
+		[Inject]
+		public var skillResultMgr:GameFightSkillResultMgr;
+		
 		private var _id:uint;
-		private var _buffInfo:BuffTemplateInfo;
+		private var _buffInfo:IBuffSheetItem;
 		private var _bossList:Array;
 		private var _hashBuffResults:HashMap = new HashMap;
 		private var _hashTriggerResults:HashMap = new HashMap;
@@ -26,12 +32,12 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer
 		public function BasicBufferProcessor(uid:uint)
 		{
 			_id = uid;
-			init();
 		}
 		
-		private function init():void
+		[PostConstruct]
+		public function init():void
 		{
-			_buffInfo = TemplateDataFactory.getInstance().getBuffTemplateById(_id);
+			_buffInfo = buffModel.getBuffSheetById(_id);
 			_overType = _buffInfo.overType;
 			initBossList();
 			initFields();
@@ -40,11 +46,10 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer
 		private function initBossList():void
 		{
 			_bossList = null;
-			if(!_buffInfo.bossEffect)
+			if(!_buffInfo.arrEffectBosses || 0 == _buffInfo.arrEffectBosses.length)
 				return;
-			var arrBoss:Array = _buffInfo.bossEffect.split(",");
 			_bossList = [];
-			for each(var strId:uint in arrBoss)
+			for each(var strId:uint in _buffInfo.arrEffectBosses)
 			{
 				_bossList.push(strId);
 			}
@@ -52,11 +57,11 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer
 		
 		private function initFields():void
 		{
-			var arrFields:Array = _buffInfo.buffMode.split(",");
+			var arrFields:Array = _buffInfo.arrModes;
 			var result:ISkillResult;
 			for each(var field:String in arrFields)
 			{
-				result = GameAGlobalManager.getInstance().gameSkillResultMgr.getSkillResultById(field);
+				result = skillResultMgr.getSkillResultById(field);
 				if(result)
 				{
 					if(TriggerConditionType.NOT_TRIGGER == result.triggerCondition)
@@ -182,6 +187,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer
 			_hashTriggerResults = null;
 			
 			_buffInfo = null;
+			_bossList = null;
 		}
 		
 		public function get overType():int

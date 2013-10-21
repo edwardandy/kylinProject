@@ -3,6 +3,7 @@ package release.module.kylinFightModule.model.interfaces
 	
 	import kylin.echo.edward.gameplay.IKylinGameManager;
 	
+	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.map.SceneElementVO;
 
 	/**
@@ -10,7 +11,7 @@ package release.module.kylinFightModule.model.interfaces
 	 * @author Edward
 	 * 
 	 */	
-	public interface ISceneDataModel extends IKylinGameManager
+	public interface ISceneDataModel extends IKylinGameManager,IFightLifecycle
 	{
 		/**
 		 * 场景类型 :SceneTypeConst常量值

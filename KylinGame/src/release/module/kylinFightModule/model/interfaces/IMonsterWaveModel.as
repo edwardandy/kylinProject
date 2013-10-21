@@ -2,6 +2,7 @@ package release.module.kylinFightModule.model.interfaces
 {	
 	import kylin.echo.edward.gameplay.IKylinGameManager;
 	
+	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
 	import release.module.kylinFightModule.model.marchWave.MonsterWaveVO;
 	
 	/**
@@ -9,7 +10,7 @@ package release.module.kylinFightModule.model.interfaces
 	 * @author Edward
 	 * 
 	 */	
-	public interface IMonsterWaveModel extends IKylinGameManager
+	public interface IMonsterWaveModel extends IKylinGameManager,IFightLifecycle
 	{
 		/**
 		 * 获得某一波的出怪数据 
@@ -45,5 +46,10 @@ package release.module.kylinFightModule.model.interfaces
 		 * 
 		 */		
 		function updateData(waves:Array):void;
+		/**
+		 * 增加当前已出波次 
+		 * 
+		 */		
+		function increaseSceneWave():void;
 	}
 }
