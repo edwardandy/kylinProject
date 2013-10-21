@@ -1,25 +1,31 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseLogices.BasicMouseCursorReleaseLogic;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseValidators.MouseCursorReleaseValidator;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseValidators.MouseCursorReleaseValidatorType;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadLineVOHelperUtil;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
-	
-	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
-	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	
-	import framecore.tools.mouse.IMouseCursor;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseValidators.MouseCursorReleaseValidator;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.mouse.IMouseCursor;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
+	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 
 	public class BasicMouseCursor extends BasicView implements IMouseCursor
 	{
+		[Inject]
+		public var mouseCursorMgr:GameFightMouseCursorManager;
+		[Inject]
+		public var loadService:ILoadAssetsServices;
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
+		[Inject]
+		public var sceneElementsModel:ISceneElementsModel
+		
 		protected var myValideMouseCursorView:MovieClip;
 		protected var myErrorMouseCursorView:MovieClip;
 		
@@ -161,8 +167,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 					myMouseCursorSponsor.notifyTargetMouseCursorSuccessRealsed(myCurrentValidMouseClickEvent);
 				}
 				
-				GameAGlobalManager.getInstance()
-					.gameMouseCursorManager.deactiveTargetCurrentMouseCursor(this);
+				mouseCursorMgr.deactiveTargetCurrentMouseCursor(this);
 			}
 			else
 			{
@@ -189,7 +194,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 		
 		protected final function deactiveSelf():void
 		{
-			GameAGlobalManager.getInstance().gameMouseCursorManager.deactiveCurrentMouseCursor();
+			mouseCursorMgr.deactiveCurrentMouseCursor();
 		}
 	}
 }

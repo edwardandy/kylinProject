@@ -1,16 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus
 {
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
 	
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 
 	public class BasicTowerCircleMenu extends BasicBuildingCircleMenu
 	{
-		protected var myTowerTemplateInfo:TowerTemplateInfo;
+		[Inject]
+		public var mouseCursorMgr:GameFightMouseCursorManager;
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
+		
+		protected var myTowerTemplateInfo:ITowerSheetItem;
 		protected var mySellCircleItem:SellCircleItem;
 		
 		public function BasicTowerCircleMenu(buildingElement:BasicBuildingElement, 
-											 towerTemplateInfo:TowerTemplateInfo)
+											 towerTemplateInfo:ITowerSheetItem)
 		{
 			super(buildingElement);
 

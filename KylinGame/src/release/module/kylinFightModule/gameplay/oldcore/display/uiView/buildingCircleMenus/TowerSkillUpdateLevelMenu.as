@@ -1,11 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus
 {
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
+	
 	import release.module.kylinFightModule.gameplay.oldcore.core.ILifecycleObject;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
-	
-	import framecore.structure.model.user.tower.TowerData;
-	import framecore.structure.model.user.tower.TowerInfo;
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
 
 	public class TowerSkillUpdateLevelMenu extends BasicTowerCircleMenu implements ILifecycleObject
 	{
@@ -13,7 +11,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 		protected var myUpdateCircleItem1:TowerSkillUpCircleItem;
 		
 		public function TowerSkillUpdateLevelMenu(buildingElement:BasicBuildingElement, 
-												  towerTemplateInfo:TowerTemplateInfo)
+												  towerTemplateInfo:ITowerSheetItem)
 		{
 			super(buildingElement, towerTemplateInfo);
 		}
@@ -29,7 +27,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			super.onInitialize();
 			//var info:TowerInfo = TowerData.getInstance().getTowerInfoByTowerId(myTowerTemplateInfo.configId);
 			var arrIds:Array = [];//info.skillIds.concat();
-			for each(var id:uint in myTowerTemplateInfo.getskillIds())
+			for each(var id:uint in myTowerTemplateInfo.skillIds)
 			{
 				if(6 == id.toString().length)
 					arrIds.push(id);
@@ -64,7 +62,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 		protected function onLifecycleActive():void
 		{
 			var arrIds:Array = [];//info.skillIds.concat();
-			for each(var id:uint in myTowerTemplateInfo.getskillIds())
+			for each(var id:uint in myTowerTemplateInfo.skillIds)
 			{
 				if(6 == id.toString().length)
 					arrIds.push(id);

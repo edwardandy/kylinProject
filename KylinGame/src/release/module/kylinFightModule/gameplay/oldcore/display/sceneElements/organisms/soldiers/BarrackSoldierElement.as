@@ -6,11 +6,22 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
 	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
 	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
 	import com.shinezone.towerDefense.fight.constants.SubjectCategory;
 	import com.shinezone.towerDefense.fight.constants.TowerType;
+	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
+	import com.shinezone.towerDefense.fight.constants.Skill.SkillType;
 	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
 	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import com.shinezone.towerDefense.fight.vo.PointVO;
+	
+	import framecore.structure.model.constdata.TowerSoundEffectsConst;
+	import framecore.structure.model.user.TemplateDataFactory;
+	import framecore.structure.model.user.base.BaseSkillInfo;
+	import framecore.structure.model.user.soldier.SoldierTemplateInfo;
+	import framecore.structure.model.user.tower.TowerData;
+	import framecore.structure.model.user.tower.TowerLevelVo;
+	import framecore.tools.media.TowerMediaPlayer;
+	
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.barrackTowers.BarrackTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
@@ -19,14 +30,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.soldier.SoldierTemplateInfo;
-	import framecore.structure.model.user.tower.TowerData;
-	import framecore.structure.model.user.tower.TowerLevelVo;
-	import framecore.tools.media.TowerMediaPlayer;
 	
 	public class BarrackSoldierElement extends BasicOrganismElement
 	{
@@ -284,7 +287,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			var skills:HashMap = myOwnerTower.soldierSkills;
 			for each(var id:uint in skills.keys())
 			{
-				updateSkill(id,skills.get(id));
+				var info:BaseSkillInfo = getBaseSkillInfo(id);
+				if(SkillType.PASSIVITY == info.type)
+				{
+					var maxLvl:int = skills.get(id);
+					for(var i:int=1; i<=maxLvl; ++i)
+					{
+						var curId:uint = getCurSkillIdByLvl(id,i);
+						processSinglePassiveSkill(curId);
+					}
+				}
+				else
+					updateSkill(id,skills.get(id));
 			}
 		}
 		

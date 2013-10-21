@@ -1,11 +1,8 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.SubjectCategory;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.SubjectCategory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.ToftElement;
@@ -14,11 +11,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.geom.Point;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class MagicTowerElement extends BasicTowerElement
 	{
@@ -147,8 +141,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			if(!mySearchedEnemy)
 				return;
 			
-			var bulletEffect:BasicBulletEffect = ObjectPoolManager.getInstance()
-				.createSceneElementObject(GameObjectCategoryType.BULLET, myFightState.weapon, false) as BasicBulletEffect;
+			var bulletEffect:BasicBulletEffect = objPoolMgr.createSceneElementObject(GameObjectCategoryType.BULLET
+				, myFightState.weapon, false) as BasicBulletEffect;
 			bulletEffect.fire(mySearchedEnemy, this, getGlobalFirePoint(), 
 				getDmgBeforeHurtTarget(false,mySearchedEnemy));
 

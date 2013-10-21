@@ -1,10 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import flash.events.MouseEvent;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.FlameRainSkillRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.SummonDemonDoorSkillRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
@@ -13,13 +15,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.events.MouseEvent;
-	
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.skill.SkillTemplateInfo;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 灾难领主

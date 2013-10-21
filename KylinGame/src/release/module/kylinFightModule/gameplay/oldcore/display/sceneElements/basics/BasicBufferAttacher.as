@@ -1,14 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics
 {
-	import com.shinezone.towerDefense.fight.constants.Skill.BufferPosition;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
+	import flash.display.Sprite;
+	
+	import release.module.kylinFightModule.gameplay.constant.Skill.BufferPosition;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.BasicBufferResource;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.bufferState.BufferStateMgr;
-	
-	import flash.display.MovieClip;
-	import flash.display.Sprite;
 
 	/**
 	 * 能够被buff影响的对象
@@ -68,6 +66,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		protected function clearBufferStates(bDie:Boolean = false):void
 		{
 			_buffStates.clear();
+			if(_mySkillBufferEffecstLayer && _mySkillBufferEffecstLayer.numChildren>0)
+				_mySkillBufferEffecstLayer.removeChildren();
+			if(_mySkillBufferBottomLayer && _mySkillBufferBottomLayer.numChildren>0)
+				_mySkillBufferBottomLayer.removeChildren();
 		}
 		
 		override public function dispose():void

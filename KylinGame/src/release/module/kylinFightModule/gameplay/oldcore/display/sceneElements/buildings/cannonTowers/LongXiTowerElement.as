@@ -1,20 +1,13 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.cannonTowers
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.TowerBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class LongXiTowerElement extends CannonTowerElement
 	{
@@ -22,7 +15,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		protected var myTowerSoldierSkin:NewBitmapMovieClip;
 		
 		private var _bAngry:Boolean = false;
-		private var _cdAngry:SimpleCDTimer = new SimpleCDTimer(3000);
+		private var _cdAngry:SimpleCDTimer;
 		
 		public function LongXiTowerElement(typeId:int)
 		{
@@ -32,7 +25,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		override protected function onInitialize():void
 		{
 			super.onInitialize();
-		
+			_cdAngry = new SimpleCDTimer(3000);
+			injector.injectInto(_cdAngry);
 			/*var soldierBitmapFrameInfos:Vector.<BitmapFrameInfo> = ObjectPoolManager.getInstance().getBitmapFrameInfos(
 				bodySkinResourceURL + GameMovieClipFrameNameType.SOLDIER_NAME_SUFFIX) as Vector.<BitmapFrameInfo>;*/
 			

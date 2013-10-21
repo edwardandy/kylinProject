@@ -1,8 +1,8 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus
 {
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
 	
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 
 	public class TowerMultiUpdateLevelMenu extends BasicTowerCircleMenu
 	{
@@ -13,11 +13,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 		private var _nextTowerIds:Array = [];//id
 		
 		public function TowerMultiUpdateLevelMenu(buildingElement:BasicBuildingElement, 
-												  towerTemplateInfo:TowerTemplateInfo)
+												  towerTemplateInfo:ITowerSheetItem)
 		{
 			super(buildingElement, towerTemplateInfo);
 			
-			_nextTowerIds = towerTemplateInfo.nextTowerId.split(":");
+			_nextTowerIds = towerTemplateInfo.nextTowerIds;
 		}
 		
 		override public function notifySceneGoldUpdate():void

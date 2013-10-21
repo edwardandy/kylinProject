@@ -2,7 +2,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 {
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SummonByOrganisms;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 自然之力

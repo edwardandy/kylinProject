@@ -1,14 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.OrganismBodySizeType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismBodySizeType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 
 	public class DemonSnowman extends BasicMonsterElement
 	{
@@ -95,7 +93,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(!myFightState.bMaxSnowball || myFightState.bStun || myFightState.bSheep)
 				return;
-			var vecTargets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().groundSceneHelper
+			var vecTargets:Vector.<BasicOrganismElement> = sceneElementsService
 				.searchOrganismElementsBySearchArea(this.x, this.y, 40,oppositeCampType, searchCanSuddenDeathEnemy);
 			if(vecTargets && vecTargets.length>0)
 			{
@@ -132,7 +130,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			myFightState.minAtk += atk;
 			myFightState.maxAtk += atk;
 			myFightState.bMaxSnowball = true;
-			this.filters = [GameFilterManager.getInstance().blueGlowFilter];
+			this.filters = [filterMgr.blueGlowFilter];
 			return true;
 		}
 	}

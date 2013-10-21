@@ -21,5 +21,11 @@ package mainModule.model.gameData.sheetData.interfaces
 		 * 
 		 */		
 		function getDesc(specialId:uint = 0):String;
+		/**
+		 * 声音id对象，不同的属性对应不同的用途 use,upgrade,attack,chant,special,nearAtk,farAtk,dead 
+		 * @return 
+		 * 
+		 */		
+		function get objSound():Object;
 	}
 }

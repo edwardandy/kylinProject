@@ -1,25 +1,25 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseValidators
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadLineVOHelperUtil;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
-	
 	import flash.events.MouseEvent;
-	import flash.geom.Point;
+	
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
+	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
+	import release.module.kylinFightModule.model.roads.MapRoadVO;
+	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
+	import release.module.kylinFightModule.utili.RoadLineVOHelperUtil;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public final class MouseCursorReleaseValidator
-	{
-		private static var _instance:MouseCursorReleaseValidator;
-		
-		public static function getInstance():MouseCursorReleaseValidator
-		{
-			return 	_instance ||= new MouseCursorReleaseValidator();
-		}
-		
+	{	
+		[Inject]
+		public var sceneElementsModel:ISceneElementsModel;
+		[Inject]
+		public var mapRoadModel:IMapRoadModel;
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
 		//这里返回 可以的话 则一般返回 true, 有些比较特殊会返回 数据， 不可以返回false
 		public function validByMouseCursor(mouseEvent:MouseEvent, type:int):Object
 		{
@@ -31,7 +31,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 					break;
 				
 				case MouseCursorReleaseValidatorType.ONLY_ROAD:
-					return GameAGlobalManager.getInstance().groundScene.hisTestMapRoad(mouseEvent.stageX,mouseEvent.stageY);
+					return sceneElementsModel.hisTestMapRoad(mouseEvent.stageX,mouseEvent.stageY);
 					break;
 				
 				case MouseCursorReleaseValidatorType.ONLY_ENEMY:
@@ -45,18 +45,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 					break;
 				
 				case MouseCursorReleaseValidatorType.ONLY_STRICT_ROAD:
-					if(!GameAGlobalManager.getInstance().groundScene.hisTestMapRoad(mouseEvent.stageX,mouseEvent.stageY)) return false;
+					if(!sceneElementsModel.hisTestMapRoad(mouseEvent.stageX,mouseEvent.stageY)) return false;
 					
-					var roadVOs:Vector.<RoadVO> = GameAGlobalManager.getInstance().gameDataInfoManager.currentSceneMapInfo.roadVOs;
-					var n:uint = roadVOs.length;
+					var n:uint = mapRoadModel.roadCount;
 					var pathPointVOs:Vector.<PointVO>;
 					var s:Array = [];
 					for(var i:uint = 0; i < n; i++)
 					{
-						var roadVO:RoadVO = roadVOs[i];
+						
+						var roadVO:MapRoadVO = mapRoadModel.getMapRoad(i);
 						
 						var roadPathStepIndex:int = RoadLineVOHelperUtil.caculatePointInfoOnRoadPathStepIndex(
-							GameMathUtil.convertStagePtToGame(mouseEvent.stageX,mouseEvent.stageY,GameAGlobalManager.getInstance().game), roadVO.lineVOs); 
+							GameMathUtil.convertStagePtToGame(mouseEvent.stageX,mouseEvent.stageY,fightViewModel.groundLayer), roadVO.lineVOs); 
 
 						if(roadPathStepIndex != -1)//表示该点不再路上
 						{

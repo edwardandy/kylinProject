@@ -1,7 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 
 	/**

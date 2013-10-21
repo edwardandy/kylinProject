@@ -43,7 +43,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			{
 				if(_netSelfCd.getIsCDEnd())
 				{
-					myFightState.bStun = false;
+					--myFightState.iStun;
 					onDoDefaultBehavior();
 					//changeToTargetBehaviorState(OrganismBehaviorState.ENEMY_ESCAPING);
 				}
@@ -57,7 +57,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			if(OrganismBehaviorState.STUN == currentBehaviorState)
 			{
 				myMoveLogic.pauseWalk(myMoveState);
-				myFightState.bStun = true;
+				++myFightState.bStun;
 				_netSelfCd.resetCDTime();
 				myBodySkin.gotoAndPlay2(GameMovieClipFrameNameType.EFFECT+"_"+SkillID.CastNet+"_"+GameMovieClipFrameNameType.IDLE+GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_START,
 					GameMovieClipFrameNameType.EFFECT+"_"+SkillID.CastNet+"_"+GameMovieClipFrameNameType.IDLE+GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_END);

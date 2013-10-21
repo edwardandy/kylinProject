@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers
 {
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	
 
 	//神秘之塔
 	public class MysteryMagicTowerElement extends MagicTowerElement

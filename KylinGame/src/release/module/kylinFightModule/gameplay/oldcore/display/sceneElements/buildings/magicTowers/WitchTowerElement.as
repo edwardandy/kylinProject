@@ -1,12 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.TowerBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.WitchRayEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 
 	/**
 	 * 女巫塔，子弹是射线
@@ -37,8 +34,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			clearRay();
 			
-			_witchRay = ObjectPoolManager.getInstance()
-				.createSceneElementObject(GameObjectCategoryType.BULLET,myTowerInfo.towerTemplateInfo.weapon,false) as WitchRayEffect;
+			_witchRay = objPoolMgr.createSceneElementObject(GameObjectCategoryType.BULLET
+				,myTowerTemplateInfo.weapon,false) as WitchRayEffect;
 			_witchRay.fire(mySearchedEnemy,this,getGlobalFirePoint(), getDmgBeforeHurtTarget(false,mySearchedEnemy));
 			_witchRay.notifyLifecycleActive();
 		}

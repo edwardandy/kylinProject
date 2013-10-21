@@ -1,6 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors
 {
-	import framecore.structure.model.user.magicSkill.MagicSkillTemplateInfo;
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetItem;
+	
 
 	public class RangeMagicMouseCursor extends MonomerMagicMouseCursor
 	{
@@ -20,7 +21,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 			}
 		}
 		
-		override public function setMagicSkillTemplateInfo(value:MagicSkillTemplateInfo):void
+		override public function setMagicSkillTemplateInfo(value:IMagicSkillSheetItem):void
 		{
 			super.setMagicSkillTemplateInfo(value);
 			

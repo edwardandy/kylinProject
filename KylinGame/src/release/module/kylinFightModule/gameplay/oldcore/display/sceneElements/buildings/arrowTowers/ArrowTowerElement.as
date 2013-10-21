@@ -1,29 +1,21 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.arrowTowers
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.SubjectCategory;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.SubjectCategory;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.TowerBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes.SpecialBufferRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.DeadlyShurikenBullet;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.Shape;
-	import flash.geom.Point;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 箭塔 
@@ -185,8 +177,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			
 			if(myCurrentFireTowerSoldierSkin == null) return;
 			
-			var bulletEffect:BasicBulletEffect = ObjectPoolManager.getInstance()
-				.createSceneElementObject(GameObjectCategoryType.BULLET, myFightState.weapon, false) as BasicBulletEffect;
+			var bulletEffect:BasicBulletEffect = objPoolMgr.createSceneElementObject(GameObjectCategoryType.BULLET
+				, myFightState.weapon, false) as BasicBulletEffect;
 			bulletEffect.fire(mySearchedEnemy, this, 
 				getGlobalFirePoint(), 
 				getDmgBeforeHurtTarget(false,mySearchedEnemy), 
@@ -224,7 +216,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			var state:SkillState = mySkillStates.get(myFightState.curUseSkillId) as SkillState;
 			if(SkillID.LetBulletFly == state.id || SkillID.LetBulletFly1 == state.id || SkillID.LetBulletFly2 == state.id)
 			{
-				var res:SpecialBufferRes = ObjectPoolManager.getInstance().createSceneElementObject(
+				var res:SpecialBufferRes = objPoolMgr.createSceneElementObject(
 					GameObjectCategoryType.ORGANISM_SKILL_BUFFER,BufferID.LetBulletFly,false) as SpecialBufferRes;
 				res.initializeByParameters(state.mainTarget);
 				res.notifyLifecycleActive();

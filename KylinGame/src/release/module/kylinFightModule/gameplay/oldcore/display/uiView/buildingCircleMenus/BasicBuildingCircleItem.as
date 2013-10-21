@@ -1,24 +1,20 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
-	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
-	import framecore.tools.font.FontUtil;
-	import framecore.tools.tips.ToolTipConst;
-	import framecore.tools.tips.ToolTipEvent;
-	import framecore.tools.tips.ToolTipManager;
-	import framecore.tools.tips.towerMenu.TowerMenuToolTip;
-	import framecore.tools.tips.towerMenu.TowerMenuToolTipDataVO;
-	import framecore.tools.tips.towerMenu.TowerPropItem;
+	import kylin.echo.edward.utilities.font.FontMgr;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
+	
+	import utili.font.FontClsName;
 
 	public class BasicBuildingCircleItem extends BasicView
 	{
+		[Inject]
+		public var filterMgr:GameFilterManager;
+		
 		protected var myItemBGView:MovieClip;
 		
 		protected var myIsLock:Boolean = false;
@@ -38,11 +34,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			myBuildingCircleItemOwner = buildingCircleMenu;
 			myClickCallback = clickCallback;
 			
-			ToolTipManager.getInstance().registGameToolTipTarget( this, ToolTipConst.TOWER_MENU_TOOL_TIP );
-			this.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, onShowToolTipHandler );
+			//ToolTipManager.getInstance().registGameToolTipTarget( this, ToolTipConst.TOWER_MENU_TOOL_TIP );
+			//this.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, onShowToolTipHandler );
 		}
 		
-		protected function onShowToolTipHandler( event:ToolTipEvent ):void
+		/*protected function onShowToolTipHandler( event:ToolTipEvent ):void
 		{
 			if ( myIsLock )
 			{
@@ -54,12 +50,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			{
 				event.preventDefault();
 			}
-		}
+		}*/
 		
 		override protected function onInitialize():void
 		{
 			myItemBGView = new BuildingCircleBuildItemSkin();
-			FontUtil.useFont(myItemBGView.itemTextSkin.goldTextField,FontUtil.FONT_TYPE_BUTTON);
+			
+			FontMgr.instance.setTextStyle(myItemBGView.itemTextSkin.goldTextField,FontClsName.ButtonFont);
 			myItemBGView.stop();
 			addChild(myItemBGView);
 
@@ -158,7 +155,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			{
 				if(myIsMouseOverFlag)
 				{
-					this.filters = [GameFilterManager.getInstance().yellowGlowFilter];
+					this.filters = [filterMgr.yellowGlowFilter];
 					onMouseOverCallback(true);
 				}
 				else
@@ -169,7 +166,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			}
 			else
 			{
-				this.filters = [GameFilterManager.getInstance().colorNessMatrixFilter];
+				this.filters = [filterMgr.colorNessMatrixFilter];
 			}
 		}
 		
