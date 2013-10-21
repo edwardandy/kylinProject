@@ -1,19 +1,15 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers
 {
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import mainModule.model.gameData.sheetData.summonerGrowth.ISummonerGrowthSheetDataModel;
 	
-	import framecore.structure.model.user.soldier.SoldierData;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 
 	public class BasicSummonSoldier extends CondottiereSoldier
 	{
+		[Inject]
+		public var growthData:ISummonerGrowthSheetDataModel;
 		protected var m_master:ISkillOwner;
 		
 		public function BasicSummonSoldier(typeId:int)
@@ -34,7 +30,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		override protected function initFightState():void
 		{
 			super.initFightState();
-			var growth:int = SoldierData.getInstance().getGrowthByIdAndLvl(m_master.curLevel,myObjectTypeId);
+			
+			var growth:int = growthData.getSummonerGrowthByMasterLvl(m_master.curLevel).getSummonerGrowthById(myObjectTypeId);
 			myFightState.maxlife *= growth/100.0;
 			myFightState.minAtk *= growth/100.0;
 			myFightState.maxAtk *= growth/100.0;

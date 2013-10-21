@@ -27,8 +27,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		[Inject]
 		public var eventDispatcher:IEventDispatcher;
 		[Inject]
-		public var gameInteractiveMgr:GameFightInteractiveManager;
-		[Inject]
 		public var fightViewModel:IFightViewLayersModel;
 		[Inject]
 		public var filterMgr:GameFilterManager;

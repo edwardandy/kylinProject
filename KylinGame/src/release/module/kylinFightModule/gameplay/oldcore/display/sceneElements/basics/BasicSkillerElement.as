@@ -38,7 +38,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.condition.GameFightSkillConditionMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.GameFightSkillProcessorMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
@@ -53,8 +52,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		public var skillConditionMgr:GameFightSkillConditionMgr;
 		[Inject]
 		public var sceneElementsService:ISceneElementsService;
-		[Inject]
-		public var objPoolMgr:ObjectPoolManager;
 		[Inject]
 		public var timeTaskMgr:TimeTaskManager;
 		[Inject]

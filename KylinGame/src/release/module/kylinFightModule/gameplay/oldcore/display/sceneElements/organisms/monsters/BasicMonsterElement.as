@@ -1,48 +1,25 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters
 {
-	import com.shinezone.towerDefense.fight.constants.BattleEffectType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.MagicID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadLineVOHelperUtil;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
+	import mainModule.model.gameData.sheetData.monster.IMonsterSheetDataModel;
+	import mainModule.model.gameData.sheetData.monster.IMonsterSheetItem;
 	
-	import flash.display.MovieClip;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.utils.getTimer;
-	
-	import framecore.structure.model.constdata.NewbieConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseMoveFighterInfo;
-	import framecore.structure.model.user.dreamland.DreamLandTemplateInfo;
-	import framecore.structure.model.user.monster.MonsterTemplateInfo;
-	import framecore.structure.views.newguidPanel.NewbieGuideManager;
-	
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
+	import release.module.kylinFightModule.gameplay.constant.BattleEffectType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundItem.BasicGroundItem;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.WorkerRopeMagicSkill;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.CommonAnimationEffects;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.MovieClipRasterizationUtil;
 	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/*
 		怪身边可以站的位置说明：，将圆分成12等份， 从X轴0 开始 0度， 30度， 60度， 120度， 150度
@@ -53,6 +30,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		//private var _myIsBoos:Boolean = false;
 		[Inject]
 		public var mapModel:IMapRoadModel;
+		[Inject]
+		public var monsterModel:IMonsterSheetDataModel;
+		[Inject]
+		public var fightData:IFightDynamicDataModel;
 		
 		private var _escapeRoadIndex:int = -1;
 		private var _escapePathIndex:int = -1;
@@ -67,7 +48,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{	
 			this.myElemeCategory = GameObjectCategoryType.MONSTER;
 			super(typeId);
-			myMoveFighterInfo = TemplateDataFactory.getInstance().getMonsterTemplateById(typeId);
+			myMoveFighterInfo = monsterModel.getMonsterSheetById(typeId);
 			this.myCampType = FightElementCampType.ENEMY_CAMP;
 			mySceneKillLife = monsterTemplateInfo.killLife;
 		}
@@ -101,9 +82,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			super.initStateWhenActive();
 		}
 		
-		public final function get monsterTemplateInfo():MonsterTemplateInfo
+		public final function get monsterTemplateInfo():IMonsterSheetItem
 		{
-			return MonsterTemplateInfo(myMoveFighterInfo);
+			return IMonsterSheetItem(myMoveFighterInfo);
 		}
 		
 		/*public final function get isBoos():Boolean
@@ -144,7 +125,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		 */		
 		public function getDisToEndPointRatio():Number
 		{
-			return GameAGlobalManager.getInstance().gameDataInfoManager.currentSceneMapInfo.getDisRatioByPosIndex(this.x,this.y,myMoveState.getCurrentLineIndex(),_escapePathIndex,_escapeRoadIndex);
+			return mapModel.getDisRatioByPosIndex(this.x,this.y,myMoveState.getCurrentLineIndex(),_escapePathIndex,_escapeRoadIndex);
 		}
 		
 		public function setEnemyAndIdle(target:BasicOrganismElement):void
@@ -206,7 +187,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		override protected function onBehaviorChangeToDying():void
 		{
-			GameAGlobalManager.getInstance().gameInteractiveManager.disFocusTargetElement(this);
+			gameInteractiveMgr.disFocusTargetElement(this);
 			//setIsOnFocus(false);
 			myFocusTipEnable = false;
 			super.onBehaviorChangeToDying();
@@ -216,7 +197,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(myIsInFocus)
 			{
-				NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_MONSTER,{"param":[myObjectTypeId]});
+				//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_MONSTER,{"param":[myObjectTypeId]});
 			}
 			super.onFocusChanged();
 		}
@@ -241,12 +222,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 					var bIsBoss:Boolean = isBoss;
 					destorySelf();
 					//胜利失败检测
-					if(GameAGlobalManager.getInstance().gameDataInfoManager.sceneLife>0 && mySceneKillLife>0)
+					if(sceneModel.sceneLife>0 && mySceneKillLife>0)
 					{
 						GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.HURT_WARN_EFFECT );
 					}
-					GameAGlobalManager.getInstance().gameDataInfoManager.updateSceneLife(-mySceneKillLife);
-					GameAGlobalManager.getInstance().gameSuccessAndFailedDetector.onEnemyCampUintArrivedEndPoint(this,bIsBoss);
+					sceneModel.updateSceneLife(-mySceneKillLife);
+					successAndFailedDetector.onEnemyCampUintArrivedEndPoint(this,bIsBoss);
 					
 					
 					break;
@@ -294,11 +275,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			
 			for(var i:int=0;i<count;++i)
 			{
-				var monster:BasicMonsterElement = ObjectPoolManager.getInstance()
+				var monster:BasicMonsterElement = objPoolMgr
 					.createSceneElementObject(GameObjectCategoryType.MONSTER, uid) as BasicMonsterElement;
 				monster.x = this.x + arrX[i]*20;
 				monster.y = this.y + arrY[i]*20;
-				var pathPoints:Vector.<PointVO> = GameAGlobalManager.getInstance().gameDataInfoManager.currentSceneMapInfo.roadVOs[_escapeRoadIndex].lineVOs[i%3].points;
+				
+				var pathPoints:Vector.<PointVO> = mapModel.getMapRoad(_escapeRoadIndex).lineVOs[i%3].points;
 				monster.startEscapeByPath(pathPoints, _escapeRoadIndex, i%3);
 				monster.updateWalkPathStepIndex(myMoveState.currentPathStepIndex);
 			}
@@ -313,7 +295,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			var iy:int = 0;
 			for(var i:int = 0;i<count;++i)
 			{
-				var item1:BasicGroundItem = ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.GROUNDITEM, itemId,false) as BasicGroundItem;
+				var item1:BasicGroundItem = objPoolMgr.createSceneElementObject(GameObjectCategoryType.GROUNDITEM, itemId,false) as BasicGroundItem;
 				item1.initByParam(duration,money);
 				if(i > 0)
 				{
@@ -363,19 +345,19 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		private function updateAtkAndLife():void
 		{
-			var atkScale:Number = GameAGlobalManager.getInstance().gameDataInfoManager.monsterAtkScale;
-			var lifeScale:Number = GameAGlobalManager.getInstance().gameDataInfoManager.monsterLifeScale;
+			var atkScale:Number = fightData.monAtkScale;
+			var lifeScale:Number = fightData.monLifeScale;
 			if(EndlessBattleMgr.instance.isEndless)
 			{
-				var temp:DreamLandTemplateInfo = TemplateDataFactory.getInstance().getDreamLandTemplateById(_ownWave);
+				/*var temp:DreamLandTemplateInfo = TemplateDataFactory.getInstance().getDreamLandTemplateById(_ownWave);
 				if(temp)
 				{
 					atkScale = temp.atkScale;
 					lifeScale = temp.lifeScale;
-				}
+				}*/
 			}
 
-			myFightState.minAtk = myMoveFighterInfo.baseAtk * atkScale;
+			myFightState.minAtk = myMoveFighterInfo.minAtk * atkScale;
 			myFightState.maxAtk = myMoveFighterInfo.maxAtk * atkScale;
 			myFightState.maxlife = myMoveFighterInfo.life * lifeScale;
 			myFightState.curLife = myFightState.maxlife;
@@ -386,7 +368,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			switch(buffId)
 			{
 				case BufferID.SnowStorm:
-					setBodyFilter([GameFilterManager.getInstance().colorBlueMatrixFilter]);
+					setBodyFilter([filterMgr.colorBlueMatrixFilter]);
 					break;
 			}
 			super.onBufferAttached(buffId);
@@ -403,9 +385,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			super.onBufferDettached(buffId);
 		}
 		
-		override protected function getDefaultSoundString():String
+		override protected function getDefaultSoundObj():Object
 		{
-			return monsterTemplateInfo?monsterTemplateInfo.sound:null;
+			return monsterTemplateInfo?monsterTemplateInfo.objSound:null;
 		}
 	}
 }

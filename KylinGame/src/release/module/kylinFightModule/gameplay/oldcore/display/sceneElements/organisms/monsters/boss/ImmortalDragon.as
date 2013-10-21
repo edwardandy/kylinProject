@@ -1,21 +1,18 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import flash.events.MouseEvent;
+	
+	import mainModule.model.gameData.sheetData.skill.IBaseOwnerSkillSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.BlackWindSkillRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
-	import flash.events.MouseEvent;
-	
-	import framecore.structure.model.user.base.BaseSkillInfo;
 
 	/**
 	 * 不朽巨龙
@@ -109,7 +106,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			if(_clickRebirthTime >= 15)
 			{
 				destorySelf();
-				GameAGlobalManager.getInstance().gameSuccessAndFailedDetector.onEnemyCampUintDied(this);
+				successAndFailedDetector.onEnemyCampUintDied(this);
 			}
 		}
 		
@@ -150,9 +147,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			var skillId:uint = myFightState.curUseSkillId;
 			if(SkillID.BlackWind == skillId)
 			{
-				var skillTemp:BaseSkillInfo = getBaseSkillInfo(skillId);
+				var skillTemp:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
 				
-				var skillEffect:BlackWindSkillRes = ObjectPoolManager.getInstance()
+				var skillEffect:BlackWindSkillRes = objPoolMgr
 					.createSceneElementObject(GameObjectCategoryType.SKILLRES, SkillID.BlackWind) as BlackWindSkillRes;
 				if(skillEffect)
 				{
@@ -167,7 +164,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		private function calcBlackWindDistance():int
 		{
-			var blacWindProcessor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(SkillID.BlackWind,false);
+			var blacWindProcessor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(SkillID.BlackWind);
 			var dis:int = blacWindProcessor.effectParam[BufferFields.MAX] - _clickBlackWindTime * 20;
 			if(dis < blacWindProcessor.effectParam[BufferFields.MIN])
 				dis = blacWindProcessor.effectParam[BufferFields.MIN];

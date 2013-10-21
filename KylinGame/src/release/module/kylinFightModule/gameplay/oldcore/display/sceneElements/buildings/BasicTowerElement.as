@@ -4,6 +4,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import flash.events.MouseEvent;
 	
 	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicItem;
+	import mainModule.model.gameData.sheetData.interfaces.IBaseFighterSheetItem;
 	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
 	
 	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
@@ -397,7 +398,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			changeToTargetBehaviorState(TowerBehaviorState.IDEL);
 		}
 		
-		override protected function getBaseFightInfo():BaseFighterInfo
+		override protected function getBaseFightInfo():IBaseFighterSheetItem
 		{
 			return myTowerTemplateInfo;
 		}

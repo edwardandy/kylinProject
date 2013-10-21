@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 

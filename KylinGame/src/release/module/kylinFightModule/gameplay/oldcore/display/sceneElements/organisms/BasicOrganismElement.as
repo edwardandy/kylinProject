@@ -57,7 +57,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	 * @author Administrator
 	 * 
 	 */	
-	public class BasicOrganismElement extends BasicBufferAttacher implements IOrganismSkiller, ISkillOwner, IMoveUnit
+	public class BasicOrganismElement extends BasicBufferAttacher implements ISkillOwner, IMoveUnit
 	{
 		[Inject]
 		public var moveLogicMgr:GameFightMoveLogicMgr;
@@ -466,7 +466,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		/****************************************************************
 		 * *************************** 战斗逻辑方法   **************************
 		 * **************************************************************/
-		override public function notifyHurtTagetOnkill(beHurtTarget:BasicOrganismElement, finalHurtValue:uint):void
+		/*override public function notifyHurtTagetOnkill(beHurtTarget:BasicOrganismElement, finalHurtValue:uint):void
 		{
 			notifyTriggerSkillAndBuff(TriggerConditionType.KILL_TARGET_OR_ATTACKED_BY_TOWER);
 			notifyTriggerSkillAndBuff(TriggerConditionType.KILL_TARGET);
@@ -478,6 +478,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 					onkillEnemyCampTypeMonster(BasicMonsterElement(beHurtTarget));
 				}
 			}
+		}*/
+		
+		override public function notifyHurtTagetOnkill(beHurtTarget:BasicOrganismElement, finalHurtValue:uint):void
+		{
+			
 		}
 		
 		protected function onkillEnemyCampTypeMonster(monster:BasicMonsterElement):void

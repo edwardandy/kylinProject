@@ -1,45 +1,51 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers
 {
-	import com.shinezone.core.datastructures.HashMap;
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.SubjectCategory;
-	import com.shinezone.towerDefense.fight.constants.TowerType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import kylin.echo.edward.utilities.datastructures.HashMap;
 	
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.soldier.SoldierTemplateInfo;
-	import framecore.structure.model.user.tower.TowerData;
-	import framecore.structure.model.user.tower.TowerLevelVo;
-	import framecore.tools.media.TowerMediaPlayer;
+	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicDataModel;
+	import mainModule.model.gameData.sheetData.skill.IBaseOwnerSkillSheetItem;
+	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetDataModel;
+	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetItem;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetDataModel;
+	import mainModule.model.gameData.sheetData.towerLevelup.ITowerLevelupSheetDataModel;
 	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.SubjectCategory;
+	import release.module.kylinFightModule.gameplay.constant.TowerType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.barrackTowers.BarrackTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class BarrackSoldierElement extends BasicOrganismElement
 	{
+		[Inject]
+		public var soldierModel:ISoldierSheetDataModel;
+		[Inject]
+		public var towerModel:ITowerSheetDataModel;
+		[Inject]
+		public var towerLvlModel:ITowerLevelupSheetDataModel;
+		[Inject]
+		public var towerData:ITowerDynamicDataModel;
+		
 		protected var mySoldierIndex:int = -1;
 		protected var myShareCenterPt:PointVO = new PointVO;
 		protected var myOwnerTower:BarrackTowerElement;
 		
 		public function BarrackSoldierElement(typeId:int)
 		{
-			myMoveFighterInfo = TemplateDataFactory.getInstance().getSoldierTemplateById(typeId);
+			myMoveFighterInfo = soldierModel.getSoldierSheetById(typeId);
 			
 			super(typeId);
 			
@@ -158,7 +164,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			this.myCampType = FightElementCampType.FRIENDLY_CAMP;
 			super.initStateWhenActive();
-			myFightState.rebirthTime =  SoldierTemplateInfo(myMoveFighterInfo).rebirthTime;
+			myFightState.rebirthTime =  ISoldierSheetItem(myMoveFighterInfo).rebirthTime;
 			myResurrectionCDTimer.setDurationTime(myFightState.rebirthTime);
 			changeToTargetBehaviorState(OrganismBehaviorState.SOLDIER_STAY_AT_HOME);
 		}
@@ -168,14 +174,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			super.initFightState();
 			myFightState.cdTime *= (1 - EndlessBattleMgr.instance.addAtkSpdPct*0.01);
 			
-			var lv:TowerLevelVo = TowerData.getInstance().getTowerLevelVoByTowerType(TowerType.Barrack);
+			var lvl:int = towerData.getTowerLevelByType(TowerType.Barrack);
 			var addAtk:Number = 1;
-			if(lv)
+			if(lvl>1)
 			{
-				myFightState.maxlife += TowerData.getInstance().getBarrackLifeByTypeAndLevel(TowerType.Barrack,lv.level);
-				addAtk += TowerData.getInstance().getTowerAtkByTypeAndLevel(TowerType.Barrack,lv.level)*0.01;
+				var arrLvl:Array = towerLvlModel.getTowerLevelupSheetByLvl(lvl).getLevelupGrowth(TowerType.Barrack);
+				myFightState.maxlife += arrLvl[1];
+				addAtk += arrLvl[0]*0.01;
 			}
-			addAtk += GlobalTemp.spiritTowerAttackAddition*0.01;
+			//addAtk += GlobalTemp.spiritTowerAttackAddition*0.01;
 			var addAtk2:Number = 1+EndlessBattleMgr.instance.addAtkPct*0.01;
 			myFightState.minAtk *= addAtk * addAtk2;
 			myFightState.maxAtk *= addAtk * addAtk2;
@@ -190,36 +197,20 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(0 != atkPct)
 			{
-				var lvAtk:int = 0;
+				/*var lvAtk:int = 0;
 				var lv:TowerLevelVo = TowerData.getInstance().getTowerLevelVoByTowerType(TowerType.Barrack);
 				if(lv)
 					lvAtk = TowerData.getInstance().getTowerAtkByTypeAndLevel(TowerType.Barrack,lv.level);
 				var addAkt:Number = 1+EndlessBattleMgr.instance.addAtkPct*0.01;
 				myFightState.minAtk = myMoveFighterInfo.baseAtk*(1 + (lvAtk+GlobalTemp.spiritTowerAttackAddition) * 0.01) * addAkt;
-				myFightState.maxAtk = myMoveFighterInfo.maxAtk*(1 + (lvAtk+GlobalTemp.spiritTowerAttackAddition) * 0.01) * addAkt;
+				myFightState.maxAtk = myMoveFighterInfo.maxAtk*(1 + (lvAtk+GlobalTemp.spiritTowerAttackAddition) * 0.01) * addAkt;*/
 			}
 			
 			if(0 != atkSpdPct)
 			{
-				myAttackCDTimer.setDurationTime(myAttackCDTimer.duration - (myMoveFighterInfo.cdTime * atkSpdPct*0.01));
+				//myAttackCDTimer.setDurationTime(myAttackCDTimer.duration - (myMoveFighterInfo.cdTime * atkSpdPct*0.01));
 			}
 		}
-		
-		/*override protected function onRenderWhenMoveToAppointPoint():void
-		{
-			if(null == currentSearchedEnemy)
-			{
-				//重生时如果有敌人从身边经过则进行拦截
-				var tempEnemy:BasicOrganismElement = GameAGlobalManager.getInstance().groundSceneHelper
-					.searchOrganismElementEnemy(this.x, this.y, myFightState.searchArea, 
-						oppositeCampType, searchCanInterceptOtherEnemy);
-				if(tempEnemy)
-				{
-					setSearchedEnemy(tempEnemy);
-					moveToCurrentFindedEnemyNearby();		
-				}
-			}
-		}*/
 		
 		override protected function checkHasAbilityToResurrection():Boolean
 		{
@@ -287,7 +278,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			var skills:HashMap = myOwnerTower.soldierSkills;
 			for each(var id:uint in skills.keys())
 			{
-				var info:BaseSkillInfo = getBaseSkillInfo(id);
+				var info:IBaseOwnerSkillSheetItem = getBaseSkillInfo(id);
 				if(SkillType.PASSIVITY == info.type)
 				{
 					var maxLvl:int = skills.get(id);
@@ -322,14 +313,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			return FocusTargetType.SOLDIER_TYPE;
 		}
 		
-		override protected function getDefaultSoundString():String
+		override protected function getDefaultSoundObj():Object
 		{
-			return myMoveFighterInfo?myMoveFighterInfo.sound:null;
+			return myMoveFighterInfo?myMoveFighterInfo.objSound:null;
 		}
 		
 		override public function get resourceID():int
 		{
-			return (myMoveFighterInfo as SoldierTemplateInfo).resId || myObjectTypeId;
+			return (myMoveFighterInfo as ISoldierSheetItem).resId || myObjectTypeId;
 		}
 	}
 }

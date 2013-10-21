@@ -1,17 +1,15 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
-	import com.shinezone.towerDefense.fight.constants.identify.MonsterID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import flash.events.MouseEvent;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.identify.MonsterID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	
-	import flash.events.MouseEvent;
 
 	/**
 	 * 恶狼先锋
@@ -57,7 +55,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			if(OrganismBehaviorState.STUN == currentBehaviorState)
 			{
 				myMoveLogic.pauseWalk(myMoveState);
-				++myFightState.bStun;
+				++myFightState.iStun;
 				_netSelfCd.resetCDTime();
 				myBodySkin.gotoAndPlay2(GameMovieClipFrameNameType.EFFECT+"_"+SkillID.CastNet+"_"+GameMovieClipFrameNameType.IDLE+GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_START,
 					GameMovieClipFrameNameType.EFFECT+"_"+SkillID.CastNet+"_"+GameMovieClipFrameNameType.IDLE+GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_END);
@@ -80,7 +78,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			if(!isAlive || OrganismBehaviorState.USE_SKILL == currentBehaviorState 
 				|| OrganismBehaviorState.NEAR_FIHGTTING == currentBehaviorState || myFightState.bStun)
 				return;
-			_searchedGoblin = GameAGlobalManager.getInstance().groundSceneHelper.searchOrganismElementEnemy(
+			_searchedGoblin = sceneElementsService.searchOrganismElementEnemy(
 				searchCenterX,searchCenterY,40,myCampType,searchGoblinCondition) as BasicMonsterElement;
 			if(!_searchedGoblin)
 				return;

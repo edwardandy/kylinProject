@@ -1,14 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.tools.media.TowerMediaPlayer;
 
 	public class SummonByOrganisms extends BasicSummonSoldier
 	{

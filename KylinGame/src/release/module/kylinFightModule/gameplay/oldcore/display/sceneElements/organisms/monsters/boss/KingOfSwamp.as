@@ -1,17 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss
 {
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillSpecialType;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import mainModule.model.gameData.sheetData.skill.monsterSkill.IMonsterSkillSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BasicTowerCircleMenu;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.skill.SkillTemplateInfo;
 
 	/**
 	 * 沼泽之王
@@ -29,12 +24,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			if(mySearchedEnemy == null) 
 				return;
 			
-			var skillTemp:SkillTemplateInfo = TemplateDataFactory.getInstance().getSkillTemplateById(SkillID.CrazyBite);
-			var vecTower:Vector.<BasicTowerElement> = GameAGlobalManager.getInstance().groundSceneHelper.searchTowersBySearchArea(
+			var skillTemp:IMonsterSkillSheetItem = monsterSkillModel.getMonsterSkillSheetById(SkillID.CrazyBite);
+			var vecTower:Vector.<BasicTowerElement> = sceneElementsService.searchTowersBySearchArea(
 				mySearchedEnemy.x,mySearchedEnemy.y,skillTemp.range);
 			if(vecTower && vecTower.length>0)
 			{
-				var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(SkillID.CrazyBite);
+				var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(SkillID.CrazyBite);
 				var state:SkillState = new SkillState;
 				state.id = SkillID.CrazyBite;
 				state.mainTarget = mySearchedEnemy;

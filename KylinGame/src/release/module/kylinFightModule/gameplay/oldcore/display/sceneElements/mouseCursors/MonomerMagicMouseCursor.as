@@ -6,6 +6,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 
 	public class MonomerMagicMouseCursor extends BasicMouseCursor
 	{
+		[Inject]
+		public var magicCursorLogic:MagicMouseCursorReleaseLogic;
+		
 		protected var magicSkillTemplateInfo:IMagicSkillSheetItem;
 		
 		public function MonomerMagicMouseCursor()
@@ -56,8 +59,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 		
 		override protected function doWhenValidMouseClick(mouseCursorReleaseValidateResult:Object):void
 		{
-			MagicMouseCursorReleaseLogic.getInstance()
-				.excute(mouseCursorReleaseValidateResult, myCurrentValidMouseClickEvent, magicSkillTemplateInfo);
+			magicCursorLogic.excute(mouseCursorReleaseValidateResult, myCurrentValidMouseClickEvent, magicSkillTemplateInfo);
 		}
 		
 		override public function dispose():void

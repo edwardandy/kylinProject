@@ -1,25 +1,19 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.MonsterID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.identify.MonsterID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.ColdStormSkillRes;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.geom.Point;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 寒冰之心
@@ -165,7 +159,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				return;
 			}
 			
-			_skillChantTimeTick = TimeTaskManager.getInstance().createTimeTask(GameFightConstant.TIME_UINT*10,onSkillChantInterval,[state.id],
+			_skillChantTimeTick = timeTaskMgr.createTimeTask(GameFightConstant.TIME_UINT*10,onSkillChantInterval,[state.id],
 				getColdStormDuration()/(GameFightConstant.TIME_UINT*10),onSkillChantEnd,[state.id]);
 			skillActionSkin.gotoAndPlay2(state.strIdleName + GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_START,
 				state.strIdleName + GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_END);
@@ -176,7 +170,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(SkillID.ColdStorm == skillId)
 			{
-				_coldStormRes = ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.SKILLRES, skillId, false) as ColdStormSkillRes;
+				_coldStormRes = objPoolMgr.createSceneElementObject(GameObjectCategoryType.SKILLRES, skillId, false) as ColdStormSkillRes;
 				if(_coldStormRes)
 				{
 					_coldStormRes.activeSkillEffect(this,null);
@@ -224,10 +218,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		private function splitIceElements():void
 		{
 			var ice:IceElement;
-			var vecDestPts:Vector.<PointVO> = GameAGlobalManager.getInstance().groundSceneHelper.getSomeRandomRoadPoints(_totleElementsCount,null,1,-1);
+			var vecDestPts:Vector.<PointVO> = sceneElementsService.getSomeRandomRoadPoints(_totleElementsCount,null,1,-1);
 			for(var i:int=0;i<_totleElementsCount;++i)
 			{
-				ice = ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.MONSTER,MonsterID.IceElement,false) as IceElement;
+				ice = objPoolMgr.createSceneElementObject(GameObjectCategoryType.MONSTER,MonsterID.IceElement,false) as IceElement;
 				ice.initByBoss(this,vecDestPts[i].x,vecDestPts[i].y);
 				ice.notifyLifecycleActive();
 				_vecIceElement.push(ice);

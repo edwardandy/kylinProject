@@ -1,58 +1,59 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import com.shinezone.towerDefense.fight.constants.SoundFields;
-	import com.shinezone.towerDefense.fight.constants.SubjectCategory;
-	import com.shinezone.towerDefense.fight.constants.TriggerConditionType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.SkillID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
+	import flash.events.MouseEvent;
+	
+	import io.smash.time.TimeManager;
+	
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicItem;
+	import mainModule.model.gameData.dynamicData.heroSkill.IHeroSkillDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.heroSkill.IHeroSkillDynamicItem;
+	import mainModule.model.gameData.sheetData.hero.IHeroSheetDataModel;
+	import mainModule.model.gameData.sheetData.hero.IHeroSheetItem;
+	import mainModule.model.gameData.sheetData.skill.IBaseOwnerSkillSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.SoundFields;
+	import release.module.kylinFightModule.gameplay.constant.SubjectCategory;
+	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.BasicMouseCursor;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.IMouseCursorSponsor;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
 	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.events.MouseEvent;
-	
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.base.BaseSkillInfo;
-	import framecore.structure.model.user.equip.EquipConst;
-	import framecore.structure.model.user.equip.EquipData;
-	import framecore.structure.model.user.equip.EquipInfo;
-	import framecore.structure.model.user.hero.HeroData;
-	import framecore.structure.model.user.hero.HeroInfo;
-	import framecore.structure.model.user.hero.HeroTemplateInfo;
-	import framecore.structure.model.user.heroSkill.HeroSkillInfo;
-	import framecore.structure.model.user.heroTalents.HeroTalentTemplateInfo;
-	import framecore.structure.model.user.item.ItemInfo;
-	import framecore.structure.model.user.jewelry.JewelryData;
-	import framecore.structure.views.pubpanel.components.Board;
-	import framecore.tools.media.TowerMediaPlayer;
-	
-	import io.smash.time.TimeManager;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class HeroElement extends BasicCondottiereSoldier implements IMouseCursorSponsor
 	{
+		[Inject]
+		public var heroData:IHeroDynamicDataModel;
+		[Inject]
+		public var heroModel:IHeroSheetDataModel;
+		[Inject]
+		public var recorderMgr:GameFightInfoRecorder;
+		[Inject]
+		public var heroSkillData:IHeroSkillDynamicDataModel;
+		[Inject]
+		public var mouseCursorMgr:GameFightMouseCursorManager;
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
+		[Inject]
+		public var timeMgr:TimeManager;
+		
 		protected var myIdelRandomAnimationCDTimer:SimpleCDTimer;
 		protected var myHeroIndex:int = -1;
-		protected var myHeroInfo:HeroInfo;
+		protected var myHeroInfo:IHeroDynamicItem;
 		private var _bChangeFightAction:Boolean = false;
 		protected var arrExceptBuffIds:Array;
 		
@@ -65,8 +66,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{	
 			this.myElemeCategory = GameObjectCategoryType.HERO;
 			super(typeId);
-			myHeroInfo = HeroData.getInstance().getOwnInfoById(typeId) as HeroInfo;
-			myMoveFighterInfo = myHeroInfo.heroTemplateInfo;
+			myHeroInfo = heroData.getHeroDataById(typeId);
+			myMoveFighterInfo = heroModel.getHeroSheetById(typeId);
 			_bNeedRebirthAnim = true;
 			myFocusTipEnable = false;
 		}
@@ -74,16 +75,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		//API
 		override protected function onkillEnemyCampTypeMonster(monster:BasicMonsterElement):void
 		{
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.updateSceneGold(monster.monsterTemplateInfo.heroRewardGoods*(1+myFightState.addGoodsPct*0.01));
+			sceneModel.updateSceneGold(monster.monsterTemplateInfo.heroRewardGoods*(1+myFightState.addGoodsPct*0.01));
 			
 			GameAGlobalManager.getInstance().game.gameFightMainUIView.playAddGoodsAnim(0,-monster.bodyHeight
 				,monster.monsterTemplateInfo.rewardGoods+monster.monsterTemplateInfo.heroRewardGoods,monster,false,0xeb5d3c);
 			
-			GameAGlobalManager.getInstance().gameFightInfoRecorder.addHeroKillUintSocre(monster.monsterTemplateInfo.score);
-			GameAGlobalManager.getInstance().gameFightInfoRecorder.addHeroKillUintEXP(objectTypeId, monster.monsterTemplateInfo.rewardExp);
-			GameAGlobalManager.getInstance().gameFightInfoRecorder.addBattleOPRecord( GameFightInfoRecorder.BATTLE_OP_TYPE_HERO_KILL_MONSTER, objectTypeId );
+			recorderMgr.addHeroKillUintSocre(monster.monsterTemplateInfo.deadScore);
+			recorderMgr.addHeroKillUintEXP(objectTypeId, monster.monsterTemplateInfo.rewardExp);
+			//recorderMgr.addBattleOPRecord( GameFightInfoRecorder.BATTLE_OP_TYPE_HERO_KILL_MONSTER, objectTypeId );
 		}
 		
 		override protected function onInitialize():void
@@ -108,7 +107,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		override protected function initStateWhenActive():void
 		{
 			super.initStateWhenActive();	
-			myFightState.rebirthTime = HeroTemplateInfo(myMoveFighterInfo).rebirthTime*(100 - myFightState.extraRebirthTime)/100.0;
+			myFightState.rebirthTime = IHeroSheetItem(myMoveFighterInfo).rebirthTime*(100 - myFightState.extraRebirthTime)/100.0;
 			myResurrectionCDTimer.setDurationTime(myFightState.rebirthTime);
 			myIdelRandomAnimationCDTimer.setDurationTime(uint(GameMathUtil.randomFromValues([9000, 12000, 15000])));
 			_lastMoveSoundIdx = -1;
@@ -147,16 +146,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		//技能相关
 		override protected function getCanUseSkills():void
 		{
-			//super.getCanUseSkills();
-			if(myHeroInfo.passiveSkillInfos && myHeroInfo.passiveSkillInfos.length>0)
+			for each(var info:IHeroSkillDynamicItem in heroSkillData.getHeroAllSkillData(myObjectTypeId))
 			{
-				for each(var info:HeroSkillInfo in myHeroInfo.passiveSkillInfos)
-				{
-					mySkillIds.push(info.configId);
-				}
-			}
+				mySkillIds.push(info.skillId);
+			}	
 			
-			if(myHeroInfo.arrTalents && myHeroInfo.arrTalents.length>0)
+			/*if(myHeroInfo.arrTalents && myHeroInfo.arrTalents.length>0)
 			{
 				for each(var talentId:uint in myHeroInfo.arrTalents)
 				{
@@ -164,41 +159,43 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 					if(temp && temp.skillId)
 						mySkillIds.push(temp.skillId);
 				}
-			}
+			}*/
 			
 			mySkillIds.push(SkillID.AutoRecoverLife);
 		}
 		
-		override protected function getBaseSkillInfo(id:uint):BaseSkillInfo
+		override protected function getBaseSkillInfo(id:uint):IBaseOwnerSkillSheetItem
 		{
-			return TemplateDataFactory.getInstance().getHeroSkillTemplateById(id);
+			return heroSkillModel.getHeroSkillSheetById(id);
 		}
 		
 		override protected function initFightState():void
 		{
+			var heroSheet:IHeroSheetItem = myMoveFighterInfo as IHeroSheetItem;
+			
 			myFightState.baseAtkArea = myMoveFighterInfo.atkArea;
 			myFightState.searchArea = myMoveFighterInfo.searchArea;
-			myFightState.range = myMoveFighterInfo.range;
-			myFightState.cdTime = myMoveFighterInfo.cdTime - myHeroInfo.level*myHeroInfo.heroTemplateInfo.cdTimeGrowth;
-			myFightState.skillAtk = myHeroInfo.heroTemplateInfo.skillAtk + myHeroInfo.level*myHeroInfo.heroTemplateInfo.skillAtkGrowth;
-			myFightState.magicDefense = myMoveFighterInfo.magicDefense;
-			myFightState.maxAtk = myMoveFighterInfo.maxAtk + myHeroInfo.level*myHeroInfo.heroTemplateInfo.maxAtkGrowth + myHeroInfo.strengthenLevel*myHeroInfo.heroTemplateInfo.potencyAtkGrownth;
-			myFightState.maxlife = myMoveFighterInfo.life + myHeroInfo.level*myHeroInfo.heroTemplateInfo.lifeGrowth + myHeroInfo.strengthenLevel*myHeroInfo.heroTemplateInfo.potencyLifeGrownth;
-			myFightState.minAtk = myMoveFighterInfo.baseAtk + myHeroInfo.level*myHeroInfo.heroTemplateInfo.baseAtkGrowth + myHeroInfo.strengthenLevel*myHeroInfo.heroTemplateInfo.potencyAtkGrownth;
-			myFightState.physicDefense = myMoveFighterInfo.physicDefense;
-			myFightState.atkType = myMoveFighterInfo.attacktype;
+			myFightState.range = myMoveFighterInfo.atkRange;
+			myFightState.cdTime = myMoveFighterInfo.atkInterval;
+			myFightState.skillAtk = heroSheet.skillAtk + myHeroInfo.level*heroSheet.skillAtkGrowth;
+			myFightState.magicDefense = myMoveFighterInfo.magicDef;
+			myFightState.maxAtk = myMoveFighterInfo.maxAtk + myHeroInfo.level*heroSheet.maxAtkGrowth + myHeroInfo.level*heroSheet.potencyAtkGrowth;
+			myFightState.maxlife = myMoveFighterInfo.life + myHeroInfo.level*heroSheet.lifeGrowth + myHeroInfo.level*heroSheet.potencyLifeGrowth;
+			myFightState.minAtk = myMoveFighterInfo.minAtk + myHeroInfo.level*heroSheet.minAtkGrowth + myHeroInfo.level*heroSheet.potencyAtkGrowth;
+			myFightState.physicDefense = myMoveFighterInfo.physicDef;
+			myFightState.atkType = myMoveFighterInfo.atkType;
 			myFightState.weapon = myMoveFighterInfo.weapon;
 			
 			calcHeroEquipEffect();
 			calcHeroJewelryEffect();
 			
-			myFightState.minAtk *= (100 + GlobalTemp.spiritHeroAttackAddition)*0.01;
-			myFightState.maxAtk *= (100 + GlobalTemp.spiritHeroAttackAddition)*0.01;
+			//myFightState.minAtk *= (100 + GlobalTemp.spiritHeroAttackAddition)*0.01;
+			//myFightState.maxAtk *= (100 + GlobalTemp.spiritHeroAttackAddition)*0.01;
 		}
 		
 		private function calcHeroEquipEffect():void
 		{
-			var equips:Vector.<EquipInfo> = EquipData.instance.getHeroEquips(myHeroInfo.heroTemplateInfo.configId);
+			/*var equips:Vector.<EquipInfo> = EquipData.instance.getHeroEquips(myHeroInfo.heroTemplateInfo.configId);
 			for each(var equip:EquipInfo in equips)
 			{
 				switch(equip.equipTemplateInfo.equipType)
@@ -211,8 +208,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 						break;
 					case EquipConst.EquipType_Decorate:
 						myFightState.cdTime -= equip.getTotalEffectValue1();
-						/*myFightState.cdTime =1 / ((1/myFightState.cdTime)
-						*(1 + (equip.getTotalEffectValue())*0.0001));*/
 						break;
 					case EquipConst.EquipType_Hand:
 						myFightState.minAtk += equip.getTotalEffectValue1();
@@ -226,12 +221,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 					myFightState.equipBloodValuePct = equip.equipTemplateInfo.equipBloodValue;
 				if(equip.equipTemplateInfo.equipCritValue)
 					myFightState.equipCritValuePct = equip.equipTemplateInfo.equipCritValue;
-			}
+			}*/
 		}
 		
 		private function calcHeroJewelryEffect():void
 		{
-			for (var iType:int = EquipConst.EquipType_Head;iType<EquipConst.EquipType_Count;++iType)
+			/*for (var iType:int = EquipConst.EquipType_Head;iType<EquipConst.EquipType_Count;++iType)
 			{
 				var jewelryInfo:ItemInfo = JewelryData.instance.getJewelryOfHero(myHeroInfo.heroTemplateInfo.configId,iType);
 				if(!jewelryInfo)
@@ -268,7 +263,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 						}
 					}
 				}
-			}
+			}*/
 		}
 		
 		override public function get subjectCategory():int
@@ -289,26 +284,27 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			{
 				if(isAlive)
 				{
-					GameAGlobalManager.getInstance().gameMouseCursorManager.activeMouseCursorByName(
+					mouseCursorMgr.activeMouseCursorByName(
 							GameFightMouseCursorManager.HERO_MOVE_MOUSE_CURSOR, this);
-					myMouseCursor = GameAGlobalManager.getInstance().gameMouseCursorManager.getCurrentMouseCursor();
+					myMouseCursor = mouseCursorMgr.getCurrentMouseCursor();
 				}
 			}
 			else if(myMouseCursor)
 			{
-				GameAGlobalManager.getInstance().gameMouseCursorManager.deactiveTargetCurrentMouseCursor(myMouseCursor);
+				mouseCursorMgr.deactiveTargetCurrentMouseCursor(myMouseCursor);
 			}
 		}
 		
 		public function notifyTargetMouseCursorSuccessRealsed(mouseClickEvent:MouseEvent):void
 		{	
-			var path:Vector.<PointVO> = GameAGlobalManager.getInstance().groundSceneHelper.
-				findPath(GameMathUtil.convertStagePtToGame(mouseClickEvent.stageX,mouseClickEvent.stageY,GameAGlobalManager.getInstance().game)
-					, new PointVO(x,y));
+			var path:Vector.<PointVO> = new Vector.<PointVO>;
+			path.push(new PointVO(x,y))
+			path.push(GameMathUtil.convertStagePtToGame(mouseClickEvent.stageX,mouseClickEvent.stageY,fightViewModel.groundLayer));
+
 			if(isAlive)
 				moveToAppointPointByPath(path);
 			
-			GameAGlobalManager.getInstance().gameInteractiveManager.setCurrentFocusdElement(null);
+			gameInteractiveMgr.setCurrentFocusdElement(null);
 		}
 		
 		public function notifyTargetMouseCursorCanceled():void
@@ -431,14 +427,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			return myHeroInfo.level;
 		}
 		
-		override protected function getDefaultSoundString():String
+		override protected function getDefaultSoundObj():Object
 		{
-			return myMoveFighterInfo?myMoveFighterInfo.sound:null;
+			return myMoveFighterInfo?myMoveFighterInfo.objSound:null;
 		}
 		
 		override public function addPassiveEquipPct(value:Array,owner:ISkillOwner):Boolean
 		{
-			var equips:Vector.<EquipInfo> = EquipData.instance.getHeroEquips(myHeroInfo.heroTemplateInfo.configId);
+			/*var equips:Vector.<EquipInfo> = EquipData.instance.getHeroEquips(myHeroInfo.heroTemplateInfo.configId);
 			for each(var equip:EquipInfo in equips)
 			{
 				if(value.length >= equip.equipTemplateInfo.equipType && int(value[equip.equipTemplateInfo.equipType-1]) > 0)
@@ -452,8 +448,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 							myFightState.skillAtk += equip.getTotalEffectValue1()*int(value[equip.equipTemplateInfo.equipType-1])*0.01;
 							break;
 						case EquipConst.EquipType_Decorate:
-							/*myFightState.cdTime =1 / ((1/myFightState.cdTime)
-								*(1 + (equip.getTotalEffectValue1()*(1+int(value[equip.equipTemplateInfo.equipType-1])*0.01))*0.0001));*/
 							myFightState.cdTime -= equip.getTotalEffectValue1()*(value[equip.equipTemplateInfo.equipType-1]*0.01)
 							break;
 						case EquipConst.EquipType_Hand:
@@ -462,15 +456,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 							break;
 					}
 				}
-			}
+			}*/
 			return true;
 		}
 		
 		public function playMoveSound():void
 		{
-			if(_lastMoveTick>0 && (TimeManager.instance.virtualTime-_lastMoveTick)<2000)
+			if(_lastMoveTick>0 && (timeMgr.virtualTime-_lastMoveTick)<2000)
 				return;
-			_lastMoveTick = TimeManager.instance.virtualTime;
+			_lastMoveTick = timeMgr.virtualTime;
 			var arrSounds:Array = getSoundIdArray(SoundFields.Move);
 			if(!arrSounds || 0 == arrSounds.length)
 				return;

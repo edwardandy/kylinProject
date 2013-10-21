@@ -1,20 +1,18 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
-	import com.shinezone.towerDefense.fight.constants.identify.GroundEffectID;
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.identify.GroundEffectID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.BasicBulletTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.ParabolaBulletTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.StraightBullectTrajectory;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect.BasicGroundEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class IceElement extends BasicMonsterElement
 	{
@@ -154,7 +152,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		private function onFreezeTower():void
 		{
-			var vecTowers:Vector.<BasicTowerElement> = GameAGlobalManager.getInstance().groundSceneHelper.searchTowersBySearchArea(this.x,this.y,100,1);
+			var vecTowers:Vector.<BasicTowerElement> = sceneElementsService.searchTowersBySearchArea(this.x,this.y,100,1);
 			if(!vecTowers || vecTowers.length <= 0)
 				return;
 			var param:Object = {};

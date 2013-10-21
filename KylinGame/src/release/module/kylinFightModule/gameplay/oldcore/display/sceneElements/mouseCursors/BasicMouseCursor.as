@@ -18,6 +18,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 		[Inject]
 		public var mouseCursorMgr:GameFightMouseCursorManager;
 		[Inject]
+		public var mouseCursorValidator:MouseCursorReleaseValidator;
+		[Inject]
 		public var loadService:ILoadAssetsServices;
 		[Inject]
 		public var objPoolMgr:ObjectPoolManager;
@@ -184,7 +186,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 
 		protected function checkIsValidMouseClick(mouseClickEvent:MouseEvent):Object
 		{
-			return MouseCursorReleaseValidator.getInstance().validByMouseCursor(mouseClickEvent, 
+			return mouseCursorValidator.validByMouseCursor(mouseClickEvent, 
 				myMouseCursorReleaseValidatorType);
 		}
 

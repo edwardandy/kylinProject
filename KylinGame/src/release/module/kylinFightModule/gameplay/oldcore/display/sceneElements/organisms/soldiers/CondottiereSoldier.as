@@ -1,18 +1,20 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FocusTargetType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
+	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetDataModel;
+	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetItem;
 	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.soldier.SoldierTemplateInfo;
+	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 
 	//雇佣兵
 	public class CondottiereSoldier extends BasicCondottiereSoldier
 	{
+		[Inject]
+		public var soldierModel:ISoldierSheetDataModel;
+		
 		public function CondottiereSoldier(typeId:int)
 		{
-			myMoveFighterInfo = TemplateDataFactory.getInstance().getSoldierTemplateById(typeId);
+			myMoveFighterInfo = soldierModel.getSoldierSheetById(typeId);
 			
 			super(typeId);
 			
@@ -24,19 +26,19 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			return FocusTargetType.SOLDIER_TYPE;
 		}
 		
-		protected function get soldierTempInfo():SoldierTemplateInfo
+		protected function get soldierTempInfo():ISoldierSheetItem
 		{
-			return myMoveFighterInfo as SoldierTemplateInfo;
+			return myMoveFighterInfo as ISoldierSheetItem;
 		}
 			
 		override public function get resourceID():int
 		{
-			return (myMoveFighterInfo as SoldierTemplateInfo).resId || myObjectTypeId;
+			return (myMoveFighterInfo as ISoldierSheetItem).resId || myObjectTypeId;
 		}
 		
-		override protected function getDefaultSoundString():String
+		override protected function getDefaultSoundObj():Object
 		{
-			return soldierTempInfo?soldierTempInfo.sound:null;
+			return soldierTempInfo?soldierTempInfo.objSound:null;
 		}
 	}
 }

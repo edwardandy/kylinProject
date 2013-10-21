@@ -2,6 +2,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 {
 	import flash.events.MouseEvent;
 	
+	import mainModule.model.gameData.sheetData.skill.monsterSkill.IMonsterSkillSheetItem;
+	
 	import release.module.kylinFightModule.gameplay.constant.BufferFields;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
@@ -13,8 +15,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
 	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
@@ -24,11 +24,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	{
 		private static const FLAMERAIN_COUNT:int = 5;
 		
-		private var _flameRainInfo:SkillTemplateInfo;
+		private var _flameRainInfo:IMonsterSkillSheetItem;
 		private var _showFlameTick:int;
 		private var _vecFlamePoints:Vector.<PointVO>;
 		
-		private var _hellCurseInfo:SkillTemplateInfo;
+		private var _hellCurseInfo:IMonsterSkillSheetItem;
 		private var _hellCurseParam:Object = {};
 		private var _vecEffMonsters:Vector.<BasicOrganismElement> = new Vector.<BasicOrganismElement>;
 		private var _iHellCurseClickCnt:int = 0;
@@ -37,8 +37,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			super(typeId);
 			this.mouseEnabled = true;
-			_flameRainInfo = getBaseSkillInfo(SkillID.FlameRain) as SkillTemplateInfo;
-			_hellCurseInfo = getBaseSkillInfo(SkillID.HellCurse) as SkillTemplateInfo;
+			_flameRainInfo = getBaseSkillInfo(SkillID.FlameRain) as IMonsterSkillSheetItem;
+			_hellCurseInfo = getBaseSkillInfo(SkillID.HellCurse) as IMonsterSkillSheetItem;
 			_hellCurseParam[BufferFields.BUFF] = BufferID.BeHellCurse;
 			_hellCurseParam[BufferFields.DURATION] = 0;
 			_hellCurseParam[SkillResultTyps.INVINCIBLE] = 1;
@@ -126,18 +126,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(_showFlameTick>0)
 			{
-				TimeTaskManager.getInstance().destoryTimeTask(_showFlameTick);
+				timeTaskMgr.destoryTimeTask(_showFlameTick);
 				_showFlameTick = 0;
 			}
-			_showFlameTick = TimeTaskManager.getInstance().createTimeTask(500,onShowSingleFlame,null,5);
-			_vecFlamePoints = GameAGlobalManager.getInstance().groundSceneHelper.getSomeRandomRoadPoints(5,null,1,-1);
+			_showFlameTick = timeTaskMgr.createTimeTask(500,onShowSingleFlame,null,5);
+			_vecFlamePoints = sceneElementsService.getSomeRandomRoadPoints(5,null,1,-1);
 		}
 		
 		private function onShowSingleFlame():void
 		{
-			var iCnt:int = TimeTaskManager.getInstance().getTimeTaskCurrentRepeatCount(_showFlameTick);
+			var iCnt:int = timeTaskMgr.getTimeTaskCurrentRepeatCount(_showFlameTick);
 			
-			var skillEffect:FlameRainSkillRes = ObjectPoolManager.getInstance()
+			var skillEffect:FlameRainSkillRes = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.SKILLRES, SkillID.FlameRain, false) as FlameRainSkillRes;
 			if(skillEffect)
 			{
@@ -156,10 +156,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		private function showSummonDoor():void
 		{
 			var arrIdxes:Array = [];
-			_vecFlamePoints = GameAGlobalManager.getInstance().groundSceneHelper.getSomeRandomRoadPoints(5,arrIdxes,1,-1,400,true);
+			_vecFlamePoints = sceneElementsService.getSomeRandomRoadPoints(5,arrIdxes,1,-1,400,true);
 			for(var i:int = 0; i<5;++i)
 			{
-				var skillEffect:SummonDemonDoorSkillRes = ObjectPoolManager.getInstance()
+				var skillEffect:SummonDemonDoorSkillRes = objPoolMgr
 					.createSceneElementObject(GameObjectCategoryType.SKILLRES, SkillID.SummonDemon, false) as SummonDemonDoorSkillRes;
 				if(skillEffect)
 				{
@@ -176,7 +176,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		 */
 		private function onHellCurse():void
 		{
-			var hellCurseProcessor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(SkillID.HellCurse,false);
+			var hellCurseProcessor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(SkillID.HellCurse);
 			var state:SkillState = new SkillState;
 			state.id = SkillID.HellCurse;
 			state.owner = this;
@@ -190,7 +190,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			if(!isAlive || !hasBuffer(BufferID.HellCurseSelf))
 				return;
 			
-			var vecMonsters:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().groundSceneHelper.
+			var vecMonsters:Vector.<BasicOrganismElement> = sceneElementsService.
 				searchOrganismElementsBySearchArea(this.x,this.y,_hellCurseInfo.range,myCampType,searchMonsterFilter);
 			if(!vecMonsters || 0 == vecMonsters.length)
 			{

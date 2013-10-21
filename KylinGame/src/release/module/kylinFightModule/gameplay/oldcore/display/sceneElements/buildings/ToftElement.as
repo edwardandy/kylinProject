@@ -18,8 +18,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	{
 		[Inject]
 		public var sceneModel:ISceneDataModel;
-		[Inject]
-		public var sceneElementsModel:ISceneElementsModel;
 		
 		protected var myMeetingCenterPoint:PointVO = new PointVO(-50, 40);//本地
 		
@@ -216,8 +214,6 @@ import robotlegs.bender.framework.api.IInjector;
 
 class ToftElementCircleMenu extends BasicBuildingCircleMenu
 {
-	[Inject]
-	public var injector:IInjector;
 	//矮人石炮 114019 
 	private var _buildingCircleItem0:BuildingCircleItem;
 	//见习法师塔 113013 

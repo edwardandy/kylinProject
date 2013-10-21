@@ -1,9 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers
 {
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.SubjectCategory;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.SubjectCategory;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 援兵

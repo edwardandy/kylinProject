@@ -1,6 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.Heros
 {
 	import mainModule.model.gameData.sheetData.interfaces.IBaseFighterSheetItem;
+	import mainModule.model.gameData.sheetData.skill.IBaseOwnerSkillSheetItem;
 	
 	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
@@ -38,7 +39,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			{
 				var skillId:uint = myFightState.curUseSkillId;
 				var state:SkillState = mySkillStates.get(skillId) as SkillState;
-				var buffTemp:IBaseFighterSheetItem = getBaseSkillInfo(skillId);
+				var buffTemp:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
 				if(!buffTemp)
 					return;
 				var i:int=0;

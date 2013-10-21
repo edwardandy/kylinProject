@@ -197,7 +197,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 		}
 		
-		protected function getDefaultSoundString():String
+		protected function getDefaultSoundObj():Object
 		{
 			return null;
 		}

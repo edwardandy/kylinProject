@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.Heros
 {
-	import mainModule.model.gameData.sheetData.interfaces.IBaseFighterSheetItem;
+	import mainModule.model.gameData.sheetData.skill.IBaseOwnerSkillSheetItem;
 	
 	import release.module.kylinFightModule.gameplay.constant.BufferFields;
 	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
@@ -159,8 +159,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			if(state && SkillID.HighBomb == state.id && !myFightState.bStun)
 			{	
-				var temp:IBaseFighterSheetItem = getBaseSkillInfo(SkillID.HighBomb);
-				if(state.mainTarget && GameMathUtil.containsPointInEllipseSearchArea(state.mainTarget.x,state.mainTarget.y,temp.atkRange,x, y) /*GameMathUtil.distance(x,y,state.mainTarget.x,state.mainTarget.y) <= temp.range*/)
+				var temp:IBaseOwnerSkillSheetItem = getBaseSkillInfo(SkillID.HighBomb);
+				if(state.mainTarget && GameMathUtil.containsPointInEllipseSearchArea(state.mainTarget.x,state.mainTarget.y,temp.range,x, y) /*GameMathUtil.distance(x,y,state.mainTarget.x,state.mainTarget.y) <= temp.range*/)
 				{
 					var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(state.id);
 					var selfState:SkillState = new SkillState;

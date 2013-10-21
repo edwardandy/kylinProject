@@ -1,11 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
+	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.magicTowers.WizardTowerElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
-	
-	import framecore.structure.model.user.soldier.SoldierTemplateInfo;
 
 	public class SummonByTower extends BasicSummonSoldier
 	{		
@@ -42,7 +42,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			
 			super.initStateWhenActive();
 			changeToTargetBehaviorState(OrganismBehaviorState.BE_SUMMON);
-			myFightState.rebirthTime =  SoldierTemplateInfo(myMoveFighterInfo).rebirthTime;
+			myFightState.rebirthTime =  ISoldierSheetItem(myMoveFighterInfo).rebirthTime;
 			myResurrectionCDTimer.setDurationTime(myFightState.rebirthTime);
 			if(!bRebirth && myBodySkin.hasFrameName(GameMovieClipFrameNameType.APPEAR+GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_START))
 			{
