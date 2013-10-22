@@ -217,9 +217,9 @@ package release.module.kylinFightModule.model.sceneElements
 			var element:BasicSceneElement = null;
 			var tempElements:Vector.<BasicSceneElement> = new Vector.<BasicSceneElement>;
 			
-			for each(element in _allElementsMap)
+			for(var e:* in _allElementsMap)
 			{
-				tempElements.push(element);	
+				tempElements.push(e);	
 			}
 			
 			for each(element in tempElements)
