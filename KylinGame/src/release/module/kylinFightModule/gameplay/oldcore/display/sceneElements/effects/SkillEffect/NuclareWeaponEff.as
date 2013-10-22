@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 
 	/**
 	 * 核弹的随机小爆炸效果 

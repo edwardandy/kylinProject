@@ -1,66 +1,35 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons
 {
-	import com.shinezone.core.structure.controls.GameEvent;
-	import com.shinezone.towerDefense.fight.constants.BattleEffectType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.SoundFields;
-	import com.shinezone.towerDefense.fight.constants.identify.MagicID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.BasicMagicSkillEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.BasicMouseCursor;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.GameMouseCursorFactory;
-	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.ShortCutKeyResponser.IShortCutKeyResponser;
-	import release.module.kylinFightModule.gameplay.oldcore.events.ExternalUseItemEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
-	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
-	import com.shinezone.utils.Reflection;
-	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
-	import flash.text.TextField;
-	import flash.text.TextFormat;
 	
-	import framecore.structure.controls.battleCommand.Battle_CMD_Const;
-	import framecore.structure.controls.shopCommand.Shop_CMD_Const;
-	import framecore.structure.controls.uiCommand.UI_CMD_Const;
-	import framecore.structure.model.constdata.HttpConst;
-	import framecore.structure.model.constdata.IconConst;
-	import framecore.structure.model.constdata.NewbieConst;
-	import framecore.structure.model.constdata.PopConst;
-	import framecore.structure.model.constdata.TowerFeatures;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.UserData;
-	import framecore.structure.model.user.commonLog.CommonLog;
-	import framecore.structure.model.user.item.ItemData;
-	import framecore.structure.model.user.item.ItemInfo;
-	import framecore.structure.model.user.item.ItemTemplateInfo;
-	import framecore.structure.views.newguidPanel.NewbieGuideManager;
-	import framecore.tools.GameStringUtil;
-	import framecore.tools.alert.Alert;
-	import framecore.tools.alert.AlertConst;
-	import framecore.tools.externalMgr.ExternalInterfaceMgr;
-	import framecore.tools.font.FontUtil;
-	import framecore.tools.getText;
-	import framecore.tools.icon.IconUtil;
-	import framecore.tools.loadmgr.LoadMgr;
-	import framecore.tools.media.TowerMediaPlayer;
-	import framecore.tools.tips.ToolTipConst;
-	import framecore.tools.tips.ToolTipEvent;
-	import framecore.tools.tips.ToolTipManager;
-	import framecore.tools.txts.translate;
+	import kylin.echo.edward.utilities.loader.LoadMgr;
+	
+	import mainModule.model.gameData.sheetData.item.IItemSheetItem;
+	import mainModule.service.soundServices.ISoundService;
+	import mainModule.service.soundServices.SoundGroupType;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.SoundFields;
+	import release.module.kylinFightModule.gameplay.constant.identify.MagicID;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.BasicMouseCursor;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.GameMouseCursorFactory;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.ShortCutKeyResponser.IShortCutKeyResponser;
+	import release.module.kylinFightModule.gameplay.oldcore.events.ExternalUseItemEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
+	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
 
 	public class PropIconView extends CDAbleIconView implements IShortCutKeyResponser
 	{
 		private static const ITEM_PROP_CD_TIME:int = 1000;
+		
+		[Inject]
+		public var soundService:ISoundService;
 		//private var _itemInfo:ItemInfo;
-		private var _itemTemp:ItemTemplateInfo;
+		private var _itemTemp:IItemSheetItem;
 		
 		private var _itemCountTextField:PropNumText;
 		private var _itemPriceText:PropPriceText;
@@ -153,9 +122,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		private function playUseItemSound():void
 		{
-			var sounds:Array = GameStringUtil.deserializeSoundString(SoundFields.Use,_itemTemp.sound);
+			if(!_itemTemp.objSound || !_itemTemp.objSound.hasOwnProperty(SoundFields.Use))
+				return;
+			
+			var sounds:Array = (_itemTemp.objSound[SoundFields.Use] as String).split("-");
 			if(sounds && sounds.length>0)
-				TowerMediaPlayer.getInstance().playEffect(sounds[0]);
+				soundService.play(sounds[0],SoundGroupType.Effect,1,true);
 		}
 		
 		override public function notifyOnGameStart():void

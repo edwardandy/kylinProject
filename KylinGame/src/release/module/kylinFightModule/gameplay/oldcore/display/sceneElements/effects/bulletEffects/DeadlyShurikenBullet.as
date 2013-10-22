@@ -1,15 +1,13 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects
 {
-	import com.shinezone.core.datastructures.HashMap;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
+	import kylin.echo.edward.utilities.datastructures.HashMap;
+	
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.utils.Dictionary;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 致命手里剑
@@ -59,7 +57,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			if(_transferTimes >= _totleTimes)
 				return false;
-			var vecTarget:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().groundSceneHelper
+			var vecTarget:Vector.<BasicOrganismElement> = sceneElementsService
 				.searchOrganismElementsBySearchArea(this.x, this.y, _range, myHurtEffectFirer.oppositeCampType, SearchConditionFilter);
 			if(!vecTarget || vecTarget.length<=0)
 				return false;

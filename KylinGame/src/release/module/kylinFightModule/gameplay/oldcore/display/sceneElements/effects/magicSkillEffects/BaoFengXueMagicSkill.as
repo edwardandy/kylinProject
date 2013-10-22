@@ -1,13 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 
 	public class BaoFengXueMagicSkill extends BasicMagicSkillEffect
@@ -133,8 +131,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		 */		
 		private function hurtEmemyUintsBloodPerRener():void
 		{
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 			
@@ -151,8 +148,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function attachEmemyUintsBufferPerSecond():void
 		{
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 			

@@ -1,23 +1,10 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.ParabolaBulletTrajectory;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.DisplayObject;
-	import flash.display.Shape;
-	import flash.geom.Point;
 
 	public class ArrowBulletEffect extends BasicBulletEffect
 	{
@@ -59,7 +46,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 					myBodySkin.gotoAndStop2(GameMovieClipFrameNameType.STOP_A_BULLET);
 					myBodySkin.render(0);//这里只渲染一次
 					
-					GameAGlobalManager.getInstance().groundScene.swapSceneElementLayerType(this, 
+					sceneElementsModel.swapSceneElementLayerType(this, 
 						GroundSceneElementLayerType.LAYER_BOTTOM);
 					
 					//地面中弹
@@ -67,7 +54,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 					{
 						if(GameMathUtil.randomTrueByProbability(GameFightConstant.PLAY_SCENE_TIP_PROBABILITY))
 						{
-							SceneTipEffect.playSceneTipEffect(myAttackSceneTipTypeId, this.x, this.y);
+							createSceneTipEffect(myAttackSceneTipTypeId, this.x, this.y);
 						}	
 					}
 					break;

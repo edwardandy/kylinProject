@@ -139,7 +139,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		 */		
 		public function getCurrentSceneResultScore():uint
 		{	
-			return EndlessBattleMgr.instance.recordScore + 
+			return /*EndlessBattleMgr.instance.recordScore + */
 				_heroKilledUintTotalSocre + 
 				_magicSkillUsedTotalSocre  +
 				_propItemUsedTotalSocre;

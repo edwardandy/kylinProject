@@ -4,11 +4,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.GameFightSkillProcessorMgr;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class BasicSkillBulletEffect extends BasicBulletEffect
 	{
+		[Inject]
+		public var skillProcessorMgr:GameFightSkillProcessorMgr;
+		
 		private var _skillState:SkillState;
 		
 		public function BasicSkillBulletEffect(typeId:int)
@@ -34,7 +37,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			if(!_skillState)
 				return;
-			var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(_skillState.id);
+			var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(_skillState.id);
 			if(processor)
 			{
 				processor.processSingleEnemy(_skillState,myTargetEnemy);

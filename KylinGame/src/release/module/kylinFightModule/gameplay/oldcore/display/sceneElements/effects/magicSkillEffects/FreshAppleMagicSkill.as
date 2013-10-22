@@ -1,11 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 
 	/**
@@ -74,8 +74,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function hurtEmemyUintsBloodPerRener():void
 		{
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 			
@@ -92,7 +91,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function myBodySkinAppearAnimationEndHandler():void
 		{
-			myMagicHurtValue = GameMathUtil.randomUintBetween(myMagicSkillTemplateInfo.minAtk, myMagicSkillTemplateInfo.maxAtk);
+			const arrDmg:Array = (myMagicSkillTemplateInfo.objEffect[SkillResultTyps.DMG] as String).split("-");
+			myMagicHurtValue = GameMathUtil.randomUintBetween(arrDmg[0], arrDmg[1]);
 			changeToTargetBehaviorState(MagicSkillEffectBehaviorState.RUNNING);
 		}
 		

@@ -1,15 +1,19 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.GameFightSkillProcessorMgr;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class BasicSkillEffectRes extends BasicBodySkinSceneElement
 	{
+		[Inject]
+		public var skillProcessorMgr:GameFightSkillProcessorMgr;
+		
 		protected var mySkillState:SkillState;
 		protected var mySkillOwner:ISkillOwner;
 		protected var myFirePoint:PointVO = new PointVO();

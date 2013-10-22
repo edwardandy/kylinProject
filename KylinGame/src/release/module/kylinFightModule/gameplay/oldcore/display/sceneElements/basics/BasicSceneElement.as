@@ -2,12 +2,20 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 {
 	import io.smash.time.IRenderAble;
 	
+	import kylin.echo.edward.utilities.string.KylinStringUtil;
+	
+	import mainModule.service.soundServices.ISoundService;
+	import mainModule.service.soundServices.SoundGroupType;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
 	import release.module.kylinFightModule.gameplay.oldcore.core.ILifecycleObject;
 	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
+	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
 
 	/**
 	 * 此类为战斗场景元素的基础类，实现状态机的更新机制、对自己添加到显示列表的实现。 
@@ -22,6 +30,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		public var objPoolMgr:ObjectPoolManager;
 		[Inject]
 		public var sceneElementsModel:ISceneElementsModel;
+		[Inject]
+		public var sceneElementsService:ISceneElementsService;
+		[Inject]
+		public var soundService:ISoundService;
 		
 		protected var myElemeCategory:String = null;
 		protected var myObjectTypeId:int = -1;
@@ -202,9 +214,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			return null;
 		}
 		
-		protected function getSoundId(field:String,idx:int=0,soundString:String=null):String
+		protected function getSoundId(field:String,idx:int=0,soundObj:Object=null):String
 		{
-			var arrSounds:Array = getSoundIdArray(field,soundString);
+			var arrSounds:Array = getSoundIdArray(field,soundObj);
 			if(!arrSounds || 0 == arrSounds.length || idx>=arrSounds.length)
 				return null;
 			if(idx < 0)
@@ -212,16 +224,28 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			return arrSounds[idx];	
 		}
 		
-		protected function getSoundIdArray(field:String,soundString:String=null):Array
+		protected function getSoundIdArray(field:String,soundObj:Object=null):Array
 		{
-			soundString ||= getDefaultSoundString();
-			return [];//GameStringUtil.deserializeSoundString(field,soundString);
+			soundObj ||= getDefaultSoundObj();
+			if(!soundObj || !soundObj.hasOwnProperty(field))
+				return [];
+			
+			
+			return (soundObj[field] as String).split("-");
 		}
 		
 		protected function playSound(id:String):void
 		{
-			//if(id)
-				//TowerMediaPlayer.getInstance().playEffect(id);
+			if(id)
+				soundService.play(id,SoundGroupType.Effect,1,true);
+		}
+		
+		protected function createSceneTipEffect(sceneTipTypeId:int, x:Number, y:Number):void
+		{
+			var sceneTipEffect:SceneTipEffect = objPoolMgr
+				.createSceneElementObject(GameObjectCategoryType.SCENE_TIP, sceneTipTypeId) as SceneTipEffect;
+			sceneTipEffect.x = x;
+			sceneTipEffect.y = y;
 		}
 	}
 }

@@ -1,9 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.IOrganismSkiller;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 
 	public class WenYiManYanMagicSkill extends BasicMagicSkillEffect
 	{

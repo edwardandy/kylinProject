@@ -1,8 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	
 	public class SafeLaunchSkillRes extends BasicSkillEffectRes
 	{

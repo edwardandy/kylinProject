@@ -1,6 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 
 	public class SpecialBufferRes extends BasicBufferResource
 	{

@@ -1,15 +1,15 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.identify.ExplosionID;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.identify.ExplosionID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.ExplosionEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	/**
 	 * 地精地雷
@@ -79,8 +79,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function ScanContactEnemy():void
 		{
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 			
@@ -107,10 +106,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 					explodeId = ExplosionID.GoblinBomb4;
 					break;
 			}
-			var sceneExplosionEffectElement:ExplosionEffect = ObjectPoolManager.getInstance()
+			var sceneExplosionEffectElement:ExplosionEffect = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.EXPLOSION, explodeId, false) as ExplosionEffect;
-			
-			myMagicHurtValue = GameMathUtil.randomUintBetween(myMagicSkillTemplateInfo.minAtk, myMagicSkillTemplateInfo.maxAtk);
+			const arrDmg:Array = (myMagicSkillTemplateInfo.objEffect[SkillResultTyps.DMG] as String).split("-");
+			myMagicHurtValue = GameMathUtil.randomUintBetween(arrDmg[0], arrDmg[1]);
 			sceneExplosionEffectElement.blowUp(null, getBulletExplosionPosition(), 
 				myMagicHurtValue, myMagicSkillTemplateInfo.atkType,
 				myMagicSkillTemplateInfo.range);

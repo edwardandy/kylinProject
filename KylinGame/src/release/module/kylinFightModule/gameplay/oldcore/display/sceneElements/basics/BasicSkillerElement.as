@@ -15,6 +15,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.SoundFields;
 	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
 	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.constant.Skill.SkillSpecialType;
@@ -50,8 +51,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		public var skillProcessorMgr:GameFightSkillProcessorMgr;
 		[Inject]
 		public var skillConditionMgr:GameFightSkillConditionMgr;
-		[Inject]
-		public var sceneElementsService:ISceneElementsService;
 		[Inject]
 		public var timeTaskMgr:TimeTaskManager;
 		[Inject]
@@ -474,7 +473,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				genSingleSkillUseUnit(curId);
 			}
 			
-			//playSound(getSoundId(SoundFields.Upgrade,0,info.sound));
+			playSound(getSoundId(SoundFields.Upgrade,0,info.objSound));
 		}
 		
 		private function removeOldSkillByLvl(skillId:uint,iLvl:int):void
@@ -632,7 +631,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			{
 				//需要等待技能处理器通知技能引导结束
 				onStartChant(state,skillTemp.chantDuration);
-				//playSound(getSoundId(SoundFields.Chant,0,skillTemp.sound));
+				playSound(getSoundId(SoundFields.Chant,0,skillTemp.objSound));
 				return;
 			}
 			
@@ -814,7 +813,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			var info:IBaseOwnerSkillSheetItem = getBaseSkillInfo(skillId);
 			//if(!info || !info.sound)
 			//	return;
-			//playSound(getSoundId(field,0,info.sound));
+			playSound(getSoundId(field,0,info.objSound));
 		}
 			
 		

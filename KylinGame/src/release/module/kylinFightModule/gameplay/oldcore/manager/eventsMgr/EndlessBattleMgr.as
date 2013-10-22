@@ -225,13 +225,13 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 			_iRebirthPrice = data[4];
 			_iCanRebirthTime = data[5];
 			_iBonusCnt = data[6];
-			logch("EndlessData:","initData:",data);
+			//logch("EndlessData:","initData:",data);
 		}
 		
 		public function saveProgress(iProgress:int,iScore:int):void
 		{
 			GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_ENDLESS_BATTLE_SAVE_PROGRESS,[HttpConst.HTTP_REQUEST,iProgress,iScore]);
-			logch("EndlessData:","saveProgress:",iProgress,iScore);
+			//logch("EndlessData:","saveProgress:",iProgress,iScore);
 			
 			//_lastSavePointScore = iScore;
 			//_lastSavePointWave = iProgress;

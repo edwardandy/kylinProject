@@ -1,19 +1,17 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.MapConfigDataVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class DaDiZhenchanMagicSkill extends BasicMagicSkillEffect
 	{
@@ -78,14 +76,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				//在3个同等法术
 				for(var i:uint = 0; i < 3; i++)
 				{
-					var daDiZhenchanMagicSkill:DaDiZhenchanMagicSkill = ObjectPoolManager
-						.getInstance()
+					var daDiZhenchanMagicSkill:DaDiZhenchanMagicSkill = objPoolMgr
 						.createSceneElementObject(GameObjectCategoryType.MAGIC_SKILL, 210761, false) as DaDiZhenchanMagicSkill;
 					
 					var rTime:uint = uint(GameMathUtil.randomFromValues([200, 600, 800]));
 					daDiZhenchanMagicSkill.setRandomStartTime(rTime);
 					
-					var randomPosition:PointVO = GameAGlobalManager.getInstance().groundSceneHelper.getCurrentSceneRandomRoadPointByCurrentRoadsData(1);
+					var randomPosition:PointVO = sceneElementsService.getCurrentSceneRandomRoadPointByCurrentRoadsData(1);
 					daDiZhenchanMagicSkill.x = randomPosition.x;
 					daDiZhenchanMagicSkill.y = randomPosition.y;
 					daDiZhenchanMagicSkill.notifyLifecycleActive();
@@ -136,8 +133,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		//地面燃烧伤害
 		private function hurtEnemyUintsBloodPerRender():void
 		{
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 			
@@ -197,12 +193,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function myBodySkinMainAttackTimeHandler():void
 		{
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 			
-			var hurtValue:uint = GameMathUtil.randomUintBetween(myMagicSkillTemplateInfo.minAtk, myMagicSkillTemplateInfo.maxAtk);
+			const arrDmg:Array = (myMagicSkillTemplateInfo.objEffect[SkillResultTyps.DMG] as String).split("-");
+			var hurtValue:uint = GameMathUtil.randomUintBetween(arrDmg[0], arrDmg[1]);
 			var n:uint = targets.length;
 			for(var i:uint = 0; i < n; i++)
 			{

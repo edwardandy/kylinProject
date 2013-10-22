@@ -1,10 +1,8 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 
 	public class HuoYanZuZhouMagicSkill extends BasicMagicSkillEffect
 	{
@@ -32,8 +30,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		private function myBodySkinAnimationFireTimeHandler():void
 		{
 			//这里释放火焰诅咒
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 

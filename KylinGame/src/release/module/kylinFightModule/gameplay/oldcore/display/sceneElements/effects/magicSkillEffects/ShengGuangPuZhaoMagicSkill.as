@@ -1,15 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import framecore.tools.GameStringUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 
 	//圣光普照
 	public class ShengGuangPuZhaoMagicSkill extends BasicMagicSkillEffect
@@ -140,8 +137,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			
 			var benifitBlood:uint = GameMathUtil.randomUintBetween(_minBenifitBlood, _maxBenifitBlood);
 			
-			targets = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			targets = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.FRIENDLY_CAMP);
 			n = targets.length;
@@ -168,8 +164,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			var n:uint = 0;
 			var i:uint = 0;
 			
-			targets = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			targets = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.FRIENDLY_CAMP, searchDeadTarget, true);
 			n = targets.length;
@@ -196,8 +191,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			
 			var hurtBlood:uint = GameMathUtil.randomUintBetween(_hurtEnemyMinBlood, _hurtEnemyMaxBlood)/* / GameFightConstant.GAME_PER_FRAME_TIME*/;
 			
-			targets = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			targets = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP);
 			n = targets.length;

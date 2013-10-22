@@ -1,22 +1,24 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.identify.MonsterID;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
 	import flash.events.MouseEvent;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.identify.MonsterID;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
+	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 恶魔之门
 	 */
 	public class SummonDemonDoorSkillRes extends BasicSkillEffectRes
 	{
+		[Inject]
+		public var mapRoadModel:IMapRoadModel;
+		
 		private var _clickCount:int = 0;
 		private var _roadIdx:int = 0;
 		private var _lineIdx:int = 0;
@@ -104,11 +106,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			else if(-1 == _curMarchType)
 				demonId = MonsterID.Cerberus;
 			
-			var monster:BasicMonsterElement = ObjectPoolManager.getInstance()
+			var monster:BasicMonsterElement = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.MONSTER, demonId) as BasicMonsterElement;
 			monster.x = this.x;
 			monster.y = this.y;
-			var pathPoints:Vector.<PointVO> = GameAGlobalManager.getInstance().gameDataInfoManager.currentSceneMapInfo.roadVOs[_roadIdx].lineVOs[_lineIdx].points;
+			
+			var pathPoints:Vector.<PointVO> = mapRoadModel.getMapRoad(_roadIdx).lineVOs[_lineIdx].points;
 			monster.startEscapeByPath(pathPoints, _roadIdx, _lineIdx);
 			monster.updateWalkPathStepIndex(_pointIdx);
 			

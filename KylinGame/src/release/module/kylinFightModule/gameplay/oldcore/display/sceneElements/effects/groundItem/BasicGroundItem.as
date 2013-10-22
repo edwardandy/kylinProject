@@ -1,23 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundItem
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
+	import flash.events.MouseEvent;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneInteractiveElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.TreasureBoxOpen.OpenTreasureBoxEff;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureData;
-	
-	import flash.events.MouseEvent;
 
 	/**
 	 * 物资箱
 	 */
 	public class BasicGroundItem extends BasicBodySkinSceneElement
 	{
+		[Inject]
+		public var timeTaskMgr:TimeTaskManager;
+		
 		private var _stayTick:int = 0;
 		private var _stayDuration:int = 0;
 		private var _addCount:int = 0;
@@ -50,7 +50,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			
 			if(_stayDuration>0)
 			{
-				_stayTick = TimeTaskManager.getInstance().createTimeTask(_stayDuration,null,null,1,destorySelf);	
+				_stayTick = timeTaskMgr.createTimeTask(_stayDuration,null,null,1,destorySelf);	
 				addEventListener(MouseEvent.CLICK,onClickItem);
 			}
 		}
@@ -59,7 +59,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			super.onLifecycleFreeze();
 			if(_stayTick>0)
-				TimeTaskManager.getInstance().destoryTimeTask(_stayTick);
+				timeTaskMgr.destoryTimeTask(_stayTick);
 			if(hasEventListener(MouseEvent.CLICK))
 				removeEventListener(MouseEvent.CLICK,onClickItem);
 			_stayTick = 0;

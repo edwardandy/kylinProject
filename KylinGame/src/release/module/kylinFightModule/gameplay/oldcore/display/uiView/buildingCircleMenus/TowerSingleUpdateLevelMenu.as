@@ -1,20 +1,16 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus
 {
 	
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
 	
-	import framecore.structure.model.constdata.NewbieConst;
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
-	import framecore.structure.views.newguidPanel.NewbieGuideManager;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 
 	public class TowerSingleUpdateLevelMenu extends BasicTowerCircleMenu
 	{
 		protected var myUpdateCircleItem:BuildingCircleItem;
 		
 		public function TowerSingleUpdateLevelMenu(buildingElement:BasicBuildingElement, 
-												  towerTemplateInfo:TowerTemplateInfo)
+												  towerTemplateInfo:ITowerSheetItem)
 		{
 			super(buildingElement, towerTemplateInfo);
 		}
@@ -28,7 +24,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 		{
 			super.onInitialize();
 			
-			myUpdateCircleItem = new BuildingCircleItem(int(myTowerTemplateInfo.nextTowerId), onCircleMenuItemBuildClick, this, true);
+			myUpdateCircleItem = new BuildingCircleItem(int(myTowerTemplateInfo.nextTowerIds[0]), onCircleMenuItemBuildClick, this, true);
 			myUpdateCircleItem.y = -50;
 			addChild(myUpdateCircleItem);
 		}
@@ -42,8 +38,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 		override protected function onCircleMenuItemBuildClick(typeId:int):void
 		{
 			super.onCircleMenuItemBuildClick(typeId);
-			GameAGlobalManager.getInstance().gameFightInfoRecorder.addBattleOPRecord( GameFightInfoRecorder.BATTLE_OP_TYPE_UPGRADE_TOWER, typeId );
-			NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_TOWER_UPGRADE_MENU,{"param":[myTowerTemplateInfo.nextTowerId],"target":this});
+			//GameAGlobalManager.getInstance().gameFightInfoRecorder.addBattleOPRecord( GameFightInfoRecorder.BATTLE_OP_TYPE_UPGRADE_TOWER, typeId );
+			//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_TOWER_UPGRADE_MENU,{"param":[myTowerTemplateInfo.nextTowerId],"target":this});
 		}
 		
 		override public function dispose():void

@@ -347,15 +347,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			var atkScale:Number = fightData.monAtkScale;
 			var lifeScale:Number = fightData.monLifeScale;
-			if(EndlessBattleMgr.instance.isEndless)
+			/*if(EndlessBattleMgr.instance.isEndless)
 			{
-				/*var temp:DreamLandTemplateInfo = TemplateDataFactory.getInstance().getDreamLandTemplateById(_ownWave);
+				var temp:DreamLandTemplateInfo = TemplateDataFactory.getInstance().getDreamLandTemplateById(_ownWave);
 				if(temp)
 				{
 					atkScale = temp.atkScale;
 					lifeScale = temp.lifeScale;
-				}*/
-			}
+				}
+			}*/
 
 			myFightState.minAtk = myMoveFighterInfo.minAtk * atkScale;
 			myFightState.maxAtk = myMoveFighterInfo.maxAtk * atkScale;

@@ -1,13 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	
 	/**
@@ -91,7 +90,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			
 			if(myEffectParameters && myEffectParameters.hasOwnProperty(SkillResultTyps.ADD_GROUND_EFF))
 			{
-				var result:BasicSkillResult = GameAGlobalManager.getInstance().gameSkillResultMgr.getSkillResultById(SkillResultTyps.ADD_GROUND_EFF);
+				var result:BasicSkillResult = skillResultMgr.getSkillResultById(SkillResultTyps.ADD_GROUND_EFF);
 				result.effect(myEffectParameters,myMonomerMagicTarget,myMonomerMagicTarget);
 			}
 			
@@ -103,15 +102,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function effectRangeEnemys():void
 		{
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
-			var hurtValue:uint = GameMathUtil.randomUintBetween(myMagicSkillTemplateInfo.minAtk, myMagicSkillTemplateInfo.maxAtk);
+			const arrDmg:Array = (myMagicSkillTemplateInfo.objEffect[SkillResultTyps.DMG] as String).split("-");
+			var hurtValue:uint = GameMathUtil.randomUintBetween(arrDmg[0], arrDmg[1]);
 			var result:BasicSkillResult;
 			if(myEffectParameters && myEffectParameters.hasOwnProperty(SkillResultTyps.DMG))
 			{
-				result = GameAGlobalManager.getInstance().gameSkillResultMgr.getSkillResultById(SkillResultTyps.DMG);
+				result = skillResultMgr.getSkillResultById(SkillResultTyps.DMG);
 			}
 			var n:uint = targets.length;
 			for(var i:uint = 0; i < n; i++)

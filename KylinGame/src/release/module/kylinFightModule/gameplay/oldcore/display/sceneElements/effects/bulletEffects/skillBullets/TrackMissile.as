@@ -1,32 +1,32 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.skillBullets
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.identify.GroundEffectID;
+	import mainModule.model.gameData.sheetData.skill.towerSkill.ITowerSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.towerSkill.ITowerSkillSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.identify.GroundEffectID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.ExplosionEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BulletEffectBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.TrackMissile.TrackMissileTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.TrackMissile.TrackMissileTrajectoryParam;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.skill.SkillTemplateInfo;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 跟踪弹
 	 */
 	public class TrackMissile extends BasicBulletEffect
 	{
+		[Inject]
+		public var towerSkillModel:ITowerSkillSheetDataModel;
+		
 		public function TrackMissile(typeId:int)
 		{
 			super(typeId);
@@ -77,7 +77,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			}
 			if(!myTargetEnemy || !myTargetEnemy.isAlive)
 			{
-				var enemy:BasicOrganismElement = GameAGlobalManager.getInstance().groundSceneHelper
+				var enemy:BasicOrganismElement = sceneElementsService
 					.searchOrganismElementEnemy(this.x,this.y,1000,FightElementCampType.ENEMY_CAMP);
 				if(enemy)
 				{
@@ -129,7 +129,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			{
 				if(GameMathUtil.randomTrueByProbability(GameFightConstant.PLAY_SCENE_TIP_PROBABILITY))
 				{
-					SceneTipEffect.playSceneTipEffect(myAttackSceneTipTypeId, myTargetEnemy.x, 
+					createSceneTipEffect(myAttackSceneTipTypeId, myTargetEnemy.x, 
 						myTargetEnemy.y - (myTargetEnemy as BasicOrganismElement).bodyHeight);
 				}
 			}
@@ -165,9 +165,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		override protected function createBulletExplosion(explosionTypeId:int):void
 		{
 			mySkillState.mainTarget = myTargetEnemy;
-			var skillInfo:SkillTemplateInfo = TemplateDataFactory.getInstance().getSkillTemplateById(mySkillState.id);
+			var skillInfo:ITowerSkillSheetItem = towerSkillModel.getTowerSkillSheetById(mySkillState.id);
 			
-			var vecEnemy:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().groundSceneHelper
+			var vecEnemy:Vector.<BasicOrganismElement> = sceneElementsService
 				.searchOrganismElementsBySearchArea(myTargetEnemy.x,myTargetEnemy.y,skillInfo.range,FightElementCampType.ENEMY_CAMP);
 			mySkillState.vecTargets.length = 0;
 			for each(var enemy:BasicOrganismElement in vecEnemy)
@@ -176,11 +176,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			}
 			//super.createBulletExplosion(explosionTypeId);
 			
-			var sceneExplosionEffectElement:ExplosionEffect = ObjectPoolManager.getInstance()
+			var sceneExplosionEffectElement:ExplosionEffect = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.EXPLOSION, explosionTypeId, false) as ExplosionEffect;
 			sceneExplosionEffectElement.blowUp(myHurtEffectFirer,getBulletExplosionPosition(), 
 				Math.round(myHurtValue * GameFightConstant.EXPLOSION_HURT_BY_BULLET_PERCENT), 
-				myAttackType,myBlletTemplateInfo.specialArea,mySkillState,myTargetEnemy/*, myAttackSceneTipTypeId*/);
+				myAttackType,40,mySkillState,myTargetEnemy/*, myAttackSceneTipTypeId*/);
 			sceneExplosionEffectElement.notifyLifecycleActive();
 		}
 		

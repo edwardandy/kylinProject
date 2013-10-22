@@ -1,18 +1,12 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	
-	import flash.events.MouseEvent;
-	
-	import framecore.tools.logger.log;
 
 	/**
 	 * 场景小特效，仅仅是展示 
@@ -27,15 +21,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		public static const SCENE_TIPE_ZAP:int = 24003;
 		
 		public static var _testtimes:uint = 0;
-		
-		public static function playSceneTipEffect(sceneTipTypeId:int, x:Number, y:Number):void
-		{
-			var sceneTipEffect:SceneTipEffect = ObjectPoolManager.getInstance()
-				.createSceneElementObject(GameObjectCategoryType.SCENE_TIP, sceneTipTypeId) as SceneTipEffect;
-			sceneTipEffect.x = x;
-			sceneTipEffect.y = y;
-		}
-		
+
 		private var _disappearTime:SimpleCDTimer;
 		private var _isTipPlayedEnd:Boolean = false;
 
@@ -54,21 +40,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			_disappearTime = new SimpleCDTimer(GameFightConstant.SCENE_TIP_DISAPPEAR_TIME);
 			myBodySkin.y = -GameFightConstant.SCENE_TIP_HEIGHT;
 //			myBodySkin.smoothing = true;
-		}
-		
-		override public function update(iElapse:int):void
-		{
-			super.update(iElapse);
-			/*if(_isTipPlayedEnd)
-			{
-				//_disappearTime.tick();
-				if(_disappearTime.getIsCDEnd())
-				{
-					destorySelf();
-				}
-			}*/
-		}
-			
+		}		
 		
 		override public function render(iElapse:int):void
 		{

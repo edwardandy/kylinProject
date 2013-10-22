@@ -1,9 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.TrackMissile
 {
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveUnit;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.IPositionUnit;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class TrackMissileTrajectoryParam
 	{

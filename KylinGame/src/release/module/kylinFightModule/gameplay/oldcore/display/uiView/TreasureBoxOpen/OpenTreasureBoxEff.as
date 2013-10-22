@@ -1,26 +1,16 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.TreasureBoxOpen
 {	
 	import com.greensock.TweenLite;
-	import com.shinezone.core.structure.controls.GameEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	
 	import flash.display.Sprite;
 	import flash.geom.Point;
 	
-	import framecore.structure.controls.battleCommand.Battle_CMD_Const;
-	import framecore.structure.model.constdata.GameConst;
-	import framecore.structure.model.constdata.HttpConst;
-	import framecore.structure.model.constdata.IconConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.UserData;
-	import framecore.structure.model.user.item.ItemData;
-	import framecore.structure.model.user.item.ItemTemplateInfo;
-	import framecore.structure.model.varMoudle.GameVar;
-	import framecore.structure.views.mapPanel.components.BezierTween;
-	import framecore.tools.icon.IconUtil;
-	import framecore.tools.logger.log;
-	import framecore.tools.txts.TextFlyEffect;
-	import framecore.tools.txts.TextFlyEffectMgr;
+	import mainModule.model.gameData.dynamicData.user.IUserDynamicDataModel;
+	import mainModule.model.gameData.sheetData.item.IItemSheetDataModel;
+	import mainModule.model.gameData.sheetData.item.IItemSheetItem;
+	
+	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
+	import release.module.kylinFightModule.utili.tween.BezierTween;
 
 	public class OpenTreasureBoxEff
 	{
@@ -28,20 +18,27 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.Treasure
 		private static const GOOD_POSITION:Point = new Point(80,30);
 		private static const ITEM_POSITION:Point = new Point(700,590);
 		
+		[Inject]
+		public var itemModel:IItemSheetDataModel;
+		[Inject]
+		public var userData:IUserDynamicDataModel;
+		[Inject]
+		public var sceneModel:ISceneDataModel;
+		
 		private var _itemId:uint;
 		private var _num:int;
 		private var _idx:int;
 		private var _icon:Sprite;
 		private var _startPt:Point;
 		private var _endPt:Point;
-		private var _itemInfo:ItemTemplateInfo;
+		private var _itemInfo:IItemSheetItem;
 		
 		public function OpenTreasureBoxEff(id:uint,cnt:int,ix:int,iy:int,idx:int)
 		{
-			_itemInfo = TemplateDataFactory.getInstance().getItemTemplateById(id);
+			_itemInfo = itemModel.getItemSheetById(id);
 			if(!_itemInfo)
 			{
-				log("OpenTreasureBoxEff no item info: "+id);
+				//log("OpenTreasureBoxEff no item info: "+id);
 				return;
 			}
 			_itemId = id;
@@ -82,7 +79,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.Treasure
 		
 		private function getFlyTweenCP():Point
 		{
-			var itemTempInfo:ItemTemplateInfo = TemplateDataFactory.getInstance().getItemTemplateById(_itemId);
+			var itemTempInfo:IItemSheetItem = itemModel.getItemSheetById(_itemId);
 			_endPt = getEndPosByType(itemTempInfo.effectType);
 			var cp:Point = new Point((_startPt.x + _endPt.x) / 2,(_startPt.y + _endPt.y) / 2);
 			var signX:int = _endPt.x > _startPt.x ? 1 : -1;
@@ -109,21 +106,21 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.Treasure
 		
 		private function onIconFlyEnd():void
 		{
-			var itemTempInfo:ItemTemplateInfo = TemplateDataFactory.getInstance().getItemTemplateById(_itemId);
+			var itemTempInfo:IItemSheetItem = itemModel.getItemSheetById(_itemId);
 			var name:String;
 			switch(itemTempInfo.effectType)
 			{
 				case 5:
 					name = "Gold + ";
-					UserData.getInstance().userBaseInfo.uGold += _num;
+					userData.golds += _num;
 					break;
 				case 10:
 					name = "Diamond + ";
-					UserData.getInstance().userBaseInfo.uMoney += _num;
+					userData.diamonds += _num;
 					break;
 				case 13:
 					name = "Goods + ";
-					GameAGlobalManager.getInstance().gameDataInfoManager.updateSceneGold(_num);
+					sceneModel.updateSceneGold(_num);
 					break;
 				default:
 					name = itemTempInfo.getName()+" + ";

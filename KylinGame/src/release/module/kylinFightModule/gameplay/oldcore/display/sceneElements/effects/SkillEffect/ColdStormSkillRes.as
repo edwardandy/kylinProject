@@ -1,12 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapFrameInfo;
-	import release.module.kylinFightModule.gameplay.oldcore.display.render.BitmapMovieClip;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.render.NewBitmapMovieClip;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 
 	/**
 	 * 极寒风暴

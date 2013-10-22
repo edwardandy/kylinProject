@@ -1,10 +1,9 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes
 {
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.Shape;
 	import flash.geom.Point;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 抛物线型弹道。 该抛物线由二次贝塞尔曲线实现 

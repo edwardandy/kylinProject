@@ -1,76 +1,47 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain
 {
-	import avmplus.getQualifiedClassName;
-	
 	import com.greensock.TweenLite;
-	import com.shinezone.core.structure.controls.GameEvent;
-	import com.shinezone.towerDefense.fight.constants.BattleEffectType;
-	import com.shinezone.towerDefense.fight.constants.EndlessBattleConst;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.TowerDefenseGameState;
+	
+	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.filters.GlowFilter;
+	import flash.text.TextField;
+	import flash.utils.clearTimeout;
+	import flash.utils.setTimeout;
+	
+	import fl.text.TLFTextField;
+	
+	import io.smash.time.TimeManager;
+	
+	import mainModule.service.soundServices.ISoundService;
+	import mainModule.service.soundServices.SoundGroupType;
+	
+	import release.module.kylinFightModule.gameplay.constant.BattleEffectType;
+	import release.module.kylinFightModule.gameplay.constant.EndlessBattleConst;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.identify.SoundID;
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IGameLifecycleBeNotifyer;
 	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.ShortCutKeyResponser.MarchMonsterShortCutRespon;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.newMonster.NewMonsterIconContainerView;
 	import release.module.kylinFightModule.gameplay.oldcore.events.GameDataInfoEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.events.GameMarchMonsterEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementFocusEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightDataInfoManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.CommonAnimationEffects;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.MonsterMarchSubWaveVO;
-	import com.shinezone.towerDefense.fight.vo.map.MonsterMarchWaveVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
-	
-	import fl.text.TLFTextField;
-	
-	import flash.display.DisplayObject;
-	import flash.display.MovieClip;
-	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.events.MouseEvent;
-	import flash.filters.GlowFilter;
-	import flash.text.TextField;
-	import flash.ui.Keyboard;
-	import flash.utils.clearTimeout;
-	import flash.utils.getTimer;
-	import flash.utils.setTimeout;
-	
-	import framecore.structure.controls.uiCommand.UI_CMD_Const;
-	import framecore.structure.model.constdata.GameConst;
-	import framecore.structure.model.constdata.PopConst;
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.UserData;
-	import framecore.structure.model.user.monster.MonsterTemplateInfo;
-	import framecore.structure.model.user.spiritBless.SpiritBlessData;
-	import framecore.structure.model.varMoudle.GameSettingVar;
-	import framecore.structure.views.newguidPanel.NewbieGuideManager;
-	import framecore.structure.views.pubpanel.components.MovieBtn;
-	import framecore.structure.views.spiritBlessPanel.components.SpiritIconManager;
-	import framecore.tools.button.McButton;
-	import framecore.tools.events.BasicEvent;
-	import framecore.tools.font.FontUtil;
-	import framecore.tools.media.TowerMediaPlayer;
-	import framecore.tools.time.DateUtil;
-	import framecore.tools.tips.ToolTipConst;
-	import framecore.tools.tips.ToolTipEvent;
-	import framecore.tools.tips.ToolTipManager;
-	
-	import io.smash.time.TimeManager;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class GameFightMainUIView extends BasicView implements IGameLifecycleBeNotifyer
 	{
 		private static const MARCH_MONSTER_FLAG_SIZE:Number = 60;
 		private static const MAX_MARCH_MONSTER_FLAG_COUNT:Number = 5;
+		
+		[Inject]
+		public var soundService:ISoundService;
 		
 		private var _gameSceneElementFocusView:DisplayObject;
 		private var _userInfoView:CurrentUserInfoView;
@@ -176,8 +147,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		private function showMarchMonsterFlag(waveMonsterSumInfos:Array):void
 		{
 			removeAllMarchMonsterFlags();
-			
-			TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.WARN );
+			soundService.play(SoundID.Warn,SoundGroupType.Effect,1,true);
 			
 			for(var roadIndex:String in waveMonsterSumInfos)
 			{
@@ -635,7 +605,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		//event handler
 		private function fightBookBtnClickHandler(/*event:MouseEvent*/):void
 		{
-			TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.CLICK_BUTTON );
+			soundService.play(SoundID.ClickButton,SoundGroupType.Effect,1,true);
 			//GameAGlobalManager.getInstance().game.notifyToGameOver(false);
 			GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL , [UI_CMD_Const.OPEN_PANEL , "gameBookPanel" ]);
 			GameAGlobalManager.getInstance().game.pause(false,false);
@@ -643,7 +613,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		private function fightPauseBtnClickHandler(/*event:MouseEvent*/):void
 		{
-			TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.CLICK_BUTTON );
+			soundService.play(SoundID.ClickButton,SoundGroupType.Effect,1,true);
 			GameAGlobalManager.getInstance().game.pause();
 		}
 		
@@ -703,7 +673,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		private function fightSettingBtnClickHandler(/*event:MouseEvent*/):void
 		{
-			TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.CLICK_BUTTON );
+			soundService.play(SoundID.ClickButton,SoundGroupType.Effect,1,true);
 			GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL ,[UI_CMD_Const.OPEN_PANEL , 'systemPanel']);
 			GameAGlobalManager.getInstance().game.pause(false, false);
 		}

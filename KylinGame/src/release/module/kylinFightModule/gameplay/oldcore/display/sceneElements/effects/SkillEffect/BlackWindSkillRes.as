@@ -1,23 +1,25 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.move.GameFightMoveLogicMgr;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.move.MoveState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveLogic;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.Interface.IMoveUnit;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.move.MoveState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.process.BasicSkillProcessor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 黑暗之风
 	 */
 	public class BlackWindSkillRes extends BasicSkillEffectRes implements IMoveUnit
 	{		
+		[Inject]
+		public var moveLogicMgr:GameFightMoveLogicMgr;
+		
 		private var _maxDistance:int = 0;
 		private var _curDistance:int = 0;
 		
@@ -30,12 +32,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			super(typeId);
 			myMoveState = new MoveState(this);
-			myMoveLogic = GameAGlobalManager.getInstance().gameMoveLogicMgr.getMoveLogicByCategoryAndId(myElemeCategory,myObjectTypeId);
+			myMoveLogic = moveLogicMgr.getMoveLogicByCategoryAndId(myElemeCategory,myObjectTypeId);
 		}
 		
 		public function initByParam(maxDistance:int,pathPoints:Vector.<PointVO>,pathStepIndex:int):void
 		{
-			var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(myObjectTypeId,false);
+			var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(myObjectTypeId);
 			
 			_maxDistance = (maxDistance>processor.effectParam[BufferFields.MIN]?maxDistance:processor.effectParam[BufferFields.MIN]);
 			myMoveLogic.moveToByPath(myMoveState,pathPoints);
@@ -85,8 +87,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function checkStunTower():void
 		{
-			var processor:BasicSkillProcessor = GameAGlobalManager.getInstance().gameSkillProcessorMgr.getSkillProcessorById(myObjectTypeId,false);
-			var vecTower:Vector.<BasicTowerElement> = GameAGlobalManager.getInstance().groundSceneHelper.
+			var processor:BasicSkillProcessor = skillProcessorMgr.getSkillProcessorById(myObjectTypeId);
+			var vecTower:Vector.<BasicTowerElement> = sceneElementsService.
 				searchTowersBySearchArea(this.x,this.y,80/*processor.effectParam[BufferFields.AREA]*/);
 			if(!vecTower || 0 == vecTower.length)
 			{

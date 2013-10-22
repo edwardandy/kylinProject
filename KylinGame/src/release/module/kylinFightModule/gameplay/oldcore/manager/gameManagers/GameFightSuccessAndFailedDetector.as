@@ -37,7 +37,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		{
 			if(sceneModel.sceneLife <= 0)
 			{
-				if(EndlessBattleMgr.instance.isEndless )
+				/*if(EndlessBattleMgr.instance.isEndless )
 				{
 					if ( EndlessBattleMgr.instance.canRebirth() )
 					{
@@ -46,7 +46,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 						return;
 					}
 				}
-				else if(!isBoss)
+				else */if(!isBoss)
 				{
 					GameAGlobalManager.getInstance().game.pause(false,false);
 					//GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL , [UI_CMD_Const.OPEN_PANEL , "deathRescue"]);
@@ -75,7 +75,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		
 		public function onClearCurWaveMonsters():void
 		{
-			if(EndlessBattleMgr.instance.isEndless)
+			/*if(EndlessBattleMgr.instance.isEndless)
 			{
 				if(EndlessBattleMgr.instance.isSavePointWave(monsterWaveModel.curWaveCount) 
 				&& !monsterWaveModel.isCompleteWave)
@@ -85,7 +85,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 					//to do 弹出提示面板后执行
 					GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL, [UI_CMD_Const.OPEN_PANEL,"endlessPauseRestPanel"]);
 				}
-			}
+			}*/
 			
 			if(monsterWaveModel.isCompleteWave)
 			{

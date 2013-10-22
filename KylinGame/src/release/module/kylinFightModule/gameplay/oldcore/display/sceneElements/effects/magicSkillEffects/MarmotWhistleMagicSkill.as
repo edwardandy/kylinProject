@@ -1,15 +1,13 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.identify.MagicID;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.identify.MagicID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
 	 * 土拨鼠的哨子
@@ -53,14 +51,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				//在3个同等法术
 				for(var i:uint = 0; i < 3; i++)
 				{
-					var daDiZhenchanMagicSkill:MarmotWhistleMagicSkill = ObjectPoolManager
-						.getInstance()
+					var daDiZhenchanMagicSkill:MarmotWhistleMagicSkill = objPoolMgr
 						.createSceneElementObject(GameObjectCategoryType.MAGIC_SKILL, MagicID.MarmotWhistle+3, false) as MarmotWhistleMagicSkill;
 					
 					var rTime:uint = uint(GameMathUtil.randomFromValues([1000, 1500, 2000]));
 					daDiZhenchanMagicSkill.setRandomStartTime(rTime);
 					
-					var randomPosition:PointVO = GameAGlobalManager.getInstance().groundSceneHelper.getCurrentSceneRandomRoadPointByCurrentRoadsData(1);
+					var randomPosition:PointVO = sceneElementsService.getCurrentSceneRandomRoadPointByCurrentRoadsData(1);
 					daDiZhenchanMagicSkill.x = randomPosition.x;
 					daDiZhenchanMagicSkill.y = randomPosition.y;
 					daDiZhenchanMagicSkill.notifyLifecycleActive();
@@ -138,8 +135,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			
 			checkOutsideEnemys();
 			
-			var targets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var targets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 			

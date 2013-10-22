@@ -1,44 +1,34 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
-	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
+	import mainModule.model.gameData.sheetData.weapon.IWeaponSheetDataModel;
+	import mainModule.model.gameData.sheetData.weapon.IWeaponSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
-	import com.shinezone.towerDefense.fight.display.sceneElements.effects.BasicHurtEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.ExplosionEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SceneTipEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.BasicBulletTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.ParabolaBulletTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.StraightBullectTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.TrackMissile.TrackMissileTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect.BasicGroundEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.IOrganismSkiller;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.DisplayObject;
-	import flash.display.Shape;
-	import flash.geom.Point;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.buff.BuffTemplateInfo;
-	import framecore.structure.model.user.weapon.WeaponTemplateInfo;
+	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class BasicBulletEffect extends BasicBodySkinSceneElement//extends BasicHurtEffect implements IOrganismSkiller
 	{
+		[Inject]
+		public var weaponModel:IWeaponSheetDataModel;
+		
 		protected var myHurtValue:uint;
 		protected var myAttackType:int;
 		
@@ -52,7 +42,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		protected var myDuration:uint = 0;//毫秒数
 		
-		protected var myBlletTemplateInfo:WeaponTemplateInfo;
+		protected var myBlletTemplateInfo:IWeaponSheetItem;
 		protected var myBulletTrajectory:BasicBulletTrajectory;//弹道
 
 		//由抛物线决定
@@ -77,9 +67,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			this.myObjectTypeId = typeId;
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_TOP;
 			
-			myBlletTemplateInfo = TemplateDataFactory.getInstance().getWeaponTemplateById(typeId);
+			myBlletTemplateInfo = weaponModel.getWeaponSheetById(typeId);
 			
-			myAttackType = myBlletTemplateInfo.atkType;		
+			//myAttackType = myBlletTemplateInfo.type;		
 			
 			onConstructCmp();
 		}
@@ -355,7 +345,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 						else
 							enemy = myTargetEnemy as BasicOrganismElement;
 						
-						SceneTipEffect.playSceneTipEffect(myAttackSceneTipTypeId, myTargetEnemy.x, 
+						createSceneTipEffect(myAttackSceneTipTypeId, myTargetEnemy.x, 
 							myTargetEnemy.y - (enemy?enemy.bodyHeight:tower.height));
 					}
 				}
@@ -394,13 +384,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 
 		protected function createBulletExplosion(explosionTypeId:int):void
 		{
-			var sceneExplosionEffectElement:ExplosionEffect = ObjectPoolManager.getInstance()
+			var sceneExplosionEffectElement:ExplosionEffect = objPoolMgr
 				.createSceneElementObject(GameObjectCategoryType.EXPLOSION, explosionTypeId, false) as ExplosionEffect;
 			sceneExplosionEffectElement.blowUp(myHurtEffectFirer, (myTargetEnemy!=null && myTargetEnemy.isAlive)?
 				new PointVO(myTargetEnemy.x,myTargetEnemy.fightState.isFlyUnit?myTargetEnemy.y/*-(myTargetEnemy as BasicOrganismElement).bodyHeight*/:myTargetEnemy.y)
 				:getBulletExplosionPosition(), 
 				Math.round(myHurtValue * GameFightConstant.EXPLOSION_HURT_BY_BULLET_PERCENT), 
-				myAttackType,myBlletTemplateInfo.specialArea,mySkillState,myTargetEnemy/*, myAttackSceneTipTypeId*/);
+				myAttackType,40,mySkillState,myTargetEnemy/*, myAttackSceneTipTypeId*/);
 			sceneExplosionEffectElement.notifyLifecycleActive();
 		}
 		
@@ -480,7 +470,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		protected function addGroundEff(effId:uint,duration:uint,param:Array,owner:ISkillOwner):BasicGroundEffect
 		{
-			var eff:BasicGroundEffect = ObjectPoolManager.getInstance().createSceneElementObject(
+			var eff:BasicGroundEffect = objPoolMgr.createSceneElementObject(
 				GameObjectCategoryType.GROUNDEFFECT,effId,false) as BasicGroundEffect;
 			if(!eff)
 				return null;

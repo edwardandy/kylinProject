@@ -94,7 +94,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			if(bForce || _marchBehaviorState == WAITTING)
 			{
 				//计算提前时间
-				var marchNextWavePreactTime:uint = EndlessBattleMgr.instance.isEndless?0:(1 - getWaitNextWaveProgress()) * GameFightConstant.MONSTER_WAVE_DURATION;
+				var marchNextWavePreactTime:uint = /*EndlessBattleMgr.instance.isEndless?0:*/(1 - getWaitNextWaveProgress()) * GameFightConstant.MONSTER_WAVE_DURATION;
 				
 				preProcessMarchMonster();
 				
@@ -154,7 +154,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		
 		private function preProcessMarchMonster():void
 		{
-			if(!EndlessBattleMgr.instance.isEndless)
+			//if(!EndlessBattleMgr.instance.isEndless)
 			{
 				var marchNextWavePreactTime:uint = (1 - getWaitNextWaveProgress()) * GameFightConstant.MONSTER_WAVE_DURATION;
 				GameAGlobalManager.getInstance().gameDataInfoManager.marchMonsterEarler(marchNextWavePreactTime);
@@ -167,11 +167,11 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			const totalWave:int = monsterWaveModel.totalWaveCount;
 			//战斗开始
 			if(0 == curWave
-			||(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.recordWave == curWave))
+			/*||(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.recordWave == curWave)*/)
 			{
 				fightState.state = FightState.StartFight;
-				if(EndlessBattleMgr.instance.isEndless)
-					GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.ENDLESS_WAVE_NUM_EFFECT, [curWave+1]);
+				/*if(EndlessBattleMgr.instance.isEndless)
+					GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.ENDLESS_WAVE_NUM_EFFECT, [curWave+1]);*/
 			}
 			//最后一波
 			else if(curWave == totalWave - 1)
@@ -179,19 +179,19 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 				GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.FINAL_WAVE_EFFECT );
 			}
 			//无极幻境每波都提示
-			else
+			/*else
 			{
 				if(EndlessBattleMgr.instance.isEndless)
 					GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.ENDLESS_WAVE_NUM_EFFECT, [curWave+1]);
-			}
+			}*/
 			
 			monsterWaveModel.increaseSceneWave();
 			curWave =  monsterWaveModel.curWaveCount;
-			if(EndlessBattleMgr.instance.isEndless)
+			/*if(EndlessBattleMgr.instance.isEndless)
 			{
 				EndlessBattleMgr.instance.checkRetrieveBuffEnd();
 				EndlessBattleMgr.instance.setCurWaveMonsterCnts(curWave,monsterWaveModel.getMonsterWave(curWave).totalMonsters);
-			}
+			}*/
 		}
 		
 		public function getWaitNextWaveProgress():Number
@@ -224,7 +224,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			
 			_marchBehaviorState = CURWAVECOMPLETE;
 			
-			if(!(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.isSavePointWave(monsterWaveModel.curWaveCount)))
+			//if(!(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.isSavePointWave(monsterWaveModel.curWaveCount)))
 				waitNextWave();
 		}
 		
@@ -235,7 +235,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 					GameFightConstant.MONSTER_WAVE_DURATION / GameFightConstant.TIME_UINT, waitNextWaveCompleteHandler);
 			
 			_marchBehaviorState = WAITTING;
-			if(!EndlessBattleMgr.instance.isEndless)
+			//if(!EndlessBattleMgr.instance.isEndless)
 				eventDispatcher.dispatchEvent(new GameMarchMonsterEvent(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE));
 		}
 		

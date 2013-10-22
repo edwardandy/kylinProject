@@ -1,35 +1,37 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus
 {
-	import com.shinezone.towerDefense.fight.constants.TowerType;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
-	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
-	
 	import flash.text.TextField;
 	
-	import framecore.structure.model.constdata.TowerConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.soldier.SoldierTemplateInfo;
-	import framecore.structure.model.user.tollLimit.TollLimitTemplateInfo;
-	import framecore.structure.model.user.tollgate.TollgateData;
-	import framecore.structure.model.user.tollgate.TollgateInfo;
-	import framecore.structure.model.user.tower.TowerData;
-	import framecore.structure.model.user.tower.TowerInfo;
-	import framecore.structure.model.user.tower.TowerLevelVo;
-	import framecore.structure.model.user.tower.TowerTemplateInfo;
-	import framecore.structure.model.varMoudle.HttpVar;
-	import framecore.tools.tips.ToolTipEvent;
-	import framecore.tools.tips.towerMenu.TowerMenuToolTip;
-	import framecore.tools.tips.towerMenu.TowerMenuToolTipDataVO;
-	import framecore.tools.tips.towerMenu.TowerPropItem;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicItem;
+	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
+	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetDataModel;
+	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
+	import mainModule.service.gameDataServices.helpServices.ITollgateService;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
+	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 
 	public class BuildingCircleItem extends BasicBuildingCircleItem
 	{
+		[Inject]
+		public var towerModel:ITowerSheetDataModel;
+		[Inject]
+		public var towerData:ITowerDynamicDataModel;
+		[Inject]
+		public var sceneModel:ISceneDataModel;
+		[Inject]
+		public var tollgateModel:ITollgateSheetDataModel;
+		[Inject]
+		public var tollgateService:ITollgateService;
+		[Inject]
+		public var fightData:IFightDynamicDataModel;
+		
 		protected var myTargetTowerTypeId:int = -1;
 		protected var myUpdatedCostMoney:uint = 0;
-		protected var myTowerTemplateInfo:TowerTemplateInfo;
+		protected var myTowerTemplateInfo:ITowerSheetItem;
 		protected var myIsOnlyUpdateMode:Boolean = false;
 				
 		private var _unLockFrameKey:String;
@@ -43,7 +45,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 
 			myTargetTowerTypeId = targetTowerTypeId;
 			myIsOnlyUpdateMode = isOnlyUpdateMode;
-			myTowerTemplateInfo  = TemplateDataFactory.getInstance().getTowerTemplateById(myTargetTowerTypeId);
+			myTowerTemplateInfo  = towerModel.getTowerSheetById(myTargetTowerTypeId);
 			myUpdatedCostMoney = myTowerTemplateInfo.buyGold;
 		}
 		
@@ -89,41 +91,32 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 
 		private function checkIsValideByMoney():void
 		{
-			var bResearched:Boolean = TowerData.getInstance().getTowerisLockByTypeId(myTargetTowerTypeId);
-			if(!bResearched || myIsLock)
+			var towerInfo:ITowerDynamicItem = towerData.getTowerDataById(myTargetTowerTypeId)
+			if(!towerInfo || myIsLock)
 				myItemBGView.itemTextSkin.visible = false;
 			else
 				myItemBGView.itemTextSkin.visible = true;
 			
-			this.setIsEnable(GameAGlobalManager.getInstance().gameDataInfoManager.sceneGold >= myUpdatedCostMoney
-			&& bResearched);
+			this.setIsEnable(sceneModel.sceneGoods >= myUpdatedCostMoney && towerInfo);
 		}
 
 		private function checkIsValideByLock():void
-		{
-			var tollLimitTypeId:uint = 	TollgateInfo(TollgateData.getInstance()
-				.getOwnInfoById(TollgateData.currentLevelId))
-				.tollgateTemplateInfo.tollLimitId;
-			
-			var tollLimit:TollLimitTemplateInfo = TemplateDataFactory.getInstance().getTollLimitTemplateById(tollLimitTypeId);
-
-			var resultIsLocked:Boolean = tollLimit.towerForbid.indexOf(myTowerTemplateInfo.type.toString()) == -1 ||
-				myTowerTemplateInfo.level > tollLimit.towerLevel - 1;	
-			
+		{			
+			const resultIsLocked:Boolean = tollgateService.canTowerBuildInTollgate(fightData.tollgateId,myTowerTemplateInfo.configId)	
 			this.setIsLock(resultIsLocked);
 		}
 		
 		override protected function excuteClickCallback():void
 		{
 			myClickCallback(myTargetTowerTypeId);
-			GameAGlobalManager.getInstance().gameFightInfoRecorder.addBuildTower( myTargetTowerTypeId );
+			//GameAGlobalManager.getInstance().gameFightInfoRecorder.addBuildTower( myTargetTowerTypeId );
 			
-			if ( myBuildingCircleItemOwner is TowerMultiUpdateLevelMenu )
+			/*if ( myBuildingCircleItemOwner is TowerMultiUpdateLevelMenu )
 			{
 				GameAGlobalManager.getInstance().gameFightInfoRecorder.addBattleOPRecord( GameFightInfoRecorder.BATTLE_OP_TYPE_UPGRADE_TOWER, myTargetTowerTypeId );
-			}
+			}*/
 
-			GameAGlobalManager.getInstance().gameDataInfoManager.updateSceneGold(-myTowerTemplateInfo.buyGold);
+			sceneModel.updateSceneGold(-myTowerTemplateInfo.buyGold);
 		}
 		
 		override protected function updateUIByCurrentState():void
@@ -145,7 +138,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			myBuildingCircleItemOwner.notifyCircleMenuItemMouseOver(myTargetTowerTypeId,bOver);
 		}
 		
-		override protected function onShowToolTipHandler(event:ToolTipEvent):void
+		/*override protected function onShowToolTipHandler(event:ToolTipEvent):void
 		{
 			var data:TowerMenuToolTipDataVO = new TowerMenuToolTipDataVO();
 			if ( myIsLock )
@@ -232,6 +225,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			}
 			
 			event.toolTip.data = data;
-		}
+		}*/
 	}
 }

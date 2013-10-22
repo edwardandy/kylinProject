@@ -649,14 +649,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 				case BulletID.Shell3:
 					bulletEffect = new ShellBulletEffect(elementTypeId);
 					break;
-
-				/*case 20023://法术光剑
-					bulletEffect = new MagicFlySwordBulletEffect(elementTypeId);
-					break;*/
-				
-				//case 20019://油锅
-				//	bulletEffect = new GunTangDeYouBulletEffect(elementTypeId);
-				//	break;
 				case BulletID.ZiMuBullet://子母弹
 					bulletEffect = new ZiMuBulletEffect(elementTypeId);
 					break;

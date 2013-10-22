@@ -13,6 +13,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.SoundFields;
 	import release.module.kylinFightModule.gameplay.constant.TowerType;
 	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
@@ -22,12 +23,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.TowerSkillUpdateLevelMenu;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
-	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 
 	public class BasicTowerElement extends BasicBuildingElement implements IOrganismSkiller, ISkillOwner
 	{	
@@ -121,7 +118,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			changeToTargetBehaviorState(TowerBehaviorState.IDEL);
 			playBuilddingEffect();
-			//playSound(getSoundId(SoundFields.Builded));
+			playSound(getSoundId(SoundFields.Builded));
 			//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_BUILD_TOWER,{"param":[myObjectTypeId],"target":this});
 			//NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_BUILD_TOWER,{"param":[myObjectTypeId],"target":this});
 		}
@@ -373,7 +370,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		protected function playAttackSound():void
 		{
-			//playSound(getSoundId(SoundFields.Attack));
+			playSound(getSoundId(SoundFields.Attack));
 		}
 		
 		override public function dispose():void
@@ -423,7 +420,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			myFightState.range = myTowerTemplateInfo.atkRange;
 			myFightState.minAtk = myTowerTemplateInfo.minAtk;
 			myFightState.maxAtk = myTowerTemplateInfo.maxAtk;
-			myFightState.cdTime = myTowerTemplateInfo.atkInterval*(1 - EndlessBattleMgr.instance.addAtkSpdPct*0.01);
+			myFightState.cdTime = myTowerTemplateInfo.atkInterval/*(1 - EndlessBattleMgr.instance.addAtkSpdPct*0.01)*/;
 			myFightState.weapon = myTowerTemplateInfo.weapon;
 			myFightState.atkType = myTowerTemplateInfo.atkType;
 			var lvl:int = towerData.getTowerLevelByType(myTowerTemplateInfo.type);
@@ -439,7 +436,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				}
 				//addAtk += GlobalTemp.spiritTowerAttackAddition*0.01;
 				
-				var addAtk2:Number = 1+EndlessBattleMgr.instance.addAtkPct*0.01;
+				var addAtk2:Number = 1/*+EndlessBattleMgr.instance.addAtkPct*0.01*/;
 				myFightState.minAtk *= addAtk * addAtk2;
 				myFightState.maxAtk *= addAtk * addAtk2;
 			}
@@ -523,9 +520,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			return TowerBehaviorState.USE_SKILL != currentBehaviorState;
 		}
 		
-		override protected function getDefaultSoundString():String
+		override protected function getDefaultSoundObj():Object
 		{
-			return "";//myTowerTemplateInfo?myTowerTemplateInfo.sound:null;
+			return myTowerTemplateInfo?myTowerTemplateInfo.objSound:null;
 		}
 	}
 }

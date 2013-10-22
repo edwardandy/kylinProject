@@ -1,30 +1,33 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect
 {
-	import com.shinezone.core.structure.controls.GameEvent;
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.FightUnitType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillAttackType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
+	import mainModule.model.gameData.sheetData.groundEff.IGroundEffSheetDataModel;
+	import mainModule.model.gameData.sheetData.groundEff.IGroundEffSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.FightUnitType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillAttackType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillResult;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.GameFightSkillResultMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
-	import flash.utils.getTimer;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.groundEff.GroundEffTemplateInfo;
 	
 	public class BasicGroundEffect extends BasicBodySkinSceneElement
 	{
+		[Inject]
+		public var groundEffModel:IGroundEffSheetDataModel;
+		[Inject]
+		public var skillResultMgr:GameFightSkillResultMgr;
+		[Inject]
+		public var timeTaskMgr:TimeTaskManager;
+		
 		protected var m_effectArea:int = 40;
 		protected var m_owner:ISkillOwner;
 		protected var m_duration:int = 0;
@@ -55,7 +58,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				m_bNeedInterval = false;
 				return;
 			}
-			var temp:GroundEffTemplateInfo = TemplateDataFactory.getInstance().getGroundEffTemplateById(myObjectTypeId);
+			var temp:IGroundEffSheetItem = groundEffModel.getGroundEffSheetById(myObjectTypeId);
 			if(!temp || temp.modeFields.length<=0)
 			{
 				m_bNeedInterval = false;
@@ -86,7 +89,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				var skillResult:ISkillResult;
 				for (var field:* in m_effParam)
 				{
-					skillResult = GameAGlobalManager.getInstance().gameSkillResultMgr.getSkillResultById(field);
+					skillResult = skillResultMgr.getSkillResultById(field);
 					if(skillResult)
 						m_vecSkillResults.push(skillResult);
 				}
@@ -117,14 +120,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				interval = m_bHasBuff?GameFightConstant.TIME_UINT*10:GameFightConstant.TIME_UINT;
 				repeat = m_duration/interval;
 			}			
-			TimeTaskManager.getInstance().createTimeTask(interval,onInterval,null,repeat,onEnd,null);
+			timeTaskMgr.createTimeTask(interval,onInterval,null,repeat,onEnd,null);
 		}
 		
 		protected function onInterval():void
 		{	
 			if(!m_bNeedInterval)
 				return;
-			var vecTargets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().groundSceneHelper.searchOrganismElementsBySearchArea(
+			var vecTargets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(
 				x,y,m_effectArea,m_owner.oppositeCampType,searchConditionFunc);
 			if(!vecTargets || vecTargets.length <= 0 )
 				return;
@@ -164,7 +167,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			super.onLifecycleFreeze();
 			m_duration = 0;	
-			TimeTaskManager.getInstance().destoryTimeTask(m_timeTick);
+			timeTaskMgr.destoryTimeTask(m_timeTick);
 			m_timeTick = 0;
 			m_bNeedInterval = false;
 			m_effectArea = 40;

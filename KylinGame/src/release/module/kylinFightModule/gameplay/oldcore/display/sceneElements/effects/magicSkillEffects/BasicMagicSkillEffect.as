@@ -1,25 +1,32 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.SoundFields;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicSceneElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.IOrganismSkiller;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
+	import io.smash.time.TimeManager;
 	
-	import framecore.structure.model.constdata.TowerSoundEffectsConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.magicSkill.MagicSkillTemplateInfo;
-	import framecore.tools.GameStringUtil;
-	import framecore.tools.media.TowerMediaPlayer;
+	import mainModule.model.gameData.dynamicData.magicSkill.IMagicSkillDynamicDataModel;
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.SoundFields;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.GameFightSkillResultMgr;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 
 	//法术效果
 	public class BasicMagicSkillEffect extends BasicBodySkinSceneElement
 	{
+		[Inject]
+		public var magicModel:IMagicSkillSheetDataModel;
+		[Inject]
+		public var magicData:IMagicSkillDynamicDataModel;
+		[Inject]
+		public var timeMgr:TimeManager;
+		[Inject]
+		public var skillResultMgr:GameFightSkillResultMgr;
 		
-		protected var myMagicSkillTemplateInfo:MagicSkillTemplateInfo;
+		protected var myMagicSkillTemplateInfo:IMagicSkillSheetItem;
 		
 		protected var myEffectParameters:Object = null;
 		
@@ -47,18 +54,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			this.myObjectTypeId = typeId;
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_TOP;
 			
-			myMagicSkillTemplateInfo = TemplateDataFactory.getInstance().getMagicSkillTemplateById(typeId);
+			myMagicSkillTemplateInfo = magicModel.getMagicSkillSheetById(typeId);
 			_myMagicLevel = myMagicSkillTemplateInfo.level;
 			myIsMonomerMagic = myMagicSkillTemplateInfo.releaseWay == 3;
 			
-			myEffectParameters = GameStringUtil.deserializeString(myMagicSkillTemplateInfo.effect);
+			myEffectParameters = myMagicSkillTemplateInfo.objEffect;
 			
 			var buffs:Array = myMagicSkillTemplateInfo.getBuffs();
 			if(buffs)
 			{
-				myBuffer1Parameters = GameStringUtil.deserializeString(buffs[0]);
-				myBuffer2Parameters = GameStringUtil.deserializeString(buffs[1]);
-				myBuffer3Parameters = GameStringUtil.deserializeString(buffs[2]);
+				myBuffer1Parameters = buffs[0];
+				myBuffer2Parameters = buffs[1];
+				myBuffer3Parameters = buffs[2];
 			}
 		}
 		
@@ -104,9 +111,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			playSound(getSoundId(SoundFields.Use));
 		}
 		
-		override protected function getDefaultSoundString():String
+		override protected function getDefaultSoundObj():Object
 		{
-			return myMagicSkillTemplateInfo?myMagicSkillTemplateInfo.sound:null;
+			return myMagicSkillTemplateInfo?myMagicSkillTemplateInfo.objSound:null;
 		}
 		
 		override protected function onLifecycleFreeze():void

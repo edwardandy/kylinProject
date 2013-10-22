@@ -1,8 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.MagicSkillEffectBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.hurt.GroundEffectState;
 
 	/**
 	 * 全屏寒冰冻结时随机显示的地表冰冻特效 

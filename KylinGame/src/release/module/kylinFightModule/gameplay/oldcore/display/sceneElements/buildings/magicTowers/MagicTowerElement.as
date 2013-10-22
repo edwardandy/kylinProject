@@ -186,7 +186,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		override public function notifyHurtTagetOnkill(beHurtTarget:BasicOrganismElement, finalHurtValue:uint):void
 		{
-			SceneTipEffect.playSceneTipEffect(SceneTipEffect.SCENE_TIPE_BZZT, beHurtTarget.x, beHurtTarget.y);
+			createSceneTipEffect(SceneTipEffect.SCENE_TIPE_BZZT, beHurtTarget.x, beHurtTarget.y);
 		}
 	}
 }

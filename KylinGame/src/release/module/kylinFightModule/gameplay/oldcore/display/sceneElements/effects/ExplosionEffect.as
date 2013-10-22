@@ -11,6 +11,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
+	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
 	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
@@ -93,8 +94,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				return;
 			}
 			var camp:int = myTarget!=null?myTarget.campType:FightElementCampType.ENEMY_CAMP;
-			var monsters:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 50, camp); 
+			var monsters:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 50, camp); 
 			
 			for each(var monster:BasicOrganismElement in monsters)
 			{
@@ -104,7 +104,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				    monster.hurtBlood(myHurtValue, FightAttackType.PHYSICAL_ATTACK_TYPE, false);
 			}
 			
-			SceneTipEffect.playSceneTipEffect(SceneTipEffect.SCENE_TIPE_BOOM, this.x, this.y);
+			createSceneTipEffect(SceneTipEffect.SCENE_TIPE_BOOM, this.x, this.y);
 		}
 		
 		private function onExplosionEndHandler():void

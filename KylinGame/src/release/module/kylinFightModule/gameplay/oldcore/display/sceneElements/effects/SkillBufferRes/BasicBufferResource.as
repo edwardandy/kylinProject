@@ -1,22 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillBufferRes
 {
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
+	import mainModule.model.gameData.sheetData.buff.IBuffSheetDataModel;
+	import mainModule.model.gameData.sheetData.buff.IBuffSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.basics.BasicBodySkinSceneElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.IBufferResource;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.display.DisplayObject;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.buff.BuffTemplateInfo;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class BasicBufferResource extends BasicBodySkinSceneElement implements IBufferResource
 	{
+		[Inject]
+		public var buffModel:IBuffSheetDataModel;
+		
 		private var _target:ISkillTarget;
-		private var _buffInfo:BuffTemplateInfo;
+		private var _buffInfo:IBuffSheetItem;
 		/**
 		 *  显示位置的相对点
 		 * 	0表示在目标的头上显示
@@ -34,13 +35,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			super();
 			myElemeCategory = GameObjectCategoryType.ORGANISM_SKILL_BUFFER;
 			myObjectTypeId = typeId;
-			_buffInfo = TemplateDataFactory.getInstance().getBuffTemplateById(myObjectTypeId);
+			_buffInfo = buffModel.getBuffSheetById(myObjectTypeId);
 		}
 		
 		override protected function get bodySkinResourceURL():String
 		{
-			if(_buffInfo && _buffInfo.resourceId>0)
-				return myElemeCategory + "_" + _buffInfo.resourceId;
+			if(_buffInfo && _buffInfo.resId>0)
+				return myElemeCategory + "_" + _buffInfo.resId;
 			else 
 				return super.bodySkinResourceURL;
 		}
@@ -111,7 +112,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			/*if(!myBodySkin)
 				return;*/
 			if(isAttch)
-				_target.notifyAddBuffRes(this,_buffInfo.positionType,_buffInfo.offsetX,_buffInfo.offsetY);
+				_target.notifyAddBuffRes(this,_buffInfo.positionType,_buffInfo.ptOffset.x,_buffInfo.ptOffset.y);
 			else
 				_target.notifyRemoveBuffRes(this);
 		}

@@ -57,6 +57,12 @@ package release.module.kylinFightModule.gameplay.constant.identify
 		public static const LetBulletFly1:uint = 1520401;
 		public static const LetBulletFly2:uint = 1520402;
 		/**
+		 * 爆炎弹
+		 */
+		public static const ExplosionFireBomb:uint = 152043;
+		public static const ExplosionFireBomb1:uint = 1520431;
+		public static const ExplosionFireBomb2:uint = 1520432;
+		/**
 		 * 连斩
 		 */
 		public static const MultyAttack:uint = 153035;

@@ -1,10 +1,10 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.ArcaneBomb
 {
+	import flash.geom.Point;
+	
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.trajectoryes.ParabolaBulletTrajectory;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.geom.Point;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class ArcaneBombBulletTrajectory extends ParabolaBulletTrajectory
 	{

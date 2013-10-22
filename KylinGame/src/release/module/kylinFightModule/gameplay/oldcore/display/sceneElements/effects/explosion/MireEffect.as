@@ -1,16 +1,14 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.explosion
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.Skill.SkillResultTyps;
-	import com.shinezone.towerDefense.fight.constants.identify.BufferID;
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
+	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.ExplosionEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BulletEffectBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 
 	/**
@@ -91,8 +89,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		private var _vecEffSoldier:Vector.<BasicOrganismElement> = new Vector.<BasicOrganismElement>;
 		private function onHurtEmemyWhenPerRender():void
 		{
-			var vecSoldier:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance().
-				groundSceneHelper.
+			var vecSoldier:Vector.<BasicOrganismElement> = sceneElementsService.
 				searchOrganismElementsBySearchArea(this.x,this.y,50,FightElementCampType.ENEMY_CAMP,necessarySearchConditionFilter);
 			if(!vecSoldier || 0 == vecSoldier.length)
 			{

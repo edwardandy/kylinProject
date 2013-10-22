@@ -24,7 +24,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			myItemBGView.gotoAndStop("sell");
 		}
 		
-		override protected function onShowToolTipHandler( event:ToolTipEvent ):void
+		/*override protected function onShowToolTipHandler( event:ToolTipEvent ):void
 		{
 			var data:TowerMenuToolTipDataVO = new TowerMenuToolTipDataVO();
 			data.status = TowerMenuToolTip.STATUS_SELL;
@@ -34,6 +34,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 //			data.props[TowerPropItem.PROP_BOX] = towerElement.myTowerCostGold >> 1;
 			data.props.push( TowerPropItem.PROP_BOX, (towerElement.myTowerCostGold >> 1) + "" );
 			event.toolTip.data = data;
-		}
+		}*/
 	}
 }

@@ -1,26 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
+	import flash.filters.ColorMatrixFilter;
+	
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.SkillEffect.NuclareWeaponEff;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.filters.ColorMatrixFilter;
-	import flash.utils.getTimer;
-	
-	import framecore.structure.model.constdata.GameConst;
-	
-	import io.smash.time.TimeManager;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class FullScreenKillMonster extends BasicMagicSkillEffect
 	{
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
+		
 		private var _arrCoord:Array;
 		private var _tickStart:int;
 		private var _redFilter:ColorMatrixFilter = new ColorMatrixFilter;
@@ -60,13 +57,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		override protected function onLifecycleFreeze():void
 		{
 			super.onLifecycleFreeze();
-			GameAGlobalManager.getInstance().game.filters = null;
+			fightViewModel.groundLayer.filters = null;
 		}
 		
 		override public function render(iElapse:int):void
 		{
 			super.render(iElapse);
-			var curTick:uint = TimeManager.instance.virtualTime;
+			var curTick:uint = timeMgr.virtualTime;
 			if(MagicSkillEffectBehaviorState.APPEAR == currentBehaviorState)
 			{
 				updateRedMatrix(_redParam + 5);
@@ -94,7 +91,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 					var idx:int = GameMathUtil.randomUintBetween(0,_arrCoord.length-1);
 					var pt:PointVO = getPointToShowEff(_arrCoord[idx]);
 					_arrCoord.splice(idx,1);
-					var eff:NuclareWeaponEff = ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.SKILLRES
+					var eff:NuclareWeaponEff = objPoolMgr.createSceneElementObject(GameObjectCategoryType.SKILLRES
 						,myEffectParameters["special"],false) as NuclareWeaponEff;
 					eff.x = pt.x;
 					eff.y = pt.y;
@@ -111,8 +108,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			changeToTargetBehaviorState(MagicSkillEffectBehaviorState.RUNNING);
 			
-			var targets:Vector.<BasicMonsterElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.getAllAliveEnemys();
+			var targets:Vector.<BasicMonsterElement> = sceneElementsService.getAllAliveEnemys();
 			var arrHurtBoss:Array = (myEffectParameters["bossHurt"] as String).split("-");
 			var hurtBossPct:int = GameMathUtil.randomUintBetween(arrHurtBoss[0],arrHurtBoss[1]);
 			
@@ -128,7 +124,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				}
 			}
 			
-			GameAGlobalManager.getInstance().groundSceneHelper.disappearAllSummonDoor();
+			sceneElementsService.disappearAllSummonDoor();
 		}
 		
 		private function onAppearEnd():void
@@ -149,7 +145,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			_redParam = red;
 			_redMatrix[4] = _redParam;
 			_redFilter.matrix = _redMatrix;
-			GameAGlobalManager.getInstance().groundScene.filters = [_redFilter];
+			fightViewModel.groundLayer.filters = [_redFilter];
 		}
 	}
 }

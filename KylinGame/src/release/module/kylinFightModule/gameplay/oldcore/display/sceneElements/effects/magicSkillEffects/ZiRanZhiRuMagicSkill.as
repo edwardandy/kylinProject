@@ -1,17 +1,16 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.OrganismBodySizeType;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismBodySizeType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	//自然之怒 表现为逆向移动的风，这里要单独处理下
 	public class ZiRanZhiRuMagicSkill extends BasicMagicSkillEffect
@@ -90,8 +89,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 
 		private function onRenderAndEffectEnemy():void
 		{
-			var enemys:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var enemys:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					GameFightConstant.ROAD_HALF_WIDTH, 
 					FightElementCampType.ENEMY_CAMP,
 					necessarySearchConditionFilter);
@@ -108,9 +106,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		//释放时对敌人造成伤害
 		private function releaseCarryedEnemys():void
 		{
-			var isNeedHurt:Boolean = myMagicSkillTemplateInfo.minAtk > 0 && myMagicSkillTemplateInfo.maxAtk > 0;
+			const arrDmg:Array = (myMagicSkillTemplateInfo.objEffect[SkillResultTyps.DMG] as String).split("-");
+			var isNeedHurt:Boolean = arrDmg[0] > 0 && arrDmg[1] > 0;
 			var hurtValue:uint = isNeedHurt ? 
-					GameMathUtil.randomUintBetween(myMagicSkillTemplateInfo.minAtk, myMagicSkillTemplateInfo.maxAtk) : 0;
+					GameMathUtil.randomUintBetween(arrDmg[0], arrDmg[1]) : 0;
 			
 			while(_currentCarryedEnemy.length)
 			{
@@ -157,8 +156,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function effectAllFriendlyUintTargetsWhenActivate():void
 		{
-			var friendlyTargets:Vector.<BasicOrganismElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			var friendlyTargets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					-1, 
 					FightElementCampType.FRIENDLY_CAMP);
 			

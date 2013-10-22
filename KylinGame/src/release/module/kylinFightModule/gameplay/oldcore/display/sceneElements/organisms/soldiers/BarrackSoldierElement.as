@@ -172,7 +172,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		override protected function initFightState():void
 		{		
 			super.initFightState();
-			myFightState.cdTime *= (1 - EndlessBattleMgr.instance.addAtkSpdPct*0.01);
+			//myFightState.cdTime *= (1 - EndlessBattleMgr.instance.addAtkSpdPct*0.01);
 			
 			var lvl:int = towerData.getTowerLevelByType(TowerType.Barrack);
 			var addAtk:Number = 1;
@@ -183,7 +183,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				addAtk += arrLvl[0]*0.01;
 			}
 			//addAtk += GlobalTemp.spiritTowerAttackAddition*0.01;
-			var addAtk2:Number = 1+EndlessBattleMgr.instance.addAtkPct*0.01;
+			var addAtk2:Number = 1/*+EndlessBattleMgr.instance.addAtkPct*0.01*/;
 			myFightState.minAtk *= addAtk * addAtk2;
 			myFightState.maxAtk *= addAtk * addAtk2;
 		}

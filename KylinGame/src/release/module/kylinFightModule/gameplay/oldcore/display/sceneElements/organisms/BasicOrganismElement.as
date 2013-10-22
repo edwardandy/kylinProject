@@ -525,7 +525,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				
 				if(hurtValue == 0)
 				{
-					SceneTipEffect.playSceneTipEffect(SceneTipEffect.SCENE_TIPE_MISS, this.x, this.y - bodyHeight);	
+					createSceneTipEffect(SceneTipEffect.SCENE_TIPE_MISS, this.x, this.y - bodyHeight);	
 					return;
 				}
 				//民兵的不屈
@@ -2565,7 +2565,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				areaAttack(this,dmg,GameFightConstant.NEAR_SKILL_AREA);
 			}
 			myFightState.bBlock = false;
-			SceneTipEffect.playSceneTipEffect(SceneTipEffect.SCENE_TIPE_MISS, this.x, this.y - bodyHeight);
+			createSceneTipEffect(SceneTipEffect.SCENE_TIPE_MISS, this.x, this.y - bodyHeight);
 			notifyTriggerSkillAndBuff(TriggerConditionType.AFTER_BLOCK);
 		}
 		

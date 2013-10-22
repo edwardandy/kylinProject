@@ -1,19 +1,18 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.FightAttackType;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.FightAttackType;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.AeroliteBulletEffect;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects.BasicBulletEffect;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class YiCiYuanZhiMenMagicSkill extends BasicMagicSkillEffect
 	{
@@ -108,8 +107,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			var hasBullet:Boolean = myEffectParameters.weapon;
 			if(hasBullet)
 			{
-				var hurtValue:uint = GameMathUtil.randomUintBetween(myMagicSkillTemplateInfo.minAtk, myMagicSkillTemplateInfo.maxAtk);
-				var bulletEffect:AeroliteBulletEffect = ObjectPoolManager.getInstance()
+				const arrDmg:Array = (myMagicSkillTemplateInfo.objEffect[SkillResultTyps.DMG] as String).split("-");
+				var hurtValue:uint = GameMathUtil.randomUintBetween(arrDmg[0], arrDmg[1]);
+				var bulletEffect:AeroliteBulletEffect = objPoolMgr
 					.createSceneElementObject(GameObjectCategoryType.BULLET, int(myEffectParameters.weapon), false) as AeroliteBulletEffect;
 				bulletEffect.fire(null, null, 
 					new PointVO(this.x, this.y - YI_CI_YUAN_ZHI_MENMAGIC_SKILL_HEIGHT + 20), 
@@ -126,8 +126,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			var n:uint = 0;
 			var i:uint = 0;
 			
-			targets = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, 
+			targets = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, 
 					myMagicSkillTemplateInfo.range, 
 					FightElementCampType.ENEMY_CAMP, necessarySearchConditionFilter);
 			n = targets.length;

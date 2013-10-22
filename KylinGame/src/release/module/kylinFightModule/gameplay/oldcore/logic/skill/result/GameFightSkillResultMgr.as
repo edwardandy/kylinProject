@@ -2,8 +2,6 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 {
 	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.BasicHashMapMgr;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_MagicDef;
-	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveMagicDef;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddAtk;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddAtkArea;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_AddGoodsPct;
@@ -38,6 +36,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_Invisible;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_Life;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_LifeToPhysicDef;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_MagicDef;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_MagicDmg;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_MaxLife;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_MoveSpeedPct;
@@ -50,6 +49,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveAtkSpdPct;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveDef;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveEquipPct;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveMagicDef;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveMaxLife;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveMaxLifePct;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_PassiveMoveSpeed;

@@ -4,9 +4,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.SoundFields;
+	import release.module.kylinFightModule.gameplay.constant.identify.SoundID;
 	import release.module.kylinFightModule.gameplay.oldcore.display.SimpleProgressBar;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
-	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	/**
@@ -78,7 +79,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		{
 			if(myIsInFocus)
 			{
-				//TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.CLICK_TOFT );
+				playSound(SoundID.Click_Toft);
 				//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_CLICK_TOWER_BASE,{"param":[],"target":this});
 				//NewbieGuideManager.getInstance().startCondition(NewbieConst.CONDITION_START_CLICK_TOWER_BASE,{"param":[],"target":myBuildingCircleMenu});
 			}
@@ -135,7 +136,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 				_currentBuilddingTowerElement.x = this.x;
 				_currentBuilddingTowerElement.y = this.y;
 				_currentBuilddingTowerElement.buildingToft = this;
-				//TowerMediaPlayer.getInstance().playEffect( TowerSoundEffectsConst.START_BUILD );
+				
+				playSound(getSoundId(SoundFields.Upgrade,0,towerModel.getTowerSheetById(_currentReadyToBuildTowerTypeId).objSound));
 				
 				sceneElementsModel.addSceneElemet(_currentBuilddingTowerElement);
 				
@@ -200,17 +202,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			{
 				this.mouseEnabled = false;
 				myBodySkin.gotoAndStop2(GameMovieClipFrameNameType.DISABLE);
-				//this.filters = [GameFilterManager.getInstance().colorNessMatrixFilter,new GlowFilter(0xf70a15 , 0.5 , 6 , 6 , 6)];
+				//this.filters = [GameFilterManager.getInstance().colorNessMatrixFilter,new Glowimport release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 			}
 		}
 	}
 }
-
 import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BasicBuildingCircleMenu;
 import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BuildingCircleItem;
-
-import robotlegs.bender.framework.api.IInjector;
 
 class ToftElementCircleMenu extends BasicBuildingCircleMenu
 {

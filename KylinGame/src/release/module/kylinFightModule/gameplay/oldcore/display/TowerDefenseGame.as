@@ -119,8 +119,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display
 				TimeManager.instance.destroy();
 			}
 
-			if(EndlessBattleMgr.instance.isEndless)
-				GlobalTemp.quitDestFlag = 2;
+			/*if(EndlessBattleMgr.instance.isEndless)
+				GlobalTemp.quitDestFlag = 2;*/
 			
 			//var completeFightObj:Object = GameAGlobalManager.getInstance().gameFightInfoRecorder.getFinalFightInfoData(false);
 			//GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_COMPLETEBATTLE_REQ, [completeFightObj]);
@@ -149,24 +149,24 @@ package release.module.kylinFightModule.gameplay.oldcore.display
 			taskOpData.isWin = isSuccess;
 			taskOpData.star = completeFightObj.star;
 			
-			if ( EndlessBattleMgr.instance.isEndless )
+			/*if ( EndlessBattleMgr.instance.isEndless )
 			{
 				taskOpData.endlessWaves = completeFightObj.waveId;
-			}
+			}*/
 			TaskManager.getInstance().updateProgress( TaskTypeConst.OPTYPE_BATTLE, taskOpData );
 			completeFightObj["taskInfo"] = TaskManager.getInstance().getBattleTasksInfo();
 			
 			GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_COMPLETEBATTLE_REQ, [completeFightObj]);
 
 			//战斗结果面板
-			if(EndlessBattleMgr.instance.isEndless)
+			/*if(EndlessBattleMgr.instance.isEndless)
 			{
 				GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL, [UI_CMD_Const.OPEN_PANEL,"endlessBattleResultPanel"]);
 				//DreamLandData.getInstance().setNode({score:EndlessBattleMgr.instance.lastSavePointScore,waveId:EndlessBattleMgr.instance.lastSavePointWave});
 				DreamLandData.getInstance().setCurrent(new DreamLandNode(completeFightObj.score,completeFightObj.waveId));
 				logch("EndlessData:","EndlessResult",completeFightObj);
 			}
-			else
+			else*/
 			{
 				GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL, [UI_CMD_Const.OPEN_PANEL,"battleResultPanel"]);
 				PanelData.panelInteraction("battleResultPanel", "setBattleResultData", 

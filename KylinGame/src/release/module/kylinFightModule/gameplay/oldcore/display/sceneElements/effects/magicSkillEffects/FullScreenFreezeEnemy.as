@@ -1,22 +1,17 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameMovieClipFrameNameType;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
+	import io.smash.time.TimeManager;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundEffect.IceMagicWandGroundEff;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	
-	import flash.utils.getTimer;
-	
-	import framecore.structure.model.constdata.GameConst;
-	
-	import io.smash.time.TimeManager;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class FullScreenFreezeEnemy extends BasicMagicSkillEffect
 	{
@@ -73,7 +68,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			super.render(iElapse);
 			
-			var curTick:uint = TimeManager.instance.virtualTime;
+			var curTick:uint = timeMgr.virtualTime;
 			switch(currentBehaviorState)
 			{
 				case MagicSkillEffectBehaviorState.APPEAR:
@@ -89,7 +84,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 							var pt:PointVO = getPointToShowEff(_arrCoord[idx]);
 							_arrCoord.splice(idx,1);
 							var effId:uint = uint(GameMathUtil.randomFromValues(_arrEffId));
-							_vecEffs.push((ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.GROUNDEFFECT,effId,false) as IceMagicWandGroundEff));
+							_vecEffs.push((objPoolMgr.createSceneElementObject(GameObjectCategoryType.GROUNDEFFECT,effId,false) as IceMagicWandGroundEff));
 							_vecEffs[_vecEffs.length-1].x = pt.x;
 							_vecEffs[_vecEffs.length-1].y = pt.y;
 							_vecEffs[_vecEffs.length-1].notifyLifecycleActive();
@@ -140,8 +135,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function onFirePoint():void
 		{
-			var targets:Vector.<BasicMonsterElement> = GameAGlobalManager.getInstance()
-				.groundSceneHelper.getAllAliveEnemys();
+			var targets:Vector.<BasicMonsterElement> = sceneElementsService.getAllAliveEnemys();
 			
 			for each(var enemy:BasicMonsterElement in targets)
 			{

@@ -106,7 +106,7 @@ package mainModule.model.gameData.dynamicData.user
 		/**
 		 * @private
 		 */
-		//function set diamonds(value:uint):void;
+		function set diamonds(value:uint):void;
 		/**
 		 * 用户金币数
 		 */
@@ -114,7 +114,7 @@ package mainModule.model.gameData.dynamicData.user
 		/**
 		 * @private
 		 */
-		//function set golds(value:uint):void;
+		function set golds(value:uint):void;
 		/**
 		 * 用户当前能量值
 		 */

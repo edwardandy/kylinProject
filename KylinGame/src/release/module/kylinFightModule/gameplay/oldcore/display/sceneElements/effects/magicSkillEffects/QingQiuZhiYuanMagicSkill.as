@@ -1,12 +1,10 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.CondottiereSoldier;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SupportSoldier;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
+	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	//请求支援
 	public class QingQiuZhiYuanMagicSkill extends BasicMagicSkillEffect
@@ -30,7 +28,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			for(var i:int=0;i<num;++i)
 			{
 				
-				var soldier:SupportSoldier = ObjectPoolManager.getInstance()
+				var soldier:SupportSoldier = objPoolMgr
 					.createSceneElementObject(GameObjectCategoryType.SUPPORT_SOLDIER, id, false) as SupportSoldier;
 				soldier.lifeDuration = this.myMagicSkillTemplateInfo.duration;
 				soldier.visible = true;

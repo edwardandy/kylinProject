@@ -1,16 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.bulletEffects
 {
-	import com.shinezone.towerDefense.fight.constants.BufferFields;
-	import com.shinezone.towerDefense.fight.constants.FightElementCampType;
-	import com.shinezone.towerDefense.fight.constants.GroundSceneElementLayerType;
-	import com.shinezone.towerDefense.fight.constants.OrganismDieType;
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
+	import release.module.kylinFightModule.gameplay.constant.FightElementCampType;
+	import release.module.kylinFightModule.gameplay.constant.GroundSceneElementLayerType;
+	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
-	import com.shinezone.towerDefense.fight.logic.skill.Interface.ISkillTarget;
-	import com.shinezone.towerDefense.fight.manager.gameManagers.GameAGlobalManager;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.magicSkill.MagicSkillTemplateInfo;
-	import framecore.tools.GameStringUtil;
+	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 
 	//陨石是没有目标的，是范围检测伤害，而且只伤害1个人
 	public class AeroliteBulletEffect extends BasicBulletEffect
@@ -45,8 +40,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		//到这里才算范围
 		override protected function onBulletEffectEnd():void
 		{
-			_vecTargets = GameAGlobalManager.getInstance()
-				.groundSceneHelper.searchOrganismElementsBySearchArea(this.x, this.y, _range>0?_range:40, 
+			_vecTargets = sceneElementsService.searchOrganismElementsBySearchArea(this.x, this.y, _range>0?_range:40, 
 					FightElementCampType.ENEMY_CAMP,
 					necessarySearchConditionFilter); 
 
@@ -76,7 +70,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			if(currentBehaviorState == BulletEffectBehaviorState.DISAPPEAR)
 			{
 				//消失放到地面
-				GameAGlobalManager.getInstance().groundScene.swapSceneElementLayerType(this, 
+				sceneElementsModel.swapSceneElementLayerType(this, 
 					GroundSceneElementLayerType.LAYER_BOTTOM);
 			}
 		}
