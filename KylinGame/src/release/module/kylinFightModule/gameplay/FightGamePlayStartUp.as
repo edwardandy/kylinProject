@@ -21,6 +21,7 @@ package release.module.kylinFightModule.gameplay
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.NewMonsterList;
+	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureDataList;
 	
 	import robotlegs.bender.framework.api.IInjector;
 
@@ -47,6 +48,7 @@ package release.module.kylinFightModule.gameplay
 			injector.map(GameMouseCursorFactory).asSingleton();
 			injector.map(MagicMouseCursorReleaseLogic).asSingleton();
 			injector.map(MouseCursorReleaseValidator).asSingleton();
+			injector.map(TreasureDataList).asSingleton();
 			
 			injector.map(GameFightSkillResultMgr).asSingleton();
 			injector.map(GameFightSkillProcessorMgr).asSingleton();

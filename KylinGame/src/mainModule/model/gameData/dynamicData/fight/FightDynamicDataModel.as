@@ -21,12 +21,27 @@ package mainModule.model.gameData.dynamicData.fight
 		private var _newMonsterIds:Array;
 		private var _newItems:Array;
 		private var _waveInfo:Array;
+		private var _arrTreasureList:Array;
 		
 		public function FightDynamicDataModel()
 		{
 			super();
 			dataId = DynamicDataNameConst.FightData;
 			updateEventType = "";
+		}
+		/**
+		 *  宝藏猎人奖励列表:[{id:140001,num:20},...]
+		 */		
+		public function get arrTreasureList():Array
+		{
+			return _arrTreasureList;
+		}
+		/**
+		 * @private
+		 */
+		public function set arrTreasureList(value:Array):void
+		{
+			_arrTreasureList = value;
 		}
 
 		/**

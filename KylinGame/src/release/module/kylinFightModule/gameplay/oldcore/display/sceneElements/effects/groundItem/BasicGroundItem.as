@@ -9,6 +9,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.TreasureBoxOpen.OpenTreasureBoxEff;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureData;
+	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureDataList;
 
 	/**
 	 * 物资箱
@@ -17,6 +18,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 	{
 		[Inject]
 		public var timeTaskMgr:TimeTaskManager;
+		[Inject]
+		public var treasureList:TreasureDataList;
 		
 		private var _stayTick:int = 0;
 		private var _stayDuration:int = 0;
@@ -79,7 +82,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		private function onOpenBoxEnd():void
 		{
-			var data:TreasureData = GameAGlobalManager.getInstance().treasureList.popTreasure();
+			var data:TreasureData = treasureList.popTreasure();
 			if(data)
 				new OpenTreasureBoxEff(data.itemId,data.num,this.x,this.y,data.idx);
 			destorySelf();

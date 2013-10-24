@@ -52,5 +52,9 @@ package mainModule.model.gameData.dynamicData.fight
 		 * [{offsetStartTick=>int,subWaves=>[{startTime,interval,times,monsterCount,monsterTypeId,roadIndex,bRandomLine},...]},...] 
 		 */
 		function get waveInfo():Array;
+		/**
+		 *  宝藏猎人奖励列表:[{id:140001,num:20},...]
+		 */		
+		function get arrTreasureList():Array;
 	}
 }

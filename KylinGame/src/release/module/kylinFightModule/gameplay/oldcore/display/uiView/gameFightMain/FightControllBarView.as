@@ -1,37 +1,23 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
+	import flash.geom.Point;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IGameLifecycleBeNotifyer;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.DaDiZhenchanMagicSkill;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.ShengGuangPuZhaoMagicSkill;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.YiCiYuanZhiMenMagicSkill;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.magicSkillEffects.ZiRanZhiRuMagicSkill;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
+	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.BasicIconView;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.CDAbleIconView;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.HeroIconView;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.MagicSkillIconView;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.MonsterWarnTip;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.PropIconView;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import com.shinezone.towerDefense.fight.vo.PointVO;
-	import com.shinezone.towerDefense.fight.vo.map.RoadLineVOHelperUtil;
-	import com.shinezone.towerDefense.fight.vo.map.RoadVO;
-	
-	import flash.display.Sprite;
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.magicSkill.MagicSkillTemplateInfo;
-	import framecore.tools.getText;
+	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureDataList;
 
-	public final class FightControllBarView extends BasicView implements IGameLifecycleBeNotifyer
+	public final class FightControllBarView extends BasicView implements IFightLifecycle
 	{
+		[Inject]
+		public var treasureList:TreasureDataList;
+		
 		private var _background:FightControllBarBGView;
 		
 		private var _heroIconViews:Vector.<HeroIconView> = new Vector.<HeroIconView>(3);
@@ -120,7 +106,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			}
 			_treasureTip.visible = false;
 			//注册点是小三角指的点
-			if(GameAGlobalManager.getInstance().treasureList.hasTreasure())
+			if(treasureList.hasTreasure())
 			{
 				_treasureTip.tip = getText("hasTreasureHunter");
 				_treasureTip.visible = true;
@@ -133,7 +119,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		}
 		
 		//IGameLifecycleNotifyer
-		public function onGameStart():void
+		public function onFightStart():void
 		{
 			var iconView:BasicIconView = null;
 			for each(iconView in _heroIconViews)
@@ -187,15 +173,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 //			}
 		}
 		
-		public function onGamePause():void
+		public function onFightPause():void
 		{
 		}
 		
-		public function onGameResume():void
+		public function onFightResume():void
 		{
 		}
 		
-		public function onGameEnd():void
+		public function onFightEnd():void
 		{
 			if(_treasureTip && contains(_treasureTip))
 				removeChild(_treasureTip);

@@ -5,6 +5,8 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	
 	import release.module.kylinFightModule.gameplay.main.MainFightScene;
+	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureDataList;
+	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 
 	/**
 	 * 战斗前准备完毕，开始战斗 
@@ -17,6 +19,10 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		public var mainFightScene:MainFightScene;
 		[Inject]
 		public var fightData:IFightDynamicDataModel;
+		[Inject]
+		public var treasureList:TreasureDataList;
+		[Inject]
+		public var sceneElementsModel:ISceneElementsModel;
 		
 		public function FightStartupCmd()
 		{
@@ -26,6 +32,8 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		override public function execute():void
 		{
 			super.execute();
+			treasureList.initList(fightData.arrTreasureList);
+			sceneElementsModel.initBeforeFightStart();
 		}
 	}
 }
