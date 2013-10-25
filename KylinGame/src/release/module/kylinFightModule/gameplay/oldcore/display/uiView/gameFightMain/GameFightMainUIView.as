@@ -2,50 +2,95 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 {
 	import com.greensock.TweenLite;
 	
-	import flash.display.DisplayObject;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.filters.GlowFilter;
 	import flash.text.TextField;
-	import flash.utils.clearTimeout;
-	import flash.utils.setTimeout;
 	
 	import fl.text.TLFTextField;
 	
 	import io.smash.time.TimeManager;
 	
+	import kylin.echo.edward.ui.McButton;
+	import kylin.echo.edward.utilities.datastructures.HashMap;
+	import kylin.echo.edward.utilities.font.FontMgr;
+	
+	import mainModule.model.gameData.sheetData.monster.IMonsterSheetDataModel;
+	import mainModule.model.gameData.sheetData.monster.IMonsterSheetItem;
 	import mainModule.service.soundServices.ISoundService;
 	import mainModule.service.soundServices.SoundGroupType;
 	
+	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
 	import release.module.kylinFightModule.gameplay.constant.BattleEffectType;
-	import release.module.kylinFightModule.gameplay.constant.EndlessBattleConst;
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	import release.module.kylinFightModule.gameplay.constant.identify.SoundID;
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
+	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
 	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.ShortCutKeyResponser.MarchMonsterShortCutRespon;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.newMonster.NewMonsterIconContainerView;
 	import release.module.kylinFightModule.gameplay.oldcore.events.GameDataInfoEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.events.GameMarchMonsterEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementFocusEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMonsterMarchManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
+	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
+	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
+	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
+	import release.module.kylinFightModule.model.marchWave.MonsterWaveVO;
+	import release.module.kylinFightModule.model.roads.MapRoadVO;
 	import release.module.kylinFightModule.utili.structure.PointVO;
+	
+	import robotlegs.bender.framework.api.IInjector;
+	
+	import utili.font.FontClsName;
 
-	public class GameFightMainUIView extends BasicView implements IGameLifecycleBeNotifyer
+	public class GameFightMainUIView extends BasicView implements IFightLifecycle
 	{
 		private static const MARCH_MONSTER_FLAG_SIZE:Number = 60;
 		private static const MAX_MARCH_MONSTER_FLAG_COUNT:Number = 5;
 		
 		[Inject]
 		public var soundService:ISoundService;
+		[Inject]
+		public var injector:IInjector;
+		[Inject]
+		public var fightViewLayers:IFightViewLayersModel;
+		[Inject]
+		public var eventDispatcher:IEventDispatcher;
+		[Inject]
+		public var recorder:GameFightInfoRecorder;
+		[Inject]
+		public var monsterWaveModel:IMonsterWaveModel;
+		[Inject]
+		public var mapRoadModel:IMapRoadModel;
+		[Inject]
+		public var monsterModel:IMonsterSheetDataModel;
+		[Inject]
+		public var fontMgr:FontMgr;
+		[Inject]
+		public var globalTemp:GlobalTemp;
+		[Inject]
+		public var interactiveMgr:GameFightInteractiveManager;
+		[Inject]
+		public var filterMgr:GameFilterManager;
+		[Inject]
+		public var monsterMarchMgr:GameFightMonsterMarchManager;
+		[Inject]
+		public var sceneModel:ISceneDataModel;
+		[Inject]
+		public var timeMgr:TimeManager;
 		
-		private var _gameSceneElementFocusView:DisplayObject;
 		private var _userInfoView:CurrentUserInfoView;
-		private var _fightBookBtn:McButton;
 		private var _fightPauseBtn:McButton;
 		private var _fightSettingBtn:McButton;
 		private var _fightControllBarView:FightControllBarView;
@@ -56,23 +101,21 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		private var _marchMonstersFlagPool:Array = [];
 		private var _marchMonsterShortCut:MarchMonsterShortCutRespon;
 		
-		//祝福系统图标容器
-		private var _spiritBlessIconContainer:Sprite = null;
-		
 		//新怪展示
 		private var _newMonsterIconsView:NewMonsterIconContainerView = null;
 		
 		private var _effects:Vector.<MovieClip> = new Vector.<MovieClip>();
-		
-		//无极幻境加战场buff按钮
-		private var _battleDrumsBtn:McButton;
-		
-		private var _iShowTreasureTick:int;
-		
+				
 		public function GameFightMainUIView()
 		{
 			super();
 			mouseEnabled = false;
+		}
+		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
+			fightViewLayers.UILayer.addChild(this);
 		}
 		
 		public function playBattleEffect( type:int,param:Array = null ):void
@@ -80,12 +123,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			var effect:MovieClip = _effects[type];
 			effect.gotoAndPlay( 1 );
 			effect.visible = true;
-			if(!GameAGlobalManager.getInstance().game.contains(effect))
-				GameAGlobalManager.getInstance().game.addChild(effect);
+			if(!fightViewLayers.UIEffectLayer.contains(effect))
+				fightViewLayers.UIEffectLayer.addChild(effect);
 			effect.addFrameScript(effect.totalFrames-1,function():void{
 				effect.stop();
-				if(GameAGlobalManager.getInstance().game.contains(effect))
-					GameAGlobalManager.getInstance().game.removeChild(effect);
+				effect.visible = false;
+				if(fightViewLayers.UIEffectLayer.contains(effect))
+					fightViewLayers.UIEffectLayer.removeChild(effect);
 				
 				if(type == BattleEffectType.ENDLESS_WAVE_NUM_EFFECT)
 				{
@@ -124,7 +168,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		private function onEnterEndlessWaveNum(e:Event):void
 		{
 			var mc:EndlessWaveNumEff = e.currentTarget as EndlessWaveNumEff;
-			var curWave:int = GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount+1;
+			var curWave:int = monsterWaveModel.curWaveCount+1;
 			((mc.mcTxt.getChildByName("txtBack") as MovieClip).getChildByName("txtNum") as TLFTextField).text = curWave.toString();
 			((mc.mcTxt.getChildByName("txtMc") as MovieClip).getChildByName("txtNum") as TLFTextField).text = curWave.toString();
 		}
@@ -144,18 +188,17 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			return _fightControllBarView;
 		}
 
-		private function showMarchMonsterFlag(waveMonsterSumInfos:Array):void
+		private function showMarchMonsterFlag(waveMonsterSumInfos:HashMap):void
 		{
 			removeAllMarchMonsterFlags();
 			soundService.play(SoundID.Warn,SoundGroupType.Effect,1,true);
 			
-			for(var roadIndex:String in waveMonsterSumInfos)
+			for(var roadIndex:int in waveMonsterSumInfos.keys())
 			{
 				var marchMonsterFlag:MarchMonsterFlag = _marchMonstersFlagPool.length > 0 ? _marchMonstersFlagPool.pop() : new MarchMonsterFlag();
 				marchMonsterFlag.roadIdx = int(roadIndex);
 				
-				var roadVOs:Vector.<RoadVO> = GameAGlobalManager.getInstance().gameDataInfoManager.currentSceneMapInfo.roadVOs;
-				var roadVO:RoadVO = roadVOs[int(roadIndex)];
+				var roadVO:MapRoadVO = mapRoadModel.getMapRoad(roadIndex);
 				var roadStartPoint:PointVO = roadVO.lineVOs[1].points[0];
 				
 				var x:Number = roadStartPoint.x;
@@ -168,9 +211,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 				else if(y > GameFightConstant.SCENE_MAP_HEIGHT - MARCH_MONSTER_FLAG_SIZE / 2) y = GameFightConstant.SCENE_MAP_HEIGHT - MARCH_MONSTER_FLAG_SIZE / 2;
 				
 				var bFly:Boolean = false;
-				for(var id:String in waveMonsterSumInfos[roadIndex])
+				for(var id:uint in waveMonsterSumInfos.get(roadIndex))
 				{
-					var info:MonsterTemplateInfo = TemplateDataFactory.getInstance().getMonsterTemplateById(uint(id));
+					var info:IMonsterSheetItem = monsterModel.getMonsterSheetById(id);
 					if(info && 2 == info.type)
 					{
 						bFly = true;
@@ -191,36 +234,28 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			super.onInitialize();
 			
-			_spiritBlessIconContainer = new Sprite();
-			_spiritBlessIconContainer.mouseEnabled = false;
-			addChild( _spiritBlessIconContainer );
+			_currentFocusInfoView = injector.instantiateUnmapped(GameFocusTargetInfoView);
 			
-			_currentFocusInfoView = new GameFocusTargetInfoView();
 			_currentFocusInfoView.x = 180;
 			_currentFocusInfoView.y = 550;
 			addChild(_currentFocusInfoView);
 			
-			_fightControllBarView = new FightControllBarView();
+			_fightControllBarView = injector.instantiateUnmapped(FightControllBarView);
 			addChild(_fightControllBarView);
 			
 			_userInfoView = new CurrentUserInfoView();
-			//_userInfoView.userImgLoader.source = UserData.getInstance().userBaseInfo.getUserHeadImageUrl();
-			//_userInfoView.userImgLoader.addEventListener(IOErrorEvent.IO_ERROR, userImgLoaderErrorHandler);
-			/*_userInfoView.lifeTextField.text = sceneLifeText;
-			_userInfoView.goldTextField.text = sceneGoldText;
-			_userInfoView.waveTextField.text = sceneWaveText;*/
-			FontUtil.useFont( _userInfoView.lifeTextField.lifeTextField, FontUtil.FONT_TYPE_BUTTON );
-			FontUtil.useFont( _userInfoView.goldTextField, FontUtil.FONT_TYPE_BUTTON );
-			FontUtil.useFont( _userInfoView.waveTextField, FontUtil.FONT_TYPE_BUTTON );
-			FontUtil.useFont( _userInfoView.waveLabel, FontUtil.FONT_TYPE_BUTTON );
-			FontUtil.useFont( _userInfoView.txtScore.txtScore, FontUtil.FONT_TYPE_BUTTON );
+			fontMgr.setTextStyle( _userInfoView.lifeTextField.lifeTextField, FontClsName.ButtonFont );
+			fontMgr.setTextStyle( _userInfoView.goldTextField, FontClsName.ButtonFont );
+			fontMgr.setTextStyle( _userInfoView.waveTextField, FontClsName.ButtonFont );
+			fontMgr.setTextStyle( _userInfoView.waveLabel, FontClsName.ButtonFont );
+			fontMgr.setTextStyle( _userInfoView.txtScore.txtScore, FontClsName.ButtonFont );
 			
 			_userInfoView.lifeTextField.mouseChildren = false;
 			
 			_userInfoView.goldTextField.mouseEnabled = true;
 			_userInfoView.goldTextField.selectable = false;
 			
-			_newMonsterIconsView = new NewMonsterIconContainerView();
+			_newMonsterIconsView = injector.instantiateUnmapped(NewMonsterIconContainerView);
 			_newMonsterIconsView.y = 80;
 			_newMonsterIconsView.x = 10;
 			addChild( _newMonsterIconsView );
@@ -228,13 +263,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			addChild(_userInfoView);
 			_userInfoView.x += 10;
 			_userInfoView.y += 8;
-
-			_fightBookBtn = new McButton;
-			var mc:FightBookBtn = new FightBookBtn();
-			_fightBookBtn.setSkin(new FightBookBtn() as MovieClip);
-			_fightBookBtn.addActionEventListener(fightBookBtnClickHandler);
-			_fightBookBtn.getSkin().x = 540+60;
-//			addChild(_fightBookBtn);
 			
 			_fightPauseBtn = new McButton;
 			_fightPauseBtn.setSkin(new FightPauseBtn() as MovieClip);
@@ -251,40 +279,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			_marchMonstersFlagLayer = new Sprite();
 			_marchMonstersFlagLayer.mouseEnabled = false;
 			_marchMonstersFlagLayer.addEventListener(MouseEvent.CLICK, marchMonstersFlagLayerMouseClickHandler);
-			addChild(_marchMonstersFlagLayer);
-			
-			ToolTipManager.getInstance().registGameToolTipTarget( _userInfoView.lifeIcon, ToolTipConst.DEFAULT_TEXT_TOOL );
-			_userInfoView.lifeIcon.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTipHandler );
-			ToolTipManager.getInstance().registGameToolTipTarget( _userInfoView.lifeTextField, ToolTipConst.DEFAULT_TEXT_TOOL );
-			_userInfoView.lifeTextField.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTipHandler );
-			
-			ToolTipManager.getInstance().registGameToolTipTarget( _userInfoView.boxIcon, ToolTipConst.DEFAULT_TEXT_TOOL );
-			_userInfoView.boxIcon.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTipHandler );
-			ToolTipManager.getInstance().registGameToolTipTarget( _userInfoView.goldTextField, ToolTipConst.DEFAULT_TEXT_TOOL );
-			_userInfoView.goldTextField.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTipHandler );
-			
-			ToolTipManager.getInstance().registGameToolTipTarget( _fightPauseBtn.getSkin(), ToolTipConst.DEFAULT_TEXT_TOOL );
-			ToolTipManager.getInstance().registGameToolTipTarget( _fightSettingBtn.getSkin(), ToolTipConst.DEFAULT_TEXT_TOOL );
-			_fightPauseBtn.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTipHandler );
-			_fightSettingBtn.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTipHandler );
-			
-			_userInfoView.drumsBuff.visible = false;
-			_userInfoView.drumsBuff.mouseChildren = false;
-			//_userInfoView.drumsBuff.mouseEnabled = false;
-			_userInfoView.drumsBuff.cacheAsBitmap = true;
-			
-			_userInfoView.retrievedBuff.visible = false;
-			_userInfoView.retrievedBuff.mouseChildren = false;
-			//_userInfoView.retrievedBuff.mouseEnabled = false;
-			_userInfoView.retrievedBuff.cacheAsBitmap = true;
-			
-			ToolTipManager.getInstance().registGameToolTipTarget( _userInfoView.drumsBuff, ToolTipConst.DEFAULT_TEXT_TOOL );
-			_userInfoView.drumsBuff.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTipHandler );
-			ToolTipManager.getInstance().registGameToolTipTarget( _userInfoView.retrievedBuff, ToolTipConst.DEFAULT_TEXT_TOOL );
-			_userInfoView.retrievedBuff.addEventListener( ToolTipEvent.GAME_TOOL_TIP_SHOW, showTipHandler );
-			
-			FontUtil.useFont( _userInfoView.drumsBuff.buffNum, FontUtil.FONT_TYPE_NORMAL );
-			
+			addChild(_marchMonstersFlagLayer);			
 			
 			_userInfoView.endlessIcon.mouseChildren = false;
 			_userInfoView.endlessIcon.mouseEnabled = false;
@@ -293,7 +288,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			_userInfoView.waveIcon.mouseEnabled = false;
 			_userInfoView.waveIcon.cacheAsBitmap = true;
 			
-			_marchMonsterShortCut = new MarchMonsterShortCutRespon;
+			_marchMonsterShortCut = injector.instantiateUnmapped(MarchMonsterShortCutRespon);
 			
 			var effect:MovieClip = new HurtWarnEffect();
 			effect.mouseChildren = effect.mouseEnabled = false;
@@ -303,7 +298,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			var posY:int = GameFightConstant.SCENE_MAP_HEIGHT >> 1;
 			effect.x = posX;
 			effect.y = posY;
-			//addChild( effect );
 			_effects.push( effect );
 			
 			effect = new FinalWaveEffect();
@@ -312,173 +306,88 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			effect.visible = false;
 			effect.x = posX;
 			effect.y = posY;
-			//addChild( effect );
 			_effects.push( effect );
 			
 			
 		}
 		
-		private function showTipHandler( e:ToolTipEvent ):void
-		{
-			switch ( e.target )
-			{
-				case _userInfoView.goldTextField:
-				case _userInfoView.boxIcon:
-				{
-					e.toolTip.data = "Goods: Resources needed to build your towers. Collected by killing enemies and selling towers.";
-					break;
-				}
-				case _userInfoView.lifeTextField:
-				case _userInfoView.lifeIcon:
-				{
-					e.toolTip.data = "Lives: Enemies that get through your defenses will deduct lives; if your lives reach 0, you are defeated.";
-					break;
-				}
-				case _fightSettingBtn.getSkin():
-				{
-					e.toolTip.data = "Options";
-					break;
-				}
-				case _fightPauseBtn.getSkin():
-				{
-					e.toolTip.data = "Pause";
-					break;
-				}
-				case _userInfoView.drumsBuff:
-				{
-					
-					e.toolTip.data = "Current level:"+ (EndlessBattleMgr.instance.reachMaxAtkBuff?"MAX":EndlessBattleMgr.instance.curAtkBuffLevel)
-						+"\nIncreases all towers attack damage by "+EndlessBattleMgr.instance.addAtkPct+"%";
-				}
-					break;
-				case _userInfoView.retrievedBuff:
-				{
-					e.toolTip.data = "God's Fury\nIncreases all towers attack speed by "+EndlessBattleMgr.instance.addAtkSpdPct+"% for 2 waves";
-				}
-					break;
-				default:
-				{
-					break;
-				}
-			}
-		}
-		
-		//ignore
-		private function userImgLoaderErrorHandler(event:Event):void
-		{
-		}
-		
 		override protected function onInitializedComplete():void
 		{
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.addEventListener(GameDataInfoEvent.INITIALIZE_DATA_INFO, gameDataInfoUpdateHandler);
-			
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.addEventListener(GameDataInfoEvent.UPDATE_SCENE_LIFE, gameDataInfoUpdateHandler);
-			
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.addEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, gameDataInfoUpdateHandler);
-			
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.addEventListener(GameDataInfoEvent.UPDATE_SCENE_WAVE, gameDataInfoUpdateHandler);
-			
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.addEventListener(GameDataInfoEvent.UPDATE_SCENE_SCORE, gameDataInfoUpdateHandler);
-			
-			GameAGlobalManager.getInstance()
-				.gameInteractiveManager
-				.addEventListener(SceneElementFocusEvent.SCENE_ELEMENT_FOCUSED, sceneElementFocusedHandler);
-			
-			GameAGlobalManager.getInstance()
-				.gameMonsterMarchManager
-				.addEventListener(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE, waitAndReadyToMarchNExtWaveHandler);
-			GameAGlobalManager.getInstance()
-				.gameMonsterMarchManager
-				.addEventListener(GameMarchMonsterEvent.MARCH_NEXT_WAVE, marchNextWaveHandler);
+			eventDispatcher.addEventListener(GameDataInfoEvent.INITIALIZE_DATA_INFO, gameDataInfoUpdateHandler);	
+			eventDispatcher.addEventListener(GameDataInfoEvent.UPDATE_SCENE_LIFE, gameDataInfoUpdateHandler);	
+			eventDispatcher.addEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, gameDataInfoUpdateHandler);	
+			eventDispatcher.addEventListener(GameDataInfoEvent.UPDATE_SCENE_WAVE, gameDataInfoUpdateHandler);	
+			eventDispatcher.addEventListener(GameDataInfoEvent.UPDATE_SCENE_SCORE, gameDataInfoUpdateHandler);	
+			eventDispatcher.addEventListener(SceneElementFocusEvent.SCENE_ELEMENT_FOCUSED, sceneElementFocusedHandler);
+			eventDispatcher.addEventListener(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE, waitAndReadyToMarchNExtWaveHandler);
+			eventDispatcher.addEventListener(GameMarchMonsterEvent.MARCH_NEXT_WAVE, marchNextWaveHandler);
 		}
 		
 		override public function dispose():void
-		{
-			super.dispose();
-			
-			removeAllMarchMonsterFlags();
-			
-			this.removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
-			
+		{	
 			while(numChildren > 0)
 			{
 				removeChildAt(0);
 			}
 
 			_currentFocusInfoView.dispose();
+			removeChild(_currentFocusInfoView);
 			_currentFocusInfoView = null;
 
 			_fightControllBarView.dispose();
+			removeChild(_fightControllBarView);
 			_fightControllBarView = null;
 			
 			//_userInfoView.userImgLoader.removeEventListener(IOErrorEvent.IO_ERROR, userImgLoaderErrorHandler);
 			//_userInfoView.userImgLoader.source = null;
+			removeChild(_userInfoView);
 			_userInfoView = null;
-
+			
+			_effects = null;
+			
+			removeChild(_fightPauseBtn.getSkin());
 			_fightPauseBtn.removeActionEventListener();
 			_fightPauseBtn = null;
 			
+			removeChild(_fightSettingBtn.getSkin());
 			_fightSettingBtn.removeActionEventListener();
 			_fightSettingBtn = null;
 			
+			removeChild(_marchMonstersFlagLayer);
 			_marchMonstersFlagLayer.removeEventListener(MouseEvent.CLICK, marchMonstersFlagLayerMouseClickHandler);
 			_marchMonstersFlagLayer = null;
+			
+			if(_marchMonstersFlagPool && _marchMonstersFlagPool.length>0)
+			{
+				for each(var flag:MarchMonsterFlag in _marchMonstersFlagPool)
+				{
+					flag.dispose();
+				}
+			}
+			_marchMonstersFlagPool = null;
+			
+			removeChild(_newMonsterIconsView);
+			_newMonsterIconsView.dispose();
+			_newMonsterIconsView = null;
 
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.removeEventListener(GameDataInfoEvent.INITIALIZE_DATA_INFO, gameDataInfoUpdateHandler);
-
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_LIFE, gameDataInfoUpdateHandler);
+			eventDispatcher.removeEventListener(GameDataInfoEvent.INITIALIZE_DATA_INFO, gameDataInfoUpdateHandler);
+			eventDispatcher.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_LIFE, gameDataInfoUpdateHandler);	
+			eventDispatcher.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, gameDataInfoUpdateHandler);
+			eventDispatcher.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_WAVE, gameDataInfoUpdateHandler);
+			eventDispatcher.removeEventListener(SceneElementFocusEvent.SCENE_ELEMENT_FOCUSED, sceneElementFocusedHandler);
+			eventDispatcher.removeEventListener(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE, waitAndReadyToMarchNExtWaveHandler);
+			eventDispatcher.removeEventListener(GameMarchMonsterEvent.MARCH_NEXT_WAVE, marchNextWaveHandler);
 			
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_GOLD, gameDataInfoUpdateHandler);
+			_marchMonsterShortCut = null;
 			
-			GameAGlobalManager.getInstance()
-				.gameDataInfoManager
-				.removeEventListener(GameDataInfoEvent.UPDATE_SCENE_WAVE, gameDataInfoUpdateHandler);
-			
-			GameAGlobalManager.getInstance()
-				.gameInteractiveManager
-				.removeEventListener(SceneElementFocusEvent.SCENE_ELEMENT_FOCUSED, sceneElementFocusedHandler);
-			
-			GameAGlobalManager.getInstance()
-				.gameMonsterMarchManager
-				.removeEventListener(GameMarchMonsterEvent.WAIT_AND_READ_TO_MARCH_NEXT_WAVE, waitAndReadyToMarchNExtWaveHandler);
-			GameAGlobalManager.getInstance()
-				.gameMonsterMarchManager
-				.removeEventListener(GameMarchMonsterEvent.MARCH_NEXT_WAVE, marchNextWaveHandler);
+			super.dispose();
 		}
 		
 		//IGameLifecycleNotifyer
-		public function onGameStart():void
+		public function onFightStart():void
 		{
-			_fightControllBarView.onGameStart();
-			
-			_fightPauseBtn.visible = (!GlobalTemp.newGuideMockTollgateFlag || GameAGlobalManager.bTest );
-			_fightSettingBtn.visible = _fightPauseBtn.visible;
-			
-			_newMonsterIconsView.clearAll();
-			
-			GameAGlobalManager.getInstance().gameInteractiveManager.registerShortCutKeyResponser(("z").charCodeAt(),_marchMonsterShortCut);
-			GameAGlobalManager.getInstance().gameInteractiveManager.registerShortCutKeyResponser(("Z").charCodeAt(),_marchMonsterShortCut);
-			
-			SpiritIconManager.getInstance().displayMode = SpiritIconManager.HORIZONTAL;
-			SpiritIconManager.getInstance().showIcons( _spiritBlessIconContainer, 175, 24, false, SpiritBlessData.SPIRITBLESS_ADDGOODS, SpiritBlessData.SPIRITBLESS_HEROATK, SpiritBlessData.SPIRITBLESS_TOWERATK);
-			
-
+			_fightControllBarView.onFightStart();
+						
 			_userInfoView.endlessIcon.visible = EndlessBattleMgr.instance.isEndless;
 			_userInfoView.waveIcon.visible = !EndlessBattleMgr.instance.isEndless;
 			_userInfoView.drumsBuff.visible = false;
@@ -486,7 +395,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			
 			if(EndlessBattleMgr.instance.isEndless)
 			{
-				if(!_battleDrumsBtn)
+				/*if(!_battleDrumsBtn)
 				{
 					_battleDrumsBtn = new McButton;
 					_battleDrumsBtn.setSkin(new BattleDrumsBtn as MovieClip);
@@ -496,7 +405,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					_battleDrumsBtn.addActionEventListener(onBattleDrumsClick);
 				}
 				_battleDrumsBtn.visible = true;
-				_battleDrumsBtn.enabled = true;
+				_battleDrumsBtn.enabled = true;*/
 
 				_userInfoView.waveLabel.visible = false;
 				_userInfoView.waveTextField.visible = false;
@@ -525,69 +434,37 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			}
 			else
 			{
-				if(_battleDrumsBtn)
+				/*if(_battleDrumsBtn)
 				{
 					_battleDrumsBtn.visible = false;
-				}
+				}*/
 				_userInfoView.waveLabel.visible = true;
 				_userInfoView.waveTextField.visible = true;
 				_userInfoView.txtScore.visible = false;
 			}
 		}
 		
-		public function onGamePause():void
+		public function onFightPause():void
 		{
-			_fightControllBarView.onGamePause();
+			_fightControllBarView.onFightPause();
 			
 			_currentFocusInfoView.hide();	//游戏暂停的时候不会抛出焦事件，故手动隐藏掉
 		}
 
-		public function onGameResume():void
+		public function onFightResume():void
 		{
-			_fightControllBarView.onGameResume();
+			_fightControllBarView.onFightResume();
 		}
 
-		public function onGameEnd():void
+		public function onFightEnd():void
 		{
 			this.removeEventListener(Event.ENTER_FRAME, enterFrameHandler);
 			
-			removeAllMarchMonsterFlags();
-			if(_iShowTreasureTick>0)
-			{
-				clearTimeout(_iShowTreasureTick);
-				_iShowTreasureTick = 0;
-			}
-			_fightControllBarView.onGameEnd();
-			_currentFocusInfoView.hide();
-		}
-		
-		private function onBattleDrumsClick(/*event:MouseEvent*/):void
-		{
-			//EndlessBattleMgr.instance.retrieveFromFail();
-			//return;
-			var data:Array = [];
-			data.push(EndlessBattleMgr.instance.curAtkBuffLevel);
-			data.push(EndlessBattleMgr.instance.getAddBuffDiamondPriceByLvl(data[0]+1));
-			data.push(EndlessBattleMgr.instance.getAddBuffGoldPriceByLvl(data[0]+1));
-			data.push(Math.ceil((EndlessBattleConst.MAX_ATKBUFF_LVL-data[0])/EndlessBattleConst.EACH_DIAMOND_ATKBUFF_LVL).toString()
-				+"/"+(Math.ceil(EndlessBattleConst.MAX_ATKBUFF_LVL/EndlessBattleConst.EACH_DIAMOND_ATKBUFF_LVL)).toString());
-			data.push(Math.ceil((EndlessBattleConst.MAX_ATKBUFF_LVL-data[0])/EndlessBattleConst.EACH_GOOD_ATKBUFF_LVL).toString()
-				+"/"+(Math.ceil(EndlessBattleConst.MAX_ATKBUFF_LVL/EndlessBattleConst.EACH_GOOD_ATKBUFF_LVL)).toString());
+			_newMonsterIconsView.clearAll();
 			
-			if(!EndlessBattleMgr.instance.reachMaxAtkBuff)
-			{
-				GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_POP , [UI_CMD_Const.OPEN_POP , "popPanel",PopConst.BATTLE_DRUMS,data]);
-				GameAGlobalManager.getInstance().game.pause( false, false );
-			}
-		}
-		
-		public function InvisibleBattleDrumsBtn():void
-		{
-			if(_battleDrumsBtn && _battleDrumsBtn.visible)
-			{
-				_battleDrumsBtn.visible = false;
-				_battleDrumsBtn.enabled = false;
-			}
+			removeAllMarchMonsterFlags();
+			_fightControllBarView.onFightEnd();
+			_currentFocusInfoView.hide();
 		}
 		
 		public function updateEndlessDrumsBuff(bShow:Boolean,iLvl:int):void
@@ -601,32 +478,22 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			_userInfoView.retrievedBuff.visible = bShow;
 		}
-
-		//event handler
-		private function fightBookBtnClickHandler(/*event:MouseEvent*/):void
-		{
-			soundService.play(SoundID.ClickButton,SoundGroupType.Effect,1,true);
-			//GameAGlobalManager.getInstance().game.notifyToGameOver(false);
-			GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL , [UI_CMD_Const.OPEN_PANEL , "gameBookPanel" ]);
-			GameAGlobalManager.getInstance().game.pause(false,false);
-		}
 		
 		private function fightPauseBtnClickHandler(/*event:MouseEvent*/):void
 		{
 			soundService.play(SoundID.ClickButton,SoundGroupType.Effect,1,true);
-			GameAGlobalManager.getInstance().game.pause();
+			eventDispatcher.dispatchEvent(new FightStateEvent(FightStateEvent.FightPause,true));
 		}
 		
 		private function marchMonstersFlagLayerMouseClickHandler(event:MouseEvent):void
 		{
-			GameAGlobalManager.getInstance().gameMonsterMarchManager.marchNextWave();
+			monsterMarchMgr.marchNextWave();
 			var flag:MarchMonsterFlag = event.target as MarchMonsterFlag;
-			var goods:int = GameAGlobalManager.getInstance().gameDataInfoManager.earlerGolds;
-			if(flag && goods>0)
+			/*if(flag && goods>0)
 			{
 				GameAGlobalManager.getInstance().gameFightInfoRecorder.taskOpData.marchMonsterCount++;
 				playAddGoodsAnim(flag.x,flag.y+20,goods,this);
-			}
+			}*/
 			
 			/*_newMonsterIconsView.pushMonster( 141001 );
 			_newMonsterIconsView.show();*/
@@ -649,7 +516,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			pParent.addChild(_addGoodsEff);
 			var text:TextField = (_addGoodsEff.content.getChildByName("txtNum") as TextField);
 			
-			FontUtil.useFont( text, FontUtil.FONT_TYPE_BUTTON );
+			fontMgr.setTextStyle( text, FontClsName.ButtonFont );
 			if(text)
 			{
 				text.width = 100;
@@ -674,18 +541,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		private function fightSettingBtnClickHandler(/*event:MouseEvent*/):void
 		{
 			soundService.play(SoundID.ClickButton,SoundGroupType.Effect,1,true);
-			GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL ,[UI_CMD_Const.OPEN_PANEL , 'systemPanel']);
-			GameAGlobalManager.getInstance().game.pause(false, false);
+			//GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL ,[UI_CMD_Const.OPEN_PANEL , 'systemPanel']);
+			//GameAGlobalManager.getInstance().game.pause(false, false);
 		}
 		
 		private function gameDataInfoUpdateHandler(event:GameDataInfoEvent):void
 		{
-			var gameDataInfoManager:GameFightDataInfoManager = GameAGlobalManager.getInstance().gameDataInfoManager;
+			//var gameDataInfoManager:GameFightDataInfoManager = GameAGlobalManager.getInstance().gameDataInfoManager;
 			
-			var sceneLifeText:String = gameDataInfoManager.sceneLife <= 0 ? "0" : gameDataInfoManager.sceneLife.toString();
-			var sceneGoldText:String = gameDataInfoManager.sceneGold <= 0 ? "0" : gameDataInfoManager.sceneGold.toString();
-			var sceneWaveText:String =  gameDataInfoManager.sceneWaveCurrentCount.toString() + "/" + gameDataInfoManager.sceneWaveTotalCount.toString();
-			var sceneScore:String = GameAGlobalManager.getInstance().gameFightInfoRecorder.getCurrentSceneResultScore().toString();
+			var sceneLifeText:String = sceneModel.sceneLife <= 0 ? "0" : sceneModel.sceneLife.toString();
+			var sceneGoldText:String = sceneModel.sceneGoods <= 0 ? "0" : sceneModel.sceneGoods.toString();
+			var sceneWaveText:String =  monsterWaveModel.curWaveCount.toString() + "/" + monsterWaveModel.curWaveCount.toString();
+			var sceneScore:String = recorder.getCurrentSceneResultScore().toString();
 			switch(event.type)
 			{
 				case GameDataInfoEvent.INITIALIZE_DATA_INFO:
@@ -750,7 +617,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		private function waitAndReadyToMarchNExtWaveHandler(event:GameMarchMonsterEvent):void
 		{
 			this.addEventListener(Event.ENTER_FRAME, enterFrameHandler);
-			showMarchMonsterFlag(GameAGlobalManager.getInstance().gameDataInfoManager.getNextWaveVO().waveMonsterSumInfos);
+			var monsterVo:MonsterWaveVO = monsterWaveModel.getMonsterWave(monsterWaveModel.curWaveCount+1);
+			if(monsterVo)
+				showMarchMonsterFlag(monsterVo.waveMonsterSumInfos);
 		}
 		
 		private function removeAllMarchMonsterFlags():void
@@ -776,22 +645,22 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			
 			removeAllMarchMonsterFlags();
 			
-			var currentWave:int = GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount;
+			var currentWave:int = monsterWaveModel.curWaveCount;
 			if(currentWave == 1 ||(EndlessBattleMgr.instance.isEndless && EndlessBattleMgr.instance.recordWave+1 == currentWave))
 			{
-				GlobalTemp.useTime = 0;				//从出第一波怪开始进行游戏过关计时
-				GlobalTemp.tempTime = TimeManager.instance.virtualTime;
+				globalTemp.useTime = 0;				//从出第一波怪开始进行游戏过关计时
+				globalTemp.tempTime = timeMgr.virtualTime;
 
 				_fightControllBarView.notifyAllIconsIsUseable();
 			}
 			
-			if(DateUtil.isInDuration(GameSettingVar.collectTypeRewardDuration) && 1 == currentWave && !EndlessBattleMgr.instance.isEndless)
+			/*if(DateUtil.isInDuration(GameSettingVar.collectTypeRewardDuration) && 1 == currentWave && !EndlessBattleMgr.instance.isEndless)
 			{
 				_iShowTreasureTick = setTimeout(showTreasureHunterTip,15000);
-			}
+			}*/
 		}
 		
-		private function showTreasureHunterTip():void
+		/*private function showTreasureHunterTip():void
 		{
 			if(_iShowTreasureTick>0)
 			{
@@ -799,7 +668,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 				_iShowTreasureTick = 0;
 			}
 			_fightControllBarView.showTreasureHunterTip();
-		}
+		}*/
 		
 		private function enterFrameHandler(event:Event):void
 		{
@@ -808,9 +677,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			{
 				var marchMonsterFlag:MarchMonsterFlag = _marchMonstersFlagLayer.getChildAt(i) as MarchMonsterFlag;
 				
-				marchMonsterFlag.visible = !GlobalTemp.newGuideMockTollgateFlag || GlobalTemp.enableMonsterMarchFlag;
+				marchMonsterFlag.visible = !globalTemp.newGuideMockTollgateFlag || globalTemp.enableMonsterMarchFlag;
 				
-				marchMonsterFlag.setProgress(GameAGlobalManager.getInstance().gameMonsterMarchManager.getWaitNextWaveProgress());
+				marchMonsterFlag.setProgress(monsterMarchMgr.getWaitNextWaveProgress());
 			}
 		}
 		

@@ -2,24 +2,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 {
 	import com.greensock.TweenLite;
 	import com.greensock.easing.Back;
-	import com.shinezone.core.structure.controls.GameEvent;
-	import com.shinezone.core.structure.moudle.PanelData;
-	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
 	
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.utils.Dictionary;
 	
-	import framecore.structure.controls.battleCommand.Battle_CMD_Const;
-	import framecore.structure.controls.newMonster.CMD_NewMonster_Const;
-	import framecore.structure.controls.uiCommand.UI_CMD_Const;
-	import framecore.structure.model.constdata.HttpConst;
-	import framecore.structure.model.constdata.PopConst;
-	import framecore.structure.model.varMoudle.HttpVar;
+	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
 	
 	/**
 	 * 新怪头像容器 

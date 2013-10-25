@@ -147,7 +147,6 @@ package release.module.kylinFightModule.model.marchWave
 		/**
 		 * @inheritDoc 
 		 */	
-		[PreDestroy]
 		public function dispose():void
 		{
 			destroy();

@@ -11,7 +11,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic
 	public class BasicHashMapMgr extends BasicGameManager
 	{
 		protected var _hashMap:HashMap = new HashMap;
-		private var _dicTemp:Dictionary = new Dictionary;
+		private var _dicTemp:Dictionary = new Dictionary(true);
 		
 		public function BasicHashMapMgr()
 		{
@@ -26,7 +26,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic
 		override public function onFightEnd():void
 		{
 			_hashMap.eachValue(disposeEachCondition);
-			_dicTemp = new Dictionary;
+			_dicTemp = new Dictionary(true);
 			_hashMap.clear();
 		}
 		

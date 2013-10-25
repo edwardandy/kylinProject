@@ -299,7 +299,7 @@ package release.module.kylinFightModule.model.sceneElements
 		{
 			
 		}
-		[PreDestroy]
+		
 		public function dispose():void
 		{
 			super.dispose();

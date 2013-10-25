@@ -8,6 +8,8 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
 	import mainModule.model.gameData.sheetData.wave.IWaveSheetDataModel;
 	import mainModule.model.gameData.sheetData.wave.IWaveSheetItem;
+	
+	import release.module.kylinFightModule.model.state.FightState;
 
 	/**
 	 * 单机时根据配置表填充虚拟的战斗数据 
@@ -22,6 +24,8 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		public var waveModel:IWaveSheetDataModel;
 		[Inject]
 		public var subWaveModel:ISubwaveSheetDataModel;
+		[Inject]
+		public var fightState:FightState;
 		
 		public function FightRequestDataCmd()
 		{
@@ -82,6 +86,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		override protected function response():void
 		{
 			super.response();
+			fightState.state = FightState.UnInitialized;
 			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightLoadMapImg));
 		}
 	}

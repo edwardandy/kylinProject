@@ -27,12 +27,21 @@ package release.module.kylinFightModule.model.viewLayers
 		private var _towerMenuLayer:Sprite;
 		private var _mouseCursorLayer:Sprite;
 		private var _UILayer:Sprite;
+		private var _UIEffectLayer:Sprite;
 		
 		public function FightViewLayersModel()
 		{
 			super();
 		}
 		
+		/**
+		 * UI特效层 
+		 */
+		public function get UIEffectLayer():Sprite
+		{
+			return _UIEffectLayer;
+		}
+
 		public function get towerMenuLayer():Sprite
 		{
 			return _towerMenuLayer;
@@ -43,19 +52,9 @@ package release.module.kylinFightModule.model.viewLayers
 			return _UILayer;
 		}
 
-		public function set UILayer(value:Sprite):void
-		{
-			_UILayer = value;
-		}
-
 		public function get mapLayer():Sprite
 		{
 			return _mapLayer;
-		}
-
-		public function set mapLayer(value:Sprite):void
-		{
-			_mapLayer = value;
 		}
 
 		public function get mouseCursorLayer():Sprite
@@ -109,6 +108,10 @@ package release.module.kylinFightModule.model.viewLayers
 			_mouseCursorLayer.mouseChildren = false;
 			_UILayer = new Sprite;
 			_UILayer.mouseEnabled = false;
+			_UIEffectLayer = new Sprite;
+			_UIEffectLayer.mouseEnabled = false;
+			_UIEffectLayer.mouseChildren = false;
+			
 			onInitialize();
 		}
 		
@@ -127,6 +130,7 @@ package release.module.kylinFightModule.model.viewLayers
 			_groundLayer.addChild(_towerMenuLayer);
 			_groundLayer.addChild(_mouseCursorLayer);
 			mainViewLayers.fightScene.addChild(_UILayer);
+			mainViewLayers.fightScene.addChild(_UIEffectLayer);
 		}
 		/**
 		 * 销毁
@@ -144,6 +148,7 @@ package release.module.kylinFightModule.model.viewLayers
 			_mouseCursorLayer.removeChildren();		
 			mainViewLayers.fightScene.removeChildren();
 			_UILayer.removeChildren();
+			_UIEffectLayer.removeChildren();
 			
 			_mapLayer = null;
 			_groundLayer = null;
@@ -154,6 +159,7 @@ package release.module.kylinFightModule.model.viewLayers
 			_roadHitTestShape = null;
 			_mouseCursorLayer = null;
 			_UILayer = null;
+			_UIEffectLayer = null;
 		}
 	}
 }

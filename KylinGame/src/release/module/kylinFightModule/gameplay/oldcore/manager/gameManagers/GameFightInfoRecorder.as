@@ -4,7 +4,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
 	
-	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
 	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 	/**
@@ -139,8 +138,8 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		 */		
 		public function getCurrentSceneResultScore():uint
 		{	
-			return /*EndlessBattleMgr.instance.recordScore + */
-				_heroKilledUintTotalSocre + 
+			 /*EndlessBattleMgr.instance.recordScore + */
+			return _heroKilledUintTotalSocre + 
 				_magicSkillUsedTotalSocre  +
 				_propItemUsedTotalSocre;
 		}

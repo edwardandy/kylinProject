@@ -159,12 +159,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 		override public function onFightEnd():void
 		{
 			super.onFightEnd();
-		}
-
-		//IDisposeObject Interface
-		[PreDestroy]
-		override public function dispose():void
-		{	
 			disposeSceneElementsPool();
 			_sceneElementsPool = null;	
 			disposeBitmapFramePool();
@@ -183,7 +177,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 				for each(var arrObjects:Array in groupObjects)
 				{
 					for each(object in arrObjects)
-					disposeObject(object);
+						disposeObject(object);
 				}
 			}
 		}

@@ -4,9 +4,9 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	
-	import release.module.kylinFightModule.gameplay.main.MainFightScene;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureDataList;
 	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
+	import release.module.kylinFightModule.model.state.FightState;
 
 	/**
 	 * 战斗前准备完毕，开始战斗 
@@ -16,13 +16,13 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	public class FightStartupCmd extends KylinCommand
 	{
 		[Inject]
-		public var mainFightScene:MainFightScene;
-		[Inject]
 		public var fightData:IFightDynamicDataModel;
 		[Inject]
 		public var treasureList:TreasureDataList;
 		[Inject]
 		public var sceneElementsModel:ISceneElementsModel;
+		[Inject]
+		public var fightState:FightState;
 		
 		public function FightStartupCmd()
 		{
@@ -34,6 +34,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 			super.execute();
 			treasureList.initList(fightData.arrTreasureList);
 			sceneElementsModel.initBeforeFightStart();
+			fightState.state = FightState.Initialized;
 		}
 	}
 }

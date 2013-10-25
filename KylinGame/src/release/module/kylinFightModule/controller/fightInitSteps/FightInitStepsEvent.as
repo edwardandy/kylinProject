@@ -2,7 +2,11 @@ package release.module.kylinFightModule.controller.fightInitSteps
 {
 	import flash.events.Event;
 	
-	
+	/**
+	 * 战斗前初始化步骤事件 
+	 * @author Edward
+	 * 
+	 */	
 	public class FightInitStepsEvent extends Event
 	{
 		/**

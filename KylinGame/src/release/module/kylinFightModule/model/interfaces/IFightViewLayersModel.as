@@ -46,9 +46,11 @@ package release.module.kylinFightModule.model.interfaces
 		function get mapLayer():Sprite;
 		/**
 		 * 战斗UI层 
-		 * @return 
-		 * 
 		 */		
 		function get UILayer():Sprite;
+		/**
+		 * UI特效层 
+		 */
+		function get UIEffectLayer():Sprite;
 	}
 }

@@ -9,9 +9,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	
 	import kylin.echo.edward.utilities.font.FontMgr;
 	
+	import mainModule.service.loadServices.IconConst;
+	
 	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
-	import release.module.kylinFightModule.gameplay.constant.TowerDefenseGameState;
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
 	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;

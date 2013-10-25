@@ -172,7 +172,6 @@ package release.module.kylinFightModule.model.scene
 		/**
 		 * @inheritDoc 
 		 */	
-		[PreDestroy]
 		public function dispose():void
 		{
 			destroy();

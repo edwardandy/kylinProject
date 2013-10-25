@@ -73,7 +73,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 				timeTaskMgr.destoryTimeTask(_timeHandlerId);
 			_timeHandlerId = -1;
 		}
-		[PreDestroy]
+		
 		override public function dispose():void
 		{
 			super.dispose();

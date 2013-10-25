@@ -2,6 +2,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 {
 	import flash.geom.Point;
 	
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetDataModel;
+	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetItem;
+	import mainModule.service.textService.ITextTranslateService;
+	
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
 	import release.module.kylinFightModule.gameplay.oldcore.core.IFightLifecycle;
@@ -17,6 +21,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	{
 		[Inject]
 		public var treasureList:TreasureDataList;
+		[Inject]
+		public var magicModel:IMagicSkillSheetDataModel;
+		[Inject]
+		public var textMgr:ITextTranslateService;
 		
 		private var _background:FightControllBarBGView;
 		
@@ -37,7 +45,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			var strMagicTypeId:String = magicSkillTypeId.toString().substr(0,magicSkillTypeId.toString().length-1);
 			for each(var magicSkillIconView:MagicSkillIconView in _magicSkillIconViews)
 			{
-				var magicSkillTemplateInfo:MagicSkillTemplateInfo = magicSkillIconView.getMagicSkillInfo();
+				var magicSkillTemplateInfo:IMagicSkillSheetItem = magicSkillIconView.getMagicSkillInfo();
 				if(magicSkillTemplateInfo != null)
 				{
 					if(type != 0)
@@ -108,7 +116,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			//注册点是小三角指的点
 			if(treasureList.hasTreasure())
 			{
-				_treasureTip.tip = getText("hasTreasureHunter");
+				_treasureTip.tip = textMgr.translateText("hasTreasureHunter");
 				_treasureTip.visible = true;
 				_treasureTip.show();
 			}
@@ -138,39 +146,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			{
 				iconView.notifyOnGameStart();
 			}
-			
-			//--set value
-//			var i:uint = 0;
-//			var n:uint = 3;
-//			var dataN:uint = 0;
-//			
-//			dataN = towerDefenseFight.heroes.length;
-//			for(i = 0; i < n; i++)
-//			{
-//				//这里需要修改
-//				var heroTypeId:int = i > dataN - 1 ? -1 : towerDefenseFight.heroes[i];
-//				var heroElement:HeroElement = heroTypeId == -1 ? null :
-//						ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.HERO, heroTypeId, false) as HeroElement;
-//				
-//				if(heroElement != null)
-//				{
-//					heroElement.notifyLifecycleActive();
-//					heroElement.x = 300;
-//					heroElement.y = 400;
-//				}
-//
-//				getHeroIconViewByIndex(i).setHeroElement(heroElement);
-//			}
-//			
-//			dataN = towerDefenseFight.magics.length;
-//			for(i = 0; i < n; i++)
-//			{
-//				var magicSkillTypeId:int = i > dataN - 1 ? -1 : towerDefenseFight.magics[i];
-//				var magicSkill:MagicSkillTemplateInfo = magicSkillTypeId == -1 ? null :
-//					TemplateDataFactory.getInstance().getMagicSkillTemplateById(magicSkillTypeId);
-//				
-//				getMagicSkillIconViewByIndex(i).setMagicSkillInfo(magicSkill);
-//			}
 		}
 		
 		public function onFightPause():void
@@ -264,6 +239,28 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			return _magicSkillIconViews[index];
 		}
 		
+		override public function dispose():void
+		{
+			removeChildren();
+			
+			var iconView:BasicIconView = null;
+			for each(iconView in _heroIconViews)
+			{
+				iconView.dispose();
+			}
+			
+			for each(iconView in _propIconViews)
+			{
+				iconView.dispose();
+			}
+			
+			for each(iconView in _magicSkillIconViews)
+			{
+				iconView.dispose();
+			}
+			
+			super.dispose();
+		}
 		override protected function onInitialize():void
 		{
 			super.onInitialize();

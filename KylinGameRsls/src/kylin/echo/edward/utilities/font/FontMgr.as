@@ -71,5 +71,31 @@ package kylin.echo.edward.utilities.font
 				//tf.setTextFormat(fmt);
 			}
 		}
+		
+		/**
+		 * 把一个显示对象里的文本框自动嵌入字体 
+		 * @param container
+		 * 
+		 */
+		/*public function autoEmbedFonts(container:DisplayObjectContainer):void{
+			if(container == null) return;
+			var t:TextFormat;
+			var child:TextField;
+			var k:int = container.numChildren;
+			while(--k>-1){
+				var obj:Object = container.getChildAt(k);
+				if( obj is TextField){
+					child = container.getChildAt(k) as TextField;
+					t = child.getTextFormat();
+					if(ConstUtil.constInClass(t.font,Fonts)){
+						FontUtil.useFont(child,getEmbedFontNameByTextFormatFont(t.font));
+					}
+				}
+				else if ( obj is DisplayObjectContainer )
+				{
+					autoEmbedFonts( DisplayObjectContainer(obj) );
+				}
+			}
+		}*/
 	}
 }

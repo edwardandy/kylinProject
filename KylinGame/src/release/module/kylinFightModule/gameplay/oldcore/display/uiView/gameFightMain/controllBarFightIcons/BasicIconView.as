@@ -1,17 +1,16 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.BasicMouseCursor;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.IMouseCursorSponsor;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
+	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.BasicMouseCursor;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.IMouseCursorSponsor;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
 
 	public class BasicIconView extends BasicView implements ISceneFocusElement, IMouseCursorSponsor
 	{
@@ -31,7 +30,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		private var _myMouseClickSprite:Sprite;
 		
-		protected var _iconTip:IconTip = null;
+		//protected var _iconTip:IconTip = null;
 		
 		public function BasicIconView()
 		{
@@ -211,41 +210,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			stateChanged();
 		}
 		
-		protected function onMouseOverHandler( e:Event ):void
-		{
-			if ( focusTips )
-			{
-				if ( _iconTip == null )
-				{
-					_iconTip = new IconTip();
-					_iconTip.y = 10;
-				}
-				
-				addChild( _iconTip );
-				_iconTip.x = myIconBitmapBackground.width >> 1;
-				
-				_iconTip.tip = focusTips;
-				
-				_iconTip.visible = true;
-			}
-		}
-		
-		protected function onMouseOutHandler( e:Event ):void
-		{
-			if ( _iconTip )
-			{
-				_iconTip.visible = false;
-			}
-		}
-		
 		override protected function onAddToStage():void
 		{
 			super.onAddToStage();
 			
 			_myMouseClickSprite.addEventListener(MouseEvent.CLICK, iconMouseClickHandler);
-			
-			_myMouseClickSprite.addEventListener( MouseEvent.MOUSE_OVER, onMouseOverHandler );
-			_myMouseClickSprite.addEventListener( MouseEvent.MOUSE_OUT, onMouseOutHandler );
 
 		}
 		
@@ -254,9 +223,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			super.onRemoveFromStage();
 			
 			_myMouseClickSprite.removeEventListener(MouseEvent.CLICK, iconMouseClickHandler);
-			
-			_myMouseClickSprite.removeEventListener( MouseEvent.MOUSE_OVER, onMouseOverHandler );
-			_myMouseClickSprite.removeEventListener( MouseEvent.MOUSE_OUT, onMouseOutHandler );
 
 			GameAGlobalManager.getInstance().gameInteractiveManager.disFocusTargetElement(this);
 		}

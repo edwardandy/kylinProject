@@ -499,7 +499,7 @@ package release.module.kylinFightModule.service.sceneElements
 		 */		
 		public function onFightEnd():void
 		{
-			dispose();
+			renderMgr.dettachFromTicker(this);
 		}
 		/**
 		 * @inheritDoc 

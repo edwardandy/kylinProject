@@ -3,11 +3,16 @@ package release.module.kylinFightModule.controller
 	
 	import mainModule.controller.netCmds.httpCmds.HttpEvent;
 	
-	import release.module.kylinFightModule.controller.fightInitSteps.FightRequestDataCmd;
 	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;
 	import release.module.kylinFightModule.controller.fightInitSteps.FightLoadMapCfgCmd;
 	import release.module.kylinFightModule.controller.fightInitSteps.FightLoadMapImgCmd;
+	import release.module.kylinFightModule.controller.fightInitSteps.FightRequestDataCmd;
 	import release.module.kylinFightModule.controller.fightInitSteps.FightStartupCmd;
+	import release.module.kylinFightModule.controller.fightState.FightEndCmd;
+	import release.module.kylinFightModule.controller.fightState.FightPauseCmd;
+	import release.module.kylinFightModule.controller.fightState.FightResumeCmd;
+	import release.module.kylinFightModule.controller.fightState.FightStartCmd;
+	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
 	
 	import robotlegs.bender.extensions.eventCommandMap.api.IEventCommandMap;
 
@@ -19,6 +24,11 @@ package release.module.kylinFightModule.controller
 			cmdMap.map(FightInitStepsEvent.FightStartup,FightInitStepsEvent).toCommand(FightStartupCmd).once();
 			cmdMap.map(FightInitStepsEvent.FightLoadMapImg,FightInitStepsEvent).toCommand(FightLoadMapImgCmd).once();
 			cmdMap.map(FightInitStepsEvent.FightLoadMapCfg,FightInitStepsEvent).toCommand(FightLoadMapCfgCmd).once();
+			
+			cmdMap.map(FightStateEvent.FightStart,FightStateEvent).toCommand(FightStartCmd).once();
+			cmdMap.map(FightStateEvent.FightEnd,FightStateEvent).toCommand(FightEndCmd).once();
+			cmdMap.map(FightStateEvent.FightPause,FightStateEvent).toCommand(FightPauseCmd);
+			cmdMap.map(FightStateEvent.FightResume,FightStateEvent).toCommand(FightResumeCmd);
 		}
 	}
 }

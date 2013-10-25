@@ -4,7 +4,7 @@ package release.module.kylinFightModule.gameplay.oldcore.core
 	import io.smash.time.TimeManager;
 	
 	//游戏中所有基于帧的tick（包括动画、运动等）通知都是通过该类完成
-	public final class TickSynchronizer implements IDisposeObject
+	public final class TickSynchronizer
 	{
 		[Inject]
 		public var timeMgr:TimeManager;
@@ -36,12 +36,6 @@ package release.module.kylinFightModule.gameplay.oldcore.core
 		{
 			//timeMgr.removeTickedObject(value);
 			timeMgr.removeAnimatedObject(value);
-		}
-		
-		//IDisposeObject
-		public function dispose():void
-		{
-			
 		}
 	}
 }

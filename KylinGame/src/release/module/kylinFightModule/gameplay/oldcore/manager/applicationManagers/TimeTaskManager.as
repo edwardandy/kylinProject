@@ -3,7 +3,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
  
     import io.smash.time.TimeManager;
     
-    import release.module.kylinFightModule.gameplay.oldcore.core.IDisposeObject;
     import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.BasicGameManager;
 
     public class TimeTaskManager extends BasicGameManager
@@ -39,14 +38,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.applicationMana
 		{
 			super.onFightEnd();
 			clearTimeTasksTimeHandleIdMapAndPool();
-		}
-		//IDisposeObject Interface
-		[PreDestroy]
-		override public function dispose():void
-		{
-			//_timer.stop();
-			//_timer.removeEventListener(TimerEvent.TIMER, timerTimeHandler);
-			//_timer = null;	
 			_timeTasksTimeHandleIdMap = null;
 			_timeTasksPool = null;
 		}

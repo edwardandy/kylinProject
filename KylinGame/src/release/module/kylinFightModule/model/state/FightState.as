@@ -24,13 +24,18 @@ package release.module.kylinFightModule.model.state
 		 */		
 		public static const PauseFight:int = 3;
 		/**
-		 * 战斗继续 
+		 * 战斗进行
 		 */		
-		public static const ResumeFight:int = 4;
+		public static const RunningFight:int = 4;
 		/**
 		 * 战斗结束 
 		 */		
 		public static const EndFight:int = 5;
+		/**
+		 * 战斗退出 
+		 */		
+		public static const QuitFight:int = 6;
+		
 		private var _state:int;
 		
 		public function FightState()

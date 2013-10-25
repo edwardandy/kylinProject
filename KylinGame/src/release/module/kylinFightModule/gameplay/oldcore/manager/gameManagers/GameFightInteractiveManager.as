@@ -29,7 +29,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		[Inject]
 		public var timeMgr:TimeManager;
 		[Inject]
-		public var gameMouseMgr:GameFightMouseCursorManager
+		public var gameMouseMgr:GameFightMouseCursorManager;
 		
 		private var _currentFocusdSceneElement:ISceneFocusElement;
 		private var _dicShortCutKeyResponser:Dictionary = new Dictionary(true);
@@ -101,7 +101,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			setCurrentFocusdElement(null);
 			
 		}
-		[PreDestroy]
+		
 		override public function dispose():void
 		{
 			super.dispose();
