@@ -34,11 +34,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			}
 			arrIds.sort(Array.NUMERIC | Array.DESCENDING);
 			myUpdateCircleItem0 = new TowerSkillUpCircleItem(arrIds.length>0?uint(arrIds[0]):0,myTowerTemplateInfo.configId, onCircleMenuItemSkillUpClick, this);
+			injector.injectInto(myUpdateCircleItem0);
 			myUpdateCircleItem0.x = -38;
 			myUpdateCircleItem0.y = -50+15;
 			addChild(myUpdateCircleItem0);
 			
 			myUpdateCircleItem1 = new TowerSkillUpCircleItem(arrIds.length>1?uint(arrIds[1]):0,myTowerTemplateInfo.configId, onCircleMenuItemSkillUpClick, this);
+			injector.injectInto(myUpdateCircleItem1);
 			myUpdateCircleItem1.x = 38;
 			myUpdateCircleItem1.y = -50+15;
 			addChild(myUpdateCircleItem1);

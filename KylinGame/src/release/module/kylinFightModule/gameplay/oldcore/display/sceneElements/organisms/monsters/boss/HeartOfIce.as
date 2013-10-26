@@ -1,9 +1,13 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.boss
 {
+	import mainModule.model.gameData.sheetData.skill.monsterSkill.IMonsterSkillSheetItem;
+	
+	import release.module.kylinFightModule.gameplay.constant.BufferFields;
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	import release.module.kylinFightModule.gameplay.constant.GameMovieClipFrameNameType;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.constant.identify.BufferID;
 	import release.module.kylinFightModule.gameplay.constant.identify.MonsterID;
 	import release.module.kylinFightModule.gameplay.constant.identify.SkillID;
@@ -29,6 +33,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		public function HeartOfIce(typeId:int)
 		{
 			super(typeId);
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
+			injector.injectInto(_splitCd);
+			injector.injectInto(_notBeAttackCd);
 		}
 		
 		override protected function onLifecycleActivate():void

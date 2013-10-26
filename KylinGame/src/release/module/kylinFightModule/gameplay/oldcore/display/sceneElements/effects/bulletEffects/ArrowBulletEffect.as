@@ -20,6 +20,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			super.onInitialize();
 			
 			_myStopABulletDispearCDTimer = new SimpleCDTimer(GameFightConstant.STOP_A_BULLET_DISPEAR_TIME);
+			injector.injectInto(_myStopABulletDispearCDTimer);
 		}
 		
 		override protected function onLifecycleActivate():void

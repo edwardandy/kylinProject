@@ -1,10 +1,13 @@
 package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 {
+	import flash.events.IEventDispatcher;
+	
 	import mainModule.model.gameData.sheetData.monster.IMonsterSheetDataModel;
 	import mainModule.model.gameData.sheetData.monster.IMonsterSheetItem;
 	
+	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;
+	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
 	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
@@ -26,6 +29,8 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		public var monsterModel:IMonsterSheetDataModel;
 		[Inject]
 		public var monsterWaveModel:IMonsterWaveModel;
+		[Inject]
+		public var eventDispatcher:IEventDispatcher;
 		
 		public function GameFightSuccessAndFailedDetector()
 		{
@@ -48,11 +53,11 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 				}
 				else */if(!isBoss)
 				{
-					GameAGlobalManager.getInstance().game.pause(false,false);
+					eventDispatcher.dispatchEvent(new FightStateEvent(FightStateEvent.FightPause,false));
 					//GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL , [UI_CMD_Const.OPEN_PANEL , "deathRescue"]);
 					return;
 				}
-				GameAGlobalManager.getInstance().game.notifyToGameOver(false);
+				eventDispatcher.dispatchEvent(new FightInitStepsEvent(FightInitStepsEvent.FightGameOver,false));
 			}
 			else if(sceneElementsModel.getAllEnemyCampOrganismElementsCount() == 0)
 			{
@@ -113,7 +118,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		
 		private function onPlayPlotEnd():void
 		{
-			GameAGlobalManager.getInstance().game.notifyToGameOver(true);
+			eventDispatcher.dispatchEvent(new FightInitStepsEvent(FightInitStepsEvent.FightGameOver,true));;
 		}
 	}
 }

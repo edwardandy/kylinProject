@@ -33,14 +33,19 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		public function ZiRanZhiRuMagicSkill(typeId:int)
 		{
-			super(typeId);
-			
+			super(typeId);	
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_BOTTOM;
 			_hasBuffer1 = myMagicLevel > 1;
 			
 			//if(myMagicSkillTemplateInfo.level>2)
 			//{
-				setScaleRatioType(OrganismBodySizeType.SIZE_MIDDLE);
+			setScaleRatioType(OrganismBodySizeType.SIZE_MIDDLE);
 			//}
 			
 			if(!myEffectParameters)
@@ -50,8 +55,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			{
 				_benifitLifePercent = myEffectParameters.maxLifeRecover / 100;
 			}
-			
-			
 		}
 		
 		//这里的运动是反向运动

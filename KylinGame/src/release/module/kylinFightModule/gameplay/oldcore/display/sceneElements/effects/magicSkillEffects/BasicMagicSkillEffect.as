@@ -52,9 +52,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			//法术大部分都是顶层的，有部分是底层的
 			this.myElemeCategory = GameObjectCategoryType.MAGIC_SKILL;
 			this.myObjectTypeId = typeId;
-			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_TOP;
-			
-			myMagicSkillTemplateInfo = magicModel.getMagicSkillSheetById(typeId);
+			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_TOP;	
+		}
+		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
+			myMagicSkillTemplateInfo = magicModel.getMagicSkillSheetById(myObjectTypeId);
 			_myMagicLevel = myMagicSkillTemplateInfo.level;
 			myIsMonomerMagic = myMagicSkillTemplateInfo.releaseWay == 3;
 			
@@ -98,7 +102,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			super.onInitialize();
 			
 			myMagicSkillCDTimer = new SimpleCDTimer(myMagicSkillTemplateInfo.duration);
+			injector.injectInto(myMagicSkillCDTimer);
 			myPerSceondCDTimer = new SimpleCDTimer(1000);
+			injector.injectInto(myPerSceondCDTimer);
 		}
 
 		override protected function onLifecycleActivate():void

@@ -4,9 +4,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	import com.greensock.easing.Back;
 	
 	import flash.events.Event;
+	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
 	
+	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
+	
+	import robotlegs.bender.framework.api.IInjector;
 	
 	/**
 	 * 新怪头像容器 
@@ -15,6 +19,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	 */	
 	public class NewMonsterIconContainerView extends BasicView
 	{
+		[Inject]
+		public var eventDispatcher:IEventDispatcher;
+		[Inject]
+		public var injector:IInjector;
+		
 		public function NewMonsterIconContainerView()
 		{
 			super();
@@ -101,7 +110,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			{
 				if ( i >= _icons.length )
 				{
-					_icons.push( new MonsterIconView() );
+					_icons.push(injector.instantiateUnmapped(MonsterIconView) );
 					_icons[i].x = 30;
 					_icons[i].y = 40 + i * 80;
 				}
@@ -146,7 +155,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			{
 				if ( i >= _icons.length )
 				{
-					_icons.push( new MonsterIconView() );
+					_icons.push( injector.instantiateUnmapped(MonsterIconView) );
 					_icons[i].x = 30;
 					_icons[i].y = 40 + i * 80;
 				}
@@ -177,11 +186,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					TweenLite.to( icon, 0.2, { scaleX:0, scaleY:0, onComplete:refreshView } );
 				}
 				
-				PanelData.panelInteraction( "towerDefenseFight", "setGamePauseStatus", true );
+				eventDispatcher.dispatchEvent(new FightStateEvent(FightStateEvent.FightPause,false));
 //				GameAGlobalManager.getInstance().gamePopupManager.open2CloseGamePauseView(true);
 //				GameAGlobalManager.getInstance().gameDataInfoManager.gameFightId
-				GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_MONSTER_DEBUT, [HttpConst.HTTP_REQUEST, icon.monID, GameAGlobalManager.getInstance().gameDataInfoManager.gameFightId]);
-				GameEvent.getInstance().sendEvent(CMD_NewMonster_Const.CMD_SHOW_NEW_MONSTER , [icon.monID]);
+				//GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_MONSTER_DEBUT, [HttpConst.HTTP_REQUEST, icon.monID, GameAGlobalManager.getInstance().gameDataInfoManager.gameFightId]);
+				//GameEvent.getInstance().sendEvent(CMD_NewMonster_Const.CMD_SHOW_NEW_MONSTER , [icon.monID]);
 			}
 		}
 		

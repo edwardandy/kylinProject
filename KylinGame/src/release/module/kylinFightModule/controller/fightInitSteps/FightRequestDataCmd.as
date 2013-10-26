@@ -8,6 +8,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
 	import mainModule.model.gameData.sheetData.wave.IWaveSheetDataModel;
 	import mainModule.model.gameData.sheetData.wave.IWaveSheetItem;
+	import mainModule.service.netServices.httpServices.HttpRequestDataFormat;
 	
 	import release.module.kylinFightModule.model.state.FightState;
 
@@ -35,7 +36,9 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		override protected function initRequestParam():void
 		{
 			super.initRequestParam();
+			requestParam.vecData.push(new HttpRequestDataFormat("fight","request",[]));
 			requestParam.bVirtual = true;
+			requestParam.bNeedRespon = true;
 		}
 			
 		override protected function get virtualResponData():Array

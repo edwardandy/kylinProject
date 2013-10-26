@@ -1,60 +1,47 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons
 {
-	import com.shinezone.core.structure.controls.GameEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
-	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.ShortCutKeyResponser.IShortCutKeyResponser;
-	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GraphicsUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
-	import com.shinezone.utils.Reflection;
-	
 	import flash.display.Bitmap;
 	import flash.display.Graphics;
 	import flash.display.Shape;
 	import flash.events.Event;
-	import flash.events.MouseEvent;
+	import flash.events.IEventDispatcher;
 	import flash.filters.GlowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
-	import flash.text.engine.RenderingMode;
 	
-	import flashx.textLayout.formats.TextAlign;
+	import kylin.echo.edward.utilities.font.FontMgr;
 	
-	import framecore.main.TextDataManager;
-	import framecore.structure.controls.heroCommand.Hero_CMD_Const;
-	import framecore.structure.model.constdata.HttpConst;
-	import framecore.structure.model.constdata.IconConst;
-	import framecore.structure.model.constdata.NewbieConst;
-	import framecore.structure.model.user.TemplateDataFactory;
-	import framecore.structure.model.user.UserData;
-	import framecore.structure.model.user.commonLog.CommonLog;
-	import framecore.structure.model.user.hero.HeroData;
-	import framecore.structure.model.user.hero.HeroInfo;
-	import framecore.structure.model.user.item.ItemData;
-	import framecore.structure.model.user.item.ItemInfo;
-	import framecore.structure.model.user.item.ItemTemplateInfo;
-	import framecore.structure.model.user.tollgate.TollgateData;
-	import framecore.structure.views.newguidPanel.NewbieGuideManager;
-	import framecore.tools.alert.Alert;
-	import framecore.tools.alert.AlertConst;
-	import framecore.tools.alert.AlertUtil;
-	import framecore.tools.font.FontUtil;
-	import framecore.tools.icon.IconUtil;
-	import framecore.tools.js.callJSFunc;
-	import framecore.tools.loadmgr.LoadMgr;
-	import framecore.tools.logger.logch;
-	import framecore.tools.tips.ToolTipConst;
-	import framecore.tools.tips.ToolTipEvent;
-	import framecore.tools.tips.ToolTipManager;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicItem;
+	import mainModule.model.gameData.sheetData.hero.IHeroSheetDataModel;
+	import mainModule.model.gameData.sheetData.hero.IHeroSheetItem;
+	import mainModule.service.loadServices.IconConst;
+	
+	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.HeroElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.ShortCutKeyResponser.IShortCutKeyResponser;
+	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.GraphicsUtil;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
+	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
+	
+	import utili.font.FontClsName;
 
 	public class HeroIconView extends CDAbleIconView implements IShortCutKeyResponser
 	{
-		private var _heroInfo:HeroInfo = null;
+		[Inject]
+		public var heroData:IHeroDynamicDataModel;
+		[Inject]
+		public var heroModel:IHeroSheetDataModel;
+		[Inject]
+		public var sceneElementsService:ISceneElementsService;
+		[Inject]
+		public var eventDispatcher:IEventDispatcher;
+		
+		private var _heroInfo:IHeroDynamicItem;
+		private var _heroSheet:IHeroSheetItem;
 		private var _heroElement:HeroElement;
 		
 		private var myGreenBlood:Bitmap;
@@ -66,7 +53,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		private var _lastBloodPct:int = 100;
 		
 		private var _lvTF:TextField = null;
-		private var _reviveTip:ReviveTip = null;
+		//private var _reviveTip:ReviveTip = null;
 		
 		private var _lvFilter:GlowFilter = null;
 		private var _reviveFilter:GlowFilter = null;
@@ -82,20 +69,20 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			super.notifyOnGameStart();
 			
-			var currentHeroIds:Array = UserData.getInstance().userExtendInfo.currentHeroIds;
+			var currentHeroIds:Array = heroData.arrHeroIdsInFight;
 			if(currentHeroIds && myIconIndex < currentHeroIds.length)
 			{
-				_heroInfo = HeroInfo(HeroData.getInstance().getOwnInfoById(currentHeroIds[myIconIndex]));
+				_heroInfo = heroData.getHeroDataById(currentHeroIds[myIconIndex]);
+				_heroSheet = heroModel.getHeroSheetById(currentHeroIds[myIconIndex]);
 				_lvTF.text = "Lv." + _heroInfo.level;
-				_heroElement = GameAGlobalManager.getInstance().groundSceneHelper.findHeroElementByHeroTypeId(_heroInfo.configId);
+				_heroElement = sceneElementsService.findHeroElementByHeroTypeId(_heroSheet.configId);
 				_heroElement.addEventListener(SceneElementEvent.ON_FOCUS, heroElementOnFocusHandler);
 				_heroElement.addEventListener(SceneElementEvent.ON_DISFOCUS, heroElementOnDisFocusHandler);
 				_heroElement.addEventListener(SceneElementEvent.ON_LIFE_CHANGED, heroElementOnLifeChangedHandler);
+								
+				setIconBitmapData(loadService.getIconBitmapData("Hero_" + _heroSheet.configId + "_" + IconConst.ICON_SIZE_CIRCLE));
 				
-				//setIconBitmapData(Reflection.createBitmapData("Hero_" + _heroInfo.configId + "_" + IconConst.ICON_SIZE_CIRCLE + ".png"));
-				setIconBitmapData(LoadMgr.instance.getIconBitmapData("Hero_" + _heroInfo.configId + "_" + IconConst.ICON_SIZE_CIRCLE));
-				
-				GameAGlobalManager.getInstance().gameInteractiveManager.registerShortCutKeyResponser((myIconIndex+1).toString().charCodeAt(),this);
+				interactiveMgr.registerShortCutKeyResponser((myIconIndex+1).toString().charCodeAt(),this);
 				
 				_lastBloodPct = 100;
 				drawBloodMask(myGreenMask.graphics,1);
@@ -128,20 +115,20 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			super.onFocusChanged();
 			
-			if(!myIsInFocus)
+			/*if(!myIsInFocus)
 			{
 				logch("NewbieGuideManager","HeroRealseCancled:"+_heroInfo.configId);
 				NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_USED_OR_CANCEL_MAGIC,{"param":[_heroInfo.configId]});
-			}
+			}*/
 		}
 		
 		override public function render(iElapse:int):void
 		{
-			if ( myIconBitmap.bitmapData && !CommonLog.instance.getValue( CommonLog.BATTLE_FIRST_HERO_GUIDE ) && TollgateData.currentLevelId == 100110311 )
+			/*if ( myIconBitmap.bitmapData && !CommonLog.instance.getValue( CommonLog.BATTLE_FIRST_HERO_GUIDE ) && TollgateData.currentLevelId == 100110311 )
 			{
 				NewbieGuideManager.getInstance().startCondition( NewbieConst.CONDITION_START_FIRST_HERO );
 				CommonLog.instance.updateValue( CommonLog.BATTLE_FIRST_HERO_GUIDE, true );
-			}
+			}*/
 			super.render( iElapse );
 		}
 		
@@ -187,20 +174,20 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			_lvFilter = new GlowFilter( 0x44210F, 1, 4, 4, 100 );
 			_reviveFilter = new GlowFilter( 0, 1, 2, 2, 100 );
 			_lvTF.filters = [_lvFilter];
-			FontUtil.useFont( _lvTF, FontUtil.FONT_TYPE_BUTTON );
+			FontMgr.instance.setTextStyle( _lvTF, FontClsName.ButtonFont );
 			
-			_reviveTip = new ReviveTip();
+			/*_reviveTip = new ReviveTip();
 			addChild( _reviveTip );
 			_reviveTip.x = 42;
 			_reviveTip.y = 14;
-			_reviveTip.visible = false;
+			_reviveTip.visible = false;*/
 		}
 		
 		override public function get focusTips():String
 		{
 			if ( _heroInfo )
 			{
-				return _heroInfo.heroTemplateInfo.getName() + " [" + ["1", "2", "3"][myIconIndex] + "]";
+				return _heroSheet.getName() + " [" + ["1", "2", "3"][myIconIndex] + "]";
 			}
 			
 			return null;
@@ -217,8 +204,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					_lvTF.y = myIconBitmapBackground.height - 11;
 					_lvTF.defaultTextFormat = tff;
 					_lvTF.filters = [_lvFilter];
-					var currentHeroIds:Array = UserData.getInstance().userExtendInfo.currentHeroIds;
-					_heroInfo = HeroInfo(HeroData.getInstance().getOwnInfoById(currentHeroIds[myIconIndex]));
+					var currentHeroIds:Array = heroData.arrHeroIdsInFight;
+					_heroInfo = heroData.getHeroDataById(currentHeroIds[myIconIndex]);
 					_lvTF.text = "Lv." + _heroInfo.level;
 				}
 				else
@@ -228,14 +215,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					_lvTF.y = myIconBitmapBackground.height - 23;
 					_lvTF.defaultTextFormat = tff;
 					_lvTF.text = "Click for\nInstant Revive";
-					addChild( _reviveTip );
-					_reviveTip.time = Math.ceil(_heroElement.rebirthCd.getCDCoolDownLeftTime() * 0.001);
+					//addChild( _reviveTip );
+					//_reviveTip.time = Math.ceil(_heroElement.rebirthCd.getCDCoolDownLeftTime() * 0.001);
 				}
 				super.drawCurrentCDTimerProgressGraphics( _heroElement.rebirthCd );
 			}
 		}
 		
-		override protected function onMouseOverHandler(e:Event):void
+		/*override protected function onMouseOverHandler(e:Event):void
 		{
 			if ( _heroElement )
 			{
@@ -248,13 +235,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					_reviveTip.visible = true;
 				}
 			}
-		}
+		}*/
 		
-		override protected function onMouseOutHandler(e:Event):void
+		/*override protected function onMouseOutHandler(e:Event):void
 		{
 			_reviveTip.visible = false;
 			super.onMouseOutHandler( e );
-		}
+		}*/
 		
 		override protected function stateChanged():void
 		{
@@ -265,15 +252,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		override protected function onIconMouseClick():void
 		{
-			NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_USE_ITEM_MAGIC,{"param":[_heroInfo.configId],"target":this});
-			GameAGlobalManager.getInstance().gameInteractiveManager.setCurrentFocusdElement(_heroElement);
-			onMouseOutHandler( null );
+			//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_USE_ITEM_MAGIC,{"param":[_heroInfo.configId],"target":this});
+			interactiveMgr.setCurrentFocusdElement(_heroElement);
+			//onMouseOutHandler( null );
 			
 			if ( !_heroElement.rebirthCd.getIsCDEnd() )
 			{
-				GameAGlobalManager.getInstance().game.pause( false, false );
+				eventDispatcher.dispatchEvent(new FightStateEvent(FightStateEvent.FightPause,false));
 				
-				var itemInfo:ItemInfo = ItemData.getInstance().getOwnInfoById( 131060 ) as ItemInfo;
+				/*var itemInfo:ItemInfo = ItemData.getInstance().getOwnInfoById( 131060 ) as ItemInfo;
 				var msg:String = TextDataManager.getInstance().getPanelConfigXML("alertPanel").heroRevive;
 				var msgs:Array = msg.split( "@" );
 				var alert:Alert;
@@ -291,7 +278,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					alert.getDiaBtn().label = TemplateDataFactory.getInstance().getItemTemplateById( 131060 ).buyPriceMoney + "";
 					alert.getStyle()["numTF"].text = "0 / 1";
 					FontUtil.useFont( alert.getStyle()["numTF"], FontUtil.FONT_TYPE_NORMAL );
-				}
+				}*/
 			}
 		}
 		
@@ -300,7 +287,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			setIsOnFocus(true);
 		}
 		
-		private function heroReviveHandler( detail:int ):void
+		/*private function heroReviveHandler( detail:int ):void
 		{
 			if ( detail == Alert.OK )
 			{
@@ -313,7 +300,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					ItemData.getInstance().useItemInfo( 131060 );
 					_heroElement.forceToResurrection();
 					
-//					GameAGlobalManager.getInstance().gamePopupManager.open2CloseGamePauseView(false);
 					GameAGlobalManager.getInstance().game.resume();
 				}
 				else
@@ -341,12 +327,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			}
 			else
 			{
-//				GameAGlobalManager.getInstance().gamePopupManager.open2CloseGamePauseView(false);
 				GameAGlobalManager.getInstance().game.resume();
 			}
-		}
+		}*/
 				
-		private function confirmCharge( detail:int ):void
+		/*private function confirmCharge( detail:int ):void
 		{
 			if ( detail == Alert.OK )
 			{
@@ -354,11 +339,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			}
 			else
 			{
-//				GameAGlobalManager.getInstance().stage.mouseChildren = true;
-//				GameAGlobalManager.getInstance().gamePopupManager.open2CloseGamePauseView(false);
 				GameAGlobalManager.getInstance().game.resume();
 			}
-		}
+		}*/
 		
 		private function heroElementOnDisFocusHandler(event:SceneElementEvent):void
 		{
@@ -367,15 +350,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		public function notifyShortCutKeyDown():void
 		{
-			if ( GameAGlobalManager.getInstance().gameInteractiveManager.currentFocusdSceneElement == _heroElement )
+			if ( interactiveMgr.currentFocusdSceneElement == _heroElement )
 			{
-				GameAGlobalManager.getInstance().gameInteractiveManager.setCurrentFocusdElement( null );
+				interactiveMgr.setCurrentFocusdElement( null );
 			}
 			else
 			{
 				onIconMouseClick();
 			}
-			ToolTipManager.getInstance().hide();
+			//ToolTipManager.getInstance().hide();
 		}
 		//血条要变化
 		private function heroElementOnLifeChangedHandler(event:SceneElementEvent):void

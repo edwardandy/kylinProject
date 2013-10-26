@@ -37,6 +37,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SummonByOrganisms;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.soldiers.SupportSoldier;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
 	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.GameFightMoveLogicMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.MoveState;
@@ -69,6 +70,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		public var groundEffModel:IGroundEffSheetDataModel
 		[Inject]
 		public var filterMgr:GameFilterManager;
+		[Inject]
+		public var mainUI:GameFightMainUIView;
 		//单位模板信息
 		protected var myMoveFighterInfo:IBaseMoveFighterSheetItem;		
 		
@@ -128,7 +131,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		public function BasicOrganismElement(typeId:int)
 		{
 			super();
-			this.myObjectTypeId = typeId;
+			this.myObjectTypeId = typeId;	
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			myMoveState = new MoveState(this);
 			myMoveLogic = moveLogicMgr.getMoveLogicByCategoryAndId(myElemeCategory,myObjectTypeId);
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_MIDDLE;
@@ -158,7 +167,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			myFireLocalPoint.y = /*fightState.isFlyUnit ? -(_myBodyHeight/2 + GameFightConstant.FLY_UNIT_OFF_HEIGTH):*/-(myBodyHeight>>1);
 			
 			myIdelAnimationCDTimer = new SimpleCDTimer(0);	
+			injector.injectInto(myIdelAnimationCDTimer);
 			_dieBodyStayCDTimer = new SimpleCDTimer(GameFightConstant.NORMAL_DIE_BODY_STAY_TIME);
+			injector.injectInto(_dieBodyStayCDTimer);
 			
 			_mySpecialEffectAnimationsLayer = new Sprite();
 			_mySpecialEffectAnimationsLayer.mouseEnabled = false;
@@ -232,7 +243,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				myFightState.searchArea = GameFightConstant.SEARCH_ENEMY_RANGE;
 			myFightState.isFlyUnit = myMoveFighterInfo.type == 2;
 			myResurrectionCDTimer = new SimpleCDTimer(myFightState.rebirthTime);
-			
+			injector.injectInto(myResurrectionCDTimer);
 			resetBooldBar();
 			
 			_myBloodBar.visible = true;
@@ -635,7 +646,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 					
 					sceneModel.updateSceneGold((this as BasicMonsterElement).monsterTemplateInfo.rewardGoods);
 					if(!byTarget || GameObjectCategoryType.HERO != byTarget.elemeCategory)
-						GameAGlobalManager.getInstance().game.gameFightMainUIView.playAddGoodsAnim(0,-bodyHeight,(this as BasicMonsterElement).monsterTemplateInfo.rewardGoods,this,false,0xecda3e);
+						mainUI.playAddGoodsAnim(0,-bodyHeight,(this as BasicMonsterElement).monsterTemplateInfo.rewardGoods,this,false,0xecda3e);
 				}
 				
 				if(byTarget != null && byTarget.isAlive) 

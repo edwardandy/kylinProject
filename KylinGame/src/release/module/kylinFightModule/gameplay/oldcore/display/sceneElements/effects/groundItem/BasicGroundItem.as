@@ -84,7 +84,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			var data:TreasureData = treasureList.popTreasure();
 			if(data)
-				new OpenTreasureBoxEff(data.itemId,data.num,this.x,this.y,data.idx);
+			{
+				const eff:OpenTreasureBoxEff = new OpenTreasureBoxEff(data.itemId,data.num,this.x,this.y,data.idx);
+				injector.injectInto(eff);
+			}
 			destorySelf();
 		}
 	}

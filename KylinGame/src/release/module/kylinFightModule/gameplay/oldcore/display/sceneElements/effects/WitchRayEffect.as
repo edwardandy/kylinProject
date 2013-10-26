@@ -19,7 +19,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 	{
 		private var _hurtScalePerFrame:Number;
 		private var _firePoint:PointVO;
-		private var _atkDurationCd:SimpleCDTimer = new SimpleCDTimer;
+		[Inject]
+		public var _atkDurationCd:SimpleCDTimer;
 		
 		public function WitchRayEffect(typeId:int)
 		{

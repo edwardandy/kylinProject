@@ -6,10 +6,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 	import release.module.kylinFightModule.gameplay.constant.OrganismDieType;
 	import release.module.kylinFightModule.gameplay.constant.Skill.SkillResultTyps;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 
 	public class BaoFengXueMagicSkill extends BasicMagicSkillEffect
 	{
+		[Inject]
+		public var mainUI:GameFightMainUIView;
 		//private var _hasBuffer2:Boolean = false;
 		//private var _buffer2Probability:Number = 0;
 		
@@ -21,8 +24,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		public function BaoFengXueMagicSkill(typeId:int)
 		{
-			super(typeId);
-			
+			super(typeId);	
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			if(!myEffectParameters)
 				return;
 			var strDmg:String = myEffectParameters[SkillResultTyps.DMG];
@@ -32,9 +40,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			/*_hasBuffer2 = myMagicLevel >= 5;
 			if(_hasBuffer2)
 			{
-				_buffer2Probability = myEffectParameters.odd / 100;
+			_buffer2Probability = myEffectParameters.odd / 100;
 			}
-*/			
+			*/			
 			_hasReDuceOtherMagicCDTime = myEffectParameters.skillCdTime!=null;
 		}
 		
@@ -46,9 +54,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			
 			if(_hasReDuceOtherMagicCDTime)
 			{
-				GameAGlobalManager.getInstance()
-					.game.gameFightMainUIView.fightControllBarView
-						.reduceMagicSkillCDTime(myObjectTypeId, Math.abs(myEffectParameters.skillCdTime), -1);
+				mainUI.fightControllBarView.reduceMagicSkillCDTime(myObjectTypeId, Math.abs(myEffectParameters.skillCdTime), -1);
 			}
 		}
 		

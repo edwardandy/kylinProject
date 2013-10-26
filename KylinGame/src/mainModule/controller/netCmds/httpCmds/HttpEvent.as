@@ -31,6 +31,10 @@ package mainModule.controller.netCmds.httpCmds
 		 * 游戏初始数据 
 		 */		
 		public static const Http_GameInit:String = "gameInit";
+		/**
+		 * 进入战斗前请求战斗数据
+		 */		
+		public static const FightRequestData:String = "fightRequestData";
 		
 		private var _iHttpType:int;
 		private var _body:Object;

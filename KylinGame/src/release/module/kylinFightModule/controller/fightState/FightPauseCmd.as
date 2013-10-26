@@ -4,6 +4,8 @@ package release.module.kylinFightModule.controller.fightState
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.GamePauseView;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 	import release.module.kylinFightModule.model.state.FightState;
 	import release.module.kylinFightModule.model.state.IFightLifecycleGroup;
 
@@ -20,6 +22,12 @@ package release.module.kylinFightModule.controller.fightState
 		public var fightState:FightState;
 		[Inject]
 		public var timeMgr:TimeManager;
+		[Inject]
+		public var pauseView:GamePauseView;
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
+		[Inject]
+		public var event:FightStateEvent;
 		
 		public function FightPauseCmd()
 		{
@@ -32,6 +40,8 @@ package release.module.kylinFightModule.controller.fightState
 			fightState.state = FightState.PauseFight;
 			timeMgr.stop();
 			fightLifecycleGroup.onFightPause();
+			if(event.body)
+				fightViewModel.UILayer.addChild(pauseView);
 		}
 	}
 }

@@ -38,6 +38,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			super.onInitialize();
 			_disappearTime = new SimpleCDTimer(GameFightConstant.SCENE_TIP_DISAPPEAR_TIME);
+			injector.injectInto(_disappearTime);
 			myBodySkin.y = -GameFightConstant.SCENE_TIP_HEIGHT;
 //			myBodySkin.smoothing = true;
 		}		

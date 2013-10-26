@@ -28,13 +28,19 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		public function DaDiZhenchanMagicSkill(typeId:int)
 		{
-			super(typeId);		
+			super(typeId);			
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_BOTTOM;
 			
 			_mainAttackTotalTimes = myEffectParameters.times;
 			_hasAftershockState = myEffectParameters.dmg;
-
+			
 			if(_hasAftershockState)
 			{
 				var dmgStrArr:Array = String(myEffectParameters.dmg).split("-");
@@ -52,6 +58,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		{
 			super.onInitialize();
 			_randomStartCDTimer = new SimpleCDTimer(0);
+			injector.injectInto(_randomStartCDTimer);
 		}
 		
 		override protected function onLifecycleActivate():void

@@ -14,9 +14,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		public function CondottiereSoldier(typeId:int)
 		{
-			myMoveFighterInfo = soldierModel.getSoldierSheetById(typeId);
+			super(typeId);	
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			myMoveFighterInfo = soldierModel.getSoldierSheetById(myObjectTypeId);
 			
-			super(typeId);
+			super.onPostConstruct();
 			
 			this.myElemeCategory = GameObjectCategoryType.CONDOTTIERE_SOLDIER;
 		}

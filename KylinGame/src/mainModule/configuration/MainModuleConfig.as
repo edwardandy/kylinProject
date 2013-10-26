@@ -9,6 +9,7 @@ package mainModule.configuration
 	import mainModule.controller.MainModuleCommandsStartUp;
 	import mainModule.controller.gameInitSteps.GameInitStepEvent;
 	import mainModule.model.MainModuleModelsStartUp;
+	import mainModule.modularity.MainModularityStartUp;
 	import mainModule.service.MainModuleServicesStartUp;
 	import mainModule.startUp.MainModuleInjectStartUp;
 	import mainModule.view.MainModuleViewMediaterStartUp;
@@ -71,6 +72,7 @@ package mainModule.configuration
 			new MainModuleInjectStartUp(this.injector);
 			new MainModuleCommandsStartUp(this.eventCommandMap);
 			new MainModuleViewMediaterStartUp(this.mediatorMap);
+			injector.instantiateUnmapped(MainModularityStartUp);
 			
 			//startup
 			context.afterInitializing(startup);

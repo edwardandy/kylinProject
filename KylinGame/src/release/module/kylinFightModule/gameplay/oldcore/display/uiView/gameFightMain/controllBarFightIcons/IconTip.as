@@ -1,12 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons
 {
-	import com.shinezone.towerDefense.fight.constants.GameFightConstant;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import com.shinezone.utils.Reflection;
-	
 	import flash.display.DisplayObject;
 	import flash.display.Graphics;
-	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.geom.Point;
@@ -15,11 +10,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
-	import flashx.textLayout.formats.TextAlign;
-	
-	import framecore.structure.model.constdata.GameConst;
-	import framecore.tools.font.FontUtil;
-	import framecore.tools.tips.BasicToolTip;
+	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	
 	public class IconTip extends Sprite
 	{

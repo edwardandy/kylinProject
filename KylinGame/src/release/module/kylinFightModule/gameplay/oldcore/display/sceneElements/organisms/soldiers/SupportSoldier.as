@@ -10,7 +10,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	 */
 	public class SupportSoldier extends CondottiereSoldier
 	{
-		private var _lifeCd:SimpleCDTimer = new SimpleCDTimer();
+		[Inject]
+		public var _lifeCd:SimpleCDTimer;
 		protected var myShareCenterPt:PointVO = new PointVO;
 		
 		public function SupportSoldier(typeId:int)

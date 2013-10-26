@@ -19,7 +19,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.BasicBuildingCircleMenu;
 	import release.module.kylinFightModule.gameplay.oldcore.events.GameDataInfoEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 
 	public class BasicBuildingElement extends BasicBufferAttacher implements IBuildingCircleMenuOwner

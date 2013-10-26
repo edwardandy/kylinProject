@@ -27,6 +27,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			myObjectTypeId = typeId;
 		}
 		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
+			
+		}
+		
 		override protected function get bodySkinResourceURL():String
 		{
 			return GameObjectCategoryType.SPECIAL + "_" + myObjectTypeId;

@@ -6,9 +6,12 @@ package mainModule.model
 	import mainModule.model.gameData.dynamicData.fight.FightDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.hero.HeroDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.heroSkill.HeroSkillDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.heroSkill.IHeroSkillDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.interfaces.IDynamicDataDictionaryModel;
+	import mainModule.model.gameData.dynamicData.item.IItemDynamicDataModel;
+	import mainModule.model.gameData.dynamicData.item.ItemDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.magicSkill.IMagicSkillDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.magicSkill.MagicSkillDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicDataModel;
@@ -110,12 +113,13 @@ package mainModule.model
 			inject.map(ITowerLevelupSheetDataModel).toSingleton(TowerLevelupSheetDataModel);
 			//动态数据映射
 			inject.map(IDynamicDataDictionaryModel).toSingleton(DynamicDataDictionaryModel);
-			inject.map(HeroDynamicDataModel).asSingleton();
+			inject.map(IHeroDynamicDataModel).toSingleton(HeroDynamicDataModel);
 			inject.map(IFightDynamicDataModel).toSingleton(FightDynamicDataModel);
 			inject.map(IHeroSkillDynamicDataModel).toSingleton(HeroSkillDynamicDataModel);
 			inject.map(IMagicSkillDynamicDataModel).toSingleton(MagicSkillDynamicDataModel);
 			inject.map(ITowerDynamicDataModel).toSingleton(TowerDynamicDataModel);
 			inject.map(IUserDynamicDataModel).toSingleton(UserDynamicDataModel);
+			inject.map(IItemDynamicDataModel).toSingleton(ItemDynamicDataModel);
 		}	
 	}
 }

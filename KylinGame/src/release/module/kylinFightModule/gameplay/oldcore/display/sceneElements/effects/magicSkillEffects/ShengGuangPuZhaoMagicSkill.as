@@ -26,8 +26,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		
 		public function ShengGuangPuZhaoMagicSkill(typeId:int)
 		{
-			super(typeId);
-			
+			super(typeId);	
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			var benifitBloodStrArr:Array = String(myEffectParameters.life).split("-");
 			_minBenifitBlood = benifitBloodStrArr[0];
 			_maxBenifitBlood = benifitBloodStrArr[1];
@@ -39,7 +44,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 				_hurtEnemyMinBlood = hurtBloodStrArr[0];
 				_hurtEnemyMaxBlood = hurtBloodStrArr[1];
 			}
-
+			
 			_isNeedAttachInvincibilityBufferEffect = myMagicLevel == 6;
 			_isNeedImmediatelyResurrectionFriendlyUints = myMagicLevel >= 5;
 		}

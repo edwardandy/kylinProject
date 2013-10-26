@@ -31,6 +31,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		public function BlackWindSkillRes(typeId:int)
 		{
 			super(typeId);
+			
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
+			
 			myMoveState = new MoveState(this);
 			myMoveLogic = moveLogicMgr.getMoveLogicByCategoryAndId(myElemeCategory,myObjectTypeId);
 		}

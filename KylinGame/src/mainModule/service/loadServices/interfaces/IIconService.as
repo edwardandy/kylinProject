@@ -31,6 +31,6 @@ package mainModule.service.loadServices.interfaces
 		 * @param configId
 		 * @param size
 		 */
-		function loadIcon(container:DisplayObjectContainer,typeStr:String,configId:int,size:String,suffix:String = ".png"):IAssetsLoaderListener;
+		function loadIcon(container:DisplayObjectContainer,typeStr:String,configId:int,size:String,suffix:String = ".png",bShowQuality:Boolean=true):IAssetsLoaderListener;
 	}
 }

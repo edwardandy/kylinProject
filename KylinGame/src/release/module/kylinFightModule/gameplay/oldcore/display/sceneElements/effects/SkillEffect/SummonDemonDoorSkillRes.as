@@ -34,6 +34,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_BOTTOM;
 		}
 		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
+			injector.injectInto(_marchCd);
+		}
+		
 		override protected function beginToShow():void
 		{
 			myBodySkin.gotoAndPlay2(GameMovieClipFrameNameType.APPEAR + GameMovieClipFrameNameType.FRAME_NAME_SUFFIX_START,

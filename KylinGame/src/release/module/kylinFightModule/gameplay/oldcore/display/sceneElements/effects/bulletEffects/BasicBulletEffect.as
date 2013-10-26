@@ -21,7 +21,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
-	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
 	import release.module.kylinFightModule.utili.structure.PointVO;
 
 	public class BasicBulletEffect extends BasicBodySkinSceneElement//extends BasicHurtEffect implements IOrganismSkiller
@@ -66,11 +65,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			this.myElemeCategory = GameObjectCategoryType.BULLET;
 			this.myObjectTypeId = typeId;
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_TOP;
-			
-			myBlletTemplateInfo = weaponModel.getWeaponSheetById(typeId);
-			
-			//myAttackType = myBlletTemplateInfo.type;		
-			
+		}
+		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
+			myBlletTemplateInfo = weaponModel.getWeaponSheetById(myObjectTypeId);				
 			onConstructCmp();
 		}
 		

@@ -36,7 +36,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			super.onInitialize();
 			
 			_detectEnemyCDTimer = new SimpleCDTimer(200);//0.2
-			
+			injector.injectInto(_detectEnemyCDTimer);
 			myBodySkin.y = -YI_CI_YUAN_ZHI_MENMAGIC_SKILL_HEIGHT;
 		}
 		

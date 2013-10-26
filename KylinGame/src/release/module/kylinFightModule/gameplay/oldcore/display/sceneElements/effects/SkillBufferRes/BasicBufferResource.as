@@ -35,6 +35,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			super();
 			myElemeCategory = GameObjectCategoryType.ORGANISM_SKILL_BUFFER;
 			myObjectTypeId = typeId;
+			
+		}
+		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
 			_buffInfo = buffModel.getBuffSheetById(myObjectTypeId);
 		}
 		

@@ -31,5 +31,9 @@ package mainModule.model.gameData.dynamicData
 		 * 用户的动态数据 
 		 */		
 		public static const UserData:String = "userData";
+		/**
+		 * 道具的动态数据 
+		 */		
+		public static const ItemData:String = "itemData";
 	}
 }

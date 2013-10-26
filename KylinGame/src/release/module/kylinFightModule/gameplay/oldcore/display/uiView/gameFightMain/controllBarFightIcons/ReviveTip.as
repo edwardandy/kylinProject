@@ -1,7 +1,5 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons
 {
-	import com.shinezone.utils.Reflection;
-	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.text.TextField;
@@ -9,9 +7,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	
-	import flashx.textLayout.formats.TextAlign;
-	
-	import framecore.tools.font.FontUtil;
+	import kylin.echo.edward.utilities.Reflection;
 	
 	/**
 	 * HeroReviveTip 

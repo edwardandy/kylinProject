@@ -11,7 +11,7 @@ package mainModule.service.gameDataServices.helpServices
 	 * @author Edward
 	 * 
 	 */	
-	public class TollgateService extends KylinActor
+	public class TollgateService extends KylinActor implements ITollgateService
 	{
 		[Inject]
 		public var tollgateModel:ITollgateSheetDataModel;

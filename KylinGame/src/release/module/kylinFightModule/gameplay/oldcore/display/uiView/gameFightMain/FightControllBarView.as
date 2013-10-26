@@ -1,7 +1,5 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain
 {
-	import flash.geom.Point;
-	
 	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetDataModel;
 	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetItem;
 	import mainModule.service.textService.ITextTranslateService;
@@ -13,9 +11,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.CDAbleIconView;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.HeroIconView;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.MagicSkillIconView;
-	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.MonsterWarnTip;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons.PropIconView;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureDataList;
+	
+	import robotlegs.bender.framework.api.IInjector;
 
 	public final class FightControllBarView extends BasicView implements IFightLifecycle
 	{
@@ -25,6 +24,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		public var magicModel:IMagicSkillSheetDataModel;
 		[Inject]
 		public var textMgr:ITextTranslateService;
+		[Inject]
+		public var injector:IInjector;
 		
 		private var _background:FightControllBarBGView;
 		
@@ -100,7 +101,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			}
 		}
 		
-		private var _treasureTip:MonsterWarnTip;
+		/*private var _treasureTip:MonsterWarnTip;
 		public function showTreasureHunterTip():void
 		{
 			var pt:Point = new Point(_heroIconViews[0].width>>1,0);
@@ -120,11 +121,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 				_treasureTip.visible = true;
 				_treasureTip.show();
 			}
-			/*else
-			{
-				_treasureTip.tip = getText("hasnotTreasureHunter");
-			}*/
-		}
+		}*/
 		
 		//IGameLifecycleNotifyer
 		public function onFightStart():void
@@ -158,9 +155,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		public function onFightEnd():void
 		{
-			if(_treasureTip && contains(_treasureTip))
+			/*if(_treasureTip && contains(_treasureTip))
 				removeChild(_treasureTip);
-			_treasureTip = null;
+			_treasureTip = null;*/
 			
 			var iconView:BasicIconView = null;
 			for each(iconView in _heroIconViews)
@@ -271,21 +268,21 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			this.y = GameFightConstant.SCENE_MAP_HEIGHT - _background.height;
 			
 			//hero
-			var heroIconView0:HeroIconView = new HeroIconView();
+			var heroIconView0:HeroIconView = injector.instantiateUnmapped(HeroIconView);
 			heroIconView0.setIconIndex(0);
 			heroIconView0.x = 4;
 			heroIconView0.y = 3;
 			_heroIconViews[0] = heroIconView0;
 			addChild(heroIconView0);
 			
-			var heroIconView1:HeroIconView = new HeroIconView();
+			var heroIconView1:HeroIconView = injector.instantiateUnmapped(HeroIconView);
 			heroIconView1.setIconIndex(1);
 			heroIconView1.x = 84;
 			heroIconView1.y = 3;
 			_heroIconViews[1] = heroIconView1;
 			addChild(heroIconView1);
 			
-			var heroIconView2:HeroIconView = new HeroIconView();
+			var heroIconView2:HeroIconView = injector.instantiateUnmapped(HeroIconView);
 			heroIconView2.setIconIndex(2);
 			heroIconView2.x = 164;
 			heroIconView2.y = 3;
@@ -293,28 +290,28 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			addChild(heroIconView2);
 			
 			//Prop
-			var propIconView0:PropIconView = new PropIconView();
+			var propIconView0:PropIconView = injector.instantiateUnmapped(PropIconView);
 			propIconView0.setIconIndex(0);
 			propIconView0.x = 245;
 			propIconView0.y = 26;
 			_propIconViews[0] = propIconView0;
 			addChild(propIconView0);
 			
-			var propIconView1:PropIconView = new PropIconView();
+			var propIconView1:PropIconView = injector.instantiateUnmapped(PropIconView);
 			propIconView1.setIconIndex(1);
 			propIconView1.x = 301;
 			propIconView1.y = 26;
 			_propIconViews[1] = propIconView1;
 			addChild(propIconView1);
 			
-			var propIconView2:PropIconView = new PropIconView();
+			var propIconView2:PropIconView = injector.instantiateUnmapped(PropIconView);
 			propIconView2.setIconIndex(2);
 			propIconView2.x = 357;
 			propIconView2.y = 26;
 			_propIconViews[2] = propIconView2;
 			addChild(propIconView2);
 			
-			var propIconView3:PropIconView = new PropIconView();
+			var propIconView3:PropIconView = injector.instantiateUnmapped(PropIconView);
 			propIconView3.setIconIndex(3);
 			propIconView3.x = 413;
 			propIconView3.y = 26;
@@ -322,21 +319,21 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			addChild(propIconView3);
 			
 			//magic
-			var magicSkillIconView0:MagicSkillIconView = new MagicSkillIconView();
+			var magicSkillIconView0:MagicSkillIconView = injector.instantiateUnmapped(MagicSkillIconView);
 			magicSkillIconView0.setIconIndex(0);
 			magicSkillIconView0.x = 590;
 			magicSkillIconView0.y = 25;
 			_magicSkillIconViews[0] = magicSkillIconView0;
 			addChild(magicSkillIconView0);
 			
-			var magicSkillIconView1:MagicSkillIconView = new MagicSkillIconView();
+			var magicSkillIconView1:MagicSkillIconView = injector.instantiateUnmapped(MagicSkillIconView);
 			magicSkillIconView1.setIconIndex(1);
 			magicSkillIconView1.x = 647;
 			magicSkillIconView1.y = 25;
 			_magicSkillIconViews[1] = magicSkillIconView1;
 			addChild(magicSkillIconView1);
 			
-			var magicSkillIconView2:MagicSkillIconView = new MagicSkillIconView();
+			var magicSkillIconView2:MagicSkillIconView = injector.instantiateUnmapped(MagicSkillIconView);
 			magicSkillIconView2.setIconIndex(2);
 			magicSkillIconView2.x = 703;
 			magicSkillIconView2.y = 25;

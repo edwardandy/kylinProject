@@ -25,6 +25,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.IMouseCursorSponsor;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
 	import release.module.kylinFightModule.gameplay.oldcore.events.SceneElementEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
@@ -63,11 +64,19 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		private var _lastMoveTick:int = -1;
 		
 		public function HeroElement(typeId:int)
-		{	
-			this.myElemeCategory = GameObjectCategoryType.HERO;
+		{		
 			super(typeId);
-			myHeroInfo = heroData.getHeroDataById(typeId);
-			myMoveFighterInfo = heroModel.getHeroSheetById(typeId);
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			this.myElemeCategory = GameObjectCategoryType.HERO;
+			
+			super.onPostConstruct();
+			
+			myHeroInfo = heroData.getHeroDataById(myObjectTypeId);
+			myMoveFighterInfo = heroModel.getHeroSheetById(myObjectTypeId);
 			_bNeedRebirthAnim = true;
 			myFocusTipEnable = false;
 		}
@@ -77,7 +86,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			sceneModel.updateSceneGold(monster.monsterTemplateInfo.heroRewardGoods*(1+myFightState.addGoodsPct*0.01));
 			
-			GameAGlobalManager.getInstance().game.gameFightMainUIView.playAddGoodsAnim(0,-monster.bodyHeight
+			mainUI.playAddGoodsAnim(0,-monster.bodyHeight
 				,monster.monsterTemplateInfo.rewardGoods+monster.monsterTemplateInfo.heroRewardGoods,monster,false,0xeb5d3c);
 			
 			recorderMgr.addHeroKillUintSocre(monster.monsterTemplateInfo.deadScore);
@@ -89,6 +98,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			super.onInitialize();
 			myIdelRandomAnimationCDTimer = new SimpleCDTimer(0);
+			injector.injectInto(myIdelRandomAnimationCDTimer);
 		}
 		
 		override public function dispose():void
@@ -177,7 +187,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			myFightState.searchArea = myMoveFighterInfo.searchArea;
 			myFightState.range = myMoveFighterInfo.atkRange;
 			myFightState.cdTime = myMoveFighterInfo.atkInterval;
-			myFightState.skillAtk = heroSheet.skillAtk + myHeroInfo.level*heroSheet.skillAtkGrowth;
+			//myFightState.skillAtk = heroSheet.skillAtk + myHeroInfo.level*heroSheet.skillAtkGrowth;
 			myFightState.magicDefense = myMoveFighterInfo.magicDef;
 			myFightState.maxAtk = myMoveFighterInfo.maxAtk + myHeroInfo.level*heroSheet.maxAtkGrowth + myHeroInfo.level*heroSheet.potencyAtkGrowth;
 			myFightState.maxlife = myMoveFighterInfo.life + myHeroInfo.level*heroSheet.lifeGrowth + myHeroInfo.level*heroSheet.potencyLifeGrowth;

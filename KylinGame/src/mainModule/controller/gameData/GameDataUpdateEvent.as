@@ -26,6 +26,11 @@ package mainModule.controller.gameData
 		 */		
 		public static const GameDataUpdate_MagicSkillData:String = "gameDataUpdate_MagicSkillData";
 		/**
+		 * 道具数据更新 
+		 */		
+		public static const GameDataUpdate_ItemData:String = "gameDataUpdate_ItemData";
+		
+		/**
 		* 游戏动态数据更新事件
 		* @author Edward
 		* 

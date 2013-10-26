@@ -6,11 +6,14 @@ package release.module.kylinFightModule.configuration
 	
 	import io.smash.time.TimeManager;
 	
+	import mainModule.controller.netCmds.httpCmds.HttpEvent;
+	
 	import release.module.kylinFightModule.controller.FightModuleCommandsStartUp;
 	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;
 	import release.module.kylinFightModule.gameplay.FightGamePlayStartUp;
 	import release.module.kylinFightModule.gameplay.main.MainFightScene;
 	import release.module.kylinFightModule.model.FightModuleModelsStartUp;
+	import release.module.kylinFightModule.modularity.FightModularityStartUp;
 	import release.module.kylinFightModule.service.FightModuleServicesStartUp;
 	
 	import robotlegs.bender.extensions.contextView.ContextView;
@@ -61,14 +64,15 @@ package release.module.kylinFightModule.configuration
 			new FightModuleModelsStartUp(injector);
 			new FightModuleServicesStartUp(injector);
 			new FightGamePlayStartUp(injector);
-			
+			injector.instantiateUnmapped(FightModularityStartUp);
 			//startup
 			context.afterInitializing(startup);
 		}
 		
 		private function startup():void
 		{	
-			dispatcher.dispatchEvent(new FightInitStepsEvent(FightInitStepsEvent.FightRequestData));
+			//dispatcher.dispatchEvent(new FightInitStepsEvent(FightInitStepsEvent.FightRequestData));
+			dispatcher.dispatchEvent(new HttpEvent(HttpEvent.FightRequestData));
 		}
 	}
 }

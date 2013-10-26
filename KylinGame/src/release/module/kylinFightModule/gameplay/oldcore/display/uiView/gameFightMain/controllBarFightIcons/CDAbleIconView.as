@@ -1,30 +1,34 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons
 {
-	import com.shinezone.core.resource.ClassLibrary;
-	import com.shinezone.towerDefense.fight.constants.GameObjectCategoryType;
-	import com.shinezone.towerDefense.fight.constants.identify.MagicID;
-	import release.module.kylinFightModule.gameplay.oldcore.core.IRenderAble;
-	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.GraphicsUtil;
-	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
-	import flash.display.BlendMode;
 	import flash.display.MovieClip;
 	import flash.display.Shape;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	
-	import framecore.tools.behavior.displayUtility.DisplayUtility;
-	import framecore.tools.loadmgr.LoadMgr;
+	import io.smash.time.IRenderAble;
+	
+	import kylin.echo.edward.utilities.display.DisplayUtility;
+	
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
+	
+	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
+	import release.module.kylinFightModule.gameplay.constant.identify.MagicID;
+	import release.module.kylinFightModule.gameplay.oldcore.core.TickSynchronizer;
+	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
+	
+	import robotlegs.bender.framework.api.IInjector;
 
 	public class CDAbleIconView extends BasicIconView implements IRenderAble
 	{
+		[Inject]
+		public var tickMgr:TickSynchronizer;
+		[Inject]
+		public var loadService:ILoadAssetsServices;
+		[Inject]
+		public var injector:IInjector;
+		
 		protected var myIconUseCDTimer:SimpleCDTimer;
 		protected var myIconUseCDTime:uint = 0;
 		
@@ -75,8 +79,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		public final function resetCDAbleIconViewCDTime():void
 		{
 			//gaojian
-			if(GameAGlobalManager.bTest)
-				return;
+			/*if(GameAGlobalManager.bTest)
+				return;*/
 			if(myIconUseCDTime > 0)
 			{
 				myIconUseCDTimer.resetCDTime();
@@ -98,7 +102,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			if(!_mcResetCDEff)
 			{
 				//_mcResetCDEff = ClassLibrary.getInstance().getMovieClip(GameObjectCategoryType.MAGIC_SKILL+"_"+MagicID.Magic_Vortex);
-				_mcResetCDEff = LoadMgr.instance.domainMgr.getMovieClipByDomain(GameObjectCategoryType.MAGIC_SKILL+"_"+MagicID.Magic_Vortex);
+				
+				_mcResetCDEff = loadService.domainMgr.getMovieClipByDomain(GameObjectCategoryType.MAGIC_SKILL+"_"+MagicID.Magic_Vortex);
 				_mcResetCDEff.x = myIconBitmapBackground.width * 0.5;
 				_mcResetCDEff.y = myIconBitmapBackground.height * 0.5;
 			}
@@ -132,14 +137,14 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			_greyIcon.y = myIconBitmap.y;
 			_myIconUseCDProgressShape.x = _greyIcon.x;
 			_myIconUseCDProgressShape.y = _greyIcon.y;
-			DisplayUtility.makeGrey( _greyIcon, true );
+			DisplayUtility.instance.makeGrey( _greyIcon, true );
 			if(value != null)
 			{
-				TickSynchronizer.getInstance().attachToTicker(this);
+				tickMgr.attachToTicker(this);
 			}
 			else
 			{
-				TickSynchronizer.getInstance().dettachFromTicker(this);
+				tickMgr.dettachFromTicker(this);
 			}
 		}
 		
@@ -186,6 +191,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			super.onInitialize();
 			
 			myIconUseCDTimer = new SimpleCDTimer(myIconUseCDTime);
+			injector.injectInto(myIconUseCDTimer);
 			
 			_myIconUseCDProgressShape = new Shape();
 			addChild(_myIconUseCDProgressShape);
@@ -199,12 +205,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			return !myIconUseCDTimer.getIsCDEnd() || 
 				super.getIsInValidIconMouseClick(); 
-		}
-		
-		//RenderAble
-		public function update(iElapse:int):void
-		{
-			
 		}
 		
 		public function render(iElapse:int):void

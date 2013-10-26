@@ -16,13 +16,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		protected var _mySkillBufferEffecstLayer:Sprite = null;
 		protected var _mySkillBufferBottomLayer:Sprite = null;
 		protected var _buffStates:BufferStateMgr;
-		
-		
-		
+
 		public function BasicBufferAttacher()
 		{
 			super();
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			_buffStates = new BufferStateMgr(this);
+			injector.injectInto(_buffStates);
 		}
 		
 		override protected function onInitialize():void

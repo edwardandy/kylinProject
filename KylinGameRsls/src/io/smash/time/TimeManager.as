@@ -391,7 +391,7 @@ package io.smash.time
                 
                 if (list[i].listener == object)
                 {
-					logger.warn("This object has already been added to the time manager.");
+					logger.debug("This object has already been added to the time manager.");
                     //Logger.warn(object, "AddProcessObject", "This object has already been added to the process manager.");
                     return;
                 }
@@ -444,7 +444,7 @@ package io.smash.time
                     return true;
                 }
             }
-			logger.warn("This object has not been added to the time manager.");
+			logger.debug("This object has not been added to the time manager.");
 			return false;
             //Logger.warn(object, "RemoveProcessObject", "This object has not been added to the process manager.");
         }
@@ -513,7 +513,7 @@ package io.smash.time
             if (tickCount >= MAX_TICKS_PER_FRAME && !suppressSafety && !disableSlowWarning)
             {
                 // By default, only show when profiling.
-				logger.warn("Exceeded maximum number of ticks for frame (" + elapsed.toFixed() + "ms dropped) .");
+				logger.debug("Exceeded maximum number of ticks for frame (" + elapsed.toFixed() + "ms dropped) .");
                 //Logger.warn(this, "advance", "Exceeded maximum number of ticks for frame (" + elapsed.toFixed() + "ms dropped) .");
             }
             

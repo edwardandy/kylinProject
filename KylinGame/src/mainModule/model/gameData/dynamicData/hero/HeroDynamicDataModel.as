@@ -33,7 +33,6 @@ package mainModule.model.gameData.dynamicData.hero
 		public function getHeroDataById(id:uint):IHeroDynamicItem
 		{
 			return getItemById(id) as IHeroDynamicItem;
-			var i:IHeroDynamicItem;
 		}
 		/**
 		 * @inheritDoc

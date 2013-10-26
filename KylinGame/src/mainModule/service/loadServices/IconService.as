@@ -10,6 +10,7 @@ package mainModule.service.loadServices
 	
 	import mainModule.model.gameData.sheetData.item.IItemSheetDataModel;
 	import mainModule.model.gameData.sheetData.item.IItemSheetItem;
+	import mainModule.service.loadServices.interfaces.IIconService;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 
 	/**
@@ -17,7 +18,7 @@ package mainModule.service.loadServices
 	 * @author Edward
 	 * 
 	 */	
-	public class IconService
+	public class IconService implements IIconService
 	{
 		[Inject]
 		public var loadService:ILoadAssetsServices;
@@ -110,13 +111,13 @@ package mainModule.service.loadServices
 		 * @param configId
 		 * @param size
 		 */
-		public function loadIcon(container:DisplayObjectContainer,typeStr:String,configId:int,size:String,suffix:String = ".png"):IAssetsLoaderListener
+		public function loadIcon(container:DisplayObjectContainer,typeStr:String,configId:int,size:String,suffix:String = ".png",bShowQuality:Boolean=true):IAssetsLoaderListener
 		{
 			DisplayUtility.instance.removeAllChild(container);
 			var item:IItemSheetItem = itemModel.getItemSheetById(configId);
 			const path:String = typeStr + "_"+ (item.resId>0?item.resId:configId) + "_"+size;
 			var listener:IAssetsLoaderListener = loadService.addIconItem(path);
-			checkIconLoad(container,path,listener,configId);
+			checkIconLoad(container,path,listener,bShowQuality?configId:0);
 			return listener;
 		}
 		

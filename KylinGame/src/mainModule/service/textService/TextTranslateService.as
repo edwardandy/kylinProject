@@ -8,7 +8,7 @@ package mainModule.service.textService
 	 * @author Edward
 	 * 
 	 */	
-	public class TextTranslateService extends KylinActor
+	public class TextTranslateService extends KylinActor implements ITextTranslateService
 	{
 		public function TextTranslateService()
 		{

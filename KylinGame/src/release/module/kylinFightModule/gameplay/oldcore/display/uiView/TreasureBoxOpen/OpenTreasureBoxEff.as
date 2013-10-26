@@ -8,7 +8,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.Treasure
 	import mainModule.model.gameData.dynamicData.user.IUserDynamicDataModel;
 	import mainModule.model.gameData.sheetData.item.IItemSheetDataModel;
 	import mainModule.model.gameData.sheetData.item.IItemSheetItem;
+	import mainModule.service.loadServices.IconConst;
+	import mainModule.service.loadServices.interfaces.IIconService;
 	
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 	import release.module.kylinFightModule.utili.tween.BezierTween;
 
@@ -24,6 +27,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.Treasure
 		public var userData:IUserDynamicDataModel;
 		[Inject]
 		public var sceneModel:ISceneDataModel;
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
+		[Inject]
+		public var iconService:IIconService;
 		
 		private var _itemId:uint;
 		private var _num:int;
@@ -63,8 +70,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.Treasure
 			_icon.x = _startPt.x;
 			_icon.y = _startPt.y;
 			_icon.scaleX = _icon.scaleY = 0;
-			IconUtil.loadIcon(_icon,IconConst.ICON_TYPE_ITEM,_itemId,IconConst.ICON_SIZE_SMALL, ".png", false );
-			GameAGlobalManager.getInstance().game.addChild(_icon);
+			iconService.loadIcon(_icon,IconConst.ICON_TYPE_ITEM,_itemId,IconConst.ICON_SIZE_SMALL,".png", false );
+			fightViewModel.UIEffectLayer.addChild(_icon);
 		}
 		
 		private function scaleIcon():void
@@ -94,9 +101,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.Treasure
 			switch(type)
 			{
 				case 5:
-					return GameVar.coinSpPos;
+					return GOOD_POSITION;//GameVar.coinSpPos;
 				case 10:
-					return GameVar.diamondSpPos;
+					return GOOD_POSITION;//GameVar.diamondSpPos;
 				case 13:
 					return GOOD_POSITION;
 				default:
@@ -124,15 +131,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.Treasure
 					break;
 				default:
 					name = itemTempInfo.getName()+" + ";
-					ItemData.getInstance().putItemIds([_itemId],_num);
+					//ItemData.getInstance().putItemIds([_itemId],_num);
 					break;
 			}
 			
 			//new TextFlyEffect(name + _num,_icon.parent,_icon.x,_icon.y);
-			TextFlyEffectMgr.instance.genTextFlyEffect(name + _num,_icon.parent,_icon.x,_icon.y);
+			//TextFlyEffectMgr.instance.genTextFlyEffect(name + _num,_icon.parent,_icon.x,_icon.y);
 			_icon.parent && _icon.parent.removeChild(_icon);
 			
-			GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_TREASURE_DROP, [HttpConst.HTTP_REQUEST, _idx, GameAGlobalManager.getInstance().gameDataInfoManager.gameFightId]);
+			//GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_TREASURE_DROP, [HttpConst.HTTP_REQUEST, _idx, GameAGlobalManager.getInstance().gameDataInfoManager.gameFightId]);
 		}
 	}
 }

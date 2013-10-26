@@ -78,8 +78,13 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_TargetDmgPctToLife;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults.SkillResult_WeaknessAtk;
 	
+	import robotlegs.bender.framework.api.IInjector;
+	
 	public class GameFightSkillResultMgr extends BasicHashMapMgr
 	{
+		[Inject]
+		public var injector:IInjector;
+		
 		public function GameFightSkillResultMgr()
 		{
 			super();
@@ -485,6 +490,8 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result
 				}
 					break;
 			}
+			if(result)
+				injector.injectInto(result);
 			return result;
 		}
 	}

@@ -27,6 +27,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			this.mouseEnabled = true;
 		}
 		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
+			injector.injectInto(_netSelfCd);
+		}
+		
 		override protected function onLifecycleFreeze():void
 		{
 			super.onLifecycleFreeze();

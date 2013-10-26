@@ -21,6 +21,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		public function GoblinThunderMagicSkill(typeId:int)
 		{
 			super(typeId);
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			
 			if(!myEffectParameters)
 				return;

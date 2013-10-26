@@ -1,19 +1,25 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameAGlobalManager;
-	
+	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
-	import flash.utils.clearTimeout;
-	import flash.utils.setTimeout;
 	
-	import framecore.tools.button.McButton;
-	import framecore.tools.font.FontUtil;
+	import kylin.echo.edward.ui.McButton;
+	import kylin.echo.edward.utilities.font.FontMgr;
+	
+	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
+	
+	import utili.font.FontClsName;
 
 	public class GamePauseView extends BasicView
 	{
+		[Inject]
+		public var eventDispatcher:IEventDispatcher;
+		
 		private var _background:GamePauseBgView;
 		private var _tick:uint;
+		private var _pauseBtn:McButton;
+		
 		public function GamePauseView()
 		{
 			super();
@@ -24,42 +30,27 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView
 			super.onInitialize();
 			
 			_background = new GamePauseBgView();
-			var pauseBtn:McButton = new McButton();
-			pauseBtn.setSkin( _background.pauseBtn );
-			FontUtil.useFont( pauseBtn.getSkin()["label"], FontUtil.FONT_TYPE_BUTTON );
-			FontUtil.useFont( _background["contentTF"], FontUtil.FONT_TYPE_NORMAL );
+			_pauseBtn = new McButton();
+			_pauseBtn.setSkin( _background.pauseBtn );
+			FontMgr.instance.setTextStyle( _pauseBtn.getSkin()["label"], FontClsName.ButtonFont );
+			FontMgr.instance.setTextStyle( _background["contentTF"], FontClsName.NormalFont );
 			
-			//pauseBtn.addActionEventListener( gamePauseViewBtnClickHandler);
+			_pauseBtn.addActionEventListener( gamePauseViewBtnClickHandler);
 			addChild(_background);
-		}
-		
-		override protected function onAddToStage():void 
-		{
-			_tick = setTimeout(onListenClick,10);
-			
 		}
 		
 		override protected function onRemoveFromStage():void
 		{
-			GameAGlobalManager.getInstance().game.removeEventListener(MouseEvent.CLICK, gamePauseViewBtnClickHandler);
+			_pauseBtn.removeActionEventListener();
+			dispose();
+			//GameAGlobalManager.getInstance().game.removeEventListener(MouseEvent.CLICK, gamePauseViewBtnClickHandler);
 		}
-		
-		private function onListenClick():void
-		{
-			if(_tick>0)
-			{
-				clearTimeout(_tick);
-				_tick = 0;
-			}
-			GameAGlobalManager.getInstance().game.addEventListener(MouseEvent.CLICK,gamePauseViewBtnClickHandler);
-		}
-		
+	
 		override public function dispose():void
 		{
 			super.dispose();
 			
 			//_background.pauseBtn.removeEventListener(MouseEvent.CLICK, gamePauseViewBtnClickHandler);
-			GameAGlobalManager.getInstance().game.removeEventListener(MouseEvent.CLICK, gamePauseViewBtnClickHandler);
 			removeChild(_background);
 			_background = null;
 		}
@@ -67,9 +58,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView
 		//event handler
 		private function gamePauseViewBtnClickHandler(e:MouseEvent):void
 		{
-			GameAGlobalManager.getInstance().game.removeEventListener(MouseEvent.CLICK, gamePauseViewBtnClickHandler);
-			GameAGlobalManager.getInstance().gamePopupManager.open2CloseGamePauseView(false);
-			GameAGlobalManager.getInstance().game.resume();
+			this.parent.removeChild(this);
+			eventDispatcher.dispatchEvent(new FightStateEvent(FightStateEvent.FightResume));
 		}
 	}
 }

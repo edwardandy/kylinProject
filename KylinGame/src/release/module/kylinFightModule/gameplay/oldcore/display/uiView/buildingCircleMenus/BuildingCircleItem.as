@@ -6,12 +6,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicItem;
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
-	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
 	import mainModule.model.gameData.sheetData.tower.ITowerSheetDataModel;
 	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
 	import mainModule.service.gameDataServices.helpServices.ITollgateService;
 	
-	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 
 	public class BuildingCircleItem extends BasicBuildingCircleItem
@@ -42,9 +40,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 										   isOnlyUpdateMode:Boolean = false)
 		{
 			super(clickCallback, buildingCircleMenu);
-
 			myTargetTowerTypeId = targetTowerTypeId;
 			myIsOnlyUpdateMode = isOnlyUpdateMode;
+		}
+		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
 			myTowerTemplateInfo  = towerModel.getTowerSheetById(myTargetTowerTypeId);
 			myUpdatedCostMoney = myTowerTemplateInfo.buyGold;
 		}

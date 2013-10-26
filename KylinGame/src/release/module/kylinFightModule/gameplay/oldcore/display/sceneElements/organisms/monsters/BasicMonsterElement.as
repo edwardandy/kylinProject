@@ -12,10 +12,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.effects.groundItem.BasicGroundItem;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.CommonAnimationEffects;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
@@ -46,9 +44,16 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		public function BasicMonsterElement(typeId:int)
 		{	
-			this.myElemeCategory = GameObjectCategoryType.MONSTER;
 			super(typeId);
-			myMoveFighterInfo = monsterModel.getMonsterSheetById(typeId);
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			this.myElemeCategory = GameObjectCategoryType.MONSTER;	
+			super.onPostConstruct();
+			
+			myMoveFighterInfo = monsterModel.getMonsterSheetById(myObjectTypeId);
 			this.myCampType = FightElementCampType.ENEMY_CAMP;
 			mySceneKillLife = monsterTemplateInfo.killLife;
 		}
@@ -224,7 +229,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 					//胜利失败检测
 					if(sceneModel.sceneLife>0 && mySceneKillLife>0)
 					{
-						GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.HURT_WARN_EFFECT );
+						mainUI.playBattleEffect( BattleEffectType.HURT_WARN_EFFECT );
 					}
 					sceneModel.updateSceneLife(-mySceneKillLife);
 					successAndFailedDetector.onEnemyCampUintArrivedEndPoint(this,bIsBoss);

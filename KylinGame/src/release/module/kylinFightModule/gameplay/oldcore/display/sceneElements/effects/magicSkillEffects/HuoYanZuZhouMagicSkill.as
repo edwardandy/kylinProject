@@ -12,7 +12,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		public function HuoYanZuZhouMagicSkill(typeId:int)
 		{
 			super(typeId);
-			
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			_hasBuffer2 = myMagicLevel >= 4;
 			_hasBuffer3 = myMagicLevel >= 5;
 		}

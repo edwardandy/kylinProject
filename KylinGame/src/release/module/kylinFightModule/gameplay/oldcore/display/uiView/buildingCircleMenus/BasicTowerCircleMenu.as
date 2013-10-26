@@ -5,6 +5,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicBuildingElement;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
+	
+	import robotlegs.bender.framework.api.IInjector;
 
 	public class BasicTowerCircleMenu extends BasicBuildingCircleMenu
 	{
@@ -29,6 +31,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			super.onInitialize();
 			
 			mySellCircleItem = new SellCircleItem(onCircleMenuItemSellClick, this);
+			injector.injectInto(mySellCircleItem);
 			mySellCircleItem.x = 47;
 			mySellCircleItem.y = 30;
 			addChild(mySellCircleItem);

@@ -8,10 +8,10 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.monsters.BasicMonsterElement;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
 	import release.module.kylinFightModule.gameplay.oldcore.events.GameMarchMonsterEvent;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.NewMonsterList;
 	import release.module.kylinFightModule.model.interfaces.IMapRoadModel;
 	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
@@ -38,6 +38,8 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		public var timeTaskMgr:TimeTaskManager;
 		[Inject]
 		public var objPoolMgr:ObjectPoolManager;
+		//[Inject]
+		public var mainUI:GameFightMainUIView;
 		
 		private static const MAX_MONSTER_MARCH_SUB_WAVE_TIME_TASK_INFO_CACHE_COUNT:uint = 50;
 		private static const MARCHING:int = 1;
@@ -157,10 +159,8 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			//if(!EndlessBattleMgr.instance.isEndless)
 			{
 				var marchNextWavePreactTime:uint = (1 - getWaitNextWaveProgress()) * GameFightConstant.MONSTER_WAVE_DURATION;
-				GameAGlobalManager.getInstance().gameDataInfoManager.marchMonsterEarler(marchNextWavePreactTime);
-				GameAGlobalManager.getInstance()
-					.game.gameFightMainUIView.fightControllBarView
-					.reduceMagicSkillCDTime(0, marchNextWavePreactTime, 0,true);
+				//GameAGlobalManager.getInstance().gameDataInfoManager.marchMonsterEarler(marchNextWavePreactTime);
+				mainUI.fightControllBarView.reduceMagicSkillCDTime(0, marchNextWavePreactTime, 0,true);
 			}
 			
 			var curWave:int =  monsterWaveModel.curWaveCount;
@@ -176,7 +176,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			//最后一波
 			else if(curWave == totalWave - 1)
 			{
-				GameAGlobalManager.getInstance().game.playBattleEffect( BattleEffectType.FINAL_WAVE_EFFECT );
+				mainUI.playBattleEffect( BattleEffectType.FINAL_WAVE_EFFECT );
 			}
 			//无极幻境每波都提示
 			/*else

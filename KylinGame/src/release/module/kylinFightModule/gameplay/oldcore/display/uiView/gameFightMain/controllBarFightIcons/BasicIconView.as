@@ -3,17 +3,28 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
 	import release.module.kylinFightModule.gameplay.oldcore.core.ISceneFocusElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.BasicMouseCursor;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.IMouseCursorSponsor;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.GameFilterManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
 
 	public class BasicIconView extends BasicView implements ISceneFocusElement, IMouseCursorSponsor
 	{
+		[Inject]
+		public var interactiveMgr:GameFightInteractiveManager;
+		[Inject]
+		public var mouseMgr:GameFightMouseCursorManager;
+		[Inject]
+		public var filterMgr:GameFilterManager;
+		[Inject]
+		public var mainUI:GameFightMainUIView;
+		
 		protected var myIsInFocus:Boolean = false;
 		protected var myIsDisable:Boolean = true;//默认
 		
@@ -42,7 +53,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		//IMouseCursorSponsor Interface
 		public function notifyTargetMouseCursorSuccessRealsed(mouseClickEvent:MouseEvent):void
 		{
-			GameAGlobalManager.getInstance().gameInteractiveManager.disFocusTargetElement(this);
+			interactiveMgr.disFocusTargetElement(this);
 		}
 		
 		public function notifyTargetMouseCursorCanceled():void
@@ -151,7 +162,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			{
 				if(myMouseCursor != null)
 				{
-					GameAGlobalManager.getInstance().gameMouseCursorManager.deactiveTargetCurrentMouseCursor(myMouseCursor);
+					mouseMgr.deactiveTargetCurrentMouseCursor(myMouseCursor);
 					myMouseCursor = null;
 				}
 			}
@@ -179,7 +190,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			myIconBitmapBackground.visible = myIconBitmap.visible;
 			this.mouseChildren = !myIsDisable;
 			_myMouseClickSprite.buttonMode = !myIsDisable;
-			this.filters = myIsInFocus ? [GameFilterManager.getInstance().blueGlowFilter] : null;
+			this.filters = myIsInFocus ? [filterMgr.blueGlowFilter] : null;
 		}
 		
 		override protected function onInitialize():void
@@ -222,23 +233,40 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			super.onRemoveFromStage();
 			
+			setIconBitmapData(null);
+			
+			myDisableBackgroundBitmap.bitmapData.dispose();
+			myDisableBackgroundBitmap.bitmapData = null;
+			myDisableBackgroundBitmap = null;
+			
+			myIconBitmapBackground.bitmapData.dispose();
+			myIconBitmapBackground.bitmapData = null;
+			myIconBitmapBackground = null;
+			
+			if(myMouseCursor != null)
+			{
+				mouseMgr.deactiveTargetCurrentMouseCursor(myMouseCursor);
+				myMouseCursor = null;
+			}
+			
 			_myMouseClickSprite.removeEventListener(MouseEvent.CLICK, iconMouseClickHandler);
+			_myMouseClickSprite = null;
 
-			GameAGlobalManager.getInstance().gameInteractiveManager.disFocusTargetElement(this);
+			interactiveMgr.disFocusTargetElement(this);
 		}
 		
 		protected function onIconMouseClick():void
 		{
 			if(focusEnable)
 			{
-				GameAGlobalManager.getInstance().gameInteractiveManager.setCurrentFocusdElement(this);
-				onMouseOutHandler( null );
+				interactiveMgr.setCurrentFocusdElement(this);
+				//onMouseOutHandler( null );
 			}
 		}
 		
 		protected function getIsInValidIconMouseClick():Boolean
 		{
-			return myIsDisable || myIconBitmap.bitmapData == null || !GameAGlobalManager.getInstance().game.gameFightMainUIView.visible;
+			return myIsDisable || myIconBitmap.bitmapData == null || !mainUI.visible;
 		}
 
 		//event Handler

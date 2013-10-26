@@ -12,7 +12,7 @@ package mainModule.service.soundServices
 	import treefortress.sound.SoundInstance;
 	import treefortress.sound.SoundManager;
 
-	public class SoundService
+	public class SoundService implements ISoundService
 	{
 		[Inject]
 		public var loadService:ILoadAssetsServices;

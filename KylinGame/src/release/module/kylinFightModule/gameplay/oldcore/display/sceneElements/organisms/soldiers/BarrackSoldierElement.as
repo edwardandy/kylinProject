@@ -24,7 +24,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.BasicOrganismElement;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.organisms.OrganismBehaviorState;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.SkillState;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.utili.structure.PointVO;
 	
@@ -45,9 +44,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		public function BarrackSoldierElement(typeId:int)
 		{
-			myMoveFighterInfo = soldierModel.getSoldierSheetById(typeId);
-			
 			super(typeId);
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			myMoveFighterInfo = soldierModel.getSoldierSheetById(myObjectTypeId);
+			
+			super.onPostConstruct();
 			
 			this.myElemeCategory = GameObjectCategoryType.SOLDIER;
 			this.myCampType = FightElementCampType.FRIENDLY_CAMP;	

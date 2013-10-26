@@ -25,6 +25,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 			super.onInitialize();
 			
 			myUpdateCircleItem = new BuildingCircleItem(int(myTowerTemplateInfo.nextTowerIds[0]), onCircleMenuItemBuildClick, this, true);
+			injector.injectInto(myUpdateCircleItem);
 			myUpdateCircleItem.y = -50;
 			addChild(myUpdateCircleItem);
 		}

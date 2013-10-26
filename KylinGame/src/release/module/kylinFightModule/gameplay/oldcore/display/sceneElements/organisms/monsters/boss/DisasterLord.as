@@ -36,7 +36,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		public function DisasterLord(typeId:int)
 		{
 			super(typeId);
-			this.mouseEnabled = true;
+			this.mouseEnabled = true;	
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			_flameRainInfo = getBaseSkillInfo(SkillID.FlameRain) as IMonsterSkillSheetItem;
 			_hellCurseInfo = getBaseSkillInfo(SkillID.HellCurse) as IMonsterSkillSheetItem;
 			_hellCurseParam[BufferFields.BUFF] = BufferID.BeHellCurse;

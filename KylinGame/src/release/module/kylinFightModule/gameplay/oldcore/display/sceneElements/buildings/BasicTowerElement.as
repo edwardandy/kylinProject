@@ -23,7 +23,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus.TowerSkillUpdateLevelMenu;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
-	import release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr.EndlessBattleMgr;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
 
 	public class BasicTowerElement extends BasicBuildingElement implements IOrganismSkiller, ISkillOwner
@@ -55,15 +54,21 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		
 		public function BasicTowerElement(typeId:int)
 		{
-			super();
+			super();	
+			this.myObjectTypeId = typeId;
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			myCampType = FightElementCampType.FRIENDLY_CAMP;
 			this.myElemeCategory = GameObjectCategoryType.TOWER;
-			this.myObjectTypeId = typeId;
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_MIDDLE;
 			this.mouseEnabled = false;//after building
 			myFocusTipEnable = true;
-			myTowerTemplateInfo = towerModel.getTowerSheetById(typeId);
-			myTowerInfo = towerData.getTowerDataById(typeId);
+			myTowerTemplateInfo = towerModel.getTowerSheetById(myObjectTypeId);
+			myTowerInfo = towerData.getTowerDataById(myObjectTypeId);
 		}
 		
 		override public function get hurtPositionHeight():Number

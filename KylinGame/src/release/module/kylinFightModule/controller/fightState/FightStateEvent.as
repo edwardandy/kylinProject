@@ -31,7 +31,7 @@ package release.module.kylinFightModule.controller.fightState
 		
 		private var _body:Object;
 		
-		public function FightStateEvent(type:String,data:Object,bubbles:Boolean=false, cancelable:Boolean=false)
+		public function FightStateEvent(type:String,data:Object=null,bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			_body = data;
 			super(type, bubbles, cancelable);

@@ -254,7 +254,7 @@ package kylin.echo.edward.ui
 		 * @param fontSize
 		 * 
 		 */
-		public function setLabelFont(fontMgr:FontMgr,fontType:String,fontSize:* = null):void
+		public function setLabelFont(fontType:String,fontSize:* = null):void
 		{
 			if(bt){
 				var tfl:TextField = bt.getChildByName("label") as TextField;
@@ -265,7 +265,7 @@ package kylin.echo.edward.ui
 						format.size = fontSize;
 						tfl.defaultTextFormat = format;
 					}
-					fontMgr.setTextStyle(tfl,fontType);
+					FontMgr.instance.setTextStyle(tfl,fontType);
 				}
 			}
 		}

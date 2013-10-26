@@ -1,13 +1,6 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.buildingCircleMenus
 {
-	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.buildings.BasicTowerElement;
 	
-	import framecore.tools.tips.ToolTipConst;
-	import framecore.tools.tips.ToolTipEvent;
-	import framecore.tools.tips.ToolTipManager;
-	import framecore.tools.tips.towerMenu.TowerMenuToolTip;
-	import framecore.tools.tips.towerMenu.TowerMenuToolTipDataVO;
-	import framecore.tools.tips.towerMenu.TowerPropItem;
 
 	public class SellCircleItem extends BasicBuildingCircleItem
 	{

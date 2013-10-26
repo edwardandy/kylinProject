@@ -29,6 +29,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			super.onInitialize();
 			
 			_stayCDTimer = new SimpleCDTimer(5000);
+			injector.injectInto(_stayCDTimer);
 		}
 		
 		override protected function onLifecycleFreeze():void

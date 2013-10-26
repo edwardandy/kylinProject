@@ -4,7 +4,11 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	
+	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMonsterMarchManager;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureDataList;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 	import release.module.kylinFightModule.model.state.FightState;
 
@@ -23,6 +27,12 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		public var sceneElementsModel:ISceneElementsModel;
 		[Inject]
 		public var fightState:FightState;
+		[Inject]
+		public var fightViewModel:IFightViewLayersModel;
+		[Inject]
+		public var mainUI:GameFightMainUIView;
+		[Inject]
+		public var monsterMarchMgr:GameFightMonsterMarchManager;
 		
 		public function FightStartupCmd()
 		{
@@ -35,6 +45,9 @@ package release.module.kylinFightModule.controller.fightInitSteps
 			treasureList.initList(fightData.arrTreasureList);
 			sceneElementsModel.initBeforeFightStart();
 			fightState.state = FightState.Initialized;
+			fightViewModel.UILayer.addChild(mainUI);
+			monsterMarchMgr.mainUI = mainUI;
+			dispatch(new FightStateEvent(FightStateEvent.FightStart));
 		}
 	}
 }

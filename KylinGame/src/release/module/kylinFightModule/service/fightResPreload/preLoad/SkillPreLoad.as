@@ -29,7 +29,7 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 			item ||= monsterSkillModel.getMonsterSkillSheetById(id);
 			item ||= towerSkillModel.getTowerSkillSheetById(id);
 			
-			if(!item)
+			if(null == item)
 				return;
 			
 			if(SkillID.ColdStorm == item.configId)

@@ -25,7 +25,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		public function FullScreenFreezeEnemy(typeId:int)
 		{
 			super(typeId);
-			
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
+			injector.injectInto(_freezeCd);
 			_arrEffId = (myEffectParameters["groundEffect"] as String).split("-");
 			_freezeCd.setDurationTime(myBuffer1Parameters[BufferFields.DURATION]);
 		}

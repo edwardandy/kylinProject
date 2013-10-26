@@ -1,14 +1,11 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.controllBarFightIcons
 {
 	import com.greensock.TweenLite;
-	import com.shinezone.utils.Reflection;
 	
 	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
-	
-	import framecore.tools.font.FontUtil;
 
 	/**
 	 *
@@ -26,7 +23,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			var tff:TextFormat = _tf.defaultTextFormat;
 			tff.align = TextFormatAlign.LEFT;
 			_tf.defaultTextFormat = tff;
-			FontUtil.resizeFont( _tf, 12 );
+			//FontUtil.resizeFont( _tf, 12 );
 //			_arrow.visible = false;
 			
 			_header = new MonsterWarnTip_Header0();

@@ -10,6 +10,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	import kylin.echo.edward.utilities.font.FontMgr;
 	
 	import mainModule.service.loadServices.IconConst;
+	import mainModule.service.loadServices.interfaces.IIconService;
 	
 	import release.module.kylinFightModule.gameplay.constant.FocusTargetType;
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
@@ -29,9 +30,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		public var fightState:FightState;
 		[Inject]
 		public var timeTaskMgr:TimeTaskManager;
+		[Inject]
+		public var iconService:IIconService;
 		
 		private var _isShowed:Boolean = false;
-		private var _autoHideTimeHandler:int = -1;
 		
 		private var _curTargetInfo:IFocusTargetInfo = null;	//当前对象的数据
 		
@@ -87,7 +89,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 							x:(GameFightConstant.SCENE_MAP_WIDTH - this.width),
 							onComplete:onTweenAnimationEndHandler
 						});
-					destoryAutoHideTimeHandler();
 				}
 			}
 		}
@@ -241,7 +242,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 				: _curTargetInfo.type == FocusTargetType.SOLDIER_TYPE ? IconConst.ICON_TYPE_SOLDIER
 				: _curTargetInfo.type == FocusTargetType.MONSTER_TYPE ? IconConst.ICON_TYPE_MONSTER_2 : IconConst.ICON_TYPE_RESEARCH;
 			
-			IconUtil.loadIcon( _background.iconContainer, type, _curTargetInfo.resourceID, IconConst.ICON_SIZE_50 );
+			iconService.loadIcon(_background.iconContainer,type,_curTargetInfo.resourceID, IconConst.ICON_SIZE_50 );
 			
 			_background["nameLabel"].width = 100;
 			_background["nameLabel"].text = _curTargetInfo.targetName;
@@ -291,7 +292,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 						onComplete:onTweenReverseAniamtionEndHandler
 					}
 				);
-				destoryAutoHideTimeHandler();
 			}
 		}
 		
@@ -304,8 +304,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		override public function dispose():void
 		{
 			super.dispose();
-			
-			destoryAutoHideTimeHandler();
 		}
 		
 		private function onTweenAnimationEndHandler():void
@@ -327,15 +325,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		private function onTweenReverseAniamtionEndHandler():void
 		{
 			this.mouseChildren = false;
-		}
-		
-		private function destoryAutoHideTimeHandler():void
-		{
-			if(_autoHideTimeHandler != -1)
-			{
-				timeTaskMgr.destoryTimeTask(_autoHideTimeHandler);
-				_autoHideTimeHandler = -1;
-			}
 		}
 	}
 }

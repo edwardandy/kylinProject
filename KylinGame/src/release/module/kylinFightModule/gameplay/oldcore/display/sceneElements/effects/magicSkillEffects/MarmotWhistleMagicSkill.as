@@ -17,7 +17,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 		private var _vecEffectTargets:Vector.<BasicOrganismElement> = new Vector.<BasicOrganismElement>;
 		
 		private var _randomStartTime:int = 0;
-		private var _randomStartCDTimer:SimpleCDTimer = new SimpleCDTimer;
+		[Inject]
+		public var _randomStartCDTimer:SimpleCDTimer;
 		
 		public function MarmotWhistleMagicSkill(typeId:int)
 		{

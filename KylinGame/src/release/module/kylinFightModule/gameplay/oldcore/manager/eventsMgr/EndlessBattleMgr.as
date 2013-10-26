@@ -1,6 +1,5 @@
 package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 {
-	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import release.module.kylinFightModule.gameplay.constant.EndlessBattleConst;
@@ -203,7 +202,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 				
 		public function init(data:Array):void
 		{
-			dispose();
+			/*dispose();
 			if(!data)
 				return;
 			_isEndless = true;
@@ -224,13 +223,13 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 			}
 			_iRebirthPrice = data[4];
 			_iCanRebirthTime = data[5];
-			_iBonusCnt = data[6];
+			_iBonusCnt = data[6];*/
 			//logch("EndlessData:","initData:",data);
 		}
 		
 		public function saveProgress(iProgress:int,iScore:int):void
 		{
-			GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_ENDLESS_BATTLE_SAVE_PROGRESS,[HttpConst.HTTP_REQUEST,iProgress,iScore]);
+			/*GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_ENDLESS_BATTLE_SAVE_PROGRESS,[HttpConst.HTTP_REQUEST,iProgress,iScore]);
 			//logch("EndlessData:","saveProgress:",iProgress,iScore);
 			
 			//_lastSavePointScore = iScore;
@@ -257,19 +256,19 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 			
 			_iTotalMoney += arr[3];
 			_iTotalExp += arr[4];
-			_iTotalItem += arr[5];	
+			_iTotalItem += arr[5];*/	
 		}
 		
 		public function upgradeAtkBuff(iLvl:int):Boolean
 		{
-			if(iLvl > EndlessBattleConst.MAX_ATKBUFF_LVL)
+			/*if(iLvl > EndlessBattleConst.MAX_ATKBUFF_LVL)
 				iLvl = EndlessBattleConst.MAX_ATKBUFF_LVL;
 			
 			if(_addAtkPct >= (EndlessBattleConst.EACH_ATKBUFF_NUM * EndlessBattleConst.MAX_ATKBUFF_LVL))
 				return false;
 			_addAtkPct += EndlessBattleConst.EACH_ATKBUFF_NUM * iLvl;
 			GameAGlobalManager.getInstance().groundSceneHelper.addAllTowerEndlessAtkBuff(EndlessBattleConst.EACH_ATKBUFF_NUM);
-			GameAGlobalManager.getInstance().game.gameFightMainUIView.updateEndlessDrumsBuff(true,curAtkBuffLevel);
+			GameAGlobalManager.getInstance().game.gameFightMainUIView.updateEndlessDrumsBuff(true,curAtkBuffLevel);*/
 			return true;
 		}
 		/**
@@ -307,7 +306,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 		public function retrieveFromFail():void
 		{
 			_iCanRebirthTime--;
-			var bHasKill:Boolean = GameAGlobalManager.getInstance().groundSceneHelper.killAllEnemies();
+			/*var bHasKill:Boolean = GameAGlobalManager.getInstance().groundSceneHelper.killAllEnemies();
 			GameAGlobalManager.getInstance().groundSceneHelper.disappearAllSummonDoor();
 			GameAGlobalManager.getInstance().gameDataInfoManager.updateSceneLife(1);
 			addAtkSpdPct = 30;
@@ -318,20 +317,20 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 			{
 				GameAGlobalManager.getInstance().gameSuccessAndFailedDetector.onClearCurWaveMonsters();
 			}
-			GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_ENDLESS_BATTLE_REBIRTH, [HttpConst.HTTP_REQUEST,[]]);
+			GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_ENDLESS_BATTLE_REBIRTH, [HttpConst.HTTP_REQUEST,[]]);*/
 		}
 		
 		public function checkRetrieveBuffEnd():void
 		{
-			if(addAtkSpdPct>0 && GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount - _failedWave>1)
+			/*if(addAtkSpdPct>0 && GameAGlobalManager.getInstance().gameDataInfoManager.sceneWaveCurrentCount - _failedWave>1)
 			{
 				disableRetrieveBuff();
-			}
+			}*/
 		}
 		
 		public function checkRetrieveFromFail():void
 		{
-			bWaitForRebirth = false;
+			/*bWaitForRebirth = false;
 			var cost:int = iRebirthPrice;
 			if(cost <= UserData.getInstance().userBaseInfo.uMoney)
 			{
@@ -343,7 +342,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 			else
 				GameAGlobalManager.getInstance().game.notifyToGameOver(false);
 			
-			GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_POP , [UI_CMD_Const.CLOSE_POP , "popPanel",PopConst.WRATH_OF_GOD ]);
+			GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_POP , [UI_CMD_Const.CLOSE_POP , "popPanel",PopConst.WRATH_OF_GOD ]);*/
 		}
 		
 		/**
@@ -353,7 +352,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 		 */		
 		public function checkAddAtkBuffByType(iType:int = 1):void
 		{
-			var cost:int;
+			/*var cost:int;
 			var curBuffLvl:int = curAtkBuffLevel;
 			if(1 == iType)
 			{
@@ -417,7 +416,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 					pt = GameAGlobalManager.getInstance().game.localToGlobal(new Point(400,365));
 					TextFlyEffectMgr.instance.genTextFlyEffect(1 == iSuccess?"UPGRADE SUCCESS":"UPGRADE FAILED",GameConst.stage,pt.x,pt.y);
 				}
-			}
+			}*/
 			
 			//GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_POP , [UI_CMD_Const.CLOSE_POP , "popPanel",PopConst.BATTLE_DRUMS ]);
 		}
@@ -441,8 +440,8 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 		
 		private function disableRetrieveBuff():void
 		{
-			GameAGlobalManager.getInstance().groundSceneHelper.addAllTowerEndlessAtkSpdBuff(-addAtkSpdPct);
-			GameAGlobalManager.getInstance().game.gameFightMainUIView.updateEndlessRebirthBuff(false);
+			/*GameAGlobalManager.getInstance().groundSceneHelper.addAllTowerEndlessAtkSpdBuff(-addAtkSpdPct);
+			GameAGlobalManager.getInstance().game.gameFightMainUIView.updateEndlessRebirthBuff(false);*/
 			addAtkSpdPct = 0;
 			_failedWave = -1;
 		}
@@ -463,9 +462,9 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.eventsMgr
 			if(!isSavePointWave(iWave))
 				return null;
 			
-			return [ItemID.Gold,ItemID.EXP,DreamLandData.getInstance().getRewardItemIdByWave(iWave),
+			return null /*[ItemID.Gold,ItemID.EXP,DreamLandData.getInstance().getRewardItemIdByWave(iWave),
 				DreamLandData.getInstance().getRewardGoldByWave(iWave)*_iBonusCnt,DreamLandData.getInstance().getRewardExpByWave(iWave)*_iBonusCnt,
-				DreamLandData.getInstance().getRewardItemCountByWave(iWave)*_iBonusCnt];
+				DreamLandData.getInstance().getRewardItemCountByWave(iWave)*_iBonusCnt]*/;
 		}
 		
 		public function dispose():void

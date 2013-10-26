@@ -76,8 +76,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		[Inject]
 		public var monsterModel:IMonsterSheetDataModel;
 		[Inject]
-		public var fontMgr:FontMgr;
-		[Inject]
 		public var globalTemp:GlobalTemp;
 		[Inject]
 		public var interactiveMgr:GameFightInteractiveManager;
@@ -110,12 +108,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			super();
 			mouseEnabled = false;
-		}
-		
-		[PostConstruct]
-		public function onPostConstruct():void
-		{
-			fightViewLayers.UILayer.addChild(this);
 		}
 		
 		public function playBattleEffect( type:int,param:Array = null ):void
@@ -244,11 +236,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			addChild(_fightControllBarView);
 			
 			_userInfoView = new CurrentUserInfoView();
-			fontMgr.setTextStyle( _userInfoView.lifeTextField.lifeTextField, FontClsName.ButtonFont );
-			fontMgr.setTextStyle( _userInfoView.goldTextField, FontClsName.ButtonFont );
-			fontMgr.setTextStyle( _userInfoView.waveTextField, FontClsName.ButtonFont );
-			fontMgr.setTextStyle( _userInfoView.waveLabel, FontClsName.ButtonFont );
-			fontMgr.setTextStyle( _userInfoView.txtScore.txtScore, FontClsName.ButtonFont );
+			FontMgr.instance.setTextStyle( _userInfoView.lifeTextField.lifeTextField, FontClsName.ButtonFont );
+			FontMgr.instance.setTextStyle( _userInfoView.goldTextField, FontClsName.ButtonFont );
+			FontMgr.instance.setTextStyle( _userInfoView.waveTextField, FontClsName.ButtonFont );
+			FontMgr.instance.setTextStyle( _userInfoView.waveLabel, FontClsName.ButtonFont );
+			FontMgr.instance.setTextStyle( _userInfoView.txtScore.txtScore, FontClsName.ButtonFont );
 			
 			_userInfoView.lifeTextField.mouseChildren = false;
 			
@@ -516,7 +508,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			pParent.addChild(_addGoodsEff);
 			var text:TextField = (_addGoodsEff.content.getChildByName("txtNum") as TextField);
 			
-			fontMgr.setTextStyle( text, FontClsName.ButtonFont );
+			FontMgr.instance.setTextStyle( text, FontClsName.ButtonFont );
 			if(text)
 			{
 				text.width = 100;

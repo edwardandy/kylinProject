@@ -1,17 +1,15 @@
 package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.newMonster
 {
-	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
-	import com.shinezone.utils.Reflection;
-	
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
-	import flash.events.Event;
-	import flash.utils.Dictionary;
+	import flash.utils.getDefinitionByName;
 	
-	import framecore.structure.model.constdata.IconConst;
-	import framecore.tools.icon.IconUtil;
+	import mainModule.service.loadServices.IconConst;
+	import mainModule.service.loadServices.interfaces.IIconService;
+	
+	import release.module.kylinFightModule.gameplay.oldcore.core.BasicView;
 	
 	/**
 	 * 新怪图标 
@@ -20,6 +18,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	 */	
 	public class MonsterIconView extends BasicView
 	{
+		[Inject]
+		public var iconService:IIconService;
+		
 		public function MonsterIconView()
 		{
 			super();
@@ -70,8 +71,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			}
 			
 			_monID = value;
-			
-			IconUtil.loadIcon( _icon, IconConst.ICON_TYPE_MONSTER_2, _monID, IconConst.ICON_SIZE_NEW );
+			iconService.loadIcon(_icon, IconConst.ICON_TYPE_MONSTER_2, _monID, IconConst.ICON_SIZE_NEW );
 		}
 		public function get monID():int
 		{
@@ -99,7 +99,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			_bg.y = -40;
 			addChild( _bg );
 			
-			_effect = Reflection.createMovieClip( "NewMonsterEffect" );
+			
+			_effect = new (getDefinitionByName("NewMonsterEffect") as Class);
 			_effect.x = -3.4;
 			_effect.y = 7.8;
 			addChild( _effect );

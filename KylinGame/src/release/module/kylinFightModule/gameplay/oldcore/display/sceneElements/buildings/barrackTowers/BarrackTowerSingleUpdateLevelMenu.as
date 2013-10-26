@@ -27,6 +27,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			super.onInitialize();
 			
 			_meetingPointCircleItem = new MeetingPointCircleItem(onCircleMenuItemMettingPointClick, this);
+			injector.injectInto(_meetingPointCircleItem);
 			//_meetingPointCircleItem.x = 43;
 			_meetingPointCircleItem.y = 50;
 			addChild(_meetingPointCircleItem);

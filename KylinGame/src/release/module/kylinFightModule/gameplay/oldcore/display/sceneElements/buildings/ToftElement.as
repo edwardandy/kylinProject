@@ -32,7 +32,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 		public function ToftElement()
 		{
 			super();
-
+		}
+		
+		[PostConstruct]
+		override public function onPostConstruct():void
+		{
+			super.onPostConstruct();
 			this.myElemeCategory = GameObjectCategoryType.TOFT;
 			this.myObjectTypeId = sceneModel.sceneType;
 			this.myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_BOTTOM;

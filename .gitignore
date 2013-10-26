@@ -12,3 +12,7 @@ bin-release/
 KylinGame/KylinGameShell.swf
 KylinGame/release/module/kylinFightModule/KylinFightModule.swf
 KylinGame/wrapper.swf
+KylinGame/release/battleres
+KylinGame/release/icon
+KylinGame/release/image
+KylinGame/release/soundEffects

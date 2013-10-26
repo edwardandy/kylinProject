@@ -29,15 +29,31 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		 * 战斗前准备完毕，开始战斗
 		 */		
 		public static const FightStartup:String = "fightStartup";
+		/**
+		 * 战斗结束，需要传递参数，true:胜利，false:失败
+		 */		
+		public static const FightGameOver:String = "fightGameOver";
 		
-		public function FightInitStepsEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false)
+		private var _data:Object;
+		
+		public function FightInitStepsEvent(type:String,body:Object = null, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
+			_data = body;
 			super(type, bubbles, cancelable);
 		}
-		
+		/**
+		 * 事件的数据 
+		 * @return 
+		 * 
+		 */		
+		public function get data():Object
+		{
+			return _data;
+		}
+
 		override public function clone():Event
 		{
-			return new FightInitStepsEvent(type,bubbles,cancelable) as Event;
+			return new FightInitStepsEvent(type,_data,bubbles,cancelable) as Event;
 		}
 	}
 }

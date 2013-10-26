@@ -6,6 +6,7 @@ package release.module.kylinFightModule.gameplay
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.GameMouseCursorFactory;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseLogices.MagicMouseCursorReleaseLogic;
 	import release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.mouseCursors.mouseCursorReleaseValidators.MouseCursorReleaseValidator;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.GamePauseView;
 	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.move.GameFightMoveLogicMgr;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.buffer.GameFightBufferProcessorMgr;
@@ -55,6 +56,7 @@ package release.module.kylinFightModule.gameplay
 			injector.map(GameFightInteractiveManager).asSingleton();
 			injector.map(GameFightMonsterMarchManager).asSingleton();
 			injector.map(GameFightMainUIView).asSingleton();
+			injector.map(GamePauseView).asSingleton();
 			
 			injector.map(GameFightSkillResultMgr).asSingleton();
 			injector.map(GameFightSkillProcessorMgr).asSingleton();

@@ -2,15 +2,23 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.IEventDispatcher;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
-	import kylin.echo.edward.utilities.loader.LoadMgr;
+	import kylin.echo.edward.utilities.font.FontMgr;
+	import kylin.echo.edward.utilities.string.KylinStringUtil;
 	
+	import mainModule.model.gameConstAndVar.interfaces.IConfigDataModel;
+	import mainModule.model.gameData.dynamicData.item.IItemDynamicDataModel;
+	import mainModule.model.gameData.sheetData.item.IItemSheetDataModel;
 	import mainModule.model.gameData.sheetData.item.IItemSheetItem;
+	import mainModule.service.loadServices.IconConst;
 	import mainModule.service.soundServices.ISoundService;
 	import mainModule.service.soundServices.SoundGroupType;
+	import mainModule.service.textService.ITextTranslateService;
 	
+	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
 	import release.module.kylinFightModule.gameplay.constant.SoundFields;
 	import release.module.kylinFightModule.gameplay.constant.identify.MagicID;
@@ -21,6 +29,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.ObjectPoolManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInfoRecorder;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
+	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
+	import release.module.kylinFightModule.model.scene.SceneDataModel;
+	
+	import utili.font.FontClsName;
 
 	public class PropIconView extends CDAbleIconView implements IShortCutKeyResponser
 	{
@@ -28,7 +40,27 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		[Inject]
 		public var soundService:ISoundService;
-		//private var _itemInfo:ItemInfo;
+		[Inject]
+		public var itemData:IItemDynamicDataModel;
+		[Inject]
+		public var itemModel:IItemSheetDataModel;
+		[Inject]
+		public var recorder:GameFightInfoRecorder;
+		[Inject]
+		public var global:GlobalTemp;
+		[Inject]
+		public var eventDispatch:IEventDispatcher;
+		[Inject]
+		public var cfgData:IConfigDataModel;
+		[Inject]
+		public var cursorFactory:GameMouseCursorFactory;
+		[Inject]
+		public var textTranslater:ITextTranslateService;
+		[Inject]
+		public var objPoolMgr:ObjectPoolManager;
+		[Inject]
+		public var sceneModel:ISceneDataModel;
+		
 		private var _itemTemp:IItemSheetItem;
 		
 		private var _itemCountTextField:PropNumText;
@@ -51,11 +83,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			super.notifyTargetMouseCursorSuccessRealsed(mouseClickEvent);
 			
-			NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_USED_OR_CANCEL_MAGIC,{"param":[_itemTemp.configId]});
+			//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_USED_OR_CANCEL_MAGIC,{"param":[_itemTemp.configId]});
 			
-			GameAGlobalManager.getInstance()
-				.game.gameFightMainUIView.fightControllBarView
-				.notifyOtherPropItemResetCDAbleIconViewCDTime(this);
+			mainUI.fightControllBarView.notifyOtherPropItemResetCDAbleIconViewCDTime(this);
 			
 			onUseItemSuccess();
 		}
@@ -68,22 +98,23 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			}
 		}
 		
-		private function get _itemInfo():ItemInfo
+		/*private function get _itemInfo():ItemInfo
 		{
 			return ItemData.getInstance().getOwnInfoById(_itemTemp.configId) as ItemInfo;
-		}
+		}*/
 		
 		private function updateItemCount():void
 		{
 			_itemCountTextField.visible = false;
 			_itemPriceText.visible = false;
-			if(_itemInfo && _itemInfo.number > 0)
+			var cnt:int = itemCnt;
+			if(cnt > 0)
 			{
-				if ( uint(_itemCountTextField.txtNum.text) < _itemInfo.number )//战斗中购买了道具
+				if ( uint(_itemCountTextField.txtNum.text) < cnt)//战斗中购买了道具
 				{
 					playCDResetEff();	//播放一个特效提示一下
 				}
-				_itemCountTextField.txtNum.text = _itemInfo.number.toString();
+				_itemCountTextField.txtNum.text = cnt.toString();
 				if(myIconBitmap && myIconBitmap.visible)
 				{
 					_itemCountTextField.visible = true;
@@ -102,15 +133,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		private function onUseItemSuccess():void
 		{
-			GameAGlobalManager.getInstance().gameFightInfoRecorder.addBattleOPRecord( GameFightInfoRecorder.BATTLE_OP_TYPE_USE_ITEM, _itemTemp.configId );
-			GameAGlobalManager.getInstance()
-				.gameFightInfoRecorder
-				.addPropItemUse(_itemTemp.configId, _itemTemp.rewardScore);
+			//GameAGlobalManager.getInstance().gameFightInfoRecorder.addBattleOPRecord( GameFightInfoRecorder.BATTLE_OP_TYPE_USE_ITEM, _itemTemp.configId );
+			recorder.addPropItemUse(_itemTemp.configId, _itemTemp.rewardScore);
 			
-			ItemData.getInstance().useItem(_itemInfo,1);
-			GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_USEITEM_INBATTLE, [HttpConst.HTTP_REQUEST,_itemTemp.configId,1,GameAGlobalManager.getInstance().gameDataInfoManager.gameFightId]);
+			//ItemData.getInstance().useItem(_itemInfo,1);
+			//GameEvent.getInstance().sendEvent(Battle_CMD_Const.CMD_USEITEM_INBATTLE, [HttpConst.HTTP_REQUEST,_itemTemp.configId,1,GameAGlobalManager.getInstance().gameDataInfoManager.gameFightId]);
 			
-			if(!_itemInfo || _itemInfo.number == 0)
+			if(!itemCnt)
 			{
 				stateChanged();
 			}
@@ -134,21 +163,22 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			//var currentItemIds:Array = UserData.getInstance().userExtendInfo.currentItemIds;
 
-			if ( CommonLog.instance.getValue( TowerFeatures.FEATURE_SHOP + TowerFeatures.FEATURE_UNLOCK_STATUS ) )
+			//if ( CommonLog.instance.getValue( TowerFeatures.FEATURE_SHOP + TowerFeatures.FEATURE_UNLOCK_STATUS ) )
 			{
 				myIconUseCDTime = ITEM_PROP_CD_TIME;
 				
-				_effectParameters = GameStringUtil.deserializeString(_itemTemp.effectValue);
+				_effectParameters = KylinStringUtil.parseCommaString(_itemTemp.effectValue);
 				
-				var resId:uint = _itemTemp.resourceId;
+				var resId:uint = _itemTemp.resId;
 				if(0 == resId)
 					resId = _itemTemp.configId;
 				
 				//setIconBitmapData(Reflection.createBitmapData("Item_" + resId + "_" + IconConst.ICON_SIZE_CIRCLE + ".png"));
-				setIconBitmapData(LoadMgr.instance.getIconBitmapData("Item_" + resId + "_" + IconConst.ICON_SIZE_CIRCLE));
+				
+				setIconBitmapData(loadService.getIconBitmapData("Item_" + resId + "_" + IconConst.ICON_SIZE_CIRCLE));
 				
 				var arr:Array = ["Q","W","E","R"];
-				GameAGlobalManager.getInstance().gameInteractiveManager.registerShortCutKeyResponser(arr[myIconIndex].charCodeAt(),this);				
+				interactiveMgr.registerShortCutKeyResponser(arr[myIconIndex].charCodeAt(),this);				
 			}
 			
 			super.notifyOnGameStart();
@@ -160,7 +190,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					NewbieGuideManager.getInstance().startCondition( NewbieConst.CONDITION_START_FIRST_ITEM );
 					CommonLog.instance.updateValue( CommonLog.BATTLE_FIRST_ITEM_GUIDE, true );
 				}*/
-				_mockFlag = GlobalTemp.newGuideMockTollgateFlag;
+				_mockFlag = global.newGuideMockTollgateFlag;
 				myIconBitmap.visible = !_mockFlag;
 				updateItemCount();
 				_disableIconA.visible = _itemCountTextField.visible;
@@ -168,12 +198,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 				this.mouseEnabled = this.mouseChildren = false;		
 			}
 			
-			GameEvent.eventBus.addEventListener( ExternalUseItemEvent.USE_ITEM, onExternalUseItemHandler );
+			eventDispatch.addEventListener( ExternalUseItemEvent.USE_ITEM, onExternalUseItemHandler );
 		}
 		
 		override public function notifyOnGameEnd():void
 		{
-			GameEvent.eventBus.removeEventListener( ExternalUseItemEvent.USE_ITEM, onExternalUseItemHandler );
+			eventDispatch.removeEventListener( ExternalUseItemEvent.USE_ITEM, onExternalUseItemHandler );
 			super.notifyOnGameEnd();
 			
 			_effectParameters = null;
@@ -182,7 +212,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		override protected function onInitialize():void
 		{
 			super.onInitialize();
-			_itemTemp = TemplateDataFactory.getInstance().getItemTemplateById(ITEMIDS[myIconIndex]);
+			
+			_itemTemp = itemModel.getItemSheetById(cfgData.arrItemIdsInFight[myIconIndex]);
 			
 			myIconBitmapBackground.bitmapData = new PropNormalIconBackgroundBitmapData();
 			myIconBitmapBackground.visible = false;
@@ -194,16 +225,16 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			_itemCountTextField.y = myIconBitmapBackground.height - (_itemCountTextField.height>>1);
 			_itemCountTextField.visible = false;
 			addChild(_itemCountTextField);	
-			FontUtil.useFont( _itemCountTextField.txtNum, FontUtil.FONT_TYPE_BUTTON );
+			FontMgr.instance.setTextStyle( _itemCountTextField.txtNum, FontClsName.ButtonFont );
 			
 			_itemPriceText = new PropPriceText;
 			_itemPriceText.x = myIconBitmapBackground.width>>1;
 			_itemPriceText.y = myIconBitmapBackground.height - (_itemPriceText.height>>1);
 			_itemPriceText.visible = false;
 			addChild(_itemPriceText);	
-			FontUtil.useFont( _itemPriceText.txtNum, FontUtil.FONT_TYPE_BUTTON );
+			FontMgr.instance.setTextStyle( _itemPriceText.txtNum, FontClsName.ButtonFont );
 			
-			_ptPos = GameAGlobalManager.getInstance().game.globalToLocal(localToGlobal(new Point(0,0)));	
+			_ptPos = mainUI.globalToLocal(localToGlobal(new Point(0,0)));	
 			
 			addChild( _disableIconA );
 			_disableIconA.visible = _disableIconB.visible = false;
@@ -254,14 +285,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		override protected function needMouseCursor():Boolean
 		{
-			return _itemInfo && _itemInfo.number>0 && _itemTemp.effectType == 1 /*法术类*/ && _effectParameters && int(_effectParameters.magic) != MagicID.Magic_Vortex/*魔力漩涡*/
+			return itemCnt>0 && _itemTemp.effectType == 1 /*法术类*/ && _effectParameters && int(_effectParameters.magic) != MagicID.Magic_Vortex/*魔力漩涡*/
 				&& int(_effectParameters.magic) != MagicID.NuclearWeapon && int(_effectParameters.magic) != MagicID.IceMagicWand;
 		}
 		
 		override protected function createMouseCursor():BasicMouseCursor
 		{
 			var effectType:int = _itemTemp.effectType;
-			return GameMouseCursorFactory.getInstance().createGameMouseCursor(effectType, _effectParameters, this);
+			
+			return cursorFactory.createGameMouseCursor(effectType, _effectParameters, this);
 		}
 		
 		/*override public function get focusTips():String
@@ -273,15 +305,15 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			if(!getIsInValidIconMouseClick() && myIconBitmap.visible )
 			{
-				if ( GameAGlobalManager.getInstance().gameInteractiveManager.currentFocusdSceneElement == this )
+				if ( interactiveMgr.currentFocusdSceneElement == this )
 				{
-					GameAGlobalManager.getInstance().gameInteractiveManager.setCurrentFocusdElement( null );
+					interactiveMgr.setCurrentFocusdElement( null );
 				}
 				else
 				{
 					onIconMouseClick();
 				}
-				ToolTipManager.getInstance().hide();
+				//ToolTipManager.getInstance().hide();
 			}
 		}
 		
@@ -289,11 +321,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			super.onIconMouseClick();
 			//如果没有道具，弹出购买窗口
-			if(!_itemInfo || _itemInfo.number <=0)
+			if(itemCnt <=0)
 			{
-				if ( GameAGlobalManager.getInstance().gameInteractiveManager.currentFocusdSceneElement == this )
+				if ( interactiveMgr.currentFocusdSceneElement == this )
 				{
-					GameAGlobalManager.getInstance().gameInteractiveManager.setCurrentFocusdElement( null );
+					interactiveMgr.setCurrentFocusdElement( null );
 				}
 				buyItem();
 				return;
@@ -304,26 +336,26 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			{
 				if(MagicID.Magic_Vortex == int(_effectParameters.magic)/*魔力漩涡*/)
 				{
-					GameAGlobalManager.getInstance().game.gameFightMainUIView.fightControllBarView.clearAllMagicIconCD(true);
+					mainUI.fightControllBarView.clearAllMagicIconCD(true);
 					bUsed = true;
 				}	
 				else if(MagicID.NuclearWeapon == int(_effectParameters.magic) || MagicID.IceMagicWand == int(_effectParameters.magic))
 				{
-					ObjectPoolManager.getInstance().createSceneElementObject(GameObjectCategoryType.MAGIC_SKILL,int(_effectParameters.magic));
+					objPoolMgr.createSceneElementObject(GameObjectCategoryType.MAGIC_SKILL,int(_effectParameters.magic));
 					bUsed = true;
 				}
 			}
 			
 			if(_itemTemp.effectType == 3 /*增加战场物资类*/)
 			{
-				GameAGlobalManager.getInstance().gameDataInfoManager.updateSceneGold(_effectParameters["goods"]);
-				GameAGlobalManager.getInstance().game.gameFightMainUIView.playAddGoodsAnim(200,20,_effectParameters["goods"],GameAGlobalManager.getInstance().game.gameFightMainUIView);
+				sceneModel.updateSceneGold(_effectParameters["goods"]);
+				mainUI.playAddGoodsAnim(200,20,_effectParameters["goods"],mainUI);
 				bUsed = true;
 			}
 			else if(_itemTemp.effectType == 15 /*增加战场生命值*/)
 			{
-				GameAGlobalManager.getInstance().gameDataInfoManager.updateSceneLife(_effectParameters["life"]);
-				GameAGlobalManager.getInstance().game.gameFightMainUIView.tweenLifeIcon();
+				sceneModel.updateSceneLife(_effectParameters["life"]);
+				mainUI.tweenLifeIcon();
 				bUsed = true;
 			}
 			
@@ -331,49 +363,47 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			{
 				onUseItemSuccess();
 				resetCDAbleIconViewCDTime();
-				GameAGlobalManager.getInstance()
-					.game.gameFightMainUIView.fightControllBarView
-					.notifyOtherPropItemResetCDAbleIconViewCDTime(this);
-				if ( GameAGlobalManager.getInstance().gameInteractiveManager.currentFocusdSceneElement == this )
+				mainUI.fightControllBarView.notifyOtherPropItemResetCDAbleIconViewCDTime(this);
+				if ( interactiveMgr.currentFocusdSceneElement == this )
 				{
-					GameAGlobalManager.getInstance().gameInteractiveManager.setCurrentFocusdElement( null );
+					interactiveMgr.setCurrentFocusdElement( null );
 				}
 			}
 			
-			NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_USE_ITEM_MAGIC,{"param":[_itemTemp.configId],"target":this});
+			//NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_USE_ITEM_MAGIC,{"param":[_itemTemp.configId],"target":this});
 		}
 		
 		override public function render(iElapse:int):void
 		{
 			super.render( iElapse );
 			
-			if ( myIconBitmap.bitmapData && !CommonLog.instance.getValue( CommonLog.BATTLE_FIRST_ITEM_GUIDE ) && !myIsDisable )
+			/*if ( myIconBitmap.bitmapData && !CommonLog.instance.getValue( CommonLog.BATTLE_FIRST_ITEM_GUIDE ) && !myIsDisable )
 			{
 				NewbieGuideManager.getInstance().startCondition( NewbieConst.CONDITION_START_FIRST_ITEM );
 				CommonLog.instance.updateValue( CommonLog.BATTLE_FIRST_ITEM_GUIDE, true );
-			}
+			}*/
 			
 			var str:String = null;
 			switch( myIconIndex )
 			{
 				case 0:
 				{
-					str = translate( "+ 200 goods" );
+					str = textTranslater.translateText( "+ 200 goods" );
 					break;
 				}
 				case 1:
 				{
-					str = translate( "+ 5 lives" );
+					str = textTranslater.translateText( "+ 5 lives" );
 					break;
 				}
 				case 2:
 				{
-					str = translate( "Full freeze" );
+					str = textTranslater.translateText( "Full freeze" );
 					break;
 				}
 				case 3:
 				{
-					str = translate( "Full blast" );
+					str = textTranslater.translateText( "Full blast" );
 					break;
 				}
 				default:
@@ -382,7 +412,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 				}
 			}
 			
-			if(myIconUseCDTimer.getIsCDEnd())	//动态更新TIPS
+			/*if(myIconUseCDTimer.getIsCDEnd())	
 			{
 				if ( _itemTemp && _iconTip && _iconTip.visible )
 				{
@@ -403,9 +433,9 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					_iconTip.showLine = true;
 					_iconTip.tip = _itemTemp.getName() + " [" + ["Q", "W", "E","R"][myIconIndex] + "]\n" + str; 
 				}
-			}
+			}*/
 			
-			if ( _mockFlag && !GlobalTemp.enableMockItemFlag )
+			if ( _mockFlag && !global.enableMockItemFlag )
 			{
 				myIconBitmapBackground.visible = myIconBitmap.visible = false;
 				updateItemCount();
@@ -423,18 +453,18 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		{
 			super.onFocusChanged();
 			
-			if(!myIsInFocus)
+			/*if(!myIsInFocus)
 			{
 				NewbieGuideManager.getInstance().endCondition(NewbieConst.CONDITION_END_USED_OR_CANCEL_MAGIC,{"param":[_itemTemp.configId]});
-			}
+			}*/
 		}
 		
 		private function buyItem():void
 		{
-			GameAGlobalManager.getInstance().game.pause( false, false );
+			eventDispatch.dispatchEvent(new FightStateEvent(FightStateEvent.FightPause,false));
 			
-			var title:String = getText("Buy")+" "+_itemTemp.getName();
-			var alert:Alert;
+			var title:String = textTranslater.translateText("Buy")+" "+_itemTemp.getName();
+			/*var alert:Alert;
 			//直接购买
 			if(UserData.getInstance().userBaseInfo.uMoney >= _itemTemp.buyPriceMoney)
 			{
@@ -443,39 +473,44 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 				IconUtil.loadIcon(alert.getStyle()["mcItemIcon"],IconConst.ICON_TYPE_ITEM,_itemTemp.resourceId || _itemTemp.configId
 					,IconConst.ICON_SIZE_CIRCLE);
 				
-				FontUtil.useFont( alert.getStyle()["txt1"], FontUtil.FONT_TYPE_NORMAL );
-				FontUtil.useFont( alert.getStyle()["txt2"], FontUtil.FONT_TYPE_BUTTON );
-				FontUtil.useFont( alert.getStyle()["txt3"], FontUtil.FONT_TYPE_BUTTON );
+				FontMgr.instance.setTextStyle( alert.getStyle()["txt1"], FontClsName.NormalFont );
+				FontMgr.instance.setTextStyle( alert.getStyle()["txt2"], FontClsName.ButtonFont );
+				FontMgr.instance.setTextStyle( alert.getStyle()["txt3"], FontClsName.ButtonFont );
 			}
 			//提示充值
 			else
 			{
-				GameEvent.eventBus.addEventListener(ExternalInterfaceMgr.CHARGE_BACK,onChargeBack);
+				eventDispatch.addEventListener(ExternalInterfaceMgr.CHARGE_BACK,onChargeBack);
 				GameEvent.getInstance().sendEvent( UI_CMD_Const.OPEN_POP, [UI_CMD_Const.OPEN_POP, "popPanel", PopConst.DIAMOND_ALERT_POP
 					, [_itemTemp.buyPriceMoney-UserData.getInstance().userBaseInfo.uMoney, _itemTemp.configId]] );
-			}
+			}*/
 		}
 		
 		private function onAlertBuyItemHandle( detail:int ):void
 		{
-			if(detail == Alert.OK )
+			/*if(detail == Alert.OK )
 			{
 				GameEvent.getInstance().sendEvent( Shop_CMD_Const.CMD_BUYITEM, [HttpConst.HTTP_REQUEST, _itemTemp.configId, 1, _itemTemp.buyPriceMoney] );
 				updateItemCount();
 			}
-			GameAGlobalManager.getInstance().game.resume();
+			GameAGlobalManager.getInstance().game.resume();*/
 		}
 		
 		private function onChargeBack(e:Event):void
 		{
-			GameEvent.eventBus.removeEventListener(ExternalInterfaceMgr.CHARGE_BACK,onChargeBack);
+			/*eventDispatch.removeEventListener(ExternalInterfaceMgr.CHARGE_BACK,onChargeBack);
 			GameAGlobalManager.getInstance().game.resume();
 			if(UserData.getInstance().userBaseInfo.uMoney >= _itemTemp.buyPriceMoney)
 			{
 				GameEvent.getInstance().sendEvent( Shop_CMD_Const.CMD_BUYITEM, [HttpConst.HTTP_REQUEST, _itemTemp.configId, 1, _itemTemp.buyPriceMoney] );
 				GameAGlobalManager.getInstance().game.pause( false, true );
 				updateItemCount();
-			}
+			}*/
+		}
+		
+		private function get itemCnt():int
+		{
+			return itemData.getItemCountById(_itemTemp.configId);
 		}
 	}
 }

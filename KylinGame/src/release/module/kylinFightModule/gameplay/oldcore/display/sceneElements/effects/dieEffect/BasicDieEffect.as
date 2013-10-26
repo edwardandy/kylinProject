@@ -20,6 +20,12 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.e
 			myGroundSceneLayerType = GroundSceneElementLayerType.LAYER_BOTTOM;
 		}
 		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
+			injector.injectInto(_dieStayCd);
+		}
+		
 		public function setDieEffectParam(callback:Function):void
 		{
 			_endCallBack = callback;

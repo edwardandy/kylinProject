@@ -1,6 +1,7 @@
 package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.ConcreteResults
 {
 	import release.module.kylinFightModule.gameplay.constant.TriggerConditionType;
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFightMain.GameFightMainUIView;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillOwner;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.Interface.ISkillTarget;
 	import release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.BasicSkillResult;
@@ -10,6 +11,9 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.Conc
 	 */
 	public class SkillResult_RdcMagicCdAfterDie extends BasicSkillResult
 	{
+		[Inject]
+		public var mainUI:GameFightMainUIView;
+		
 		public function SkillResult_RdcMagicCdAfterDie(strId:String)
 		{
 			super(strId);
@@ -21,8 +25,7 @@ package release.module.kylinFightModule.gameplay.oldcore.logic.skill.result.Conc
 			var arrValue:Array = getValueArray(value);
 			var magicId:uint = arrValue[0];
 			var cd:int = arrValue[1];
-			GameAGlobalManager.getInstance().game.gameFightMainUIView.fightControllBarView
-				.reduceMagicSkillCDTime(magicId, cd, 1);
+			mainUI.fightControllBarView.reduceMagicSkillCDTime(magicId, cd, 1);
 			return true;
 		}
 	}

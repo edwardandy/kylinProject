@@ -15,8 +15,8 @@ package release.module.kylinFightModule.model.state
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.NewMonsterList;
+	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
 	import release.module.kylinFightModule.model.interfaces.ISceneDataModel;
-	import release.module.kylinFightModule.model.marchWave.MonsterWaveModel;
 	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
 
@@ -25,7 +25,7 @@ package release.module.kylinFightModule.model.state
 	 * @author Edward
 	 * 
 	 */	
-	public class FightLifecycleGroup implements IFightLifecycle
+	public class FightLifecycleGroup implements IFightLifecycleGroup
 	{
 		[Inject]
 		public var newMonsterList:NewMonsterList;
@@ -40,7 +40,7 @@ package release.module.kylinFightModule.model.state
 		[Inject]
 		public var monsterMarchMgr:GameFightMonsterMarchManager;
 		[Inject]
-		public var monsterWaveModel:MonsterWaveModel;
+		public var monsterWaveModel:IMonsterWaveModel;
 		[Inject]
 		public var timeTaskMgr:TimeTaskManager;
 		[Inject]
@@ -64,7 +64,7 @@ package release.module.kylinFightModule.model.state
 		[Inject]
 		public var moveLogicMgr:GameFightMoveLogicMgr;
 		
-		private var _vecLifecycles:Vector.<IFightLifecycle>;
+		private var _vecLifecycles:Vector.<IFightLifecycle> = new Vector.<IFightLifecycle>;
 		
 		public function FightLifecycleGroup()
 		{
@@ -138,6 +138,7 @@ package release.module.kylinFightModule.model.state
 			{
 				fightMgr.dispose();
 			}
+			_vecLifecycles = null;
 		}
 	}
 }

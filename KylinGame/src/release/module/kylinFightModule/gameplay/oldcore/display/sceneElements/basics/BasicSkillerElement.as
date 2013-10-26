@@ -42,7 +42,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 	import release.module.kylinFightModule.gameplay.oldcore.manager.applicationManagers.TimeTaskManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.GameMathUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
-	import release.module.kylinFightModule.service.sceneElements.ISceneElementsService;
 	import release.module.kylinFightModule.utili.structure.PointVO;
 	
 	public class BasicSkillerElement extends BasicFightElement implements ISkillOwner
@@ -96,6 +95,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			super();
 		}
 		
+		[PostConstruct]
+		public function onPostConstruct():void
+		{
+			injector.injectInto(myCheckSkillCD);
+			injector.injectInto(myStartCheckSkillCD);
+		}
+		
 		public function get lastExplosionPoint():PointVO
 		{
 			return _lastExplosionPoint ||= new PointVO;
@@ -107,6 +113,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			myFightState = new FightUnitState(this);
 			initFightState();
 			myAttackCDTimer = new SimpleCDTimer(myFightState.cdTime);
+			injector.injectInto(myAttackCDTimer);
 		}
 		
 		override protected function onLifecycleActivate():void

@@ -59,7 +59,7 @@ package mainModule.service.netServices.httpServices
 				if(_param.bNeedRespon)
 				{
 					_iVirtualTick = setTimeout(onVirtualRequest,2000);
-					if(_contextDispatcher.hasEventListener(_param.responseEventType))
+					//if(_contextDispatcher.hasEventListener(_param.responseEventType))
 						_contextDispatcher.dispatchEvent(new HttpEvent(_param.responseEventType,[_param],HttpEvent.Type_RequestBeSend));
 				}
 				else
@@ -71,7 +71,7 @@ package mainModule.service.netServices.httpServices
 			_connection.addEventListener(ErrorEvent.ERROR,onRequestError);
 			_connection.startConnect();	
 			
-			if(0 == _param.retryTimes && _contextDispatcher.hasEventListener(_param.responseEventType))
+			if(0 == _param.retryTimes /*&& _contextDispatcher.hasEventListener(_param.responseEventType)*/)
 				_contextDispatcher.dispatchEvent(new HttpEvent(_param.responseEventType,[_param],HttpEvent.Type_RequestBeSend));
 		}
 		
@@ -108,7 +108,7 @@ package mainModule.service.netServices.httpServices
 		{
 			if(_param.bVirtual)
 			{
-				if(_contextDispatcher.hasEventListener(_param.responseEventType))
+				//if(_contextDispatcher.hasEventListener(_param.responseEventType))
 					_contextDispatcher.dispatchEvent(new HttpEvent(_param.responseEventType,[[],_param],HttpEvent.Type_Response));
 				return;
 			}
@@ -118,10 +118,10 @@ package mainModule.service.netServices.httpServices
 			var result:Object = JSON.parse(_connection.responseData);
 			if(result && 1 == result[0])
 			{
-				if(_param.bNeedRespon && _contextDispatcher.hasEventListener(_param.responseEventType))
+				if(_param.bNeedRespon /*&& _contextDispatcher.hasEventListener(_param.responseEventType)*/)
 					_contextDispatcher.dispatchEvent(new HttpEvent(_param.responseEventType,[result[1],_param],HttpEvent.Type_Response));
 			}
-			else if(_contextDispatcher.hasEventListener(_param.responseEventType))
+			else /*if(_contextDispatcher.hasEventListener(_param.responseEventType))*/
 				_contextDispatcher.dispatchEvent(new HttpEvent(_param.responseEventType,[result?result[0]:null,_param],HttpEvent.Type_ResponseError));
 			
 		}
