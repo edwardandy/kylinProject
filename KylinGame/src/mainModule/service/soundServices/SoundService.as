@@ -36,9 +36,9 @@ package mainModule.service.soundServices
 				_dicGroupPaused[group] = false;
 			if(_pauseAll)
 				_dicGroupPaused[group] = true;
-			
-			const si:SoundInstance = _rootMgr.getSound(id);
-			if(!si)
+			var info:AssetInfo = loadService.getSoundItem(id);
+			//const si:SoundInstance = _rootMgr.getSound(id);
+			if(!info)
 			{
 				loadService.addSoundItem(id)
 					.addComplete(function(info:AssetInfo):void{
