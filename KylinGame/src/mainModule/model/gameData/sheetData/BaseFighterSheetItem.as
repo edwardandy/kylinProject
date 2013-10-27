@@ -228,6 +228,8 @@ package mainModule.model.gameData.sheetData
 			_skills = value;
 			_skillIds.length = 0;
 			_skillUseUnits.length = 0;
+			if(!_skills)
+				return;
 			
 			var arrResult:Array = _skills.split(",");
 			var arrSub:Array;

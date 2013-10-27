@@ -65,10 +65,10 @@ package mainModule.service.gameDataServices.sheetData
 			var arrSub:Array;
 			i = 0;
 			for(i in arrData)
-			{
-				arrSub = arrData[i];
-				if(id == uint(arrSub[idx]))
+			{	
+				if(id == uint(arrData[i][idx]))
 				{
+					arrSub = arrData[i];
 					arrData.splice(i,1);
 					break;
 				}

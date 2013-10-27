@@ -2,6 +2,7 @@ package mainModule.extensions.viewLayers
 {
 	import flash.display.DisplayObjectContainer;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.utils.Dictionary;
 	
 	import kylin.echo.edward.utilities.datastructures.DictionaryUtil;
@@ -58,6 +59,8 @@ package mainModule.extensions.viewLayers
 		private function init():void
 		{
 			_contextRoot = new Sprite;
+			_contextRoot.mouseEnabled = false;
+			
 			_fightScene = new Sprite;
 			
 			panelLayer = new Sprite;
@@ -77,14 +80,14 @@ package mainModule.extensions.viewLayers
 			waitPanelAppearLayer.mouseChildren = false;
 			waitPanelAppearLayer.visible = false;
 			_contextRoot.addChild(waitPanelAppearLayer);
-		}
-		
+		}	
 		
 		public function getPanelSubLayerByIdx(layerIndex:int):DisplayObjectContainer
 		{
 			if(null == panelIdxToLayer[layerIndex])
 			{
 				var sp:Sprite = new Sprite();
+				sp.mouseEnabled = false;
 				panelLayer.addChild(sp);
 				panelIdxToLayer[layerIndex] = sp;
 				var temp:Array 	= DictionaryUtil.getKeys(panelIdxToLayer);

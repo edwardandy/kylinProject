@@ -19,7 +19,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.m
 			myValideMouseCursorView = loadService.domainMgr.getMovieClipByDomain("cursor_move");
 			
 			//myErrorMouseCursorView = ClassLibrary.getInstance().getMovieClip("cursor_move2"); //new errorMouseCursorViewCls();
-			myErrorMouseCursorView = loadService.domainMgr.domainMgr.getMovieClipByDomain("cursor_move2");
+			myErrorMouseCursorView = loadService.domainMgr.getMovieClipByDomain("cursor_move2");
 			
 			super.onInitialize();
 		}

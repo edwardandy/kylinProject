@@ -87,7 +87,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			var currentMagicSkillIds:Vector.<IMagicSkillDynamicItem> = magicData.getAllMagicData().sort(sortMagicSkills);
 			if(currentMagicSkillIds && myIconIndex < currentMagicSkillIds.length)
 			{
-				_magicSkillTemplateInfo = currentMagicSkillIds[myIconIndex];
+				_magicSkillTemplateInfo = magicModel.getMagicSkillSheetById(currentMagicSkillIds[myIconIndex].id);
 				var iconId:uint = _magicSkillTemplateInfo.iconId;
 				//setIconBitmapData(Reflection.createBitmapData("magic_" + iconId + "_" + IconConst.ICON_SIZE_CIRCLE + ".png"));
 				setIconBitmapData(loadService.getIconBitmapData("magic_" + iconId + "_" + IconConst.ICON_SIZE_CIRCLE));

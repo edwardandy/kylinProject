@@ -1,6 +1,5 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetDataModel;
 	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetItem;
 	
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
@@ -8,9 +7,6 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 	
 	public class SoilderPreLoad extends BasicPreLoad
 	{
-		[Inject]
-		public var soldierModel:ISoldierSheetDataModel;
-		
 		public function SoilderPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);

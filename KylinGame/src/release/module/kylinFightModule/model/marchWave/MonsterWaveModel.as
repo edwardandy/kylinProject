@@ -103,7 +103,12 @@ package release.module.kylinFightModule.model.marchWave
 					FillObjectUtil.fillObj(subWaveVo,subWave);
 					
 					var arr:Array;
-					(null != (arr = waveVo.waveMonsterSumInfos.get(subWaveVo.roadIndex))) || (arr = waveVo.waveMonsterSumInfos.put(subWaveVo.roadIndex,[]));
+					arr = waveVo.waveMonsterSumInfos.get(subWaveVo.roadIndex);
+					if(null == arr)
+					{
+						waveVo.waveMonsterSumInfos.put(subWaveVo.roadIndex,[]);
+						arr = waveVo.waveMonsterSumInfos.get(subWaveVo.roadIndex);
+					}
 					arr.hasOwnProperty(subWaveVo.monsterTypeId) || (arr[subWaveVo.monsterTypeId] = 0);
 					arr[subWaveVo.monsterTypeId] += subWaveVo.monsterCount;
 					subWaveMaxEndTime = Math.max(subWaveMaxEndTime,subWaveVo.startTime + (subWaveVo.times - 1) * subWaveVo.interval);

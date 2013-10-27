@@ -9,6 +9,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMonsterMarchManager;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.treasureData.TreasureDataList;
 	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
+	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
 	import release.module.kylinFightModule.model.sceneElements.ISceneElementsModel;
 	import release.module.kylinFightModule.model.state.FightState;
 
@@ -33,6 +34,8 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		public var mainUI:GameFightMainUIView;
 		[Inject]
 		public var monsterMarchMgr:GameFightMonsterMarchManager;
+		[Inject]
+		public var monsterWaveModel:IMonsterWaveModel;
 		
 		public function FightStartupCmd()
 		{
@@ -42,6 +45,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		override public function execute():void
 		{
 			super.execute();
+			monsterWaveModel.updateData(fightData.waveInfo);
 			treasureList.initList(fightData.arrTreasureList);
 			sceneElementsModel.initBeforeFightStart();
 			fightState.state = FightState.Initialized;

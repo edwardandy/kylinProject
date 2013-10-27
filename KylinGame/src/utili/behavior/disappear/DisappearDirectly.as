@@ -1,5 +1,8 @@
 package utili.behavior.disappear
 {
+	import flash.utils.clearTimeout;
+	import flash.utils.setTimeout;
+	
 	import utili.behavior.Behavior;
 	import utili.behavior.interfaces.IDisappear;
 	import utili.behavior.interfaces.IDisappearBehavior;
@@ -11,13 +14,22 @@ package utili.behavior.disappear
 	 */
 	public class DisappearDirectly extends Behavior implements IDisappearBehavior
 	{
+		private var tick:uint;
 		/**
 		 * 消失
 		 */
 		public function disappear():void
 		{
 			_mPanel.alpha = 0;
-			_mPanel.visible = false;		
+			_mPanel.visible = false;	
+			tick = setTimeout(appearCB,10);
+		}
+		
+		override protected function appearCB():void
+		{
+			super.appearCB();
+			if(tick>0)
+				clearTimeout(tick);
 		}
 		
 		/**

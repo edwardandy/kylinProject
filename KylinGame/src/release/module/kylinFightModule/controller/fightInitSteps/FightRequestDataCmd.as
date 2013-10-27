@@ -2,6 +2,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 {	
 	import mainModule.controller.netCmds.httpCmds.HttpCmd;
 	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
 	import mainModule.model.gameData.sheetData.subwave.ISubwaveSheetDataModel;
 	import mainModule.model.gameData.sheetData.subwave.ISubwaveSheetItem;
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
@@ -27,6 +28,8 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		public var subWaveModel:ISubwaveSheetDataModel;
 		[Inject]
 		public var fightState:FightState;
+		[Inject]
+		public var heroData:IHeroDynamicDataModel;
 		
 		public function FightRequestDataCmd()
 		{
@@ -44,6 +47,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		override protected function get virtualResponData():Array
 		{
 			var dynamicData:Object = {};
+			//战斗动态数据
 			var fightObj:Object = {};
 			dynamicData[DynamicDataNameConst.FightData] = fightObj;
 			
@@ -82,6 +86,16 @@ package release.module.kylinFightModule.controller.fightInitSteps
 				
 				fightObj.waveInfo.push(waveObj);
 			}
+			
+			//携带的英雄
+			heroData.arrHeroIdsInFight.push(180001,180002,180003);
+			var heroObj:Object = {};
+			dynamicData[DynamicDataNameConst.HeroData] = heroObj;
+			heroObj.dynamicItems = {180001:{id:180001,level:1},180002:{id:180002,level:1},180003:{id:180003,level:1}};
+			//拥有的魔法
+			var magicObj:Object = {};
+			dynamicData[DynamicDataNameConst.MagicSkillData] = magicObj;
+			magicObj.dynamicItems = {210101:{id:210101,level:1},210401:{id:210401,level:1},210701:{id:210701,level:1}};
 			
 			return [{dynamic:dynamicData}];
 		}

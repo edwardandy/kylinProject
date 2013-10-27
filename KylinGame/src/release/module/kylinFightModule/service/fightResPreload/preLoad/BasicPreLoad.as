@@ -1,6 +1,8 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
+	import mainModule.model.gameData.sheetData.monster.IMonsterSheetDataModel;
 	import mainModule.model.gameData.sheetData.skill.IBaseSkillSheetItem;
+	import mainModule.model.gameData.sheetData.soldier.ISoldierSheetDataModel;
 	
 	import release.module.kylinFightModule.gameplay.constant.BufferFields;
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
@@ -11,6 +13,11 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 
 	public class BasicPreLoad
 	{
+		[Inject]
+		public var monsterModel:IMonsterSheetDataModel;
+		[Inject]
+		public var soldierModel:ISoldierSheetDataModel;
+		
 		private var _mgr:FightResPreloadService;
 		
 		public function BasicPreLoad(mgr:FightResPreloadService)
@@ -81,8 +88,11 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 			{
 				var soilderId:uint = (eff[SkillResultTyps.SUMMON] as String).split("-")[0];
 				//可能是士兵，也可能是怪物
-				preloadSoilderRes(soilderId);
-				preloadMonsterRes(soilderId);
+				if(null != monsterModel.getMonsterSheetById(soilderId))
+					preloadMonsterRes(soilderId);
+				else if(null != soldierModel.getSoldierSheetById(soilderId))
+					preloadSoilderRes(soilderId);
+				
 			}
 		}
 		
@@ -92,8 +102,10 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 			{
 				var soilderId:uint = (eff[SkillResultTyps.SUMMON_AFTER_DIE] as String).split("-")[0];
 				//可能是士兵，也可能是怪物
-				preloadSoilderRes(soilderId);
-				preloadMonsterRes(soilderId);
+				if(null != monsterModel.getMonsterSheetById(soilderId))
+					preloadMonsterRes(soilderId);
+				else if(null != soldierModel.getSoldierSheetById(soilderId))
+					preloadSoilderRes(soilderId);
 			}
 		}
 		

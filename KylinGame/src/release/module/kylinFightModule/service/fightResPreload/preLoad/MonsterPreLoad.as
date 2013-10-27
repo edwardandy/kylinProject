@@ -1,6 +1,5 @@
 package release.module.kylinFightModule.service.fightResPreload.preLoad
 {
-	import mainModule.model.gameData.sheetData.monster.IMonsterSheetDataModel;
 	import mainModule.model.gameData.sheetData.monster.IMonsterSheetItem;
 	
 	import release.module.kylinFightModule.gameplay.constant.GameObjectCategoryType;
@@ -8,9 +7,6 @@ package release.module.kylinFightModule.service.fightResPreload.preLoad
 	
 	public class MonsterPreLoad extends BasicPreLoad
 	{
-		[Inject]
-		public var monsterModel:IMonsterSheetDataModel;
-		
 		public function MonsterPreLoad(mgr:FightResPreloadService)
 		{
 			super(mgr);

@@ -20,6 +20,7 @@ package release.module.kylinFightModule.gameplay
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightInteractiveManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMonsterMarchManager;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightMouseCursorManager;
+	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.GameFightSuccessAndFailedDetector;
 	import release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers.mouse.MouseCursorManager;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.MovieClipRasterizationUtil;
 	import release.module.kylinFightModule.gameplay.oldcore.utils.SimpleCDTimer;
@@ -57,6 +58,7 @@ package release.module.kylinFightModule.gameplay
 			injector.map(GameFightMonsterMarchManager).asSingleton();
 			injector.map(GameFightMainUIView).asSingleton();
 			injector.map(GamePauseView).asSingleton();
+			injector.map(GameFightSuccessAndFailedDetector).asSingleton();
 			
 			injector.map(GameFightSkillResultMgr).asSingleton();
 			injector.map(GameFightSkillProcessorMgr).asSingleton();

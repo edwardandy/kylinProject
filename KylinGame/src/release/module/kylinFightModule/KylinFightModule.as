@@ -21,6 +21,8 @@ package release.module.kylinFightModule
 		public function KylinFightModule()
 		{
 			super();
+			this.mouseEnabled = false;
+			//this.mouseChildren = false;
 		}
 		
 		[PostConstruct]

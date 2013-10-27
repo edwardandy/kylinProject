@@ -14,6 +14,7 @@ package release.module.kylinFightModule.service.fightResPreload
 	import mainModule.model.gameData.sheetData.item.IItemSheetItem;
 	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetDataModel;
 	import mainModule.model.gameData.sheetData.skill.magic.IMagicSkillSheetItem;
+	import mainModule.service.loadServices.IconConst;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
 	
 	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;
@@ -122,7 +123,7 @@ package release.module.kylinFightModule.service.fightResPreload
 		
 		public function checkHeroPreloadIcon(heroId:uint):void
 		{
-			loadService.addIconItem("Hero_" + heroId + "_" /*+ IconConst.ICON_SIZE_CIRCLE*/).addToLoaderProgress(loadProgress);
+			loadService.addIconItem("Hero_" + heroId + "_" + IconConst.ICON_SIZE_CIRCLE).addToLoaderProgress(loadProgress);
 		}
 		/**
 		 * 怪物资源
@@ -166,7 +167,7 @@ package release.module.kylinFightModule.service.fightResPreload
 			var item:IMagicSkillSheetItem = magicSkillModel.getMagicSkillSheetById(magicId);
 			if(!item)
 				return;
-			loadService.addIconItem("magic_" + (item.iconId>0?item.iconId:magicId) + "_" /*+ IconConst.ICON_SIZE_CIRCLE*/)
+			loadService.addIconItem("magic_" + (item.iconId>0?item.iconId:magicId) + "_" + IconConst.ICON_SIZE_CIRCLE)
 				.addToLoaderProgress(loadProgress);
 		}
 		/**
@@ -184,7 +185,7 @@ package release.module.kylinFightModule.service.fightResPreload
 				return;
 			
 			var iconId:uint = item.resId || itemId;
-			loadService.addIconItem("Item_" + iconId + "_" /*+ IconConst.ICON_SIZE_CIRCLE*/)
+			loadService.addIconItem("Item_" + iconId + "_" + IconConst.ICON_SIZE_CIRCLE)
 				.addToLoaderProgress(loadProgress);
 		}
 		/**
