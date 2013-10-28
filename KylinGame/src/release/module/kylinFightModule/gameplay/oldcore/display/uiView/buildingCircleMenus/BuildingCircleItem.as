@@ -105,7 +105,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.building
 		private function checkIsValideByLock():void
 		{			
 			const resultIsLocked:Boolean = tollgateService.canTowerBuildInTollgate(fightData.tollgateId,myTowerTemplateInfo.configId)	
-			this.setIsLock(resultIsLocked);
+			this.setIsLock(!resultIsLocked);
 		}
 		
 		override protected function excuteClickCallback():void

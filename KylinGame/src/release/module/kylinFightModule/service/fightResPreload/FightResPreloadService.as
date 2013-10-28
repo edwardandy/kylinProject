@@ -236,7 +236,7 @@ package release.module.kylinFightModule.service.fightResPreload
 		 */
 		private function preloadMonsterRes():void
 		{
-			for(var i:int = monsterWaveModel.totalWaveCount;i>0;--i)
+			for(var i:int = monsterWaveModel.totalWaveCount-1;i>=0;--i)
 			{
 				for each(var subWave:MonsterSubWaveVO in monsterWaveModel.getMonsterWave(i).vecSubWaves)
 				{

@@ -110,7 +110,7 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 					timeTaskMgr.destoryTimeTask(_timeHandlerId);
 				}
 				
-				_currentMonsterMarchWaveVO = monsterWaveModel.getMonsterWave(monsterWaveModel.curWaveCount);
+				_currentMonsterMarchWaveVO = monsterWaveModel.getMonsterWave(monsterWaveModel.curWaveCount-1);
 				
 				var subWaveVOs:Vector.<MonsterSubWaveVO> = _currentMonsterMarchWaveVO.vecSubWaves;
 				var subWaveCount:uint = subWaveVOs.length;

@@ -41,6 +41,10 @@ package release.module.kylinFightModule.model.interfaces
 		 */
 		function get groundLayer():Sprite;
 		/**
+		 * 地表背景层，用于检测鼠标事件 
+		 */		
+		function get groundBg():Sprite;
+		/**
 		 * 地图显示层 
 		 */		
 		function get mapLayer():Sprite;

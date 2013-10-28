@@ -100,6 +100,7 @@ package release.module.kylinFightModule.model.marchWave
 				for each(var subWave:Object in wave.subWaves)
 				{
 					var subWaveVo:MonsterSubWaveVO = new MonsterSubWaveVO;
+					waveVo.vecSubWaves.push(subWaveVo);
 					FillObjectUtil.fillObj(subWaveVo,subWave);
 					
 					var arr:Array;

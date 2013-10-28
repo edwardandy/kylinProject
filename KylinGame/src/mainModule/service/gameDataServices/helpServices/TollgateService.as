@@ -2,10 +2,12 @@ package mainModule.service.gameDataServices.helpServices
 {
 	import kylin.echo.edward.framwork.model.KylinActor;
 	
+	import mainModule.model.gameData.dynamicData.tower.ITowerDynamicDataModel;
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetDataModel;
 	import mainModule.model.gameData.sheetData.tollgate.ITollgateSheetItem;
 	import mainModule.model.gameData.sheetData.tower.ITowerSheetDataModel;
 	import mainModule.model.gameData.sheetData.tower.ITowerSheetItem;
+
 	/**
 	 * 关卡相关逻辑方法
 	 * @author Edward
@@ -17,6 +19,8 @@ package mainModule.service.gameDataServices.helpServices
 		public var tollgateModel:ITollgateSheetDataModel;
 		[Inject]
 		public var towerModel:ITowerSheetDataModel;
+		[Inject]
+		public var towerData:ITowerDynamicDataModel;
 		
 		public function TollgateService()
 		{
@@ -33,6 +37,9 @@ package mainModule.service.gameDataServices.helpServices
 			
 			const towerItem:ITowerSheetItem = towerModel.getTowerSheetById(towerId);
 			if(!towerItem)
+				return false;
+			
+			if(null == towerData.getTowerDataById(towerId))
 				return false;
 			
 			return towerItem.level <= tollgateItem.getTowerMaxLvlByType(towerItem.type);

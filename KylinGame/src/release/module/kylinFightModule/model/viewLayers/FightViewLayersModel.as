@@ -2,6 +2,7 @@ package release.module.kylinFightModule.model.viewLayers
 {
 	import flash.display.Shape;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	
 	import kylin.echo.edward.framwork.model.KylinActor;
 	
@@ -20,6 +21,7 @@ package release.module.kylinFightModule.model.viewLayers
 		public var mainViewLayers:ViewLayersMgr;
 		private var _mapLayer:Sprite;
 		private var _groundLayer:Sprite;
+		private var _groundBg:Sprite;
 		private var _roadHitTestShape:Shape;
 		private var _bottomLayer:Sprite;
 		private var _middleLayer:Sprite;
@@ -34,9 +36,11 @@ package release.module.kylinFightModule.model.viewLayers
 			super();
 		}
 		
-		/**
-		 * UI特效层 
-		 */
+		public function get groundBg():Sprite
+		{
+			return _groundBg;
+		}
+
 		public function get UIEffectLayer():Sprite
 		{
 			return _UIEffectLayer;
@@ -95,6 +99,7 @@ package release.module.kylinFightModule.model.viewLayers
 			_mapLayer.mouseChildren = false;
 			_groundLayer = new Sprite;
 			_roadHitTestShape = new Shape;
+			_groundBg = new Sprite;
 			_bottomLayer = new Sprite;
 			_bottomLayer.mouseEnabled = false;
 			_middleLayer = new Sprite;
@@ -124,6 +129,7 @@ package release.module.kylinFightModule.model.viewLayers
 			mainViewLayers.fightScene.addChild(_mapLayer);
 			_mapLayer.addChild(_roadHitTestShape);
 			mainViewLayers.fightScene.addChild(_groundLayer);
+			_groundLayer.addChild(_groundBg);
 			_groundLayer.addChild(_bottomLayer);
 			_groundLayer.addChild(_middleLayer);
 			_groundLayer.addChild(_topLayer);
@@ -131,6 +137,12 @@ package release.module.kylinFightModule.model.viewLayers
 			_groundLayer.addChild(_mouseCursorLayer);
 			mainViewLayers.fightScene.addChild(_UILayer);
 			mainViewLayers.fightScene.addChild(_UIEffectLayer);
+			_groundLayer.addEventListener(MouseEvent.CLICK,onClick);
+		}
+		
+		private function onClick(e:MouseEvent):void
+		{
+			trace(e.target);
 		}
 		/**
 		 * 销毁
@@ -152,6 +164,7 @@ package release.module.kylinFightModule.model.viewLayers
 			
 			_mapLayer = null;
 			_groundLayer = null;
+			_groundBg = null;
 			_bottomLayer = null;
 			_middleLayer = null;
 			_topLayer = null;

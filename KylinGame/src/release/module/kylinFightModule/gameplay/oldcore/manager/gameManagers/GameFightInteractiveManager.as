@@ -118,21 +118,21 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			if(isListen)
 			{
 				fightViewData.groundLayer.addEventListener(MouseEvent.CLICK, groundSceneClickHandler,true);
-				fightViewData.groundLayer.addEventListener(MouseEvent.CLICK, groundSceneClickHandler1);
+				fightViewData.groundBg.addEventListener(MouseEvent.CLICK, groundSceneClickHandler1);
 				stage.addEventListener(KeyboardEvent.KEY_UP, stageKeyUpHandler);
 			}
 			else
 			{
 				fightViewData.groundLayer.removeEventListener(MouseEvent.CLICK, groundSceneClickHandler,true);
-				fightViewData.groundLayer.removeEventListener(MouseEvent.CLICK, groundSceneClickHandler1);
+				fightViewData.groundBg.removeEventListener(MouseEvent.CLICK, groundSceneClickHandler1);
 				stage.removeEventListener(KeyboardEvent.KEY_UP, stageKeyUpHandler);
 			}
 		}
 		
 		private function groundSceneClickHandler1(event:MouseEvent):void
 		{
-			if(event.target != fightViewData.groundLayer)
-				return;
+			/*if(event.target != fightViewData.groundLayer)
+				return;*/
 						
 			if(_currentFocusdSceneElement != null && _currentFocusdSceneElement is HeroElement)
 			{

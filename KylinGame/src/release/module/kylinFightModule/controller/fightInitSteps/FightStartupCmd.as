@@ -1,5 +1,7 @@
 package release.module.kylinFightModule.controller.fightInitSteps
 {
+	import flash.display.Sprite;
+	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	
 	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
@@ -34,8 +36,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		public var mainUI:GameFightMainUIView;
 		[Inject]
 		public var monsterMarchMgr:GameFightMonsterMarchManager;
-		[Inject]
-		public var monsterWaveModel:IMonsterWaveModel;
+		
 		
 		public function FightStartupCmd()
 		{
@@ -45,10 +46,15 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		override public function execute():void
 		{
 			super.execute();
-			monsterWaveModel.updateData(fightData.waveInfo);
 			treasureList.initList(fightData.arrTreasureList);
 			sceneElementsModel.initBeforeFightStart();
 			fightState.state = FightState.Initialized;
+			
+			
+			fightViewModel.groundBg.graphics.beginFill(0,0);
+			fightViewModel.groundBg.graphics.drawRect(0,0,760,650);
+			fightViewModel.groundBg.graphics.endFill();
+			
 			fightViewModel.UILayer.addChild(mainUI);
 			monsterMarchMgr.mainUI = mainUI;
 			dispatch(new FightStateEvent(FightStateEvent.FightStart));

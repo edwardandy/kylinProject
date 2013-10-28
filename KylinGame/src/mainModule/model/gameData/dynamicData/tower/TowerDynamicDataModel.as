@@ -41,7 +41,7 @@ package mainModule.model.gameData.dynamicData.tower
 		 */	
 		public function getTowerLevelByType(iType:int):int
 		{
-			return towerLevels[iType];
+			return _towerLevels[iType];
 		}
 	}
 }

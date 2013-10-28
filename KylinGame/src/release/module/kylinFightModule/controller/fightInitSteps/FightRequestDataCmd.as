@@ -2,6 +2,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 {	
 	import mainModule.controller.netCmds.httpCmds.HttpCmd;
 	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
+	import mainModule.model.gameData.dynamicData.fight.IFightDynamicDataModel;
 	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
 	import mainModule.model.gameData.sheetData.subwave.ISubwaveSheetDataModel;
 	import mainModule.model.gameData.sheetData.subwave.ISubwaveSheetItem;
@@ -11,6 +12,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 	import mainModule.model.gameData.sheetData.wave.IWaveSheetItem;
 	import mainModule.service.netServices.httpServices.HttpRequestDataFormat;
 	
+	import release.module.kylinFightModule.model.interfaces.IMonsterWaveModel;
 	import release.module.kylinFightModule.model.state.FightState;
 
 	/**
@@ -30,6 +32,10 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		public var fightState:FightState;
 		[Inject]
 		public var heroData:IHeroDynamicDataModel;
+		[Inject]
+		public var monsterWaveModel:IMonsterWaveModel;
+		[Inject]
+		public var fightData:IFightDynamicDataModel;
 		
 		public function FightRequestDataCmd()
 		{
@@ -96,6 +102,11 @@ package release.module.kylinFightModule.controller.fightInitSteps
 			var magicObj:Object = {};
 			dynamicData[DynamicDataNameConst.MagicSkillData] = magicObj;
 			magicObj.dynamicItems = {210101:{id:210101,level:1},210401:{id:210401,level:1},210701:{id:210701,level:1}};
+			//拥有的塔
+			var towerObj:Object = {};
+			dynamicData[DynamicDataNameConst.TowerData] = towerObj;
+			towerObj.dynamicItems = {111001:{id:111001,level:1},112007:{id:112007,level:1},113013:{id:113013,level:1},113013:{id:114019,level:1}};
+			towerObj.towerLevels = {1:1,2:1,3:1,4:1};
 			
 			return [{dynamic:dynamicData}];
 		}
@@ -104,6 +115,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		{
 			super.response();
 			fightState.state = FightState.UnInitialized;
+			monsterWaveModel.updateData(fightData.waveInfo);
 			dispatch(new FightInitStepsEvent(FightInitStepsEvent.FightLoadMapImg));
 		}
 	}
