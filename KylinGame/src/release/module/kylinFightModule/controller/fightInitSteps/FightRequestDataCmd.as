@@ -105,7 +105,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 			//拥有的塔
 			var towerObj:Object = {};
 			dynamicData[DynamicDataNameConst.TowerData] = towerObj;
-			towerObj.dynamicItems = {111001:{id:111001,level:1},112007:{id:112007,level:1},113013:{id:113013,level:1},113013:{id:114019,level:1}};
+			towerObj.dynamicItems = {111001:{id:111001,level:1},112007:{id:112007,level:1},113013:{id:113013,level:1},114019:{id:114019,level:1}};
 			towerObj.towerLevels = {1:1,2:1,3:1,4:1};
 			
 			return [{dynamic:dynamicData}];

@@ -115,7 +115,7 @@ package mainModule.service.loadServices
 		{
 			DisplayUtility.instance.removeAllChild(container);
 			var item:IItemSheetItem = itemModel.getItemSheetById(configId);
-			const path:String = typeStr + "_"+ (item.resId>0?item.resId:configId) + "_"+size;
+			const path:String = typeStr + "_"+ ((item && item.resId>0)?item.resId:configId) + "_"+size;
 			var listener:IAssetsLoaderListener = loadService.addIconItem(path);
 			checkIconLoad(container,path,listener,bShowQuality?configId:0);
 			return listener;

@@ -303,10 +303,10 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.b
 			{
 				case GameObjectCategoryType.TOWER:
 					skillInfo = towerSkillModel.getTowerSkillSheetById(id);
-				case GameObjectCategoryType.MONSTER:
-					skillInfo = monsterSkillModel.getMonsterSkillSheetById(id);
 				case GameObjectCategoryType.HERO:
 					skillInfo = heroSkillModel.getHeroSkillSheetById(id);	
+				default:	
+					skillInfo = monsterSkillModel.getMonsterSkillSheetById(id);
 			}
 			return skillInfo;
 		}

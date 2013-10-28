@@ -46,7 +46,7 @@ package release.module.kylinFightModule.model.marchWave
 
 		public function getMonsterWave(idx:int):MonsterWaveVO
 		{
-			if(idx<0 || idx>_vecMonsterWaves.length)
+			if(idx<0 || idx>=_vecMonsterWaves.length)
 				return null;
 			return _vecMonsterWaves[idx];
 		}
