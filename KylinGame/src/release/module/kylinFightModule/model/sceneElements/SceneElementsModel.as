@@ -302,7 +302,6 @@ package release.module.kylinFightModule.model.sceneElements
 		
 		public function dispose():void
 		{
-			super.dispose();
 			_towerElements = null;
 			_organismsElements = null;
 			_groundEffElements = null;

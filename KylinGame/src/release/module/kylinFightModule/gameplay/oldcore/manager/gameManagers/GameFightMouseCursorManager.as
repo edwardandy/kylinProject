@@ -50,6 +50,13 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 		{
 			deactiveCurrentMouseCursor();
 			unRegistAllMouseCursors();
+			_registedMouseCursorMap = new Dictionary;
+		}
+		
+		override public function dispose():void
+		{
+			super.dispose();
+			_registedMouseCursorMap = null; 
 		}
 		
 		//API Regist
@@ -85,8 +92,6 @@ package release.module.kylinFightModule.gameplay.oldcore.manager.gameManagers
 			{
 				mouseCursor.dispose();
 			}
-			
-			_registedMouseCursorMap = null; 
 		}
 		
 		public function activeMouseCursorByName(mouseCursorName:String, mouseCursorSponsor:IMouseCursorSponsor = null):void

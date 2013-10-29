@@ -33,6 +33,10 @@ package release.module.kylinFightModule.controller.fightInitSteps
 		 * 战斗结束，需要传递参数，true:胜利，false:失败
 		 */		
 		public static const FightGameOver:String = "fightGameOver";
+		/**
+		 * 重新开始战斗 
+		 */		
+		public static const FightRestart:String = "fightRestart";
 		
 		private var _data:Object;
 		

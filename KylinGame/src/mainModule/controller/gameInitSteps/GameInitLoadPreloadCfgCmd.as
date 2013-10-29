@@ -1,12 +1,7 @@
 package mainModule.controller.gameInitSteps
 {
-	import flash.events.Event;
-	
-	import br.com.stimuli.loading.loadingtypes.XMLItem;
-	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	import kylin.echo.edward.utilities.loader.AssetInfo;
-	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
 	
 	import mainModule.model.preLoadData.interfaces.IPreLoadCfgModel;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;

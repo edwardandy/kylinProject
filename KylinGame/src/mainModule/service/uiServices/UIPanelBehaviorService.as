@@ -93,6 +93,7 @@ package mainModule.service.uiServices
 			var spPanel:Sprite = panel as Sprite;
 			if(spPanel.parent)
 				spPanel.parent.removeChild(spPanel);
+			_panels.deletePanel(panel.panelId);
 		}
 	}
 }

@@ -38,13 +38,13 @@ package release.module.kylinFightModule.model.state
 		[Inject]
 		public var interactiveMgr:GameFightInteractiveManager;
 		[Inject]
-		public var monsterMarchMgr:GameFightMonsterMarchManager;
-		[Inject]
 		public var monsterWaveModel:IMonsterWaveModel;
 		[Inject]
 		public var timeTaskMgr:TimeTaskManager;
 		[Inject]
 		public var objPoolMgr:ObjectPoolManager;
+		[Inject]
+		public var monsterMarchMgr:GameFightMonsterMarchManager;
 		[Inject]
 		public var sceneModel:ISceneDataModel;
 		[Inject]
@@ -80,9 +80,9 @@ package release.module.kylinFightModule.model.state
 			addLifecycle(mouseMgr);
 			addLifecycle(interactiveMgr);
 			addLifecycle(monsterWaveModel);
-			addLifecycle(monsterMarchMgr);
 			addLifecycle(timeTaskMgr);
 			addLifecycle(objPoolMgr);
+			addLifecycle(monsterMarchMgr);
 			addLifecycle(sceneModel);
 			addLifecycle(sceneElementsModel);
 			addLifecycle(sceneElementsService);
@@ -110,7 +110,7 @@ package release.module.kylinFightModule.model.state
 		
 		public function onFightEnd():void
 		{
-			for each(var fightMgr:IFightLifecycle in _vecLifecycles.reverse())
+			for each(var fightMgr:IFightLifecycle in _vecLifecycles.concat().reverse())
 			{
 				fightMgr.onFightEnd();
 			}

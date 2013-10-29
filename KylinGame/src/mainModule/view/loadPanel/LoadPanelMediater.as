@@ -6,6 +6,7 @@ package mainModule.view.loadPanel
 	
 	import mainModule.controller.gameInitSteps.GameInitStepEvent;
 	import mainModule.controller.uiCmds.UIPanelEvent;
+	import mainModule.model.panelData.PanelNameConst;
 	
 	public class LoadPanelMediater extends KylinPanelMediater
 	{
@@ -23,6 +24,13 @@ package mainModule.view.loadPanel
 			
 			addViewListener(UIPanelEvent.UI_PanelOpened,onLoadPanelOpened,UIPanelEvent);
 			addContextListener(ProgressEvent.PROGRESS,onLoadProgress,ProgressEvent);
+			_loadPanel.ctrlBtnFight.addActionEventListener(onClickFight);
+		}
+		
+		override public function destroy():void
+		{
+			_loadPanel.ctrlBtnFight.removeActionEventListener();
+			super.destroy();
 		}
 		
 		private function onLoadPanelOpened(e:UIPanelEvent):void
@@ -35,6 +43,12 @@ package mainModule.view.loadPanel
 		{
 			//_loadPanel.txtMsg.text = "My Test Info.";
 			_loadPanel.txtProgress.text = "Loading..." + int(e.bytesLoaded*100).toString() + "%";
+		}
+		
+		private function onClickFight():void
+		{
+			dispatch(new UIPanelEvent(UIPanelEvent.UI_ClosePanel,PanelNameConst.LoadPanel));
+			dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.KylinFightModule));
 		}
 	}
 }

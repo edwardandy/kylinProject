@@ -80,7 +80,9 @@ package kylin.echo.edward.ui
 		public function dispose() : void
 		{
 			removeEvent();
-			if (bt != null) bt.stop();
+			if (bt != null) 
+				bt.stop();
+			bt = null;
 			frameArr = null;
 			actionListener = null;
 			args = null;

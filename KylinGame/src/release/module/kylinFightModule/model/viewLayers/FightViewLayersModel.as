@@ -2,7 +2,6 @@ package release.module.kylinFightModule.model.viewLayers
 {
 	import flash.display.Shape;
 	import flash.display.Sprite;
-	import flash.events.MouseEvent;
 	
 	import kylin.echo.edward.framwork.model.KylinActor;
 	
@@ -137,13 +136,8 @@ package release.module.kylinFightModule.model.viewLayers
 			_groundLayer.addChild(_mouseCursorLayer);
 			mainViewLayers.fightScene.addChild(_UILayer);
 			mainViewLayers.fightScene.addChild(_UIEffectLayer);
-			_groundLayer.addEventListener(MouseEvent.CLICK,onClick);
 		}
-		
-		private function onClick(e:MouseEvent):void
-		{
-			trace(e.target);
-		}
+
 		/**
 		 * 销毁
 		 * 
@@ -151,6 +145,8 @@ package release.module.kylinFightModule.model.viewLayers
 		[PreDestroy]
 		public function destroy():void
 		{
+			if(!_mapLayer)
+				return;
 			_mapLayer.removeChildren();
 			_groundLayer.removeChildren();
 			_bottomLayer.removeChildren();

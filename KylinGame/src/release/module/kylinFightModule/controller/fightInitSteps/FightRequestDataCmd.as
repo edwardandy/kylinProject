@@ -94,6 +94,7 @@ package release.module.kylinFightModule.controller.fightInitSteps
 			}
 			
 			//携带的英雄
+			heroData.arrHeroIdsInFight.length = 0;
 			heroData.arrHeroIdsInFight.push(180001,180002,180003);
 			var heroObj:Object = {};
 			dynamicData[DynamicDataNameConst.HeroData] = heroObj;

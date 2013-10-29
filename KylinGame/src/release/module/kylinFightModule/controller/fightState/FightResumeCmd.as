@@ -4,7 +4,9 @@ package release.module.kylinFightModule.controller.fightState
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	
+	import release.module.kylinFightModule.gameplay.oldcore.display.uiView.GamePauseView;
 	import release.module.kylinFightModule.gameplay.oldcore.vo.GlobalTemp;
+	import release.module.kylinFightModule.model.interfaces.IFightViewLayersModel;
 	import release.module.kylinFightModule.model.state.FightState;
 	import release.module.kylinFightModule.model.state.IFightLifecycleGroup;
 

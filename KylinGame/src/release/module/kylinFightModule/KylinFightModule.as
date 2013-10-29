@@ -1,9 +1,11 @@
 package release.module.kylinFightModule
 {
 	import flash.display.MovieClip;
+	import flash.net.getClassByAlias;
+	import flash.utils.getDefinitionByName;
+	import flash.utils.getQualifiedClassName;
 	
 	import kylin.echo.edward.framwork.view.KylinBasePanel;
-	
 	
 	import release.module.kylinFightModule.configuration.KylinFightConfig;
 	
@@ -25,13 +27,24 @@ package release.module.kylinFightModule
 			//this.mouseChildren = false;
 		}
 		
-		[PostConstruct]
-		public function init():void
-		{			
+		override public function appear(param:Object=null):void
+		{
+			super.appear(param);
 			_context = new Context()
 				.install( MVCSBundle)
 				.configure(KylinFightConfig)
 				.configure( new ContextView(this) );
+		}
+		
+		override public function disappear(param:Object=null):void
+		{
+			super.disappear(param);
+			_context.destroy(afterContextDestroy);
+		}
+		
+		private function afterContextDestroy():void
+		{
+			_context = null;
 		}
 		
 		override public function get content():MovieClip

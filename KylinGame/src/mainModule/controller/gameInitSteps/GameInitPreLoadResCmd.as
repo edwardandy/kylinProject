@@ -95,8 +95,8 @@ package mainModule.controller.gameInitSteps
 		private function allLoadCmp(e:Event = null):void
 		{
 			//dispatch(new HttpEvent(HttpEvent.Http_GameInit));
-			dispatch(new UIPanelEvent(UIPanelEvent.UI_ClosePanel,PanelNameConst.LoadPanel));
-			dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.KylinFightModule));
+			//dispatch(new UIPanelEvent(UIPanelEvent.UI_ClosePanel,PanelNameConst.LoadPanel));
+			//dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.KylinFightModule));
 			
 			directCommandMap.release(this);
 		}

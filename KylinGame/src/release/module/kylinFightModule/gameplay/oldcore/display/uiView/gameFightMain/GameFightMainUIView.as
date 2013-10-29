@@ -23,6 +23,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 	import mainModule.service.soundServices.ISoundService;
 	import mainModule.service.soundServices.SoundGroupType;
 	
+	import release.module.kylinFightModule.controller.fightInitSteps.FightInitStepsEvent;
 	import release.module.kylinFightModule.controller.fightState.FightStateEvent;
 	import release.module.kylinFightModule.gameplay.constant.BattleEffectType;
 	import release.module.kylinFightModule.gameplay.constant.GameFightConstant;
@@ -317,35 +318,32 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		
 		override public function dispose():void
 		{	
-			while(numChildren > 0)
-			{
-				removeChildAt(0);
-			}
+			removeChildren();
 
 			_currentFocusInfoView.dispose();
-			removeChild(_currentFocusInfoView);
+			//removeChild(_currentFocusInfoView);
 			_currentFocusInfoView = null;
 
 			_fightControllBarView.dispose();
-			removeChild(_fightControllBarView);
+			//removeChild(_fightControllBarView);
 			_fightControllBarView = null;
 			
 			//_userInfoView.userImgLoader.removeEventListener(IOErrorEvent.IO_ERROR, userImgLoaderErrorHandler);
 			//_userInfoView.userImgLoader.source = null;
-			removeChild(_userInfoView);
+			//removeChild(_userInfoView);
 			_userInfoView = null;
 			
 			_effects = null;
 			
-			removeChild(_fightPauseBtn.getSkin());
+			//removeChild(_fightPauseBtn.getSkin());
 			_fightPauseBtn.removeActionEventListener();
 			_fightPauseBtn = null;
 			
-			removeChild(_fightSettingBtn.getSkin());
+			//removeChild(_fightSettingBtn.getSkin());
 			_fightSettingBtn.removeActionEventListener();
 			_fightSettingBtn = null;
 			
-			removeChild(_marchMonstersFlagLayer);
+			//removeChild(_marchMonstersFlagLayer);
 			_marchMonstersFlagLayer.removeEventListener(MouseEvent.CLICK, marchMonstersFlagLayerMouseClickHandler);
 			_marchMonstersFlagLayer = null;
 			
@@ -358,7 +356,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 			}
 			_marchMonstersFlagPool = null;
 			
-			removeChild(_newMonsterIconsView);
+			//removeChild(_newMonsterIconsView);
 			_newMonsterIconsView.dispose();
 			_newMonsterIconsView = null;
 
@@ -533,8 +531,8 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 		private function fightSettingBtnClickHandler(/*event:MouseEvent*/):void
 		{
 			soundService.play(SoundID.ClickButton,SoundGroupType.Effect,1,true);
-			//GameEvent.getInstance().sendEvent(UI_CMD_Const.OPEN_PANEL ,[UI_CMD_Const.OPEN_PANEL , 'systemPanel']);
-			//GameAGlobalManager.getInstance().game.pause(false, false);
+			eventDispatcher.dispatchEvent(new FightInitStepsEvent(FightInitStepsEvent.FightGameOver,true));
+			//eventDispatcher.dispatchEvent(new FightInitStepsEvent(FightInitStepsEvent.FightRestart));
 		}
 		
 		private function gameDataInfoUpdateHandler(event:GameDataInfoEvent):void

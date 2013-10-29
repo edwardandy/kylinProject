@@ -1,6 +1,7 @@
 package mainModule.service.uiServices
 {
 	import flash.display.DisplayObject;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
@@ -13,11 +14,12 @@ package mainModule.service.uiServices
 	import kylin.echo.edward.framwork.model.KylinActor;
 	import kylin.echo.edward.framwork.view.interfaces.IKylinBasePanel;
 	import kylin.echo.edward.utilities.display.DisplayObjectUtils;
+	import kylin.echo.edward.utilities.loader.AssetInfo;
 	
+	import mainModule.extensions.viewLayers.ViewLayersMgr;
 	import mainModule.model.panelData.PanelCfgVo;
 	import mainModule.model.panelData.PanelInstancesModel;
 	import mainModule.model.panelData.PanelNameConst;
-	import mainModule.extensions.viewLayers.ViewLayersMgr;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	import mainModule.model.panelData.interfaces.IPanelDeclareModel;
 	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
@@ -72,6 +74,13 @@ package mainModule.service.uiServices
 				return;
 			var resId:String = cfg.resId || id;
 			
+			var assetInfo:AssetInfo = loadService.getModuleItem(resId);
+			if(assetInfo && assetInfo.content)
+			{
+				genPanelInstance(id,assetInfo.content,param);
+				return;
+			}
+			
 			var item:ImageItem = loadService.addModuleItem(resId,resId+"_childDomain").item as ImageItem;
 			if(!item)
 				return;
@@ -117,7 +126,10 @@ package mainModule.service.uiServices
 			var instance:IKylinBasePanel;
 			if(content is IKylinBasePanel)
 			{
-				instance = IKylinBasePanel(content);
+				//var cls:Class = loadService.domainMgr.getClassByDomain("release.module."+id+"::"+id);
+				var fullClassName:String = "release.module."+id.charAt().toLowerCase()+id.slice(1)+"::"+id;
+				instance = IKylinBasePanel(new ((content as Sprite).loaderInfo.applicationDomain.getDefinition(fullClassName) as Class))
+				//instance = IKylinBasePanel(content);
 				_injector.injectInto(instance);
 			}
 			else

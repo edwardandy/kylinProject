@@ -29,17 +29,17 @@ package release.module.kylinFightModule.controller.fightState
 		 */		
 		public static const FightQuit:String = "fightQuit";
 		
-		private var _body:Object;
+		private var _data:Object;
 		
-		public function FightStateEvent(type:String,data:Object=null,bubbles:Boolean=false, cancelable:Boolean=false)
+		public function FightStateEvent(type:String,body:Object=null,bubbles:Boolean=false, cancelable:Boolean=false)
 		{
-			_body = data;
+			_data = body;
 			super(type, bubbles, cancelable);
 		}
 		
 		override public function clone():Event
 		{
-			return new FightStateEvent(type,_body,bubbles,cancelable) as Event;
+			return new FightStateEvent(type,_data,bubbles,cancelable) as Event;
 		}
 		
 		/**
@@ -47,9 +47,9 @@ package release.module.kylinFightModule.controller.fightState
 		 * @return 
 		 * 
 		 */		
-		public function get body():Object
+		public function get data():Object
 		{
-			return _body;
+			return _data;
 		}
 	}
 }

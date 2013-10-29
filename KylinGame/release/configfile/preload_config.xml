@@ -2,6 +2,7 @@
 <preLoad>
 	<!-- 预加载资源  isFirst:1-首次加载 0-后台隐藏式加载-->
 	<res id="UIComponent" folder="module" isFirst="1" priority="50"/>
+<!-- 	<res id="KylinFightModule" folder="module" isFirst="1" priority="10"/> -->
 	
 	<!-- 预加载数值配置表-->
 	<res id="heroSheetData" folder="configfile" isFirst="1"/>

@@ -40,7 +40,7 @@ package release.module.kylinFightModule.controller.fightState
 			fightState.state = FightState.PauseFight;
 			timeMgr.stop();
 			fightLifecycleGroup.onFightPause();
-			if(event.body)
+			if(event.data)
 				fightViewModel.UILayer.addChild(pauseView);
 		}
 	}
