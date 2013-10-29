@@ -51,6 +51,11 @@ package mainModule.controller.netCmds.httpCmds.cmds
 			dynamicData[DynamicDataNameConst.TowerData] = towerObj;
 			towerObj.dynamicItems = {111001:{id:111001,level:1},112007:{id:112007,level:1},113013:{id:113013,level:1},114019:{id:114019,level:1}};
 			towerObj.towerLevels = {1:1,2:1,3:1,4:1};
+			//拥有的道具
+			var itemObj:Object = {};
+			dynamicData[DynamicDataNameConst.ItemData] = itemObj;
+			itemObj.dynamicItems = {1000001:{id:1000001,itemId:131063,num:99},1000002:{id:1000002,itemId:131127,num:99}
+				,1000003:{id:1000003,itemId:131124,num:99},1000004:{id:1000004,itemId:131125,num:99}};
 			
 			return [{dynamic:dynamicData}];
 		}
