@@ -69,6 +69,13 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 			super.onBehaviorChangeToDying();
 		}
 		
+		override protected function checkCanResurrect():Boolean
+		{
+			if(myFightState.maxlife <= 3000)
+				return false;
+			return super.checkCanResurrect();
+		}
+		
 		override protected function onBehaviorChangeToResurrect():void
 		{
 			super.onBehaviorChangeToResurrect();
