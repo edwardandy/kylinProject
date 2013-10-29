@@ -1,8 +1,9 @@
 package mainModule.controller.netCmds.httpCmds.cmds
 {
 	import mainModule.controller.netCmds.httpCmds.HttpCmd;
-	import mainModule.model.gameData.sheetData.hero.IHeroSheetDataModel;
-	import mainModule.model.gameData.sheetData.hero.IHeroSheetItem;
+	import mainModule.model.gameData.dynamicData.DynamicDataNameConst;
+	import mainModule.model.gameData.dynamicData.hero.IHeroDynamicDataModel;
+	import mainModule.service.netServices.httpServices.HttpRequestDataFormat;
 
 	/**
 	 * 请求游戏初始化的后台数据 
@@ -12,19 +13,46 @@ package mainModule.controller.netCmds.httpCmds.cmds
 	public class HttpGameInitCmd extends HttpCmd
 	{
 		[Inject]
-		public var heroSheet:IHeroSheetDataModel;
+		public var heroData:IHeroDynamicDataModel;
 		
 		public function HttpGameInitCmd()
 		{
 			super();
 		}
 		
+		override protected function initRequestParam():void
+		{
+			super.initRequestParam();
+			requestParam.vecData.push(new HttpRequestDataFormat("game","init",[]));
+			requestParam.bVirtual = true;
+			requestParam.bNeedRespon = true;
+		}
+		
 		override protected function request():void
 		{
 			super.request();
+		}
+		
+		override protected function get virtualResponData():Array
+		{
+			var dynamicData:Object = {};
+			//携带的英雄
+			heroData.arrHeroIdsInFight.length = 0;
+			heroData.arrHeroIdsInFight.push(180001,180002,180003);
+			var heroObj:Object = {};
+			dynamicData[DynamicDataNameConst.HeroData] = heroObj;
+			heroObj.dynamicItems = {180001:{id:180001,level:1},180002:{id:180002,level:1},180003:{id:180003,level:1}};
+			//拥有的魔法
+			var magicObj:Object = {};
+			dynamicData[DynamicDataNameConst.MagicSkillData] = magicObj;
+			magicObj.dynamicItems = {210101:{id:210101,level:1},210401:{id:210401,level:1},210701:{id:210701,level:1}};
+			//拥有的塔
+			var towerObj:Object = {};
+			dynamicData[DynamicDataNameConst.TowerData] = towerObj;
+			towerObj.dynamicItems = {111001:{id:111001,level:1},112007:{id:112007,level:1},113013:{id:113013,level:1},114019:{id:114019,level:1}};
+			towerObj.towerLevels = {1:1,2:1,3:1,4:1};
 			
-			var item:IHeroSheetItem = heroSheet.getHeroSheetById(180001);
-			trace(item);
+			return [{dynamic:dynamicData}];
 		}
 	}
 }

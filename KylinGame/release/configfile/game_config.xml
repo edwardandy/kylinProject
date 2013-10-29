@@ -36,7 +36,7 @@
 	<!-- 面板透明度出现动画速度 -->  
 	<panelalphavelocity>3</panelalphavelocity>
 	<!-- 战斗中可以使用并购买的道具id -->  
-	<itemIdsInFight>100001,100002</itemIdsInFight>
+	<itemIdsInFight>131063,131127,131124,131125</itemIdsInFight>
 	
 	<!-- 首次加载路径 iPreLoad:1-首次预加载,2-后台隐藏式加载 -->
 	<panel iPreLoad="1" priority="50" layerIndex = "0" appear="AppearAlpha" disappear="DisappearAlpha">LoadPanel</panel>

@@ -6,8 +6,7 @@ package mainModule.controller.gameInitSteps
 	import kylin.echo.edward.framwork.controller.KylinCommand;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoaderProgress;
 	
-	import mainModule.controller.uiCmds.UIPanelEvent;
-	import mainModule.model.panelData.PanelNameConst;
+	import mainModule.controller.netCmds.httpCmds.HttpEvent;
 	import mainModule.model.panelData.interfaces.IPanelCfgModel;
 	import mainModule.model.preLoadData.PreLoadCfgVo;
 	import mainModule.model.preLoadData.interfaces.IPreLoadCfgModel;
@@ -94,7 +93,7 @@ package mainModule.controller.gameInitSteps
 		
 		private function allLoadCmp(e:Event = null):void
 		{
-			//dispatch(new HttpEvent(HttpEvent.Http_GameInit));
+			dispatch(new HttpEvent(HttpEvent.Http_GameInit));
 			//dispatch(new UIPanelEvent(UIPanelEvent.UI_ClosePanel,PanelNameConst.LoadPanel));
 			//dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.KylinFightModule));
 			

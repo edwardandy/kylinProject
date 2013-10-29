@@ -58,6 +58,7 @@ package mainModule.model.gameConstAndVar
 			_nPanelScaleVelocity = Number(gameCfgModel.gameCfg.panelscalevelocity);
 			_nPanelMaxScale = Number(gameCfgModel.gameCfg.panelmaxscale);
 			_nPanelAlphaVelocity = Number(gameCfgModel.gameCfg.panelalphavelocity);
+			itemIdsInFight = String(gameCfgModel.gameCfg.itemIdsInFight);
 		}
 	}
 }

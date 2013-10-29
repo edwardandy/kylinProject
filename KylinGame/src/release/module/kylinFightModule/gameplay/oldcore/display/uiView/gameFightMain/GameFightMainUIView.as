@@ -577,8 +577,11 @@ package release.module.kylinFightModule.gameplay.oldcore.display.uiView.gameFigh
 					TweenLite.to( _userInfoView.txtScore, 0.2, {scaleX:1, scaleY:1, delay:0.2, overwrite:0, 
 						onComplete:function():void
 						{
-							_userInfoView.txtScore.filters = null;
-							_userInfoView.txtScore.txtScore.text = sceneScore;
+							if(_userInfoView)
+							{
+								_userInfoView.txtScore.filters = null;
+								_userInfoView.txtScore.txtScore.text = sceneScore;
+							}
 						}
 					} );
 					break;
