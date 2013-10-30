@@ -2762,7 +2762,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		override public function explodeAfterDie(dmg:int,range:int,owner:ISkillOwner,dieType:int):Boolean
 		{
 			var vecTargets:Vector.<BasicOrganismElement> = sceneElementsService.searchOrganismElementsBySearchArea(this.x,this.y,range,myCampType);
-			if(OrganismDieType.NORMAL_DIE != dieType)
+			if(OrganismDieType.NORMAL_DIE != dieType && !isHero && !isBoss)
 				_myCurrentDieType = dieType;
 			for each(var target:BasicOrganismElement in vecTargets)
 			{

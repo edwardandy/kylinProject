@@ -22,6 +22,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		private var _clickRebirthTime:int = 0;
 		private var _clickBlackWindTime:int = 0;
 		private var _curMaxLife:uint;
+		private var _leftRebirthTime:int;
 				
 		public function ImmortalDragon(typeId:int)
 		{
@@ -31,6 +32,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		override protected function onLifecycleActivate():void
 		{
+			_leftRebirthTime = 5;
 			super.onLifecycleActivate();
 		}
 		
@@ -63,6 +65,19 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 				notifyTriggerSkillAndBuff(TriggerConditionType.KILL_TARGET);
 		}
 		
+		override protected function onRenderWhenResurrectionState():void
+		{
+			if(myResurrectionCDTimer.getIsCDEnd())
+			{
+				if(hasEventListener(MouseEvent.CLICK))
+				{
+					removeEventListener(MouseEvent.CLICK,onClickWhenResurrect);
+					stopClickEff();
+				}
+			}
+			super.onRenderWhenResurrectionState();
+		}
+		
 		override protected function onBehaviorChangeToDying():void
 		{
 			clearClickWindState();
@@ -71,7 +86,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		
 		override protected function checkCanResurrect():Boolean
 		{
-			if(myFightState.maxlife <= 3000)
+			if(myFightState.maxlife <= 3000 || _leftRebirthTime<=0)
 				return false;
 			return super.checkCanResurrect();
 		}
@@ -80,6 +95,7 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			super.onBehaviorChangeToResurrect();
 			_curMaxLife = myFightState.maxlife/3;
+			--_leftRebirthTime;
 			addEventListener(MouseEvent.CLICK,onClickWhenResurrect);
 			playClickEff();
 		}
@@ -88,11 +104,6 @@ package release.module.kylinFightModule.gameplay.oldcore.display.sceneElements.o
 		{
 			super.onResurrectionComplete();
 			_clickRebirthTime = 0;
-			if(hasEventListener(MouseEvent.CLICK))
-			{
-				removeEventListener(MouseEvent.CLICK,onClickWhenResurrect);
-				stopClickEff();
-			}
 			myFightState.maxlife = _curMaxLife;
 			resetBooldBar();
 		}
