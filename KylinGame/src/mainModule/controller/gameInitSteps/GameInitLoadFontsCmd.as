@@ -1,16 +1,19 @@
 package mainModule.controller.gameInitSteps
 {
+	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.text.Font;
 	
 	import br.com.stimuli.loading.loadingtypes.ImageItem;
 	
 	import kylin.echo.edward.framwork.controller.KylinCommand;
+	import kylin.echo.edward.utilities.loader.AssetInfo;
 	import kylin.echo.edward.utilities.loader.interfaces.IAssetsLoaderListener;
 	import kylin.echo.edward.utilities.loader.interfaces.ILoadMgr;
-	
+		
 	import mainModule.controller.uiCmds.UIPanelEvent;
 	import mainModule.model.panelData.PanelNameConst;
-	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;
+	import mainModule.service.loadServices.interfaces.ILoadAssetsServices;	
 	
 	/**
 	 * 加载游戏字体库 
@@ -41,14 +44,15 @@ package mainModule.controller.gameInitSteps
 			loadService.addFontItem("FontLibrary").addComplete(processFontUtil).addError(processFontUtil);
 		}
 		
-		private function processFontUtil():void
+		private function processFontUtil(info:AssetInfo):void
 		{	
-			/*var arrNames:Vector.<String> = (item.content as MovieClip).loaderInfo.applicationDomain.getQualifiedDefinitionNames();
-			for each(var fontName:String in arrNames)
+			/*var arrNames:Vector.<String> = (info.content as MovieClip).loaderInfo.applicationDomain.getQualifiedDefinitionNames();
+			for each(var fontCls:String in arrNames)
 			{
-				var ft1:Font = new(item.getDefinitionByName(fontName) as Class);
-				Font.registerFont(item.getDefinitionByName(fontName) as Class);
+				var ft1:Font = new(info.getClass(fontCls));
+				Font.registerFont(info.getClass(fontCls));
 			}*/
+			
 			dispatch(new UIPanelEvent(UIPanelEvent.UI_OpenPanel,PanelNameConst.LoadPanel));
 			directCommandMap.release(this);
 		}
